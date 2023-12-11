@@ -1,4 +1,4 @@
-## BMC Helix code base
+## BMC Helix Prod code base
 
 ## Hello user
 ## To use this lib straight ahead
