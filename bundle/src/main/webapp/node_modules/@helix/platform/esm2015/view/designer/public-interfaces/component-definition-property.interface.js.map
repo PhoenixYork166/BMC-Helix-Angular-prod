@@ -1,0 +1,1 @@
+{"version":3,"file":"component-definition-property.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/designer/public-interfaces/component-definition-property.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IComponentDefinitionProperty {\n  guid: string;\n  model: any;\n  isReadOnly: boolean;\n}\n"]}

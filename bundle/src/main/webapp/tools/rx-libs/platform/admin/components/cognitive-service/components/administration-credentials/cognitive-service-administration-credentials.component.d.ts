@@ -1,0 +1,31 @@
+import { OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { RxCurrentUserService, IUserOverlayGroupDescriptorChildren } from '@helix/platform/shared/api';
+import { RxCognitiveServiceService } from '../../cognitive-service.service';
+import { RxNotificationService, RxSystemConfigurationService } from '@helix/platform/shared/api';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class CognitiveServiceAdministrationCredentialsComponent implements OnInit {
+    private formBuilder;
+    private rxCognitiveServiceService;
+    private rxCurrentUserService;
+    private rxNotificationService;
+    private rxSystemConfigurationService;
+    private translateService;
+    isAdministrator: boolean;
+    currentOverlayContext: IUserOverlayGroupDescriptorChildren;
+    cognitiveAdministrationCredentialsProvidersForm: FormGroup;
+    watsonAdminCredentialsData: string;
+    cognitiveAdminPlatformApiKey: string;
+    constructor(formBuilder: FormBuilder, rxCognitiveServiceService: RxCognitiveServiceService, rxCurrentUserService: RxCurrentUserService, rxNotificationService: RxNotificationService, rxSystemConfigurationService: RxSystemConfigurationService, translateService: TranslateService);
+    ngOnInit(): void;
+    isFormDirty(): boolean;
+    private loadSystemSettings;
+    private getWatsonAdminCredentialsData;
+    private loadCognitiveAdminCredentialsValues;
+    save(): void;
+    isSaveButtonDisabled(): boolean;
+    isSaveButtonVisible(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CognitiveServiceAdministrationCredentialsComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CognitiveServiceAdministrationCredentialsComponent, "rx-cognitive-service-administration-credentials", never, { "isAdministrator": "isAdministrator"; "currentOverlayContext": "currentOverlayContext"; }, {}, never, never>;
+}

@@ -1,0 +1,517 @@
+.adapt-select {
+  display: inline-block;
+  margin-bottom: 1rem;
+  width: 100%;
+
+  &.is-responsive {
+    width: 100%;
+  }
+
+  .dropdown-toggle {
+    width: 100%;
+  }
+
+  &.ng-dirty.ng-invalid,
+  &.is-error {
+    .dropdown-toggle {
+      border-color: $select-invalid;
+
+      &.is-active {
+        border-color: color-variant($select-invalid, hover);
+      }
+    }
+
+    .dropdown_select__label {
+      color: $select-invalid;
+    }
+
+    .form-control-label {
+      color: $color-critical;
+    }
+  }
+}
+
+.select-hidden {
+  visibility: hidden;
+}
+
+.dropdown_select {
+  .dropdown-toggle {
+    width: 100%;
+    @include rtl(text-align, left);
+    position: relative;
+    @include text-truncate();
+
+    &.is-active {
+      background-color: $select-toggle-active-bg;
+      border-color: $select-toggle-active-border;
+    }
+  }
+
+  .dropdown-toggle-title {
+    display: inline-block;
+    position: absolute;
+    @include rtl(left, 1rem);
+    color: transparent;
+  }
+
+  .dropdown-backdrop {
+    position: absolute;
+    top: 0;
+    width: 1.625rem;
+    z-index: $zindex-select-backdrop;
+  }
+}
+
+.dropdown_select__search {
+  margin-bottom: 0;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    font-size: .8125rem;
+    @include rtl(left, .875rem);
+    width: .875rem;
+    height: 2.875rem;
+    line-height: 46px; // IE11 issue with line-height and rem's
+  }
+
+  .form-control {
+    width: 100%;
+    height: 2.875rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0; //align form control, depends on border-width
+    @if($rtl-mode) {
+      padding: .75rem 2rem .75rem 1.75rem;
+    } @else {
+      padding: .75rem 1.75rem .75rem 2rem;
+    }
+    border-width: 1px;
+    border-style: solid;
+    border-color: $select-border-color $white;
+    border-image: initial;
+
+    &:focus {
+      border-color: $select-border-focus-color;
+    }
+  }
+
+  &.d-icon-search::before {
+    line-height: 46px; // IE11 issue with line-height and rem's
+  }
+}
+
+
+.dropdown_select__menu {
+  width: 100%;
+  max-height: $dropdown-menu-max-height;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  z-index: $zindex-select-overlay;
+  top: auto;
+  left: 0;
+  float: left;
+  min-width: 12.5rem;
+  margin: .125rem 0 0;
+  padding: 0 0 .5rem;
+  list-style: none;
+  color: $select-menu-color;
+  border-radius: $border-radius;
+  background-color: $select-menu-bg;
+  background-clip: padding-box;
+  transition: max-height .5s;
+  transform-origin: left top;
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+
+  &.dropdown_select__menu--mobile {
+    position: fixed;
+    z-index: $zindex-select-mobile;
+    width: 100vw;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: unset;
+  }
+
+  &.is-top {
+    bottom: 100%;
+    transform-origin: center bottom;
+  }
+
+  .dropdown-header {
+    padding: .875rem .875rem .1875rem;
+  }
+
+  &.activeLoad {
+    max-height: calc(#{$select-loader-height} + .5rem); // select loader height (desctop - 11.25rem, mobile - (55vh - 3.75rem) + parent padding-bottom(0.5rem);
+
+    .select-loader-container {
+      display: flex;
+    }
+
+    .select_option_container {
+      display: none;
+    }
+  }
+
+  .select-loader-container {
+    display: none;
+  }
+
+  .select_option_container {
+    display: block;
+  }
+
+  .dropdown-item {
+    padding: $dropdown-item-padding-y $dropdown-item-padding-x;
+    position: relative;
+    white-space: nowrap;
+
+    &.active {
+      color: $select-item-active-color;
+      background-color: $select-item-active-bg;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: .1875rem;
+        height: 100%;
+        background: $select-item-selected;
+        position: absolute;
+        @include rtl(left, 0);
+        top: 0;
+        bottom: 0;
+      }
+    }
+
+    &:disabled,
+    &.disabled {
+      opacity: $disabled;
+      cursor: $cursor-disabled;
+    }
+
+    .checkbox__label {
+      .dropdown-item__badge {
+        margin-right: $icon-lockup-spacing;
+        margin-left: $icon-lockup-spacing;
+      }
+
+      .dropdown-item__icon {
+        margin-right: $icon-lockup-spacing;
+        margin-left: $icon-lockup-spacing;
+      }
+    }
+  }
+
+  .dropdown_select__wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    @include rtl(padding-left, .875rem);
+  }
+
+  .dropdown-help-text {
+    font-weight: $font-weight-normal;
+    color: $select-help-text-color;
+    line-height: 1.5 !important;
+    white-space: normal;
+  }
+
+  a,
+  button {
+    cursor: pointer;
+    white-space: normal;
+  }
+
+  .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    .checkbox__item {
+      @include rtl(padding-right, 0);
+      margin: 0;
+      white-space: normal;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: block;
+    }
+  }
+
+  &.dropdown-menu-right {
+    left: auto;
+    transform-origin: right top;
+  }
+}
+
+.dropdown_select__menu-sticky {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .select_option_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+
+  .dropdown_select__search {
+    flex: 0 0 auto;
+  }
+
+  .dropdown_select__menu-content-wrapper {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+.dropdown_select__search-cross {
+  position: absolute;
+  top: 0;
+  @include rtl(right, .3125rem);
+  width: 1.75rem;
+  height: 2.875rem;
+  font-size: .8125rem;
+  text-align: center;
+  text-decoration: none;
+  opacity: .6;
+  color: $select-menu-color;
+  line-height: 46px;
+  transition: opacity .25s $ease-transition-in-out;
+  cursor: pointer;
+  z-index: 2;
+  border: none;
+  background: transparent;
+
+  &:hover {
+    opacity: .8;
+    color: $select-menu-color;
+    text-decoration: none;
+  }
+
+  .d-icon-cross_adapt {
+    position: relative;
+  }
+}
+
+
+.dropdown_select__label {
+  padding-bottom: .25rem;
+  font-weight: 600;
+}
+
+.dropdown_select__required {
+  font-weight: normal;
+  color: $select-required-color;
+}
+
+.dropdown__counter {
+  display: inline-flex;
+  overflow: hidden;
+  color: $text-tertiary;
+  white-space: nowrap;
+  opacity: 0;
+  align-self: center;
+}
+
+//mobile scss styles
+
+.adapt-select--mobile {
+  .dropdown_select__menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    z-index: $zindex-m-select-menu;
+    overflow: auto;
+    white-space: nowrap;
+
+    .dropdown-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .checkbox__label .checkbox__item {
+        &:after,
+        &:before {
+          top: .5rem;
+        }
+      }
+    }
+
+    .checkbox__item {
+      white-space: normal;
+    }
+  }
+}
+
+.dropdown_select__overlay {
+  position: fixed;
+  z-index: $zindex-m-select-overlay;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+  transition: all .6s $ease-transition-in-out;
+}
+
+.dropdown_select__error {
+  color: $select-invalid;
+}
+
+.btn-link__load-more_mobile {
+  border: 0;
+  padding: .375rem .875rem;
+}
+
+.list-unstyled__load-more_mobile {
+  margin-bottom: 0;
+}
+
+.m-select__header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: $m-select-header;
+  border-bottom: 1px solid $select-border-color;
+}
+
+.m-select__header_sticky {
+  background-color: $select-menu-bg;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.m-select__controls_sticky {
+  background-color: $select-menu-bg;
+  position: sticky;
+  top: $m-select-header;
+  z-index: 10;
+}
+
+.m-select__title {
+  font-size: 1rem;
+}
+
+.m-select__button {
+  display: block;
+  padding: .1875rem 0;
+  position: absolute;
+  @include rtl(left, 1.25rem);
+  background: none;
+  border: 0;
+  font-weight: normal;
+  color: $select-button-color;
+  text-align: inherit;
+}
+
+.m-select__button--done {
+  @include rtl(left, auto);
+  @include rtl(right, 1.25rem);
+}
+
+.btn-group {
+  .adapt-select,
+  .dropdown {
+    margin-bottom: 0;
+
+    .dropdown-toggle {
+      width: auto;
+    }
+
+    &:first-child:not(:last-child):not(.dropdown-toggle) .btn {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-child:not(:first-child) .btn {
+      @if($rtl-mode) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+      @else {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: $border-radius !important;
+        border-bottom-right-radius: $border-radius !important;
+      }
+    }
+
+    &:not(:first-child):not(:last-child):not(.dropdown-toggle) .btn {
+      border-radius: 0;
+    }
+
+    &:not(:first-child) .btn {
+      margin-left: -1px;
+    }
+  }
+}
+
+.dd-menu--in-body {
+  z-index: $zindex-select-overlay-in-body !important;
+}
+
+.select-loader-container {
+  width: 100%;
+  height: $select-loader-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.mention-list-container {
+  min-width: 12.5rem;
+  color: $select-menu-color;
+  border-radius: $border-radius;
+  background-color: $select-menu-bg;
+  background-clip: padding-box;
+  transition: max-height $animation-medium;
+  transform-origin: left top;
+  overflow: auto;
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+
+  .mention-list {
+    list-style: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: .125rem 0 0;
+    padding: 0;
+  }
+
+  .mention-list-item {
+    padding: .375rem .875rem;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      color: $color-active;
+    }
+  }
+
+  .mention-loader-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}

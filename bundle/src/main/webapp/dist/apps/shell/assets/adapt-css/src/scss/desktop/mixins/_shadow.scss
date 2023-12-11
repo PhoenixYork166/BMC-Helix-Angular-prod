@@ -1,0 +1,37 @@
+//Main shadow variables
+//------------------------------------------------------------------
+$shadow-amount: 3px; //Computes base amount of Y distance between shadows
+$shadow-amount-multiplier: 6; //Computes distance in Y value between first and second shadows
+
+$shadow-steps: 4px; //Computes amount of diffuseness in shadows
+$shadow-steps-multiplier: 6; //Enhances distance in diffuseness between first and second shadows
+
+$shadow-opacity-amount: .06; //Computes base amount of opacity for diffuse shadows
+$shadow-opacity-multiplier: .08; //Computes difference in opacity between the diffuse and non-diffuse shadows
+
+@mixin shadow($distance: 0) {
+  @if ($distance == 0) {
+    box-shadow: none;
+  } @else {
+    box-shadow: 0 ($distance * $shadow-amount) ($distance * $shadow-steps) rgba(0, 0, 0, ($shadow-opacity-amount + $shadow-opacity-amount*.5*($distance - 1) + $shadow-opacity-multiplier)),
+    0 ($distance * ($shadow-amount + $shadow-amount-multiplier)) ($distance * ($shadow-steps + $shadow-steps-multiplier)) rgba(0, 0, 0, ($shadow-opacity-amount + $shadow-opacity-amount*.5*($distance - 1)));
+  }
+}
+
+@function shadow-value($distance: 0) {
+  @if ($distance == 0) {
+    @return "";
+  } @else {
+    @return 0 #{($distance * $shadow-amount)} #{($distance * $shadow-steps)} #{rgba(0, 0, 0, ($shadow-opacity-amount + $shadow-opacity-amount*.5*($distance - 1) + $shadow-opacity-multiplier))},
+    0 #{($distance * ($shadow-amount + $shadow-amount-multiplier))} #{($distance * ($shadow-steps + $shadow-steps-multiplier))} #{rgba(0, 0, 0, ($shadow-opacity-amount + $shadow-opacity-amount*.5*($distance - 1)))};
+  }
+}
+
+@mixin text-shadow($distance: 0) {
+  @if ($distance == 0) {
+    text-shadow: none;
+  } @else {
+    text-shadow: 0 ($distance * $shadow-amount) ($distance * $shadow-steps) rgba(0, 0, 0, ($shadow-opacity-amount + $shadow-opacity-amount*.5*($distance - 1) + $shadow-opacity-multiplier)),
+    0 ($distance * ($shadow-amount + $shadow-amount-multiplier)) ($distance * ($shadow-steps + $shadow-steps-multiplier)) rgba(0, 0, 0, ($shadow-opacity-amount + $shadow-opacity-amount*.5*($distance - 1)));
+  }
+}

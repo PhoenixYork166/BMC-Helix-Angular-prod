@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/named-list/designer/index.ts"],"names":[],"mappings":"AAAA,cAAc,6BAA6B,CAAC;AAC5C,cAAc,kCAAkC,CAAC","sourcesContent":["export * from './named-list-designer/index';\nexport * from './named-list-designer-page/index';\n"]}

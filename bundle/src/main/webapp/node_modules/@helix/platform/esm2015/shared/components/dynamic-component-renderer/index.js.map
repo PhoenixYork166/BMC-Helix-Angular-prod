@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/dynamic-component-renderer/index.ts"],"names":[],"mappings":"AAAA,cAAc,wCAAwC,CAAC;AACvD,cAAc,qCAAqC,CAAC","sourcesContent":["export * from './dynamic-component-renderer.component';\nexport * from './dynamic-component-renderer.module';\n"]}

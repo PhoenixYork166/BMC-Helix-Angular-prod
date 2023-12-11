@@ -1,0 +1,1 @@
+{"version":3,"file":"action-list-widget.types.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/designer/form-controls/action-list-widget/action-list-widget.types.ts"],"names":[],"mappings":"","sourcesContent":["export interface IActionListWidgetComponentOptions {\n  tooltip?: string;\n}\n"]}

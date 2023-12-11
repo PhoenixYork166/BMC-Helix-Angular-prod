@@ -1,0 +1,37 @@
+import { HttpClient } from '@angular/common/http';
+import { NgZone } from '@angular/core';
+import { AdaptModalService } from '@bmc-ux/adapt-angular';
+import { RxComponentCanDeactivateGuard } from '../../navigation/component-can-deactivate.guard';
+import { Observable } from 'rxjs';
+import { RxAuthService } from '../auth.service';
+import { RxSessionService } from '../session.service';
+import { SessionExpirationType } from './session-expiration.interface';
+import * as i0 from "@angular/core";
+export declare class RxSessionExpirationService {
+    private httpClient;
+    private adaptModalService;
+    private rxAuthService;
+    private ngZone;
+    private rxSessionService;
+    private rxComponentCanDeactivateGuard;
+    private sessionExpirationModal;
+    private trackUserInteractionDebounced;
+    private sessionExpirationInfos;
+    constructor(httpClient: HttpClient, adaptModalService: AdaptModalService, rxAuthService: RxAuthService, ngZone: NgZone, rxSessionService: RxSessionService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard);
+    setTimeout(type: SessionExpirationType, time: string): void;
+    keepSessionAlive(): Observable<any>;
+    logout(): void;
+    private trackUserInteraction;
+    private getLastUserInteraction;
+    private getIdleSessionTimeout;
+    private updateTimeoutHandler;
+    private isIdleTimeout;
+    private getTimeToSessionExpirationWarning;
+    private showIdleTimeoutWarning;
+    private showAbsoluteTimeoutWarning;
+    private openModal;
+    private isValidTimeout;
+    private clearTimer;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxSessionExpirationService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxSessionExpirationService>;
+}

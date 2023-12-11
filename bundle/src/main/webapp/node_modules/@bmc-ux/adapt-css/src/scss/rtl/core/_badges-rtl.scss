@@ -1,0 +1,86 @@
+%btn-badge {
+  margin: $btn-badge-margin-rtl;
+  padding-top: $btn-badge-padding-top;
+  padding-bottom: $btn-badge-padding-bottom;
+  font-size: $btn-badge-font-size;
+  color: $badge-color;
+  border-radius: 2px;
+}
+
+a:hover {
+  .badge {
+    background-color: color-variant($link-color, hover);
+    transition: background-color .25s;
+  }
+}
+
+a:active:hover {
+  .badge {
+    background-color: color-variant($link-color, active);
+    transition: background-color .25s;
+  }
+}
+
+h1 .badge,
+h2 .badge,
+h3 .badge,
+h4 .badge,
+h5 .badge,
+h6 .badge {
+  padding: $badge-hx-padding-y $badge-hx-padding-x;
+}
+
+.badge {
+  border-radius: $badge-border-radius;
+  position: relative;
+
+  .list-group-item & {
+    @extend %btn-badge;
+  }
+
+  .btn & {
+    @extend %btn-badge;
+    background-color: transparentize($black, .85);
+  }
+
+  .btn-secondary & {
+    background-color: $badge-default-bg;
+  }
+
+  .btn-link & {
+    background-color: $color-active;
+    transition: background .2s;
+  }
+
+  .btn-link:hover & {
+    background-color: color-variant($color-active, hover);
+  }
+
+  .btn-sm &,
+  .btn-group-sm > .btn & {
+    top: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .btn-xs &,
+  .btn-group-xs > .btn & {
+    top: 0;
+    margin: -5px -2px -5px 5px;
+    padding: 2px 5px;
+  }
+}
+
+.badge-dot {
+  position: absolute;
+  left: -$badge-dot-size * .5;
+  top: -$badge-dot-size * .5;
+  height: $badge-dot-size;
+  width: $badge-dot-size;
+  border-radius: $badge-dot-size * .5;
+  background-color: $color-info;
+  border: $border-lg solid $white;
+}
+
+
+@include animated-badge();

@@ -1,0 +1,33 @@
+import { KeyValueObject } from '@bmc-ux/adapt-angular';
+import { ResizeMode, TableCustomTexts, ToolbarConfig } from '@bmc-ux/adapt-table';
+import { IPlainObject } from '@helix/platform/shared/api';
+import { IRowDataItem } from '@helix/platform/view/api';
+import { FilterMetadata, SortMeta } from 'primeng/api';
+import { IAdaptTableColumnConfig } from './record-grid-column.types';
+import { RowSelectionMode } from './row-selection-mode.enum';
+export interface IAdaptTableConfig {
+    data: IRowDataItem[];
+    originalRows?: IRowDataItem[];
+    columns: IAdaptTableColumnConfig[];
+    columnResizeMode: ResizeMode;
+    cardLayoutColumns: IAdaptTableColumnConfig[];
+    bordered: boolean;
+    scrollable: boolean;
+    toolbarConfig: ToolbarConfig;
+    filterable: boolean;
+    selectedItems: IRowDataItem[];
+    filters: KeyValueObject<FilterMetadata>;
+    rows: number;
+    first: number;
+    multiSortMeta: SortMeta[];
+    rowSelectionMode: RowSelectionMode;
+    isLoadingData: boolean;
+    totalRecords: number;
+    primaryKey: string;
+    isLoadingMoreData: boolean;
+    striped: boolean;
+    texts: TableCustomTexts;
+    expandedGroupsKeys: IPlainObject;
+    virtualScroll: boolean;
+    virtualRowHeight: number;
+}

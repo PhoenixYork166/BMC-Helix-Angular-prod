@@ -1,0 +1,1 @@
+{"version":3,"file":"named-list-designer.constant.js","sourceRoot":"","sources":["../../../../../../libs/platform/named-list/designer/named-list-designer.constant.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,sBAAsB,GAAG;IACpC,eAAe,EAAE,mBAAmB;CACrC,CAAC","sourcesContent":["export const RX_NAMED_LIST_DESIGNER = {\n  featureSelector: 'namedListDesigner'\n};\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"date-form-control-options.interface.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/shared/components/form-controls/date-form-control/date-form-control-options.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IDateFormControlOptions {\n  label?: string;\n  required?: boolean;\n}\n"]}

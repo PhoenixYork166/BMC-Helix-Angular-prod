@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/event/designer/event-designer-page/index.ts"],"names":[],"mappings":"AAAA,cAAc,8BAA8B,CAAC;AAC7C,cAAc,iCAAiC,CAAC","sourcesContent":["export * from './event-designer-page.module';\nexport * from './event-designer-page.component';\n"]}

@@ -1,0 +1,52 @@
+// DateTime
+.dt-input-control {
+  @include rtl(padding-right, 3rem);
+  background: {
+    repeat: no-repeat;
+    position: center if($rtl-mode, left, right) .62501rem;
+    size: 20px 20px;
+  }
+
+  &.i-date {
+    background-image: icon($i-date, $dt-icon-color);
+  }
+
+  &.i-date-time {
+    background-image: icon($i-date-time, $dt-icon-color);
+  }
+
+  &.i-time {
+    background-image: icon($i-time, $dt-icon-color);
+  }
+
+  &.dt-invalid {
+    color: $dt-invalid-color;
+    border-color: $dt-invalid-color;
+    background-image: $form-icon-danger;
+  }
+}
+
+.dt-picker-open {
+  color: $input-focus-color;
+  background-color: $input-focus-bg;
+  border-color: $input-focus-border-color;
+  outline: none;
+
+  &.i-date {
+    background-image: icon($i-date, $dt-icon-color-active);
+  }
+
+  &.i-date-time {
+    background-image: icon($i-date-time, $dt-icon-color-active);
+  }
+
+  &.i-time {
+    background-image: icon($i-time, $dt-icon-color-active);
+  }
+
+  &.dt-invalid {
+    color: color-variant($form-icon-danger-color, active);
+    border-color: color-variant($form-icon-danger-color, hover);
+    background-image: icon($i-state-danger, color-variant($form-icon-danger-color, hover));
+  }
+}

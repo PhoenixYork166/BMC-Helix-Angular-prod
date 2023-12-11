@@ -1,0 +1,36 @@
+import { HttpClient } from '@angular/common/http';
+import { IHttpGetParams, IHttpOptions, RxCommandFactoryService } from '@helix/platform/shared/api';
+import { Observable } from 'rxjs';
+import { IIndexDefinition, IRecordDefinition } from './record-definition.types';
+import { IFieldDefinition, IFieldDefinitionsById } from './field-definition.interfaces';
+import { RxGuidService } from '@helix/platform/utils';
+import * as i0 from "@angular/core";
+export declare class RxRecordDefinitionService {
+    private httpClient;
+    private rxCommandFactoryService;
+    private rxGuidService;
+    private renameCommand;
+    private revertCustomizationCommand;
+    constructor(httpClient: HttpClient, rxCommandFactoryService: RxCommandFactoryService, rxGuidService: RxGuidService);
+    get(recordDefinitionName: string, options?: IHttpGetParams, skipLocalization?: boolean): Observable<IRecordDefinition>;
+    getNew(): Observable<IRecordDefinition>;
+    create(recordDefinition: IRecordDefinition): Observable<any>;
+    update(recordDefinition: IRecordDefinition, options?: IHttpOptions): Observable<any>;
+    delete(recordDefinitionName: string): Observable<any>;
+    rename(oldRecordDefinitionName: string, newRecordDefinitionName: string): Observable<any>;
+    revertCustomization(recordDefinitionName: string): Observable<any>;
+    private getUrl;
+    private setOptionsByIdProperty;
+    buildFieldDefinitionsByIdMap(recordDefinition: IRecordDefinition): IFieldDefinitionsById;
+    addFieldDefinitionToMap(fieldDefinition: IFieldDefinition, fieldDefinitionsById: IFieldDefinitionsById, field: string | number): void;
+    setFieldDefinitionsToOptional(recordDefinition: IRecordDefinition): IRecordDefinition;
+    private isSelectionFieldDefinition;
+    applyLocalization(recordDefinition: IRecordDefinition): void;
+    isRegularRecord(recordDefinition: IRecordDefinition): boolean;
+    isExternalRecord(recordDefinition: IRecordDefinition): boolean;
+    isJoinRecord(recordDefinition: IRecordDefinition): boolean;
+    isCustomRecord(recordDefinition: IRecordDefinition): boolean;
+    isAutomaticIndex(index: IIndexDefinition): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxRecordDefinitionService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxRecordDefinitionService>;
+}

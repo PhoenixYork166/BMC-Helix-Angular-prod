@@ -1,0 +1,277 @@
+@use "sass:math";
+
+.adapt-steps {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: $steps-height;
+  color: $text-primary;
+  border: $steps-border-width solid $steps-border-color;
+  border-radius: $steps-border-radius;
+}
+
+.adapt-steps-panel {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.adapt-step {
+  position: relative;
+  display: inline-flex;
+  min-width: 15px;
+  padding: 0 25px;
+  line-height: $steps-height - $steps-border-width * 2;
+  opacity: 1;
+  border: 0;
+  background-color: $color-foreground;
+  transition: all 250ms ease-in;
+  user-select: none;
+  flex: 1;
+
+  &::before {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: inline-block;
+    width: 0;
+    height: 2px;
+    transition: width 250ms ease-in;
+    transform: translateX(-50%);
+    background-color: $steps-selection-spot-color;
+    content: "";
+  }
+
+  &::after {
+    position: absolute;
+    z-index: 2;
+    top: -3px;
+    @include rtl(right, if($rtl-mode, -8px, -21px));
+    content: "";
+    display: inline-block;
+    width: 29px;
+    height: 29px;
+    transform: rotate(57.5deg) skewX(25deg) scaleY(math.cos(25deg));
+    transform-origin: left;
+    @if($rtl-mode) {
+      border-bottom: $steps-border-width solid $steps-border-color;
+      border-left: $steps-border-width solid $steps-border-color;
+    } @else {
+      border-top: $steps-border-width solid $steps-border-color;
+      border-right: $steps-border-width solid $steps-border-color;
+    }
+    background-color: $color-foreground;
+    transition: all 250ms ease-in;
+  }
+
+  &:hover {
+    background-color: color-variant($color-foreground, hover);
+    cursor: pointer;
+
+    &::after {
+      background-color: color-variant($color-foreground, hover);
+    }
+  }
+
+  &:first-of-type {
+    @include rtl(padding-left, 10px);
+  }
+}
+
+.adapt-step-last {
+  @include rtl(padding-right, 10px);
+
+  &::after {
+    display: none;
+  }
+}
+
+.adapt-step-disabled {
+  background-color: color-variant($color-secondary, disabled);
+
+  .adapt-step-image,
+  .adapt-step-label-text-long,
+  .adapt-step-label-text-short {
+    color: color-variant($text-secondary, disabled);
+  }
+
+  &::after,
+  &:hover::after,
+  &:hover {
+    cursor: $cursor-disabled;
+    background-color: color-variant($color-secondary, disabled);
+  }
+}
+
+.adapt-step-collapsed {
+  flex: none;
+  width: 15px;
+  min-width: 15px;
+  transition: all 250ms ease-in, background-color 250ms ease-in;
+  padding: 0;
+  background-color: $gray-100;
+
+  &::after {
+    background-color: $gray-100;
+  }
+
+  &.adapt-step-disabled {
+    background-color: $gray-100;
+
+    &::after {
+      background-color: $gray-100;
+    }
+  }
+
+  &.adapt-step-last {
+    width: 25px;
+    min-width: 25px;
+
+    &:hover {
+      width: 30px;
+      min-width: 30px;
+    }
+  }
+
+  &:first-of-type {
+    width: 20px;
+    min-width: 20px;
+  }
+
+  .adapt-step-image,
+  .adapt-step-label {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 250ms ease-in 100ms;
+  }
+}
+
+.adapt-step-image,
+.adapt-step-label {
+  width: auto;
+  opacity: 1;
+  transition: all 300ms ease-in;
+  vertical-align: top;
+}
+
+.adapt-step-image {
+  display: inline-block;
+  @include rtl(margin-right, 10px);
+  font-size: 24px;
+  color: $text-primary;
+}
+
+.adapt-step-image-tag {
+  width: 20px;
+  height: 20px;
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+}
+
+.adapt-step-label {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  @include text-truncate();
+  height: $steps-height - $steps-border-width * 2;
+}
+
+.adapt-step-label-text {
+  @include text-truncate();
+  @include rtl(text-align, left);
+}
+
+.adapt-step-label-text-long {
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  line-height: 20px;
+}
+
+.adapt-step-label-text-short {
+  color: $text-secondary;
+  font-size: 13px;
+  line-height: 15px;
+}
+
+.adapt-step-label-text-short:first-of-type,
+.adapt-step-label-text-long:last-of-type {
+  line-height: $steps-height;
+}
+
+.adapt-selection-spot {
+  position: absolute;
+  z-index: $zindex-steps-selection-line;
+  bottom: 0;
+  left: if($rtl-mode, 100%, -100%);
+  display: inline-block;
+  width: 0;
+  height: 2px;
+  background-color: $steps-selection-spot-color;
+  transition: left 250ms ease-in;
+  will-change: left, width;
+}
+
+.adapt-step-selected::before {
+  width: 100%;
+}
+
+.adapt-step-active:hover {
+  cursor: default;
+}
+
+//
+// MOBILE
+//
+.adapt-steps-mobile {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+
+  .adapt-step {
+    flex: 0 0 100%;
+    height: 100%;
+    padding: 0 15px;
+    background-color: transparent;
+
+    &:before,
+    &:after {
+      content: none;
+    }
+  }
+
+  .adapt-step-disabled {
+    background-color: $white;
+  }
+
+  &__indicators-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 2px;
+    margin: 0 -3px;
+  }
+
+  &__indicator {
+    flex: 1 1 12px;
+    margin: 0 3px;
+    border-radius: 1px;
+    overflow: hidden;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: #d9d9d9;
+      transition: background-color .25s;
+    }
+
+    &.active:after {
+      background-color: $color-active;
+
+    }
+  }
+}

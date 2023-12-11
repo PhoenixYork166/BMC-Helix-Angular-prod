@@ -1,0 +1,857 @@
+// Focus for file, radio, and checkbox
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  @include tab-focus();
+}
+
+input[type="radio"]:focus + .radio__item,
+input[type="checkbox"]:focus + .checkbox__item {
+  @include tab-focus();
+
+  &::before {
+    @include form-control-focus();
+  }
+
+  &.checkbox__item_no-label,
+  &.radio__item_no-label {
+    box-shadow: none;
+  }
+
+  &.checkbox__item_no-label::before,
+  &.radio__item_no-label::before {
+    @include tab-focus();
+  }
+}
+
+input[type="checkbox"]:disabled + .checkbox__item {
+  opacity: $disabled;
+}
+
+/*9.18.17*/
+.disabled-textfield {
+  cursor: $cursor-disabled !important;
+}
+
+.checkbox-before,
+.checkbox-after,
+.radio-before,
+.radio-after {
+  display: block;
+  padding-left: 1.5rem;
+}
+
+.checkbox__label,
+.radio__label {
+  display: flex;
+}
+
+.radio,
+.checkbox {
+  display: block;
+  margin-top: $checkbox-margin-top;
+  margin-bottom: $checkbox-margin-bottom;
+
+  position: relative;
+
+  label {
+    margin-bottom: 0;
+    cursor: pointer;
+    position: relative;
+  }
+
+  input[type="radio"],
+  &-inline input[type="radio"],
+  input[type="checkbox"],
+  &-inline input[type="checkbox"] {
+    position: absolute;
+    width: $check-cell-size;
+    height: $check-cell-size;
+    padding: 0;
+    border: 0;
+    outline: none;
+    opacity: 0;
+    z-index: 2;
+
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.checkbox__item,
+.radio__item {
+  position: relative;
+  padding-left: calc(#{$check-cell-size} + #{$icon-lockup-spacing} + .125rem);
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: .125rem;
+    width: $check-cell-size;
+    height: $check-cell-size;
+    transition: transform .245s ease, background .245s ease, border .245s ease;
+  }
+
+  &::before {
+    border: 1px solid $input-border-color;
+  }
+
+  &::after {
+    transform: translateY(-50%) scale(0);
+  }
+
+  &:hover,
+  &:focus {
+    &::before {
+      border-color: color-variant($input-border-color, hover);
+    }
+  }
+}
+
+.checkbox__item {
+  min-height: 1.25rem;
+
+  &::before {
+    border-radius: 2px;
+  }
+
+  &::after {
+    background: $check-icon no-repeat center center;
+    background-size: contain;
+  }
+}
+
+.radio__item {
+  min-height: 1.25rem;
+
+  &::before,
+  &::after {
+    border-radius: 50%;
+  }
+}
+
+.checkbox input,
+.checkbox-inline input {
+  &:checked ~ .checkbox__item {
+    &::after {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(-50%) scale($checkbox-scale);
+    }
+
+    &::before {
+      background: $check-active-color;
+      border-color: color-variant($check-active-color, hover);
+    }
+
+    &.disabled::before,
+    .disabled::after {
+      opacity: $disabled;
+    }
+  }
+
+  &:focus ~ .checkbox__item::before {
+    border-color: color-variant($check-active-color, hover);
+  }
+
+  &:checked:hover ~ .checkbox__item::before {
+    background: color-variant($check-active-color, hover);
+    border-color: color-variant($check-active-color, active);
+  }
+
+  &:disabled ~ .checkbox__item,
+  &.disabled ~ .checkbox__item {
+    cursor: $cursor-disabled;
+  }
+
+  &:disabled ~ .checkbox__item::before,
+  &:disabled:checked ~ .checkbox__item::before,
+  &:disabled:focus ~ .checkbox__item::before {
+    background-color: $check-disabled-color;
+    border-color: $check-disabled-border-color;
+  }
+
+  &:disabled:checked ~ .checkbox__item::before,
+  &:disabled:checked:focus ~ .checkbox__item::before {
+    background-color: $check-disabled-checked-color;
+    border-color: $check-disabled-checked-border-color;
+  }
+}
+
+.checkbox,
+.checkbox-inline {
+  &.readonly {
+    cursor: default;
+
+    input {
+      pointer-events: none;
+    }
+
+    input,
+    .checkbox__item,
+    input:hover,
+    input:hover ~ .checkbox__item::before {
+      cursor: default;
+    }
+
+    .checkbox__item::before,
+    input:focus ~ .checkbox__item::before {
+      background-color: $check-disabled-color;
+      border-color: $check-disabled-border-color;
+    }
+
+    input:checked ~ .checkbox__item::before {
+      background-color: $check-readonly-color;
+      border-color: $check-readonly-color;
+    }
+
+    input:checked ~ .checkbox__item::after {
+      background: $check-readonly-icon no-repeat center center;
+      background-size: contain;
+      visibility: visible;
+      opacity: 1;
+      -webkit-transform: translateY(-50%) scale($check-readonly-scale);
+              transform: translateY(-50%) scale($check-readonly-scale);
+    }
+  }
+}
+
+.at-group-selection-checkbox,
+.at-selection-checkbox {
+  /* stylelint-disable-next-line no-duplicate-selectors */
+  .ui-state-disabled,
+  .ui-state-disabled:hover,
+  .ui-state-disabled:focus,
+  .ui-state-disabled,
+  .ui-state-disabled:hover,
+  .ui-state-disabled:focus {
+    background-color: $check-disabled-color;
+    border-color: $check-disabled-border-color;
+    cursor: not-allowed !important;
+  }
+}
+
+.radio input,
+.radio-inline input {
+
+  &:checked ~ .radio__item {
+    &::before {
+      border-color: color-variant($check-active-color, hover);
+    }
+
+    &::after {
+      transform: translateY(-50%) scale($checkbox-scale);
+      background: $check-active-color;
+    }
+  }
+
+  &:checked:hover ~ .radio__item {
+    &::before {
+      border-color: color-variant($check-active-color, active);
+    }
+
+    &::after {
+      background: color-variant($check-active-color, hover);
+    }
+  }
+
+  &:disabled ~ .radio__item {
+    cursor: $cursor-disabled;
+  }
+
+  &:disabled ~ .radio__item::before,
+  &:disabled:hover ~ .radio__item::before,
+  &:disabled:active ~ .radio__item::before,
+  &:checked:disabled ~ .radio__item::before,
+  &:checked:disabled:hover ~ .radio__item::before,
+  &:checked:disabled:active ~ .radio__item::before {
+    border-color: $input-disabled-border-color;
+    background: $input-disabled-bg;
+  }
+
+  &:disabled ~ .radio__item::after,
+  &:disabled:hover ~ .radio__item::after,
+  &:disabled:active ~ .radio__item::after,
+  &:checked:disabled ~ .radio__item::after,
+  &:checked:disabled:hover ~ .radio__item::after,
+  &:checked:disabled:active ~ .radio__item::after {
+    background: color-variant($color-primary, disabled);
+  }
+}
+
+.radio,
+.radio-inline {
+  &.readonly {
+    input,
+    .radio__item {
+      cursor: default;
+    }
+
+    .radio__item::before,
+    input:hover ~ .radio__item::before,
+    input:active ~ .radio__item::before,
+    input:checked ~ .radio__item::before,
+    input:checked:hover ~ .radio__item::before,
+    input:checked:active ~ .radio__item::before {
+      border-color: $input-disabled-border-color;
+      background: $input-disabled-bg;
+    }
+
+    .radio__item::after,
+    input:hover ~ .radio__item::after,
+    input:active ~ .radio__item::after,
+    input:checked ~ .radio__item::after,
+    input:checked:hover ~ .radio__item::after,
+    input:checked:active ~ .radio__item::after {
+      background: color-variant($color-primary, disabled);
+    }
+  }
+}
+
+.radio + .radio:not(.radio-inline),
+.checkbox + .checkbox:not(.checkbox-inline):not(.switch) {
+  margin-top: $checkbox-siblings-margin; // Move up sibling radios or checkboxes for tighter spacing
+}
+
+// indeterminate checkbox
+
+.checkbox {
+
+  input {
+    ~ .checkbox__item .icon-indeterminate {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) scale(0);
+      opacity: 0;
+      left: .125rem;
+      width: $check-cell-size;
+      height: $check-cell-size;
+      background: $indeterminate-icon no-repeat center center;
+      background-size: contain;
+      transition: transform .245s ease, opacity .245s ease;
+    }
+  }
+
+  input:indeterminate {
+    ~ .checkbox__item::before {
+      border-color: color-variant($check-active-color, hover);
+      background: $check-active-color;
+    }
+
+    ~ .checkbox__item::after {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0);
+    }
+
+    ~ .checkbox__item .icon-indeterminate {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+
+  &.readonly {
+    input:indeterminate {
+      ~ .checkbox__item .icon-indeterminate {
+        background: $indeterminate-readonly-icon no-repeat center center;
+        transform: translateY(-50%) scale(1.2);
+      }
+
+      ~ .checkbox__item::before {
+        border-color: $check-readonly-color;
+        background: $check-readonly-color;
+      }
+    }
+  }
+}
+
+// Radios and checkboxes on same line
+.radio-inline,
+.checkbox-inline {
+  position: relative;
+  display: inline-block;
+  padding-left: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
+  margin-left: 20px; // space out consecutive inline controls
+}
+
+// Apply same disabled cursor tweak as for inputs
+// Some special care is needed because <label>s don't inherit their parent's `cursor`.
+//
+// Note: Neither radios nor checkboxes can be readonly.
+
+input[type="radio"],
+input[type="checkbox"] {
+
+  &:indeterminate:disabled + .checkbox__item {
+    opacity: $disabled;
+  }
+
+  &[disabled],
+  &.disabled,
+  fieldset[disabled] & {
+    cursor: $cursor-disabled;
+  }
+}
+
+// These classes are used directly on <label>s
+/* stylelint-disable-next-line no-duplicate-selectors */
+.radio-inline,
+.checkbox-inline {
+  &.disabled,
+  fieldset[disabled] & {
+    cursor: $cursor-disabled;
+  }
+}
+
+// These classes are used on elements with <label> descendants
+/* stylelint-disable-next-line no-duplicate-selectors */
+.radio,
+.checkbox {
+  &.disabled,
+  fieldset[disabled] & {
+    label {
+      cursor: $cursor-disabled;
+    }
+  }
+}
+
+// Checkbox and Radiobutton with error states
+.checkbox.is-error .checkbox__item::before,
+.radio.is-error .radio__item::before {
+  border-color: color-variant($color-critical, hover);
+}
+
+.form-control-required {
+  display: inline-block;
+  font-weight: normal;
+  color: $form-required-color;
+}
+
+// Form controls
+.form-control {
+  padding-left: $input-btn-padding-x;
+  padding-right: $input-btn-padding-x;
+
+  &:hover,
+  &:hover + .input-group-custom-tag {
+    border-color: color-variant($input-border-color, hover);
+  }
+
+  // Unstyle the caret on `<select>`s in IE10+.
+  &::-ms-expand {
+    display: none;
+    border: 0;
+    background-color: transparent;
+  }
+
+  // Remove default clear input button in IE
+  &::-ms-clear {
+    display: none;
+  }
+
+  &:focus,
+  &:focus + .input-group-custom-tag {
+    background-color: $color-foreground;
+    border-color: $color-active;
+    color: $input-focus-color;
+    outline: none;
+  }
+
+  // disable state:
+  // cursor - not-allowed
+  // color transparentize .4
+  &:disabled,
+  &:disabled + .input-group-custom-tag {
+    color: $input-disabled-color;
+    background-color: $input-disabled-bg;
+    border-color: $input-disabled-border-color;
+    cursor: $cursor-disabled;
+  }
+
+  &:disabled:hover,
+  &:disabled:hover + .input-group-custom-tag {
+    color: transparentize($input-disabled-color, .4);
+    border-color: $input-disabled-border-color;
+
+    &::placeholder {
+      color: transparentize($input-placeholder-color, .4);
+    }
+  }
+
+  &:-ms-input-placeholder {
+    color: $input-placeholder-color !important;
+  }
+
+  &:-moz-ui-invalid {
+    box-shadow: none;
+  }
+}
+
+// Disable state for fieldset
+
+fieldset[disabled],
+.form-group.disabled { // <-- depends on layout, we need to set disable style to label
+
+  // state for prefix and suffix in textfields
+  .input-group-text {
+    color: $input-disabled-color;
+    background-color: $input-disabled-bg;
+    border-color: $input-disabled-border-color;
+    cursor: $cursor-disabled;
+  }
+
+  .form-control-label {
+    color: $input-color;
+  }
+}
+
+.form-control-label {
+  font-weight: 600;
+}
+
+.form-control-feedback {
+  margin: $form-control-feedback-margin;
+}
+
+select.form-control:not([multiple]) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 26px;
+  background: {
+    image: $select-caret;
+    repeat: no-repeat;
+    position: calc(100% - 10px) center;
+    size: 8px 8px;
+  }
+
+  &:disabled {
+    background-image: $select-caret-disabled;
+  }
+}
+
+select.form-control:not([size]):not([multiple]) {
+  height: auto;
+}
+
+// Forms utilities
+.form-group.is-required > label::after {
+  content: " (required)";
+  font-weight: $font-weight-normal;
+  color: $form-required-color;
+  //color: if($accessible-mode, get-contrast-color($form-required-color), $form-required-color);
+}
+
+.form-group.is-required-short > label::after {
+  content: " *";
+  font-weight: $font-weight-normal;
+  color: $form-required-color;
+  //color: if($accessible-mode, get-contrast-color($form-required-color), $form-required-color);
+}
+
+// for accessibility make required as a badge
+@if ($accessible-mode) {
+  .form-group.is-required > label::after,
+  .form-group.is-required-short > label::after {
+    @include badge-variant(theme-color("danger"), false);
+    content: "required";
+    display: inline-block;
+    margin: 0 .25rem 0 .5rem;
+    //font-size: $badge-font-size;
+    //font-weight: $badge-font-weight;
+    line-height: 1;
+    padding: $badge-padding-y $badge-padding-x;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    @include border-radius($badge-border-radius);
+  }
+
+  .form-control-required {
+    @include badge-variant(theme-color("danger"), false);
+    display: inline-block;
+    margin: 0 .25rem 0 .5rem;
+    line-height: 1;
+    padding: $badge-padding-y $badge-padding-x;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    @include border-radius($badge-border-radius);
+  }
+}
+
+// Form validation states
+.form-control-success,
+.form-control-danger,
+.form-control-warning {
+  padding-right: $spacer * 3 !important; // must be important for override .input-group-[size] classes
+
+  background: {
+    repeat: no-repeat;
+    size: $form-validation-icon-size;
+    position: $form-validation-icon-position !important;
+  }
+
+  transition: $input-transition, background .25s $ease-transition-in, background-position 0s;
+}
+
+textarea {
+  &.form-control-success,
+  &.form-control-danger,
+  &.form-control-warning {
+    background-position: right .65rem top $input-btn-padding-y !important;
+
+    &.form-control-sm {
+      background-position: right .65rem top $input-btn-padding-y-sm !important;
+    }
+
+    &.form-control-lg {
+      background-position: right .65rem top $input-btn-padding-y-lg !important;
+    }
+  }
+}
+
+.has-success {
+  @include form-control-validation(map-get($theme-colors, success));
+
+  .form-control-success {
+    background-image: $form-icon-success;
+
+    &:focus,
+    &:focus + .input-group-custom-tag {
+      border-color: color-variant(map-get($theme-colors, success), hover);
+    }
+
+    &:active,
+    &:active + .input-group-custom-tag {
+      border-color: color-variant(map-get($theme-colors, success), active);
+    }
+  }
+}
+
+.has-warning {
+  @include form-control-validation(map-get($theme-colors, warning));
+
+  .form-control-warning {
+    background-image: $form-icon-warning;
+
+    &:focus,
+    &:focus + .input-group-custom-tag {
+      border-color: color-variant(map-get($theme-colors, warning), hover);
+    }
+
+    &:active,
+    &:active + .input-group-custom-tag {
+      border-color: color-variant(map-get($theme-colors, warning), active);
+    }
+  }
+}
+
+.has-danger {
+  @include form-control-validation(map-get($theme-colors, danger));
+
+  .form-control-danger {
+    background-image: $form-icon-danger;
+
+    &:focus,
+    &:focus + .input-group-custom-tag {
+      border-color: color-variant(map-get($theme-colors, danger), hover);
+    }
+
+    &:active,
+    &:active + .input-group-custom-tag {
+      border-color: color-variant(map-get($theme-colors, danger), active);
+    }
+  }
+}
+
+// Textfield
+.textfield {
+  display: block;
+}
+
+// Counter input group
+.input-group-counter {
+  /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+  @extend .input-group-text;
+  padding: 0;
+  flex-direction: column;
+  width: 32px;
+
+  button {
+    background: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 10px;
+    flex: 1 1 auto;
+    color: $text-secondary;
+    transition: color .25s linear;
+
+    &:hover {
+      color: $color-active;
+    }
+
+    &:active {
+      color: color-variant($color-active, hover);
+    }
+
+    &:first-child,
+    &:last-child {
+      &:after {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 7px;
+        border-style: solid;
+      }
+    }
+
+    &:first-child {
+      &:after {
+        border-width: 0 4px 7px 4px;
+        border-color: transparent transparent currentColor transparent;
+        vertical-align: bottom;
+      }
+    }
+
+    &:last-child {
+      &:after {
+        border-width: 7px 4px 0 4px;
+        border-color: currentColor transparent transparent transparent;
+        vertical-align: top;
+      }
+    }
+  }
+}
+
+// Deprecated! Counter field
+.addon-counter {
+  //width: 32px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+  background: none;
+
+  button {
+    width: 30px; // +1px from the border
+    border: 0;
+    line-height: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    flex: 1 1 auto;
+    background: none;
+    color: $text-secondary;
+    transition: color .25s linear;
+
+    &:hover {
+      color: $color-active;
+    }
+
+    &:active {
+      color: color-variant($color-active, hover);
+    }
+
+    &:first-child,
+    &:last-child {
+      &:after {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 7px;
+        border-style: solid;
+      }
+    }
+
+    &:first-child {
+      &:after {
+        vertical-align: bottom;
+        border-width: 0 4px 7px 4px;
+        border-color: transparent transparent currentColor transparent;
+      }
+    }
+
+    &:last-child {
+      &:after {
+        vertical-align: top;
+        border-width: 7px 4px 0 4px;
+        border-color: currentColor transparent transparent transparent;
+      }
+    }
+  }
+}
+
+// Readonly input
+.form-control[readonly]:not(.dt-input-control):not(.rx-form-control) {
+  border: none;
+  background: none;
+  background-clip: padding-box;
+
+  &:focus {
+    border-color: $color-active;
+  }
+}
+
+// TODO:
+// normalize readonly state across all components:
+// - by default components should use .form-control-plaintext class
+// - .form-control readonly should have similar to disabled state styles
+// - chane Angular code
+// - remove padding, controls etc (check with design team)
+
+// Adapt plaintext
+.form-control-disabled-look[readonly] {
+  color: $input-disabled-color;
+  background-color: $input-disabled-bg !important;
+  border: 1px solid $input-disabled-border-color !important;
+  cursor: $cursor-disabled;
+
+  &:hover {
+    color: transparentize($input-disabled-color, .4);
+    border-color: $input-disabled-border-color;
+
+    &::placeholder {
+      color: transparentize($input-placeholder-color, .4);
+    }
+  }
+
+  &:focus {
+    border-color: $color-active !important;
+  }
+}
+
+// input height in IE11
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* IE10+ specific styles go here */
+  // fix for https://github.bmc.com/bmc-ux/adapt-angular/issues/1678
+  input {
+    &.form-control {
+      height: $ie11-input-height;
+    }
+
+    &.form-control-lg {
+      height: $ie11-input-height-lg;
+    }
+
+    &.form-control-sm {
+      height: $ie11-input-height-sm;
+    }
+  }
+}
+
+[placeholder] {
+  text-overflow: ellipsis;
+}

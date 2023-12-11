@@ -1,0 +1,1 @@
+{"version":3,"file":"fields.interface.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/actions/edit-records/interfaces/fields.interface.ts"],"names":[],"mappings":"","sourcesContent":["import { IFieldInstance } from '@helix/platform/record/api';\n\nexport interface IFields {\n  [fieldId: number]: IFieldInstance;\n}\n"]}

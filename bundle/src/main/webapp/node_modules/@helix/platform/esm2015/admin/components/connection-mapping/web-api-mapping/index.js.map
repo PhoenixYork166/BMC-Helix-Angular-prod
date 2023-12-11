@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/admin/components/connection-mapping/web-api-mapping/index.ts"],"names":[],"mappings":"AAAA,cAAc,uCAAuC,CAAC;AACtD,cAAc,6BAA6B,CAAC","sourcesContent":["export * from './web-api-mapping-registration.module';\nexport * from './web-api-mapping.component';\n"]}

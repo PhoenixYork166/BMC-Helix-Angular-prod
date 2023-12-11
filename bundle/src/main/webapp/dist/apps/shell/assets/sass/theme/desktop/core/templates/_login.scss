@@ -1,0 +1,318 @@
+$gradient-color1: if($dark-mode, $black, $black) !default;
+$gradient-color2: if($dark-mode, $gray-200, $gray-800) !default;
+$footer-color: rgba($black, .3) !default;
+
+.bg-base64 {
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.wrapper-login {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100vh; //fix for  /bmc-ux/adapt-angular/issues/221
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, $gradient-color1, $gradient-color2);
+  background-size: cover;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  &.bg-helix {
+    background-image: url("#{$login-background-path}#{$bg-helix}");
+    background-position: right top;
+  }
+
+  > * {
+    flex: 1 100%;
+  }
+
+  //start product block {top section - name of product};
+  .product {
+    padding-top: 100px;
+    font-size: 2.25rem;
+
+    @media (max-width: map-get($grid-breakpoints, sm)) {
+      padding-top: 56px;
+      //font-size: 1.625rem;
+    }
+
+  }
+
+  .product__link {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.75rem;
+    font-weight: $font-weight-light;
+    text-decoration: none;
+    color: if($dark-mode, $gray-1000, $white);
+
+    .logo {
+      width: unset;
+      height: 2rem;
+
+      margin-left: -1.625rem;
+
+      @if $rtl-mode {
+        background-position: right;
+      } @else {
+        background-position: left;
+      }
+    }
+  }
+
+  .product__logo {
+
+    &.logo-bmc {
+      margin-left: -1em;
+      line-height: 2rem;
+    }
+
+    &.logo-bmc-helix {
+      width: 8.35rem;
+      height: 2rem;
+      margin-left: -1.5rem;
+    }
+  }
+
+  .product__logo_name {
+    font-weight: $font-weight-light;
+    white-space: pre-wrap;
+    line-height: 1.15;
+  }
+
+  .product__logo_version {
+    font-size: .75rem;
+
+    @media (max-width: map-get($grid-breakpoints, sm)) {
+      //font-size: 0.625rem;
+    }
+  }
+
+  //start form block
+
+  .form {
+    margin: 0 auto 40px;
+    padding: 20px;
+    border-radius: $border-radius;
+    background: $color-foreground;
+
+    @media (min-width: 481px) {
+      width: 400px;
+      box-shadow: 0 3px 4px rgba(0, 0, 0, .14), 0 9px 10px rgba(0, 0, 0, .06); //shadow-1
+    }
+
+    @media (max-width: 480px) {
+      border-top: 1px solid $border-color;
+    }
+
+    .form-control {
+      color: $gray-1000;
+    }
+  }
+
+  .form__additional {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+
+    .checkbox {
+      margin-top: 0;
+    }
+  }
+
+  .form__additional-link {
+    display: flex;
+  }
+
+  .form__button {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form__licence {
+    padding-top: 20px;
+    font-size: 13px;
+    color: $gray-700;
+    border-top: 1px solid $border-color;
+  }
+
+  .has-feedback_left {
+    .form-control {
+      padding-right: 16px;
+      padding-left: 38px;
+    }
+
+    .form-control-feedback {
+      left: 0;
+    }
+  }
+
+  //Start footer block;
+
+  .footer {
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    padding: .75rem 0;
+    background-color: $footer-color;
+  }
+
+  .footer__container {
+    display: flex;
+    font-size: .625rem;
+    color: if($dark-mode, $gray-1000, $white);
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: map-get($grid-breakpoints, sm)) {
+      flex-wrap: wrap;
+    }
+  }
+
+  .footer__copy-span {
+    display: block;
+  }
+
+  .footer__copy-link {
+    color: inherit;
+  }
+
+  .footer__powered {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 100px;
+
+    @media (max-width: map-get($grid-breakpoints, sm)) {
+      min-width: auto;
+      order: -1;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+  }
+
+  .footer__powered-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .footer__powered-title {
+    text-transform: uppercase;
+    color: if($dark-mode, $gray-900, $gray-100);
+  }
+
+  .footer__powered-logo {
+    height: 1rem;
+    width: unset;
+
+    @if $rtl-mode {
+      background-position: left;
+    } @else {
+      background-position: right;
+    }
+
+    @media (max-width: map-get($grid-breakpoints, sm)) {
+      @if $rtl-mode {
+        background-position: right;
+      } @else {
+        background-position: left;
+      }
+    }
+  }
+
+}
+
+// iPhone 4 styles. TODO: remove after support ends
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) {
+  .wrapper-login {
+
+    .container {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .product {
+      font-size: 1.375rem;
+      padding-top: 1rem;
+    }
+
+    .product__link {
+      margin-left: 1.25rem;
+    }
+
+    .product__logo.logo-bmc {
+      margin-left: -1em;
+      line-height: 1.25rem;
+    }
+
+    .product__logo_version {
+      font-size: .625rem;
+      margin-bottom: .875rem;
+    }
+
+    .product__logo_name {
+      margin-bottom: .25rem;
+    }
+
+    .form {
+      padding: 1rem;
+      margin: 0 auto 1rem;
+
+      .textfield {
+        margin-bottom: .8125rem;
+      }
+
+      .form-group.textfield + .form-group.textfield {
+        margin-bottom: .5rem;
+      }
+
+      .form-control,
+      .btn {
+        font-size: .8125rem;
+        padding: .5rem 1rem;
+        line-height: 1.5385;
+      }
+    }
+
+    .form__additional {
+      margin-bottom: 0;
+      line-height: 1.5385;
+    }
+
+    .form__button {
+      margin-bottom: .8125rem;
+    }
+
+    .form__licence {
+      border: 0;
+      padding-top: 0;
+      font-size: 10px;
+    }
+
+    .footer__powered-logo {
+      margin-top: 0;
+      font-size: 10px;
+    }
+
+    .footer__powered {
+      margin-bottom: 7px;
+    }
+
+    .footer__container {
+      font-size: 8px;
+      line-height: 1.5385;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+}

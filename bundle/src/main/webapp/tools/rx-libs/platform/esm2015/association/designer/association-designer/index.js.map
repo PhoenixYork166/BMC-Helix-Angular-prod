@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/association/designer/association-designer/index.ts"],"names":[],"mappings":"AAAA,cAAc,+BAA+B,CAAC;AAC9C,cAAc,kCAAkC,CAAC","sourcesContent":["export * from './association-designer.module';\nexport * from './association-designer.component';\n"]}

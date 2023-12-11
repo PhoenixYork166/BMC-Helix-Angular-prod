@@ -1,0 +1,71 @@
+import { Component, Injector } from '@angular/core';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { ActiveModalRef, DismissReasons } from '@bmc-ux/adapt-angular';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { cloneDeep, omit } from 'lodash';
+import { RX_RECORD_GRID } from '../../../../record-grid.constant';
+import * as i0 from "@angular/core";
+import * as i1 from "@bmc-ux/adapt-angular";
+import * as i2 from "@helix/platform/shared/components";
+import * as i3 from "@angular/cdk/drag-drop";
+import * as i4 from "@angular/common";
+import * as i5 from "@angular/forms";
+import * as i6 from "@ngx-translate/core";
+export class RecordGridViewPresetColumnsModalComponent extends RxModalClass {
+    constructor(activeModalRef, injector) {
+        super(activeModalRef, injector);
+        this.activeModalRef = activeModalRef;
+        this.injector = injector;
+        this.params = this.activeModalRef.getData();
+        this.presetColumns = this.params.presetColumns.map((column, index) => {
+            const gridColumn = this.params.gridColumns.find((col) => col.fieldId === column.data.fieldId);
+            return Object.assign(Object.assign({}, cloneDeep(column)), { isOpen: index === 0, title: gridColumn.title, fallbackTitle: gridColumn.fallbackTitle });
+        });
+        this.isReadOnly = this.params.isReadOnly;
+        this.columnWidthPropertyOptions = RX_RECORD_GRID.columnProperties.find(({ name }) => name === 'width').options;
+        this.presetColumns.sort((a, b) => a.data.index - b.data.index);
+    }
+    expandAllColumns(event) {
+        event.stopPropagation();
+        this.presetColumns.forEach((column) => (column.isOpen = true));
+    }
+    collapseAllColumns(event) {
+        event.stopPropagation();
+        this.presetColumns.forEach((column) => (column.isOpen = false));
+    }
+    saveChanges() {
+        this.activeModalRef.close({
+            presetColumns: this.presetColumns.map((column) => omit(column, ['isOpen', 'title']))
+        });
+    }
+    cancel() {
+        this.activeModalRef.dismiss(DismissReasons.CLOSE_BTN);
+    }
+    moveColumn(fromIndex, toIndex) {
+        this.markAsDirty();
+        moveItemInArray(this.presetColumns, fromIndex, toIndex);
+        this.updateColumnIndexes();
+    }
+    onDropInSelectedColumnsContainer(event) {
+        this.moveColumn(event.previousIndex, event.currentIndex);
+    }
+    trackByGuid(index, column) {
+        return column.guid;
+    }
+    updateColumnIndexes() {
+        this.presetColumns.forEach((column, index) => {
+            column.data.index = index;
+        });
+    }
+}
+RecordGridViewPresetColumnsModalComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.1.3", ngImport: i0, type: RecordGridViewPresetColumnsModalComponent, deps: [{ token: i1.ActiveModalRef }, { token: i0.Injector }], target: i0.ɵɵFactoryTarget.Component });
+RecordGridViewPresetColumnsModalComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.1.3", type: RecordGridViewPresetColumnsModalComponent, selector: "rx-record-grid-view-preset-columns-modal", usesInheritance: true, ngImport: i0, template: "<div class=\"designer-modal-body modal-body d-flex mh-100\">\n  <div class=\"row flex-grow-1 w-100\">\n    <div class=\"d-flex flex-column mh-100 col\">\n      <div class=\"d-flex justify-content-end\">\n        <div class=\"btn-group\">\n          <button\n            adapt-button\n            btn-type=\"tertiary\"\n            type=\"button\"\n            rx-id=\"expand-all-button\"\n            (click)=\"expandAllColumns($event)\"\n          >\n            {{ 'com.bmc.arsys.rx.client.common.expand-all.label' | translate }}\n          </button>\n\n          <button\n            adapt-button\n            btn-type=\"tertiary\"\n            type=\"button\"\n            rx-id=\"collapse-all-button\"\n            (click)=\"collapseAllColumns($event)\"\n          >\n            {{ 'com.bmc.arsys.rx.client.common.collapse-all.label' | translate }}\n          </button>\n        </div>\n      </div>\n\n      <div\n        class=\"designer-modal-accordion-wrapper\"\n        cdkDropList\n        [cdkDropListData]=\"presetColumns\"\n        (cdkDropListDropped)=\"onDropInSelectedColumnsContainer($event)\"\n      >\n        <adapt-accordion [multiselect]=\"true\">\n          <div\n            *ngFor=\"\n              let column of presetColumns;\n              let index = index;\n              let first = first;\n              let last = last;\n              trackBy: trackByGuid\n            \"\n            class=\"designer-modal-accordion-content\"\n            cdkDrag\n            [cdkDragDisabled]=\"isReadOnly\"\n            [cdkDragData]=\"column\"\n            cdkDragLockAxis=\"y\"\n          >\n            <div *ngIf=\"!isReadOnly\" class=\"designer-modal-drag-handle d-icon-left-dots\" cdkDragHandle></div>\n\n            <adapt-accordion-tab\n              class=\"d-block\"\n              [isOpen]=\"column.isOpen\"\n              (open)=\"column.isOpen = true\"\n              (close)=\"column.isOpen = false\"\n            >\n              <div class=\"card-title-text w-100\">\n                <div class=\"designer-modal-card-title-content\">\n                  <div class=\"left-header-block\" [class.pl-0]=\"isReadOnly\">\n                    <div class=\"rx-ellipsis\" [title]=\"column.title\">\n                      {{ column.title || column.fallbackTitle }}\n                    </div>\n\n                    <div *ngIf=\"column.data.visible\" class=\"designer-modal-card-sub-title ml-2\" [title]=\"column.title\">\n                      visible\n                    </div>\n                  </div>\n\n                  <div *ngIf=\"!isReadOnly\" class=\"right-header-block\">\n                    <div class=\"designer-modal-card-title-index-buttons\">\n                      <button\n                        class=\"d-icon-left-triangle_down rx-button-unstyled\"\n                        type=\"button\"\n                        [disabled]=\"last\"\n                        (click)=\"$event.stopPropagation(); moveColumn(index, index + 1)\"\n                        rx-id=\"move-down-button\"\n                      ></button>\n\n                      <button\n                        class=\"d-icon-left-triangle_up rx-button-unstyled\"\n                        type=\"button\"\n                        [disabled]=\"first\"\n                        (click)=\"$event.stopPropagation(); moveColumn(index, index - 1)\"\n                        rx-id=\"move-up-button\"\n                      ></button>\n                    </div>\n                  </div>\n                </div>\n              </div>\n\n              <adapt-rx-textfield\n                label=\"Column header\"\n                [disabled]=\"true\"\n                [(ngModel)]=\"column.title\"\n              ></adapt-rx-textfield>\n\n              <adapt-rx-checkbox\n                label=\"Visible\"\n                [(ngModel)]=\"column.data.visible\"\n                [disabled]=\"isReadOnly\"\n                (ngModelChange)=\"markAsDirty()\"\n              ></adapt-rx-checkbox>\n\n              <rx-stepper-with-units-form-control\n                class=\"d-block col-5 p-0\"\n                [options]=\"columnWidthPropertyOptions\"\n                [(ngModel)]=\"column.data.width\"\n                (ngModelChange)=\"markAsDirty()\"\n              ></rx-stepper-with-units-form-control>\n            </adapt-accordion-tab>\n          </div>\n        </adapt-accordion>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div class=\"modal-footer\">\n  <button\n    *ngIf=\"!isReadOnly\"\n    adapt-button\n    btn-type=\"primary\"\n    type=\"button\"\n    rx-id=\"save-button\"\n    [disabled]=\"!isDirty()\"\n    (click)=\"saveChanges()\"\n  >\n    {{ 'com.bmc.arsys.rx.client.common.save.label' | translate }}\n  </button>\n\n  <button adapt-button btn-type=\"secondary\" type=\"button\" rx-id=\"cancel-button\" (click)=\"cancel()\">\n    {{\n      isReadOnly\n        ? ('com.bmc.arsys.rx.client.common.close.label' | translate)\n        : ('com.bmc.arsys.rx.client.common.cancel.label' | translate)\n    }}\n  </button>\n</div>\n", styles: [":root{--border-radius: 4px;--nav-background: var(--gray-900);--nav-links-color: var(--white);--font-family: \"Open Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;--color-primary-disabled-hover: #ff8d2a;--color-primary-disabled: #ff7d18;--color-primary: #f86e00;--color-primary-hover: #e45f00;--color-primary-active: #d05100;--color-primary-active-hover: #bc4300;--color-secondary-disabled-hover: #ffffff;--color-secondary-disabled: #ffffff;--color-secondary: #f9f9fa;--color-secondary-hover: #e5e5e6;--color-secondary-active: #d2d2d3;--color-secondary-active-hover: #c0c0c2;--color-active-disabled-hover: #45c8bd;--color-active-disabled: #2db7ad;--color-active: #00a79d;--color-active-hover: #00978e;--color-active-active: #00887f;--color-active-active-hover: #007970;--color-info-disabled-hover: #66d9f1;--color-info-disabled: #52c7df;--color-info: #3cb6ce;--color-info-hover: #21a6bd;--color-info-active: #0096ad;--color-info-active-hover: #00879e;--color-success-disabled-hover: #aae860;--color-success-disabled: #99d550;--color-success: #89c341;--color-success-hover: #7ab232;--color-success-active: #6ba122;--color-success-active-hover: #5d9110;--color-warning-disabled-hover: #ffda46;--color-warning-disabled: #ffc734;--color-warning: #f1b521;--color-warning-hover: #dea406;--color-warning-active: #cc9400;--color-warning-active-hover: #ba8400;--color-danger-disabled-hover: #ff5323;--color-danger-disabled: #ff4313;--color-danger: #f83200;--color-danger-hover: #e31f00;--color-danger-active: #cd0500;--color-danger-active-hover: #b80000;--dense-spacing-custom: false;--table-scroll-width: 0}.designer-modal-body{height:645px;min-height:calc(100% - 61px)!important}.designer-modal-accordion-wrapper{display:flex;flex-direction:column;height:100%;overflow:auto;padding-top:10px}.designer-modal-accordion-content{position:relative}.designer-modal-accordion-content.cdk-drag-preview{z-index:1200!important}.designer-modal-drag-handle{cursor:move;position:absolute;top:0;left:0;height:46px;padding:14px 10px 14px 14px;z-index:1}.designer-modal-card-title-content{width:100%;display:flex}.designer-modal-card-title-content .left-header-block,.designer-modal-card-title-content .right-header-block{display:flex;align-items:center}.designer-modal-card-title-content .left-header-block{flex-grow:1;min-width:0;font-size:14px;padding-left:22px}.designer-modal-card-sub-title{color:#7c7f81;font-weight:normal}.designer-modal-card-title-index-buttons{display:flex;font-size:19px}.rx-card{overflow:auto}.rx-tree-draggable-node{cursor:pointer}.rx-tree-draggable-node.cdk-drag-preview{z-index:1200!important}.rx-tree-draggable-node.cdk-drag{opacity:1}.rx-tree-node-label{word-break:break-all}rx-form-builder{max-width:400px}\n"], components: [{ type: i1.AdaptButtonComponent, selector: "adapt-button, button[adapt-button], a[adapt-button]", inputs: ["btn-type", "size", "disabled", "type", "tabIndex"], exportAs: ["adaptBtn"] }, { type: i1.AdaptAccordionComponent, selector: "adapt-accordion", inputs: ["config", "multiselect", "bordered"], outputs: ["openTab", "closeTab"] }, { type: i1.AdaptAccordionTabComponent, selector: "adapt-accordion-tab", inputs: ["title", "renderContentWhenClosed", "customClass", "multiline", "icon", "disabled", "isOpen"], outputs: ["open", "close"] }, { type: i1.AdaptRxTextfieldComponent, selector: "adapt-rx-textfield", inputs: ["prepend", "append", "isPassword", "autocomplete", "placeholder", "size", "fieldTagText", "fieldTagType", "showValidState", "showValidStateIcon", "showInvalidStateIcon", "validStateMessage", "disabledStyleForReadonlyState"] }, { type: i1.AdaptRxCheckboxComponent, selector: "adapt-rx-checkbox", inputs: ["value", "checked", "indeterminate"], outputs: ["indeterminateChange"] }, { type: i2.StepperWithUnitsFormControlComponent, selector: "rx-stepper-with-units-form-control", inputs: ["options"] }], directives: [{ type: i3.CdkDropList, selector: "[cdkDropList], cdk-drop-list", inputs: ["cdkDropListConnectedTo", "id", "cdkDropListEnterPredicate", "cdkDropListSortPredicate", "cdkDropListDisabled", "cdkDropListSortingDisabled", "cdkDropListAutoScrollDisabled", "cdkDropListOrientation", "cdkDropListLockAxis", "cdkDropListData", "cdkDropListAutoScrollStep"], outputs: ["cdkDropListDropped", "cdkDropListEntered", "cdkDropListExited", "cdkDropListSorted"], exportAs: ["cdkDropList"] }, { type: i4.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: i3.CdkDrag, selector: "[cdkDrag]", inputs: ["cdkDragDisabled", "cdkDragStartDelay", "cdkDragLockAxis", "cdkDragConstrainPosition", "cdkDragPreviewClass", "cdkDragBoundary", "cdkDragRootElement", "cdkDragPreviewContainer", "cdkDragData", "cdkDragFreeDragPosition"], outputs: ["cdkDragStarted", "cdkDragReleased", "cdkDragEnded", "cdkDragEntered", "cdkDragExited", "cdkDragDropped", "cdkDragMoved"], exportAs: ["cdkDrag"] }, { type: i4.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i3.CdkDragHandle, selector: "[cdkDragHandle]", inputs: ["cdkDragHandleDisabled"] }, { type: i5.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { type: i5.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }], pipes: { "translate": i6.TranslatePipe } });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.1.3", ngImport: i0, type: RecordGridViewPresetColumnsModalComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'rx-record-grid-view-preset-columns-modal',
+                    templateUrl: './record-grid-view-preset-columns-modal.component.html',
+                    styleUrls: ['./record-grid-view-preset-columns-modal.component.scss']
+                }]
+        }], ctorParameters: function () { return [{ type: i1.ActiveModalRef }, { type: i0.Injector }]; } });
+//# sourceMappingURL=record-grid-view-preset-columns-modal.component.js.map

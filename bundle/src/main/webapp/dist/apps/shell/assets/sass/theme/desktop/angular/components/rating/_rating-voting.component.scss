@@ -1,0 +1,38 @@
+.a-rating-voting {
+  display: inline-block;
+}
+
+.a-rating-voting__btn {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: $text-secondary;
+  border: 0;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-active;
+
+    &.is-active {
+      &:not(.is-star-icon) {
+        color: color-variant($color-primary, hover);
+      }
+
+      &.is-star-icon {
+        color: color-variant($rating-bg, hover);
+      }
+    }
+  }
+
+  &.is-active {
+    &:not(.is-star-icon) {
+      color: $color-primary;
+    }
+
+    &.is-star-icon {
+      color: $rating-bg;
+    }
+  }
+}

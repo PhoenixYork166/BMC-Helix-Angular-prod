@@ -1,0 +1,30 @@
+<!--Data can be displayed in two different ways,-->
+<!--when the record editor is in Read mode and in Edit mode (create/edit).-->
+
+<!--This container will be displayed when the record editor is in "read"-->
+<!--mode. inReadState is a property from the parent (inherited).-->
+<!--getDisplayValue() is also inherited and returns the field current value.-->
+<!--If the record editor is not in read mode, the element "editStateElementRef"-->
+<!--will be displayed instead.-->
+<!--It is possible to do it differently just using *ngIf conditions using inReadState.-->
+<ng-container>
+  <p>{{(config | async).message }}</p>
+  <rx-read-only-field
+    *ngIf="inReadState; else editStateElementRef"
+    [label]="label"
+    [value]="getDisplayValue()"
+  ></rx-read-only-field>
+</ng-container>
+
+<!--Version displayed when the record editor is in Create or Edit mode (aka not Read).-->
+<!--Some of the values here are inherited (label, isDisabled, isRequired, formControl).-->
+<ng-template #editStateElementRef>
+  <p>{{(config | async).message }}</p>
+  <adapt-rx-textfield [label]="label"
+                      [formControl]="formControl"
+                      [required]="isRequired"
+                      [readonly]="isDisabled"
+                      [requiredLabel]="'com.bmc.arsys.rx.client.common.required.label' | translate"
+                      [maxlength]="maxLength"
+  ></adapt-rx-textfield>
+</ng-template>

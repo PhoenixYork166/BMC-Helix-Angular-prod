@@ -1,0 +1,30 @@
+import { OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { ValueAccessor } from '@helix/platform/shared/components';
+import { TranslateService } from '@ngx-translate/core';
+import { IAssociationsToFollowForArchive, RxRecordDefinitionCacheService } from '@helix/platform/record/api';
+import { IArchiveAssociationControlOptions } from './archive-associations-control.types';
+import { Observable } from 'rxjs';
+import { RxNotificationService } from '@helix/platform/shared/api';
+import * as i0 from "@angular/core";
+export declare class ArchiveAssociationsControlComponent extends ValueAccessor<IAssociationsToFollowForArchive> implements OnChanges, OnInit {
+    private rxModalService;
+    private translateService;
+    private rxRecordDefinitionCacheService;
+    private rxNotificationService;
+    options: IArchiveAssociationControlOptions;
+    private associationLabels;
+    private recordDefinitionNameSubject;
+    private associationToFollowSubject;
+    private associationDefinitions$;
+    private validAssociations$;
+    private missingAssociations$;
+    associationLabel$: Observable<string>;
+    constructor(rxModalService: RxModalService, translateService: TranslateService, rxRecordDefinitionCacheService: RxRecordDefinitionCacheService, rxNotificationService: RxNotificationService);
+    ngOnChanges(changes: SimpleChanges): void;
+    ngOnInit(): void;
+    openAssociationSelector(): void;
+    openMissingDefinitionsModal(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ArchiveAssociationsControlComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ArchiveAssociationsControlComponent, "rx-archive-associations", never, { "options": "options"; }, {}, never, never>;
+}

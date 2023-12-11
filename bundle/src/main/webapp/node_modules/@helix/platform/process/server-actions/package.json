@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-process-server-actions.umd.js",
+  "module": "../../fesm2015/helix-platform-process-server-actions.js",
+  "es2015": "../../fesm2015/helix-platform-process-server-actions.js",
+  "esm2015": "../../esm2015/process/server-actions/helix-platform-process-server-actions.js",
+  "fesm2015": "../../fesm2015/helix-platform-process-server-actions.js",
+  "typings": "helix-platform-process-server-actions.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/process/server-actions"
+}

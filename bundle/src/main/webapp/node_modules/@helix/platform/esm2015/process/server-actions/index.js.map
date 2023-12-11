@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/process/server-actions/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,qBAAqB,CAAC;AACpC,cAAc,gBAAgB,CAAC","sourcesContent":["export * from './server-actions.module';\nexport * from './create-list/index';\nexport * from './record/index';\n"]}

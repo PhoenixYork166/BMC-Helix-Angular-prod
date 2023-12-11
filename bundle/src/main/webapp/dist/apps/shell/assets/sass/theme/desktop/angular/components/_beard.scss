@@ -1,0 +1,37 @@
+.adapt-beard {
+  padding: 0 .5rem .5rem;
+
+  &.desktop-view {
+    display: inline-block;
+
+    .adapt-beard__content-info {
+      position: absolute;
+      top: 0;
+
+      @include rtl(left, -.5rem);
+    }
+  }
+}
+
+.adapt-beard__content {
+  position: relative;
+}
+
+.adapt-beard__content-anchor {
+  &.hidden {
+    display: block !important;
+    visibility: hidden;
+  }
+}
+
+.adapt-beard__content-info {
+  z-index: $zindex-popover + 1; // in case beard component will be injected inside the popover
+  padding: 0 .5rem .5rem;
+  width: calc(100% + .5rem);
+  min-width: $dropdown-min-width;
+  color: $body-color;
+  background-color: $dropdown-bg;
+
+  @include border-radius($dropdown-border-radius);
+  @include shadow(2);
+}

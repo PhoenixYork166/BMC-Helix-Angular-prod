@@ -1,0 +1,32 @@
+import { OnChanges, OnDestroy, Renderer2, SimpleChanges } from '@angular/core';
+import { IRecordGridSortEditorControlOptions, IRecordGridSortEditorModel } from './record-grid-sort-editor-control.types';
+import { AdaptRxSelectComponent } from '@bmc-ux/adapt-angular';
+import { IFormFocusable, IFormControlComponent } from '@helix/platform/shared/api';
+import { ValueAccessor, ISelectOption } from '@helix/platform/shared/components';
+import { ColumnSortDirection } from '../../../common/types/record-grid.types';
+import { BehaviorSubject } from 'rxjs';
+import { RxRecordGridUtilsService } from '../../../common/services/record-grid-utils.service';
+import { RxStringService } from '@helix/platform/utils';
+import * as i0 from "@angular/core";
+export declare class RecordGridSortEditorControlComponent extends ValueAccessor<IRecordGridSortEditorModel> implements IFormControlComponent, IFormFocusable, OnChanges, OnDestroy {
+    private renderer;
+    private rxRecordGridUtilsService;
+    private rxStringService;
+    options: IRecordGridSortEditorControlOptions;
+    adaptRxSelect: AdaptRxSelectComponent;
+    ColumnSortDirection: typeof ColumnSortDirection;
+    updateOptionsSubject: BehaviorSubject<void>;
+    columnOptions$: import("rxjs").Observable<any[]>;
+    selectedColumnOption: ISelectOption[];
+    get selectedSortDirection(): ColumnSortDirection;
+    constructor(renderer: Renderer2, rxRecordGridUtilsService: RxRecordGridUtilsService, rxStringService: RxStringService);
+    ngOnChanges(changes: SimpleChanges): void;
+    onWriteValue(value: IRecordGridSortEditorModel): void;
+    focus(): void;
+    onSelectModelChange(value: ISelectOption[]): void;
+    setSortDirection(sortDirection: ColumnSortDirection): void;
+    optionFormatter(option: ISelectOption): string;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RecordGridSortEditorControlComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RecordGridSortEditorControlComponent, "rx-record-grid-sort-editor-control", never, { "options": "options"; }, {}, never, never>;
+}

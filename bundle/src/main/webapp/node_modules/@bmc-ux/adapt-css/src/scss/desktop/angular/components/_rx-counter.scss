@@ -1,0 +1,251 @@
+.adapt-rx-counter {
+  display: block;
+  width: 100%;
+
+  &.disabled {
+    .adapt-rx-counter__content {
+      .adapt-rx-counter-adding {
+        background-color: $counter-disabled-bg;
+        color: $counter-disabled-color;
+        border-color: $counter-disabled-border-color;
+      }
+
+      .adapt-rx-counter-spinners {
+        border-color: $counter-disabled-border-color;
+
+        .adapt-rx-counter-spinner:disabled {
+          background-color: $counter-disabled-bg !important;
+        }
+      }
+    }
+  }
+
+  &.readonly {
+    .adapt-rx-counter-input.form-control.rx-form-control {
+      border-color: $input-border-color;
+      background-color: $input-bg;
+
+      @include rtl(padding-left, 1rem);
+    }
+  }
+
+  .adapt-rx-counter__content {
+    display: flex;
+
+    .adapt-rx-counter-adding {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      flex: 1 0 45px;
+      padding: 0 1rem;
+      border: 1px solid $counter-border-color;
+      transition: $input-transition;
+      @include ellipsis();
+
+      .adapt-rx-counter-adding-text {
+        @include ellipsis();
+        pointer-events: none;
+      }
+    }
+
+    .adapt-rx-counter-prefix {
+      background-color: var(--color-foreground);
+      @include rtl(border-right, none);
+      @if($rtl-mode) {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      } @else {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+
+      & + .adapt-rx-counter-container {
+        & > .adapt-rx-counter-input-wrapper > .adapt-rx-counter-input.form-control {
+          border-radius: 0;
+        }
+      }
+    }
+
+    .adapt-rx-counter-suffix {
+      background-color: var(--color-foreground);
+      @include rtl(border-left, none);
+      @if($rtl-mode) {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      } @else {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+
+    .adapt-rx-counter-container {
+      display: flex;
+      flex: 1 1 auto;
+      position: relative;
+      box-sizing: content-box;
+
+      .adapt-rx-counter-input-wrapper {
+        position: relative;
+        flex: 1 1 auto;
+        z-index: 1; // should be higher than .adapt-rx-counter-spinners for correct :focus and :hover border-color style
+
+        .adapt-rx-counter-input.form-control {
+          border-radius: if($rtl-mode, 0 $border-radius $border-radius 0, $border-radius 0 0 $border-radius);
+        }
+
+        .adapt-rx-counter-input.form-control.ltr {
+          text-align: if($rtl-mode, right, left);
+        }
+
+        .adapt-rx-counter-input.form-control.form-control-disabled-look {
+          border-radius: $border-radius;
+        }
+
+        .adapt-rx-counter-input.form-control[readonly] {
+          border-radius: $border-radius;
+        }
+      }
+
+      &:last-of-type {
+        .adapt-rx-counter-spinners {
+          border-radius: if($rtl-mode, $border-radius 0 0 $border-radius, 0 $border-radius $border-radius 0);
+          overflow: hidden;
+        }
+
+        .adapt-rx-counter-spinners--mobile-visible {
+          overflow: visible;
+        }
+      }
+    }
+
+    // spinners - increase/decrease buttons
+    .adapt-rx-counter-spinners {
+      position: relative;
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      width: 2rem;
+      @include rtl(margin-left, -1px);
+      border: 1px solid $counter-border-color;
+      border-radius: 0;
+      transition: $input-transition;
+
+      &.focused {
+        border-color: $counter-border-focus;
+        z-index: 3;
+      }
+
+      .adapt-rx-counter-spinner {
+        flex: 1;
+        padding: 0;
+        border: none;
+        border-radius: $border-radius;
+        color: $counter-arrow-color;
+        background-color: var(--color-foreground);
+        transition: color $ease-transition-in-out .15s;
+        line-height: .625rem;
+
+        &:disabled {
+          color: $counter-border-color !important;
+          cursor: $cursor-disabled;
+        }
+
+        @include hover-supported() {
+          color: $counter-arrow-hover-color;
+        }
+
+        &:active {
+          color: color-variant($counter-arrow-hover-color, hover);
+        }
+
+        &::after {
+          display: inline-block;
+          content: "";
+          border-style: solid;
+        }
+
+        &.adapt-rx-counter-spinner__increase::after {
+          border-width: 0 4px 7px 4px;
+          border-color: transparent transparent currentColor transparent;
+          vertical-align: bottom;
+        }
+
+        &.adapt-rx-counter-spinner__decrease::after {
+          border-width: 7px 4px 0 4px;
+          border-color: currentColor transparent transparent transparent;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+}
+
+.adapt-rx-counter-input.form-control-disabled-look {
+  @include rtl(padding-left, 1rem);
+}
+
+.has-danger .adapt-rx-counter__content {
+  .adapt-rx-counter-adding,
+  .adapt-rx-counter-spinners,
+  .adapt-rx-counter-spinners.focused {
+    color: get-status-text-color($color-critical);
+    border-color: $color-critical;
+  }
+}
+
+// mobile styles for spinner
+.adapt-rx-counter-spinners--mobile {
+  > .btn-float-block {
+    position: relative;
+
+    > .btn {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
+      box-shadow: $box-shadow-sm;
+      z-index: 5;
+
+      &:disabled {
+        opacity: 1;
+        background: color-variant($color-primary, disabled);
+        border-color: color-variant($color-primary, disabled-hover);
+      }
+
+      &:active {
+        transform-origin: left center;
+        transform: scale(.95) translateX(-50%);
+      }
+
+      @media (max-width: map-get($grid-breakpoints, md)) {
+        font-size: 30px;
+      }
+
+      &.adapt-rx-counter-spinner__increase {
+        bottom: calc(100% + 10px);
+
+        &.d-icon-triangle_up:before,
+        .d-icon-left-triangle_up:before {
+          top: 13px;
+          position: absolute;
+        }
+      }
+
+      &.adapt-rx-counter-spinner__decrease {
+        top: calc(100% + 10px);
+
+        &.d-icon-triangle_down:before,
+        .d-icon-left-triangle_down:before {
+          bottom: 13px;
+          position: absolute;
+        }
+      }
+    }
+
+    .btn-circle + .btn-circle,
+    .btn-circle + .btn-circle:hover {
+      margin-top: 0;
+    }
+  }
+}

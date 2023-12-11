@@ -1,0 +1,1 @@
+{"version":3,"file":"helix-platform-view-designer-page.js","sourceRoot":"","sources":["../../../../../../libs/platform/view/designer-page/helix-platform-view-designer-page.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,cAAc,SAAS,CAAC","sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './index';\n"]}

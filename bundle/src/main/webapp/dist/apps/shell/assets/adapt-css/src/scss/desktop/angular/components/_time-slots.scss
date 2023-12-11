@@ -1,0 +1,22 @@
+.a-slot__label {
+  padding: 0 0 4px;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  line-height: 20px;
+}
+
+.a-slot__list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  .btn {
+    margin-bottom: 10px;
+    direction: ltr;
+
+    &:not(:last-child) {
+      @include rtl(margin-right, 10px);
+    }
+  }
+}

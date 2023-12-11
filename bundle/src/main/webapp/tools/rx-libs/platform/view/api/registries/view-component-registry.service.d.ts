@@ -1,0 +1,31 @@
+import { ComponentFactoryResolver } from '@angular/core';
+import { RxBundleCacheService, RxGlobalCacheService, RxLogService } from '@helix/platform/shared/api';
+import { RxStringService } from '@helix/platform/utils';
+import { Observable } from 'rxjs';
+import { IViewComponentDescriptor } from './view-component-descriptor.types';
+import * as i0 from "@angular/core";
+export declare class RxViewComponentRegistryService {
+    private componentFactoryResolver;
+    private rxGlobalCacheService;
+    private rxBundleCacheService;
+    private rxStringService;
+    private rxLogService;
+    private componentDescriptors;
+    private asyncComponentDescriptors;
+    constructor(componentFactoryResolver: ComponentFactoryResolver, rxGlobalCacheService: RxGlobalCacheService, rxBundleCacheService: RxBundleCacheService, rxStringService: RxStringService, rxLogService: RxLogService);
+    private ownerBundleIds$;
+    resolveAsyncDescriptors(): Observable<Map<string, IViewComponentDescriptor>>;
+    getRegisteredComponents(): Map<string, IViewComponentDescriptor>;
+    get(type: string): IViewComponentDescriptor;
+    register(...componentDescriptors: IViewComponentDescriptor[] | Promise<IViewComponentDescriptor>[]): void;
+    registerSync(descriptor: IViewComponentDescriptor): void;
+    isDataComponentDescriptor(componentDescriptor: IViewComponentDescriptor): boolean;
+    getBundlePageComponents(bundleId: string, includeAliases?: boolean): IViewComponentDescriptor[];
+    getLicensedComponents(includeAliases?: boolean): Observable<IViewComponentDescriptor[]>;
+    getComponentOwnerBundleId(viewComponentType: string): Observable<string>;
+    private isBundleLicensed;
+    private isComponentAvailableInCurrentBundle;
+    private getDescriptors;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxViewComponentRegistryService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxViewComponentRegistryService>;
+}

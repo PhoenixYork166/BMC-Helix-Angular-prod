@@ -1,0 +1,49 @@
+.adapt-pie-chart-tooltip {
+  display: block;
+}
+
+.adapt-pie-chart-tooltip__color {
+  display: inline-block;
+  margin-right: 8px;
+  width: 8px;
+  height: 8px;
+}
+
+.adapt-donut-total {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+
+  & .adapt-donut-total-label {
+    color: $chart-donut-label;
+    font-size: 15px;
+  }
+
+  & .adapt-donut-total-value {
+    font-size: 18px;
+  }
+}
+
+.adapt-chart-area {
+  margin: 0 40px;
+}
+
+.adapt-pie-chart-main-label {
+  font-size: 15px;
+  fill: $chart-pie-label;
+  color: $chart-pie-label;
+}
+
+.adapt-pie-chart-main-label-sum {
+  font-size: 18px;
+  fill: $chart-pie-label-sum;
+  color: $chart-pie-label-sum;
+}
+
+.adapt-pie-chart-tooltip__category {
+  margin-right: 5px;
+}

@@ -1,0 +1,333 @@
+// Label
+
+.adapt-list__sub-label,
+.adapt-list__title {
+  display: block;
+  transition: color .15s $ease-transition-in-out;
+}
+
+.adapt-list__title {
+  font-weight: $font-weight-bold;
+}
+
+// list selector component
+
+.adapt-list-selector {
+  .adapt-list__title {
+    display: inline-block;
+  }
+
+  &.is-error {
+    .adapt-list,
+    .adapt-list-select .dropdown_select {
+      border-color: $color-critical;
+    }
+
+    .adapt-list__title {
+      color: $color-critical;
+    }
+  }
+}
+
+.adapt-list {
+  border: 1px solid $border-color;
+  transition: height .45s $ease-transition-in-out;
+  border-radius: $border-radius;
+
+  &.adapt-list-builder__list {
+    border-radius: 0;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+
+  &.borderless {
+    border-top: none;
+  }
+}
+
+.adapt-list-builder__list-wrp {
+  transform-origin: if($rtl-mode, right, left) center;
+}
+
+.adapt-list .adapt-list-select {
+  margin-bottom: .375rem;
+  padding: .5rem .5rem 0 .5rem;
+
+  .dropdown-toggle {
+    border-radius: $border-radius;
+  }
+
+  .dropdown_select__menu.bottom-gap {
+    margin-bottom: 1.75rem;
+  }
+}
+
+.cdk-drop-list-disabled {
+  .adapt-list-item {
+    cursor: unset;
+  }
+}
+
+.adapt-list-item {
+  padding: .5rem .875rem;
+  display: flex;
+  flex: 1 1;
+  flex-direction: row;
+  align-items: center;
+  cursor: move; // Fallback for IE11
+  cursor: grab;
+
+  &.disabled,
+  &.cursor-default {
+    cursor: not-allowed;
+  }
+
+  &.disabled adapt-icon,
+  &.cursor-default adapt-icon {
+    opacity: .65;
+  }
+
+  &.disabled .adapt-list-name {
+    color: color-variant($text-primary, disabled);
+  }
+
+  &:not(.hover-disabled):hover {
+    background-color: $table-row-hover;
+  }
+}
+
+.adapt-list-item.disabled:not(.hover-disabled):hover {
+  background-color: color-variant($table-row-hover, disabled);
+}
+
+.adapt-list-name {
+  @include rtl(padding-right, .5rem);
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+  color: $text-primary;
+
+  &:focus {
+    @include tab-focus();
+  }
+}
+
+.adapt-buttons-wrapper {
+  display: flex;
+}
+
+.adapt-list__icon,
+.adapt-list__badge {
+  margin-right: $icon-lockup-spacing;
+  margin-left: $icon-lockup-spacing;
+}
+
+.adapt-list-drag {
+  color: $text-tertiary;
+}
+
+.list-remove,
+.list-update {
+  opacity: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  @include rtl(margin-right, .5rem);
+}
+
+.list-remove:focus,
+.list-remove:hover,
+.list-update:focus,
+.list-update:hover,
+.adapt-list-item:not(.hover-disabled) .adapt-list-name:focus + .list-remove,
+.adapt-list-item:not(.hover-disabled):focus .list-remove,
+.adapt-list-item:not(.hover-disabled):hover .list-remove,
+.adapt-list-item:not(.hover-disabled) .adapt-list-name:focus + .list-update,
+.adapt-list-item:not(.hover-disabled):focus .list-update,
+.adapt-list-item:not(.hover-disabled):hover .list-update {
+  opacity: 1;
+}
+
+
+// list builder component
+
+.adapt-list-builder {
+
+  button {
+    border: none;
+    background: transparent;
+  }
+
+  &.is-error {
+    .adapt-list,
+    .adapt-list-builder__search {
+      border-color: $color-critical;
+    }
+
+    .adapt-list__title,
+    .form-control-feedback {
+      color: $color-critical;
+    }
+  }
+
+  &.has-danger {
+    .adapt-list-builder__search,
+    .adapt-list {
+      border-color: $color-critical;
+
+      .adapt-rx-list-item {
+        .form-control {
+          border-color: $color-active;
+          color: $input-focus-color;
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .adapt-list-builder__search {
+      background-color: $input-disabled-bg;
+
+      .d-icon-search {
+        opacity: $btn-disabled-opacity;
+      }
+    }
+  }
+}
+
+.adapt-list-builder_sorted {
+  .adapt-rx-list-item:hover {
+    cursor: text;
+
+    .rx-list-remove,
+    .rx-list-update {
+      opacity: 1;
+    }
+
+    .adapt-rx-list-drag {
+      color: $gray-700;
+    }
+  }
+}
+
+.adapt-list-builder__search {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  @include rtl(padding-right, .375rem);
+  @include rtl(padding-left, .875rem);
+  border: 1px solid $select-border-color;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  transition: border-color cubic-bezier(.4, 0, .2, 1) .15s;
+
+  &.focused {
+    border-color: $select-border-focus-color;
+  }
+
+  .form-control {
+    width: 100%;
+    height: 2.875rem;
+    padding: 0;
+    border: none;
+  }
+}
+
+.adapt-list-builder__add-item {
+  flex: 0 0 auto;
+}
+
+.adapt-list-builder__list-header {
+  padding: .375rem .875rem .1875rem;
+
+  span {
+    font-weight: $font-weight-bold;
+    font-size: .75rem;
+    color: $text-primary;
+    white-space: nowrap;
+  }
+}
+
+.adapt-list-builder__drag-item {
+  display: none;
+  height: 0;
+  opacity: 0;
+}
+
+.adapt-list-builder__list-item-children {
+  @include rtl(padding-left, 1.625rem);
+}
+
+// Added if it'll be needed to stylist the drop-item
+//.adapt-list-builder__drop-item {
+//}
+
+.adapt-list-builder__drag-drop-item {
+  .placeholder {
+    display: block;
+    border-color: $color-primary;
+    border-style: dashed;
+    height: $input-height;
+    opacity: 1;
+    overflow: hidden;
+    border-width: $border-width;
+    transition: height .1s, border-width .1s, opacity .1s;
+  }
+
+  &.adapt-list-builder__drop-area_center {
+    border: $border-width dashed $color-primary;
+    background-color: $gray-100;
+    margin: -$border-width;
+    @include rtl(margin-right, 0);
+
+    .placeholder {
+      display: none;
+    }
+  }
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+.adapt-list-item {
+  &.adapt-builder-list-item {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__edit-mode {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 1;
+
+    .form-group {
+      margin-bottom: 0;
+      flex: 1 1;
+    }
+
+    .textfield.is-icons .form-control {
+      @include rtl(padding-right, 6.5rem);
+    }
+  }
+
+  &__controls {
+    position: absolute;
+    @include rtl(right, 2 * $dropdown-item-padding-x);
+    z-index: 2;
+
+    .btn:not(:last-child) {
+      @include rtl(padding-right, 0);
+    }
+  }
+}
+
+.cursor-default {
+  cursor: $cursor-disabled;
+}
+
+.cdk-drop-list {
+  &.adapt-list-container {
+    overflow: auto;
+  }
+}
+
+

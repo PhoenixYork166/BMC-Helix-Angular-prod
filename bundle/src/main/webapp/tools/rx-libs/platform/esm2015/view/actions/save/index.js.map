@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/actions/save/index.ts"],"names":[],"mappings":"AAAA,cAAc,2BAA2B,CAAC;AAC1C,cAAc,4BAA4B,CAAC;AAC3C,cAAc,+BAA+B,CAAC","sourcesContent":["export * from './save-view-action.module';\nexport * from './save-view-action.service';\nexport * from './save-view-action.interfaces';\n"]}

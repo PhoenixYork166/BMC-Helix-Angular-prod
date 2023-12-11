@@ -1,0 +1,1 @@
+{"version":3,"file":"association-node.interface.js","sourceRoot":"","sources":["../../../../../../libs/platform/association/api/association-node.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IAssociationNode {\n  value: string;\n  recordDefinitionNameKey: string;\n  defaultName: string;\n}\n"]}

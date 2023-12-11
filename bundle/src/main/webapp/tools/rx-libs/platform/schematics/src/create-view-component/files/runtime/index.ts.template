@@ -1,0 +1,2 @@
+export * from './<%= dasherize(viewComponentName) %>.component';
+export * from './<%= dasherize(viewComponentName) %>.module';

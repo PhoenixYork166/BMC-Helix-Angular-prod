@@ -1,0 +1,35 @@
+import { Injector } from '@angular/core';
+import { ActiveModalRef } from '@bmc-ux/adapt-angular';
+import { IBundleDescriptor, RxDefinitionNameService, RxGlobalCacheService, RxNotificationService, RxOverlayService } from '@helix/platform/shared/api';
+import { ICopyConfig } from './copy-definition.types';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { NgForm } from '@angular/forms';
+import * as i0 from "@angular/core";
+export declare class CopyDefinitionComponent extends RxModalClass {
+    private activeModalRef;
+    private rxOverlayService;
+    private rxGlobalCacheService;
+    private rxNotificationService;
+    private router;
+    private translateService;
+    private rxDefinitionNameService;
+    private httpClient;
+    protected injector: Injector;
+    selectBundleForm: NgForm;
+    targetBundle: IBundleDescriptor[];
+    config: ICopyConfig;
+    definitionDisplayName: string;
+    autoFocusTargetBundleField: boolean;
+    bundles$: Observable<IBundleDescriptor[]>;
+    constructor(activeModalRef: ActiveModalRef, rxOverlayService: RxOverlayService, rxGlobalCacheService: RxGlobalCacheService, rxNotificationService: RxNotificationService, router: Router, translateService: TranslateService, rxDefinitionNameService: RxDefinitionNameService, httpClient: HttpClient, injector: Injector);
+    isDirty(): boolean;
+    optionFormatter(bundleDescriptor: IBundleDescriptor): string;
+    copyDefinition(): void;
+    cancel(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CopyDefinitionComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CopyDefinitionComponent, "ax-copy-definition", never, {}, {}, never, never>;
+}

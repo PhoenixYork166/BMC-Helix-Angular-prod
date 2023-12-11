@@ -1,0 +1,43 @@
+import { OnInit, OnDestroy } from '@angular/core';
+import { AdaptTreeNode, DockedPanelContext, Alert } from '@bmc-ux/adapt-angular';
+import { RxNotificationService } from '@helix/platform/shared/api';
+import { TranslateService } from '@ngx-translate/core';
+import { IHkmPortal, IHkmPortalUserGroup, IItsmCompany, IItsmSupportGroup } from '../hkm-access-mapping.types';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { FormControl } from '@angular/forms';
+import { RxHkmAccessMappingService } from '../hkm-access-mapping.service';
+import * as i0 from "@angular/core";
+export declare class HkmAccessMapEditorComponent implements OnInit, OnDestroy {
+    private dockedPanelContext;
+    private rxNotificationService;
+    private translateService;
+    private rxModalService;
+    private rxHkmAccessMappingService;
+    constructor(dockedPanelContext: DockedPanelContext, rxNotificationService: RxNotificationService, translateService: TranslateService, rxModalService: RxModalService, rxHkmAccessMappingService: RxHkmAccessMappingService);
+    private destroyed$;
+    private userGroupToFoldersMap;
+    private hkmFolders;
+    filesTree: AdaptTreeNode[];
+    company: IItsmCompany;
+    selectedItsmSupportGroups: IItsmSupportGroup[];
+    selectedUserGroups: FormControl;
+    portalUserGroups: IHkmPortalUserGroup[];
+    portals: IHkmPortal[];
+    selectedPortal: FormControl;
+    alertConfig: Alert;
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    cancel(): void;
+    save(): void;
+    private hkmFolderSortFn;
+    private setUpFoldersFromHkmPortalUserGroups;
+    deleteVisibilityGroup(group: IItsmSupportGroup): void;
+    onNodeExpand({ node }: {
+        node: AdaptTreeNode;
+    }): void;
+    supportGroupFormatter(group: IItsmSupportGroup): string;
+    userGroupOptionformatter(group: IHkmPortalUserGroup): string;
+    hkmPortalFormatter(portal: IHkmPortal): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<HkmAccessMapEditorComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<HkmAccessMapEditorComponent, "rx-hkm-access-map-editor", never, {}, {}, never, never>;
+}

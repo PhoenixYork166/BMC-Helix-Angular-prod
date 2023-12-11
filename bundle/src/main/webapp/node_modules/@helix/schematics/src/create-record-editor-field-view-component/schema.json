@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "rx-record-editor-view-component",
+  "type": "object",
+  "properties": {
+    "viewComponentName": {
+      "type": "string",
+      "description": "Record editor field view component name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the record editor field view component?"
+    }
+  },
+  "required": ["viewComponentName"]
+}

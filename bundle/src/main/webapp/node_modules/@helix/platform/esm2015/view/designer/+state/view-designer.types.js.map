@@ -1,0 +1,1 @@
+{"version":3,"file":"view-designer.types.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/designer/+state/view-designer.types.ts"],"names":[],"mappings":"","sourcesContent":["export interface IInitViewDesignerActionPayload {\n  bundleId: string;\n  viewDefinitionName?: string;\n  layoutTemplate?: number;\n}\n"]}

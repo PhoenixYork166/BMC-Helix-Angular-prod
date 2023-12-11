@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../bundles/helix-platform-utils.umd.js",
+  "module": "../fesm2015/helix-platform-utils.js",
+  "es2015": "../fesm2015/helix-platform-utils.js",
+  "esm2015": "../esm2015/utils/helix-platform-utils.js",
+  "fesm2015": "../fesm2015/helix-platform-utils.js",
+  "typings": "helix-platform-utils.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/utils"
+}

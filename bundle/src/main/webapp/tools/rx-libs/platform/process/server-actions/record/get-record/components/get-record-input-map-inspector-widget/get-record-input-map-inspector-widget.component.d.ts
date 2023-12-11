@@ -1,0 +1,33 @@
+import { Injector, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { RxIdService } from '@helix/platform/utils';
+import { IFormWidgetComponent } from '@helix/platform/shared/api';
+import { IDefinitionPickerComponentOptions, IExpressionFormControlOptions, InspectorWidgetBase, RxExpressionEditorService } from '@helix/platform/shared/components';
+import { ISelectedElementInspectorDesignerItemModel } from '@helix/platform/process/api';
+import { IGetRecordServerActionModel } from '../../get-record-server-action.types';
+import { IGetRecordInputMapInspectorWidgetOptions } from './get-record-input-map-inspector-widget.types';
+import * as i0 from "@angular/core";
+export declare class RxGetRecordInputMapInspectorWidgetComponent extends InspectorWidgetBase<IGetRecordInputMapInspectorWidgetOptions, Observable<ISelectedElementInspectorDesignerItemModel<IGetRecordServerActionModel>>> implements OnInit, OnDestroy, OnChanges, IFormWidgetComponent {
+    private rxExpressionEditorService;
+    private rxIdService;
+    private translateService;
+    protected injector: Injector;
+    elementModel$: Observable<IGetRecordServerActionModel>;
+    graph$: Observable<any>;
+    isDynamicRecordDefinitionName$: Observable<boolean>;
+    recordDefinitionPickerOptions: IDefinitionPickerComponentOptions;
+    recordIDExpressionOptions: IExpressionFormControlOptions;
+    sampleRecordDefinitionPickerOptions: IDefinitionPickerComponentOptions;
+    private destroyed$;
+    constructor(rxExpressionEditorService: RxExpressionEditorService, rxIdService: RxIdService, translateService: TranslateService, injector: Injector);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
+    onRecordDefinitionChange(recordDefinitionName: string, elementModel: IGetRecordServerActionModel): void;
+    onSampleRecordDefinitionChange(sampleRecordDefinitionName: string, elementModel: IGetRecordServerActionModel): void;
+    openExpressionEditor(elementModel: IGetRecordServerActionModel): void;
+    private patchOptions;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxGetRecordInputMapInspectorWidgetComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxGetRecordInputMapInspectorWidgetComponent, "rx-get-record-input-map-inspector-widget", never, {}, {}, never, never>;
+}

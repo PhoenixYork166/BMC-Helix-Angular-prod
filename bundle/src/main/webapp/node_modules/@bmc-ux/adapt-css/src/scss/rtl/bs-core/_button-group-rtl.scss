@@ -1,0 +1,355 @@
+// stylelint-disable selector-no-qualifying-type
+
+// Make the div behave like a button
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle; // match .btn alignment given font-size hack above
+
+  > .btn {
+    position: relative;
+    flex: 0 1 auto;
+
+    // Bring the hover, focused, and "active" buttons to the front to overlay
+    // the borders properly
+    @include hover {
+      z-index: 1;
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 1;
+    }
+  }
+
+  // Prevent double borders when buttons are next to each other
+  .btn + .btn,
+  .btn + .btn-group,
+  .btn-group + .btn,
+  .btn-group + .btn-group {
+    margin-right: -$btn-border-width;//rtl
+  }
+}
+
+// Optional: Group multiple button groups together for a toolbar
+.btn-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .input-group {
+    width: auto;
+  }
+}
+
+.btn-group {
+  > .btn:first-child {
+    margin-right: 0;//rtl
+  }
+
+  // Reset rounded corners
+  > .btn:not(:last-child):not(.dropdown-toggle),
+  > .btn-group:not(:last-child) > .btn {
+    @include border-left-radius(0);//rtl
+  }
+
+  > .btn:not(:first-child),
+  > .btn-group:not(:first-child) > .btn {
+    @include border-right-radius(0);//rtl
+  }
+}
+
+// Sizing
+//
+// Remix the default button sizing classes into new ones for easier manipulation.
+
+.btn-group-sm > .btn {
+  /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+  @extend .btn-sm;
+}
+
+.btn-group-lg > .btn {
+  /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+  @extend .btn-lg;
+}
+
+
+//
+// Split button dropdowns
+//
+
+.dropdown-toggle-split {
+  padding-right: $btn-padding-x * .75;
+  padding-left: $btn-padding-x * .75;
+
+  &::after,
+  .dropup &::after,
+  .dropright &::after {
+    margin-right: 0;//rtl
+  }
+
+  .dropleft &::before {
+    margin-left: 0;//rtl
+  }
+}
+
+.btn-sm + .dropdown-toggle-split {
+  padding-right: $btn-padding-x-sm * .75;
+  padding-left: $btn-padding-x-sm * .75;
+}
+
+.btn-lg + .dropdown-toggle-split {
+  padding-right: $btn-padding-x-lg * .75;
+  padding-left: $btn-padding-x-lg * .75;
+}
+
+
+// The clickable button for toggling the menu
+// Set the same inset shadow as the :active state
+.btn-group.show .dropdown-toggle {
+  @include box-shadow($btn-active-box-shadow);
+
+  // Show no shadow for `.btn-link` since it has no other button styles.
+  &.btn-link {
+    @include box-shadow(none);
+  }
+}
+
+
+//
+// Vertical button groups
+//
+
+.btn-group-vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  .btn,
+  .btn-group {
+    width: 100%;
+  }
+
+  > .btn + .btn,
+  > .btn + .btn-group,
+  > .btn-group + .btn,
+  > .btn-group + .btn-group {
+    margin-top: -$btn-border-width;
+    margin-right: 0;//rtl
+  }
+
+  // Reset rounded corners
+  > .btn:not(:last-child):not(.dropdown-toggle),
+  > .btn-group:not(:last-child) > .btn {
+    @include border-bottom-radius(0);
+  }
+
+  > .btn:not(:first-child),
+  > .btn-group:not(:first-child) > .btn {
+    @include border-top-radius(0);
+  }
+}
+
+
+// Checkbox and radio options
+//
+// In order to support the browser's form validation feedback, powered by the
+// `required` attribute, we have to "hide" the inputs via `clip`. We cannot use
+// `display: none;` or `visibility: hidden;` as that also hides the popover.
+// Simply visually hiding the inputs via `opacity` would leave them clickable in
+// certain cases which is prevented by using `clip` and `pointer-events`.
+// This way, we ensure a DOM element is visible to position the popover from.
+//
+// See https://github.com/twbs/bootstrap/pull/12794 and
+// https://github.com/twbs/bootstrap/pull/14559 for more information.
+
+.btn-group-toggle {
+  > .btn,
+  > .btn-group > .btn {
+    margin-bottom: 0; // Override default `<label>` value
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+      pointer-events: none;
+    }
+  }
+}
+
+.adapt-swatch-item {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  transition: border-color $animation-fast $ease-transition-in-out;
+
+  &.color-selection {
+    position: relative;
+    margin: .5rem 0 .25rem 0;
+
+
+    &:not(.multiselectable) {
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      > .check-indicator {
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        transform: translateY(0) scale(.6);
+        position: absolute;
+      }
+
+      &.is-selected {
+        position: relative;
+        background-color: $color-foreground !important;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-left: .25rem;
+    }
+
+    // multiselectable - checkbox mode
+    &.multiselectable {
+      .adapt-inner-check {
+        opacity: 0;
+      }
+      
+      &.is-selected .adapt-inner-check,
+      &:not(:disabled):hover .adapt-inner-check {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.tile-selection {
+    position: relative;
+    border: unset;
+    border-radius: 0;
+    transition: box-shadow $animation-fast $ease-transition-in-out;
+
+    box-shadow:
+            1px 0 0 0 color-variant($color-secondary, hover),
+            0 1px 0 0 color-variant($color-secondary, hover),
+            1px 1px 0 0 color-variant($color-secondary, hover),   /* Just to fix the corner */
+            1px 0 0 0 color-variant($color-secondary, hover) inset,
+            0 1px 0 0 color-variant($color-secondary, hover) inset;
+
+    &:focus,
+    &:active {
+      box-shadow:
+              1px 0 0 0 color-variant($color-secondary, hover),
+              0 1px 0 0 color-variant($color-secondary, hover),
+              1px 1px 0 0 color-variant($color-secondary, hover),
+              1px 0 0 0 color-variant($color-secondary, hover) inset,
+              0 1px 0 0 color-variant($color-secondary, hover) inset !important;
+    }
+
+    // radiobutton mode
+    &:not(.multiselectable) {
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: calc(.125rem + 1px);
+        left: .125rem;
+        transform: translateY(0);
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        opacity: 0;
+        transition: transform .245s ease, background .245s ease, border .245s ease;
+      }
+
+      &::before {
+        border: 1px solid $input-border-color;
+      }
+
+      &::after {
+        transform: translateY(0) scale(0);
+      }
+
+      &.is-selected::before,
+      &.is-selected::after,
+      &:not(:disabled):hover::before {
+        opacity: 1;
+      }
+
+      &.is-selected::before {
+        border-color: $color-primary;
+      }
+
+      &.is-selected::after {
+        transform: scale(.5);
+        background: $color-primary;
+      }
+
+    }
+
+    // multiselectable - checkbox mode
+    &.multiselectable {
+      &::before {
+        content: "";
+        position: absolute;
+        top: calc(.125rem + 1px);
+        left: .125rem;
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        background-color: transparent;
+        opacity: 0;
+        transition: opacity $animation-fast $ease-transition-in-out;
+      }
+
+      &.is-selected::after {
+        content: "\ea54";
+        font-family: dpl-icon-font;
+        color: $color-foreground;
+        position: absolute;
+        top: .125rem;
+        left: .125rem;
+        width: 1rem;
+        height: 1rem;
+        transform: translateY(0) scale(.6);
+        background-size: contain;
+      }
+
+      &.is-selected::before,
+      &:not(:disabled):hover::before {
+        opacity: 1;
+      }
+
+      &.is-selected::before {
+        background: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+
+    &.is-selected {
+      box-shadow:
+              1px 0 0 0 $color-primary,
+              0 1px 0 0 $color-primary,
+              1px 1px 0 0 $color-primary,
+              1px 0 0 0 $color-primary inset,
+              0 1px 0 0 $color-primary inset !important;
+      z-index: 1;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $color-secondary;
+      box-shadow:
+              1px 0 0 0 $color-active,
+              0 1px 0 0 $color-active,
+              1px 1px 0 0 $color-active,
+              1px 0 0 0 $color-active inset,
+              0 1px 0 0 $color-active inset !important;
+      z-index: 2;
+    }
+  }
+}

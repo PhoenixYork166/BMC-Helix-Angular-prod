@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/licensing/index.ts"],"names":[],"mappings":"AAAA,cAAc,sBAAsB,CAAC;AACrC,cAAc,6BAA6B,CAAC","sourcesContent":["export * from './license.interfaces';\nexport * from './license-data-page.service';\n"]}

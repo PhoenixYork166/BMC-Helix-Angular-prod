@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/services-provider-region/index.ts"],"names":[],"mappings":"AAAA,cAAc,gDAAgD,CAAC;AAC/D,cAAc,sCAAsC,CAAC","sourcesContent":["export * from './services-provider-region-registration.module';\nexport * from './services-provider-region.component';\n"]}

@@ -1,0 +1,2345 @@
+//
+// ## ADAPT-CSS Variables
+//
+
+// Table of Contents
+//
+// Color system
+// Options
+// Spacing
+// Letter spacing
+// Body
+// Links
+// Paragraphs
+// Grid breakpoints
+// Grid columns
+// Grid containers
+// Animation
+
+// Components
+// Fonts
+// Headings
+// Labels
+// Lists
+// Tree
+// Tables
+// Buttons
+// Forms
+// Dropdowns
+// Z-index master list
+// Navs
+// Navbar
+// Pagination
+// Jumbotron
+// Cards
+// Tooltips
+// Popovers
+// Metatags
+// Badges
+// Modals
+// DockedPanels
+// Sidebar
+// Alerts
+// Toasts
+// Progress bars
+// List group
+// Image thumbnails
+// Uploader
+// Figures
+// Breadcrumbs
+// Carousel
+// Close
+// Code
+// Profile
+// Login
+// Logo
+// Tree view
+// Printing
+// Toasts
+// Busy, Loaders
+// Charts
+// Rating
+
+// RTL
+
+@use "sass:math";
+
+$is-mobile: false !default;
+
+$start: left;
+$end: right;
+
+$rtl-mode: false !default;
+
+// HP redefine (need to have in case other team compiles it)
+//these var defined in scss/_variables.scss
+//$color-primary-custom: #f86e00 !default;  // BMC default is Orange
+//$color-secondary-custom: #f9f9fa !default; // BMC default is Gray
+//$color-active-custom: #00a79d !default;  //BMC default is Teal
+
+$nav-theme-custom: dark !default;
+
+$logo-dark-custom: $logo-bmc-dark-icon !default;
+$logo-light-custom: $logo-bmc-light-icon !default;
+$logo-helix-dark-custom: $logo-bmc-helix-dark-icon !default;
+$logo-helix-light-custom: $logo-bmc-helix-light-icon !default;
+
+//
+// ## Color system
+//
+// Brand colors
+$color-primary:   $color-primary-custom !default; //BMC default is Orange
+$color-secondary: $color-secondary-custom !default; //BMC default is Gray
+$color-active:    $color-active-custom !default; //BMC default is Teal
+
+// Status-oriented colors
+$color-info:     $color-info-custom !default;  //BMC default is Blue
+$color-success:  $color-success-custom !default;  //BMC default is Green
+$color-warning:  $color-warning-custom !default;  //BMC default is Yellow
+$color-critical: $color-critical-custom !default;  //BMC default is Red
+$color-danger: $color-critical;  //BMC default is Red
+
+//
+// Use 'color-variant' function for generating color-variants:
+// base, hover, active, active-hover, disabled, disabled-hover, row, row-hover, row-active, row-active-hover, muted
+//
+// Usage example: background-color: color-variant($color-primary, hover);
+//
+
+// - - - - - - - - - START BOOTSTRAP COLOR DEFINITION - - - - - - - - - - - -
+
+//These gray colors defined in https://github.bmc.com/bmc-ux/adapt-angular/issues/576
+
+$white:     create-gray(#fff, 0%) !default;       //
+$gray-100:  create-gray(#fafafa, .5%) !default;   //.gray-100  {  background-color: #f9f9fa; }
+$gray-200:  create-gray(#f2f2f2, 1%) !default;    //.gray-200  {  background-color: #f0f0f1; }
+$gray-300:  create-gray(#d9d9d9, 1.5%) !default;  //.gray-300  {  background-color: #d6d7d8; }
+$gray-400:  create-gray(#b3b3b3, 2%) !default;    //.gray-400  {  background-color: #afb1b3; }
+$gray-500:  create-gray(#999, 2.5%) !default;     //.gray-500  {  background-color: #959799; }
+$gray-600:  create-gray(#808080, 3%) !default;    //.gray-600  {  background-color: #7c7f81; }
+$gray-700:  create-gray(#666, 3.5%) !default;     //.gray-700  {  background-color: #626668; }
+$gray-800:  create-gray(#515151, 4%) !default;    //.gray-800  {  background-color: #4e5154; }
+$gray-900:  create-gray(#333, 4.5%) !default;     //.gray-900  {  background-color: #313538; }
+$gray-1000: create-gray(#292929, 5%) !default;    //.gray-1000 {  background-color: #272b2f; }
+$black:     create-gray(#000, 0%) !default;       //
+
+// Sass scopes variables with if statement, so we need to define them first
+$theme-colors: null !default;
+
+// to meet accessible contrast ratio:
+@if ($accessible-mode) {
+  $theme-colors: (
+    primary: get-contrast-color($color-primary),
+    secondary: get-contrast-color($gray-700),
+    success: get-contrast-color($color-success),
+    info: get-contrast-color($color-info),
+    warning: get-contrast-color($color-warning, $black, false),
+    danger: get-contrast-color($color-critical),
+    light: get-contrast-color($white),
+    dark: get-contrast-color($gray-1000)
+  ) !default;
+} @else {
+  $theme-colors: (
+    primary: $color-primary,
+    secondary: $gray-700, //TODO: Consider alignment between this and our secondary color. Our secondary color is actually darker than our secondary color. Again a design consideration, but maybe should be aligned with color-secondary.
+    success: $color-success,
+    info: $color-info,
+    warning: $color-warning,
+    danger: $color-critical,
+    light: $white,
+    dark: $gray-900
+  ) !default;
+}
+
+// Set a specific jump point for requesting color jumps
+$theme-color-interval: 8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$yiq-contrasted-threshold: 150 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark: if($dark-mode, $gray-100, $gray-900) !default;
+$yiq-text-light: if($dark-mode, $gray-1000, $white) !default;
+
+// - - - - - - - - - END BOOTSTRAP COLOR DEFINITION - - - - - - - - - - - -
+
+
+// Text colors
+
+// https://github.bmc.com/bmc-ux/adapt-css/issues/638:
+
+$text-primary: if($accessible-mode, $black, $gray-900) !default;
+$text-primary-inverse: $white !default;
+
+$text-secondary: if($accessible-mode, $gray-900, $gray-700) !default;
+$text-secondary-inverse: $gray-200 !default;
+
+$text-tertiary: if($accessible-mode, $gray-700, $gray-500) !default;
+$text-tertiary-inverse: $gray-400 !default;
+
+// Colors used for all background and foreground colors
+$color-foreground: $white !default; // BMC default is white, #FFFFFF
+$color-background: $gray-200 !default; // BMC default is Off-white
+$color-foreground-inverse: $gray-900 !default; // BMC default is dark gray
+$color-background-inverse: $gray-1000 !default; // BMC default is near-black
+
+// Color ramp: Used for computing the other states on the base colors
+$hover: 6.5% !default;
+$active: $hover * 2.25 !default; // 14.625%
+$active-hover: $active * 1.5 !default; // 21.9375%
+$disabled: math.div($hover, 1%) * .1 !default; // opacity .65
+
+// Status-oriented muted colors, this needs to be below Color Ramp section
+$color-info-muted:     color-variant($color-info, muted, $dark-mode) !default;
+$color-success-muted:  color-variant($color-success, muted, $dark-mode) !default;
+$color-warning-muted:  color-variant($color-warning, muted, $dark-mode) !default;
+$color-critical-muted: color-variant($color-critical, muted, $dark-mode) !default;
+
+// Status-oriented muted colors, this needs to be below Color Ramp section
+$color-info-muted:     color-variant($color-info, muted, $dark-mode) !default;
+$color-success-muted:  color-variant($color-success, muted, $dark-mode) !default;
+$color-warning-muted:  color-variant($color-warning, muted, $dark-mode) !default;
+$color-critical-muted: color-variant($color-critical, muted, $dark-mode) !default;
+
+
+// define variables for active, hover, active-hover, disabled, disabled-hover states
+// $jabPrimary: jabConverter($color-primary);
+//   $color-primary-hover:          JABColorVariant($jabPrimary, 1);
+//   $color-primary-active:         JABColorVariant($jabPrimary, 2);
+//   $color-primary-active-hover:   JABColorVariant($jabPrimary, 3);
+//   $color-primary-disabled:       JABColorVariant($jabPrimary, -1);
+//   $color-primary-disabled-hover: JABColorVariant($jabPrimary, -2);
+
+// $jabSecondary: jabConverter($color-secondary);
+//   $color-secondary-hover:          JABColorVariant($jabSecondary, 1);
+//   $color-secondary-active:         JABColorVariant($jabSecondary, 2);
+//   $color-secondary-active-hover:   JABColorVariant($jabSecondary, 3);
+//   $color-secondary-disabled:       JABColorVariant($jabSecondary, -1);
+//   $color-secondary-disabled-hover: JABColorVariant($jabSecondary, -2);
+
+// $jabActive: jabConverter($color-active);
+//   $color-active-hover:          JABColorVariant($jabActive, 1);
+//   $color-active-active:         JABColorVariant($jabActive, 2);
+//   $color-active-active-hover:   JABColorVariant($jabActive, 3);
+//   $color-active-disabled:       JABColorVariant($jabActive, -1);
+//   $color-active-disabled-hover: JABColorVariant($jabActive, -2);
+
+// $jabSuccess: jabConverter($color-success);
+//   $color-success-hover:          JABColorVariant($jabSuccess, 1);
+//   $color-success-active:         JABColorVariant($jabSuccess, 2);
+//   $color-success-active-hover:   JABColorVariant($jabSuccess, 3);
+//   $color-success-disabled:       JABColorVariant($jabSuccess, -1);
+//   $color-success-disabled-hover: JABColorVariant($jabSuccess, -2);
+
+// $jabInfo: jabConverter($color-info);
+//   $color-info-hover:          JABColorVariant($jabInfo, 1);
+//   $color-info-active:         JABColorVariant($jabInfo, 2);
+//   $color-info-active-hover:   JABColorVariant($jabInfo, 3);
+//   $color-info-disabled:       JABColorVariant($jabInfo, -1);
+//   $color-info-disabled-hover: JABColorVariant($jabInfo, -2);
+
+// $jabWarning: jabConverter($color-warning);
+//   $color-warning-hover:          JABColorVariant($jabWarning, 1);
+//   $color-warning-active:         JABColorVariant($jabWarning, 2);
+//   $color-warning-active-hover:   JABColorVariant($jabWarning, 3);
+//   $color-warning-disabled:       JABColorVariant($jabWarning, -1);
+//   $color-warning-disabled-hover: JABColorVariant($jabWarning, -2);
+
+// $jabDanger: jabConverter($color-critical);
+//   $color-danger-hover:          JABColorVariant($jabDanger, 1);
+//   $color-danger-active:         JABColorVariant($jabDanger, 2);
+//   $color-danger-active-hover:   JABColorVariant($jabDanger, 3);
+//   $color-danger-disabled:       JABColorVariant($jabDanger, -1);
+//   $color-danger-disabled-hover: JABColorVariant($jabDanger, -2);
+
+//
+// ## Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-caret: true !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: true !default;
+$enable-hover-media-query: false !default; // Deprecated, no longer affects any compiled CSS
+$enable-grid-classes: true !default;
+$enable-print-styles: true !default;
+
+//
+// ## Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the $spacers map, should you need more variation.
+
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: ($spacer * .75),
+  4: ($spacer * 1.25),
+  5: ($spacer * 2),
+  6: ($spacer * 3.25)
+) !default;
+
+// This variable affects the `.h-*` and `.w-*` classes.
+$sizes: (
+  25:   25%,
+  50:   50%,
+  75:   75%,
+  100:  100%) !default;
+
+//
+// ## Letter spacing
+//
+// Variables used for letter spacing in helper classes
+$en-space:   .385em !default;
+$em-space:   .999em !default;
+$thin-space: .2115em !default;
+$hair-space: .082em !default;
+
+//
+// ## Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:    $color-foreground !default;
+$body-color: $text-primary !default;
+//
+// ## Links
+//
+// Style anchor elements.
+
+$link-color:            if($accessible-mode, get-contrast-color($color-active), $color-active) !default;
+//$link-decoration:       if($accessible-mode, underline, none) !default;
+$link-decoration:       none !default;
+$link-hover-color:      if($accessible-mode, get-contrast-color(color-variant($color-active, hover)), color-variant($color-active, hover)) !default;
+$link-hover-decoration: underline !default;
+
+//
+// ## Paragraphs
+//
+// Style p element.
+
+$paragraph-margin-bottom: .625rem;
+
+//
+// ## Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  xs:              0,
+  sm:              544px,
+  md:              768px,
+  lg:              992px,
+  xl:              1200px,
+  xxl:             1600px
+) !default;
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints);
+
+//
+// ## Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns:      12 !default;
+$grid-gutter-width: 30px !default;
+
+//
+// ## Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  sm: 540px + $grid-gutter-width,
+  md: 720px + $grid-gutter-width,
+  lg: 960px + $grid-gutter-width,
+  xl: 1140px + $grid-gutter-width,
+  xxl: 1540px + $grid-gutter-width
+) !default;
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+//
+// ## Animation
+//
+// General easing curves - Basic Animation curves based on Robert Penner’s easing equations - easings.net
+// Quad
+$ease-quad-in: cubic-bezier(.26, 0, .6, .2) !default;
+$ease-quad-out: cubic-bezier(.4, .8, .74, 1) !default;
+$ease-quad-in-out: cubic-bezier(.48, .04, .52, .96) !default;
+
+// Cubic
+$ease-cubic-in: cubic-bezier(.32, 0, .66, -.02) !default;
+$ease-cubic-out: cubic-bezier(.34, 1.02, .68, 1) !default;
+$ease-cubic-in-out: cubic-bezier(.62, -.04, .38, 1.04) !default;
+
+// Quart
+$ease-quart-in: cubic-bezier(.46, 0, .74, -.04) !default;
+$ease-quart-out: cubic-bezier(.26, 1.04, .54, 1) !default;
+$ease-quart-in-out: cubic-bezier(.7, -.1, .3, 1.1) !default;
+
+// Quint
+$ease-quint-in: cubic-bezier(.52, 0, .78, -.1) !default;
+$ease-quint-out: cubic-bezier(.22, 1.1, .48, 1) !default;
+$ease-quint-in-out: cubic-bezier(.76, -.14, .24, 1.14) !default;
+
+// Sine
+$ease-sine-in: cubic-bezier(.32, 0, .6, .36) !default;
+$ease-sine-out: cubic-bezier(.4, .64, .68, 1) !default;
+$ease-sine-in-out: cubic-bezier(.36, 0, .64, 1) !default;
+
+// Expo
+$ease-expo-in: cubic-bezier(.62, .02, .84, -.08) !default;
+$ease-expo-out: cubic-bezier(.16, 1.08, .38, .98) !default;
+$ease-expo-in-out: cubic-bezier(.84, -.12, .16, 1.12) !default;
+
+// Circ
+$ease-circ-in: cubic-bezier(.54, 0, 1, .44) !default;
+$ease-circ-out: cubic-bezier(0, .56, .46, 1) !default;
+$ease-circ-in-out: cubic-bezier(.88, .14, .12, .86) !default;
+
+// Back
+$ease-back-in: cubic-bezier(.6, -.28, .735, .045) !default;
+$ease-back-out: cubic-bezier(.175, .885, .32, 1.275) !default;
+$ease-back-in-out: cubic-bezier(.68, -.55, .265, 1.55) !default;
+
+// Default ADAPT easing curves
+// Transition that should be applied to animations with shadows that move in and out
+$ease-float-in-out: var(--ease-float-in-out) !default;
+// Basic transition for elements that enter the screen (linear out, slow in)
+$ease-transition-in: var(--ease-transition-in) !default;
+// Basic transition for elements that leave the screen (fast out, linear in)
+$ease-transition-out: var(--ease-transition-out) !default;
+// Basic transition for easing elements in and out (fast out, slow in). Used for transforming elements that remain on screen.
+$ease-transition-in-out: var(--ease-transition-in-out) !default;
+// Easing curve for indeterminate progress bars
+$ease-progress-in-out: cubic-bezier(.65, .815, .735, .395) !default;
+// Abstraction for linear easing
+$ease-transition-linear: linear !default;
+// Animation scaling variables
+$animation-scaling-in:     .8;
+$animation-scaling-out:    1.2;
+$animation-pop-scale:      1.05;
+
+// Default duration
+$animation-extra-fast:  var(--animation-extra-fast);
+$animation-fast:        var(--animation-fast);
+$animation-medium:      var(--animation-medium);
+$animation-slow:        var(--animation-slow);
+$animation-extra-slow:  var(--animation-extra-slow);
+$animation-infinite:    var(--animation-infinite);
+
+// Animation opacity variables
+$animation-opacity-hidden: 0;
+$animation-opacity-shown:  1;
+
+//
+// ## Components
+//
+// Define common padding and border radius sizes and more.
+
+$line-height-lg: math.div(4, 3) !default;
+$line-height-sm: 1.5 !default;
+
+$border-width: 1px !default;
+$border-default: $border-width !default;
+$border-lg: ($border-default * 2) !default;
+$border-color: $gray-300 !default;
+$border-color-inverse: $gray-800 !default;
+
+$border-radius: .125rem !default;             // will be overridden with scss/_variables.scss (custom values)
+$border-radius-lg: $border-radius !default;
+$border-radius-sm: $border-radius !default;
+$border-radius-round: 1.25rem !default;
+$border-radius-none: 0 !default;
+
+$box-shadow-sm: shadow-value(1);
+$box-shadow: shadow-value(2);
+$box-shadow-lg: shadow-value(3);
+
+$component-active-color: $text-primary !default;
+$component-active-bg: $color-primary !default;
+
+$caret-width: .308em !default;
+
+$transition-base: all .2s $ease-transition-in-out !default;
+$transition-fade: opacity .15s linear !default;
+$transition-collapse: height .25s $ease-transition-in-out !default;
+
+// Border-gradient variables
+$border-gradient-from: $color-background !default;
+$border-gradient-to: $color-foreground !default;
+$border-gradient-weight: .0125rem !default;
+
+//
+// ## Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$font-path: "../fonts" !default;
+
+$font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif: Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace: "Hack", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$font-size-base: .8125rem !default;
+$font-size-lg: .9375rem !default;
+$font-size-sm: .75rem !default;
+$font-size-xs: .6875rem !default;
+$font-size-xxs: .625rem !default;
+
+$font-weight-light: var(--font-weight-light) !default;
+$font-weight-normal: var(--font-weight-normal) !default;
+$font-weight-bold: var(--font-weight-bold) !default;
+
+$font-weight-base: $font-weight-normal !default;
+$line-height-base: 1.5385 !default;
+
+$h1-font-size: var(--h1-font-size) !default; // 28px
+$h2-font-size: var(--h2-font-size) !default; // 21px
+$h3-font-size: 1.125rem !default; // 18px
+$h4-font-size: 1.125rem !default; // 18px
+$h5-font-size: .9375rem !default; // 15px
+$h6-font-size: .9375rem !default; // 15px
+
+$headings-margin-bottom: ($spacer * .5) !default;
+$headings-font-family: inherit !default;
+$headings-font-weight: $font-weight-base !default;
+$headings-line-height: 1.1 !default;
+$headings-color: inherit !default;
+
+$headings-small-font-size: 50% !default;
+$headings-small-color: $text-tertiary !default;
+
+$display1-size: 4rem !default;
+$display2-size: 3.5rem !default;
+$display3-size: 2.5rem !default;
+$display4-size: 1.5rem !default;
+
+$display1-weight: $font-weight-light !default;
+$display2-weight: $font-weight-light !default;
+$display3-weight: $font-weight-light !default;
+$display4-weight: $font-weight-light !default;
+$display-line-height: $headings-line-height !default;
+
+$lead-font-size: 1.25rem !default; // 20px
+$lead-font-weight: $font-weight-light !default;
+
+$extra-small-font-size: 75% !default;
+$small-font-size: 81.25% !default;
+$large-font-size: 112.5% !default;
+$extra-large-font-size: 131.25% !default;
+
+$text-muted: $text-tertiary !default;
+
+$abbr-border-color: $color-info !default;
+
+$blockquote-text-font-family: "Georgia", "open sans", serif !default;
+$blockquote-sign-font-family: "opens sans", "helvetica", sans-serif !default;
+$blockquote-small-color: $gray-500 !default;
+$blockquote-border-color: lighten($color-info, 15%) !default;
+$blockquote-border-width: .25rem !default;
+$blockquote-font-size: 1rem !default;
+$blockquote-p-color: $gray-700 !default;
+
+$hr-border-color: $gray-300 !default; //rgba(0, 0, 0, .1) !default;
+$hr-border-width: $border-width !default;
+
+$mark-padding: .0625rem .25rem !default;
+$mark-border-radius: $border-radius !default;
+$mark-bg: color-variant($color-warning, muted, $dark-mode) !default;
+
+$dt-font-weight: $font-weight-bold !default;
+$dd-margin-bottom: .5rem !default;
+
+$kbd-box-shadow: inset 0 -2px 0 rgba($black, .25) !default;
+$nested-kbd-font-weight: $font-weight-bold !default;
+
+$list-inline-padding: 5px !default;
+
+$hr-margin-y: $spacer !default;
+
+//
+// ## Headings
+//
+
+$h1-line-height: 2rem !default;
+$h1-margin: 20px 0 12px !default;
+
+$h2-line-height: 1.5rem !default;
+$h2-margin: 20px 0 12px !default;
+
+$h3-line-height: 1.25rem !default;
+$h3-margin: 20px 0 12px !default;
+
+$h4-line-height: 1.25rem !default;
+$h4-margin: 18px 0 10px !default;
+
+$h5-line-height: 1rem !default;
+$h5-margin: 18px 0 10px !default;
+
+//line height based on dense spacing
+@if ($dense-spacing-custom == true) {
+  $line-height-base: calc($line-height-base * .875);
+  $h1-line-height: calc($h1-line-height * .875);
+  $h2-line-height: calc($h2-line-height * .875);
+  $h3-line-height: calc($h3-line-height * .875);
+  $h4-line-height: calc($h4-line-height * .875);
+  $h5-line-height: calc($h5-line-height * .875);
+  //heading margin
+  $h1-margin: calc(20px * .875) 0 calc(12px * .875);
+  $h2-margin: calc(20px * .875) 0 calc(12px * .875);
+  $h3-margin: calc(20px * .875) 0 calc(12px * .875);
+  $h4-margin: calc(18px * .875) 0 calc(10px * .875);
+  $h5-margin: calc(18px * .875) 0 calc(10px * .875);
+  //  mark and inline padding
+  $mark-padding: calc(.625rem * .875) .25rem !default;
+  $list-inline-padding: calc(5px * .875) 5px !default;
+}
+
+//
+// ## Labels
+//
+
+$label-margin-bottom: .25rem !default;
+@if ($dense-spacing-custom == true) {
+  $label-margin-bottom: calc(.25rem * .875) !default;
+}
+//
+// ## Lists
+//
+
+$list-left-padding: 2rem !default;
+$list-line-height: inherit !default;
+
+//
+// Tree
+//
+
+$triangle-hover: $color-active !default;
+$triangle-active: color-variant($color-active, hover) !default;
+
+//
+// ## Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-cell-padding: .5rem !default;
+$table-cell-padding-sm: .25rem !default;
+
+@if ($dense-spacing-custom == true) {
+  $table-cell-padding: calc(.5rem * .875) !default;
+  $table-cell-padding-sm: calc(.25rem * .875)!default;
+}
+
+$table-bg: transparent !default;
+
+$table-accent-bg: color-variant($gray-100, row) !default;
+$table-hover-bg: color-variant($gray-100, row-hover) !default;
+
+$table-active-bg: $color-secondary !default;
+$table-success-bg: $color-success !default;
+$table-info-bg: $color-info !default;
+$table-warning-bg: $color-warning !default;
+$table-danger-bg: $color-critical !default;
+
+$table-head-bg: $gray-900 !default;
+$table-head-color: $gray-200 !default;
+
+$table-border-width: $border-width !default;
+$table-border-color: $gray-500 !default;
+$table-border-color-2: if($dark-mode, darken($table-border-color, 26%), lighten($table-border-color, 26%)) !default;
+
+// TODO: Need to create t-inverse mode. This should be something we think about overall for this component. We have inverse styles but no way to have an inverse table that shows up well in dark mode. We need to consider either a dark mode version (with the class inverse), or make it flexible enough where it works well with dark themes.
+$table-dark-bg: $color-foreground-inverse !default;
+$table-dark-accent-bg: $color-background-inverse !default;
+$table-dark-hover-bg: $gray-700 !default;
+$table-dark-border-color: $border-color-inverse !default;
+$table-dark-color: $text-primary-inverse !default; // Change to text color from $body-bg
+
+$table-striped-order:         odd !default;
+
+$table-caption-color:         $text-muted !default;
+
+//$table-row-hover: if($dark-mode, color-variant($gray-200, row), color-variant($gray-500, row)) !default;
+$table-row-hover: color-variant($gray-500, row, $dark-mode) !default;
+$table-row-selected: color-variant($gray-300, row-hover, $dark-mode) !default;
+$table-row-selected-hover: color-variant($gray-500, row-hover, $dark-mode) !default;
+
+//
+// ## Buttons + Forms
+//
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+$label-margin-bottom: .5rem !default;
+
+$input-btn-padding-y: .5rem !default;
+$input-btn-padding-x: 1rem !default;
+$input-btn-line-height: $line-height-base !default;
+
+$input-btn-padding-y-xs: .25rem !default;
+$input-btn-padding-x-xs: .5rem !default;
+$input-btn-line-height-xs: $line-height-base !default;
+
+$input-btn-padding-y-sm: .375rem !default;
+$input-btn-padding-x-sm: .75rem !default;
+$input-btn-line-height-sm: $line-height-base !default;
+
+$input-btn-padding-y-lg: .5313rem !default;
+$input-btn-padding-x-lg: 1.25rem !default;
+$input-btn-line-height-lg: $line-height-base !default;
+
+$input-btn-padding-y-xl: .75rem !default;
+$input-btn-padding-x-xl: 1.5rem !default;
+$input-btn-line-height-xl: $line-height-base !default;
+
+$input-btn-focus-width: .2rem !default;
+$input-btn-focus-color: $color-primary !default;
+$input-btn-focus-box-shadow: none !default;
+
+$input-btn-border-width: $border-width !default;
+
+@if ($dense-spacing-custom == true) {
+  $label-margin-bottom: calc(.5rem * .875) !default;
+
+  $input-btn-padding-y: calc(.5rem * .875) !default;
+
+  $input-btn-padding-y-xs: calc(.25rem * .875) !default;
+
+  $input-btn-padding-y-sm: calc(.375rem * .875) !default;
+
+  $input-btn-padding-y-lg: calc(.5313rem * .875) !default;
+
+  $input-btn-padding-y-xl: calc(.75rem * .875) !default;
+
+}
+//
+// ## Buttons
+//
+// For each of Bootstrap's buttons, define text, background, and border color.
+
+$btn-padding-y: $input-btn-padding-y !default;
+$btn-padding-x: $input-btn-padding-x !default;
+$btn-line-height: $input-btn-line-height !default;
+
+$btn-padding-y-xs: $input-btn-padding-y-xs !default;
+$btn-padding-x-xs: $input-btn-padding-x-xs !default;
+$btn-line-height-xs: $input-btn-line-height-xs !default;
+
+$btn-padding-y-sm: $input-btn-padding-y-sm !default;
+$btn-padding-x-sm: $input-btn-padding-x-sm !default;
+$btn-line-height-sm: $input-btn-line-height-sm !default;
+
+$btn-padding-y-lg: $input-btn-padding-y-lg !default;
+$btn-padding-x-lg: $input-btn-padding-x-lg !default;
+$btn-line-height-lg: $input-btn-line-height-lg !default;
+
+$btn-padding-y-xl: $input-btn-padding-y-xl !default;
+$btn-padding-x-xl: $input-btn-padding-x-xl !default;
+$btn-line-height-xl: $input-btn-line-height-xl !default;
+
+$btn-border-width: $input-btn-border-width !default;
+
+$btn-font-weight: $font-weight-base !default;
+$btn-box-shadow: none !default;
+$btn-focus-width: $input-btn-focus-width !default;
+$btn-focus-box-shadow: 0 0 0 2px rgba($color-primary, .25) !default;
+$btn-disabled-opacity: .65 !default;
+$btn-active-box-shadow: none !default;
+
+$btn-link-disabled-color: $text-muted !default;
+
+$btn-block-spacing-y: .5rem !default;
+
+$btn-toolbar-margin: .5rem !default;
+
+$button-icon-change-font-size: 16px !default;
+$button-icon-change-line-height: 1 !default;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius: $border-radius !default;
+$btn-border-radius-lg: $border-radius-lg !default;
+$btn-border-radius-sm: $border-radius-sm !default;
+
+$btn-transition: background-color .25s $ease-transition-in-out, border-color .25s $ease-transition-in-out, box-shadow .25s $ease-transition-in-out !default;
+
+$btn-active-growth: 3px !default;
+
+//
+// ## Forms
+//
+
+$input-padding-y: $input-btn-padding-y !default;
+$input-padding-x: $input-btn-padding-x !default;
+$input-line-height: $input-btn-line-height !default;
+
+$input-padding-y-xs: $input-btn-padding-y-xs !default;
+$input-padding-x-xs: $input-btn-padding-x-xs !default;
+$input-line-height-xs: $input-btn-line-height-xs !default;
+
+$input-padding-y-sm: $input-btn-padding-y-sm !default;
+$input-padding-x-sm: $input-btn-padding-x-sm !default;
+$input-line-height-sm: $input-btn-line-height-sm !default;
+
+$input-padding-y-lg: $input-btn-padding-y-lg !default;
+$input-padding-x-lg: $input-btn-padding-x-lg !default;
+$input-line-height-lg: $input-btn-line-height-lg !default;
+
+$form-required-color: $color-critical !default;
+
+$cursor-disabled: not-allowed !default;
+
+$input-bg:            $color-foreground !default;
+$input-disabled-bg:   color-variant($gray-200, disabled) !default;
+
+$input-color:         if($accessible-mode, $gray-900 , $gray-700) !default;
+$input-disabled-color: color-variant($input-color, disabled) !default;
+
+$input-border-color:  $gray-300 !default;
+$input-disabled-border-color:  color-variant($input-border-color, disabled) !default;
+
+$input-border-width:  $border-width !default; // For form controls and buttons
+$input-box-shadow:    inset 0 1px 1px rgba(0, 0, 0, .075) !default;
+
+$input-border-radius: $border-radius !default;
+$input-border-radius-lg: $border-radius-lg !default;
+$input-border-radius-sm: $border-radius-sm !default;
+
+$input-focus-bg: $input-bg;
+$input-focus-border-color: $color-active !default;
+$input-focus-color: $input-color;
+$input-focus-width: $input-btn-focus-width !default;
+
+// this variable is not used in our styles
+// for .form-control:focus we set border-color not box-shadow
+// and this exact color is provided to us by bootstrap
+$input-focus-box-shadow: rgba(102, 175, 233, .6) !default;
+
+$input-placeholder-color: if($accessible-mode, $gray-700, $gray-500) !default;
+$input-plaintext-color: $body-color !default;
+
+$input-height-border: $input-btn-border-width * 2 !default;
+
+$input-height-inner: ($font-size-base * $input-btn-line-height) + ($input-btn-padding-y * 2) !default;
+$input-height: calc(#{$input-height-inner} + #{$input-height-border}) !default;
+
+$input-height-inner-sm: ($font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2) !default;
+$input-height-sm: calc(#{$input-height-inner-sm} + #{$input-height-border}) !default;
+
+$input-height-inner-lg: ($font-size-lg * $input-btn-line-height-lg) + ($input-btn-padding-y-lg * 2) !default;
+$input-height-lg: calc(#{$input-height-inner-lg} + #{$input-height-border}) !default;
+
+$input-transition-time: .15s;
+$input-transition: border-color $ease-transition-in-out $input-transition-time, box-shadow $ease-transition-in-out $input-transition-time !default;
+
+$form-text-margin-top: .25rem !default;
+
+$form-check-margin-bottom: .5rem !default;
+$form-check-input-gutter: 1.25rem !default;
+$form-check-input-margin-y: .25rem !default;
+$form-check-input-margin-x: .25rem !default;
+
+$form-check-inline-margin-x: .75rem !default;
+$form-check-inline-input-margin-x: .3125rem !default;
+
+$form-group-margin-bottom: $spacer !default;
+
+@if ($dense-spacing-custom == true) {
+  $form-text-margin-top: calc(.25rem * .875) !default;
+
+  $form-check-margin-bottom: calc(.5rem * .875) !default;
+  $form-check-input-gutter: calc(1.25rem * .875) !default;
+  $form-check-input-margin-y: calc(.25rem * .875) !default;
+
+  $form-group-margin-bottom: calc($spacer * .875)!default;
+}
+
+$input-group-addon-color: $input-color !default;
+$input-group-addon-bg: $input-bg !default;
+$input-group-addon-border-color: $input-border-color !default;
+
+$form-legend-color: $text-primary !default;
+$form-legend-border-color: $border-color !default; // by default we disabled border
+
+$select-caret-color: $text-primary;
+$select-caret: icon($i-caret-down, $select-caret-color);
+$select-caret-disabled: icon($i-caret-down, color-variant($select-caret-color, disabled));
+$select-caret-hover: icon($i-caret-down, color-variant($select-caret-color, hover));
+$select-caret-disabled-hover: icon($i-caret-down, color-variant($select-caret-color, disabled-hover));
+
+$select-caret-up: icon($i-caret-up, $select-caret-color);
+$select-caret-up-disabled: icon($i-caret-up, color-variant($select-caret-color, disabled));
+$select-caret-up-hover: icon($i-caret-up, color-variant($select-caret-color, hover));
+$select-caret-up-disabled-hover: icon($i-caret-up, color-variant($select-caret-color, disabled-hover));
+
+$select-caret-color-link: $color-active;
+$select-caret-link: icon($i-caret-down, $select-caret-color-link);
+$select-caret-link-disabled: icon($i-caret-down, color-variant($select-caret-color, disabled));
+$select-caret-link-hover: icon($i-caret-down, color-variant($select-caret-color-link, hover));
+$select-caret-link-disabled-hover: icon($i-caret-down, color-variant($select-caret-color-link, disabled-hover));
+
+$select-caret-link-up: icon($i-caret-up, $select-caret-color-link);
+$select-caret-link-up-disabled: icon($i-caret-up, color-variant($select-caret-color, disabled));
+$select-caret-link-up-hover: icon($i-caret-up, color-variant($select-caret-color-link, hover));
+$select-caret-link-up-disabled-hover: icon($i-caret-up, color-variant($select-caret-color-link, disabled-hover));
+
+// Form validation
+$form-control-feedback-margin: 0 !default;
+
+$form-feedback-margin-top: $form-text-margin-top !default;
+$form-feedback-font-size: $small-font-size !default;
+$form-feedback-valid-color: $color-success !default;
+$form-feedback-invalid-color: $color-critical !default;
+
+// Checkboxes and Radio buttons
+$check-cell-size: 1rem !default;
+$check-border-color: color-variant($gray-100, hover) !default; //Q:Should be gray 200?
+$check-border-color-hover: color-variant($gray-100, active) !default;
+
+$check-icon: icon($i-check, $white) !default;
+$check-icon-disabled: icon($i-check, alpha-to-solid($white, $disabled, $color-primary)) !default; //changed to work off of alpha
+$indeterminate-icon: icon($i-indeterminate, $white) !default;
+
+$check-active-color: if($accessible-mode, get-contrast-color($color-primary), $color-primary) !default;
+$check-disabled-color: $gray-200 !default;
+$check-disabled-border-color: color-variant($gray-200, hover) !default;
+$check-disabled-checked-color: if($accessible-mode, get-contrast-color($color-primary), $color-primary) !default;
+$check-disabled-checked-border-color: if($accessible-mode, get-contrast-color(color-variant($color-primary, hover)), color-variant($color-primary, hover)) !default;
+//new variables added for checkbox readonly mode
+$check-readonly-color: transparent !default;
+$check-readonly-icon: icon($i-check, $color-primary) !default;
+$check-readonly-scale: 1.2;
+$indeterminate-readonly-icon: icon($i-indeterminate, $color-primary) !default;
+
+$check-disabled-opacity: $disabled !default;
+
+$checkbox-siblings-margin: -5px !default;
+$checkbox-scale: .6 !default;
+$checkbox-top: 2px !default;
+$checkbox-left: 2px !default;
+$checkbox-padding-left-x: 1.5 !default;
+$checkbox-margin-top: calc(#{$input-padding-y} + #{$border-width}) !default;
+$checkbox-margin-bottom: $input-padding-y + .25rem !default;
+
+// Switch
+$switch-block-height: 2.375rem !default;
+$switch-slider-height: 1.375rem !default;
+$switch-slider-width: 2.8125rem !default;
+$switch-check-height: 1.75rem !default;
+$switch-check-marker: icon($i-check, $white) !default;
+$switch-check-marker-height: 1rem !default;
+
+$switch-sm-slider-height: 1.125rem !default;
+$switch-sm-slider-width: 2.5rem !default;
+$switch-sm-check-height: 1.5rem !default;
+$switch-sm-check-marker-height: .85rem !default;
+$switch-sm-slider-bg-size: 12px !default;
+$switch-sm-slider-after: 1.5rem !default;
+
+$switch-lg-slider-height: 1.5rem !default;
+$switch-lg-slider-width: 3.25rem !default;
+$switch-lg-check-height: 1.875rem !default;
+$switch-lg-check-marker-height: 1.15rem !default;
+$switch-lg-slider-bg-size: 15px !default;
+$switch-lg-slider-after: 1.95rem !default;
+
+$switch-scaling-factor: 2px !default;
+$switch-label-disable-color: color-variant($text-primary, disabled) !default;
+
+$switch-scale: 1.1 !default;
+$switch-slider-before: ($switch-slider-width - $switch-check-height + ($switch-check-height - $switch-slider-height) * .5) + .0625rem !default;
+$switch-slider-after: $switch-slider-width - $switch-check-marker-height - ($switch-slider-height - $switch-check-marker-height) * .5 + .0625rem !default;
+$switch-slider-bg-size: 13px !default;
+
+$switch-switcher-color: $gray-100 !default;
+$switch-switcher-hover-color: $color-foreground !default;
+$switch-pot-color: $color-active !default;
+$switch-pot-hover-color: color-variant($color-active, hover) !default;
+$switch-pot-focus-color: color-variant($color-secondary, hover) !default;
+$switch-pot-active-color: color-variant($color-active, active) !default;
+$switch-well-color: $color-background !default;
+$switch-well-color-active: if($accessible-mode, get-contrast-color($color-primary), $color-primary) !default;
+
+// Form validation icons
+$form-icon-success-color: map-get($theme-colors, success) !default;
+$form-icon-success: icon($i-state-success, $form-icon-success-color) !default;
+
+$form-icon-warning: icon($i-state-warning, get-status-text-color($color-warning)) !default;
+
+$form-icon-danger-color: map-get($theme-colors, danger) !default;
+$form-icon-danger: icon($i-state-danger, $form-icon-danger-color) !default;
+
+$form-validation-icon-size: 1.25rem;
+$form-validation-icon-position: center right .625rem;
+
+
+//
+// ## Counter
+//
+
+$counter-border-color: $input-border-color !default;
+$counter-disabled-border-color: $input-disabled-border-color !default;
+$counter-border-focus: $color-active !default;
+
+$counter-invalid: $color-critical !default;
+
+$counter-disabled-bg: $input-disabled-bg !default;
+$counter-disabled-color: $input-disabled-color !default;
+
+$counter-arrow-color: $input-color !default;
+$counter-arrow-hover-color: $color-active !default;
+
+//
+// ## Search
+//
+
+$search-height: 38px;
+$search-height-sm: 32px;
+
+$search-font-size: $font-size-base !default;
+$search-font-size-sm: $font-size-sm !default;
+$search-font-size-lg: $font-size-lg !default;
+
+$search-border-active: $color-active !default;
+$search-border-hover: color-variant($gray-300, hover) !default;
+
+$search-icon-color: $gray-500 !default;
+$search-icon-active-color: $gray-700 !default;
+
+$search-clear-color: $gray-500 !default;
+$search-clear-hover-color: color-variant($gray-500, hover) !default;
+
+//
+// ## Dropdowns
+//
+// Dropdown menu container and contents.
+
+$dropdown-min-width: 10rem !default;
+$dropdown-padding-y: 5px !default;
+$dropdown-spacer: 2px !default;
+$dropdown-bg: $white !default;
+$dropdown-border-color: $dropdown-bg !default;
+$dropdown-border-radius: $border-radius !default;
+$dropdown-border-width: $border-width !default;
+$dropdown-divider-bg: $border-color !default;
+$dropdown-box-shadow: shadow(2) !default;
+
+$dropdown-link-color: $text-primary !default;
+$dropdown-link-hover-color: if($accessible-mode, get-contrast-color($color-active), $color-active) !default;
+$dropdown-link-hover-bg: inherit !default;
+
+$dropdown-link-active-color: color-variant($color-active, hover) !default;
+$dropdown-link-active-bg: $gray-100 !default;
+
+$dropdown-link-disabled-color: color-variant($text-primary, disabled) !default;
+
+$dropdown-item-active: $gray-200 !default;
+$dropdown-item-selected: if($accessible-mode, get-contrast-color($color-primary), $color-primary) !default;
+$dropdown-item-padding-x: .875rem !default;
+$dropdown-item-padding-y: .375rem !default;
+
+$dropdown-header-color: $text-primary !default;
+
+$dropdown-dialog-content-border-color: $border-color !default;
+$dropdown-dialog-content-border-width: $border-width !default;
+
+$dropdown-kabob-bg: $color-foreground !default;
+$dropdown-kabob-icon: $text-primary !default;
+$dropdown-kabob-icon-active: $color-active !default;
+$dropdown-kabob-icon-disabled: color-variant($dropdown-kabob-icon, disabled) !default;
+
+@if ($dense-spacing-custom == true) {
+  $dropdown-padding-y: calc(5px * .875) !default;
+
+  $dropdown-item-padding-y: calc(.375rem * .875) !default;
+}
+//
+// ## Select
+//
+
+$select-invalid: $color-critical !default;
+$select-required-color: $form-required-color !default;
+
+$select-menu-color: $text-primary !default;
+$select-menu-bg: $color-foreground !default;
+
+$select-help-text-color: $gray-500 !default;
+
+$select-border-color: $input-border-color;
+$select-border-focus-color: $color-active !default;
+
+$select-button-color: $color-active !default;
+
+$select-item-active-color: $text-primary !default;
+$select-item-active-bg: $gray-200 !default;
+$select-item-selected: $color-primary !default;
+
+$select-toggle-bg: $color-secondary !default;
+$select-toggle-active-bg: color-variant($color-secondary, hover) !default; //Q: Check on this
+$select-toggle-active-border: color-variant($color-secondary, active) !default;
+
+$zindex-select-backdrop: -1 !default;
+$zindex-select-overlay: 990 !default;       // the same as dropdown
+
+$zindex-m-select-overlay: 1040 !default;
+$zindex-m-select-menu: 1041 !default;
+
+//
+// ## Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+
+// general zindex ramp
+
+$zindex-offcanvas-4: 400 !default;
+$zindex-offcanvas-3: 300 !default;
+$zindex-offcanvas-2: 200 !default;
+$zindex-offcanvas-1: 100 !default;
+$zindex-canvas: 0 !default;
+
+
+// Mapping for individual elements, list goes top to bottom toward canvas, items stack relatively bottom to top from canvas
+//
+// Current order:
+// tooltips -> toast -> busy loader -> popovers -> dialogs -> overmodals -> modal/docked
+
+
+// Highly off-canvas
+
+// Tooltips
+$zindex-tooltip:            1090 !default;
+
+// Toasts
+$zindex-toast:              1080 !default;
+
+// Loaders
+$zindex-loader:             1070 !default;             // right now it's 1052 in angular, should be on top of modals
+$zindex-loader-backdrop:    1069 !default;
+$zindex-loader-floating:    980 !default;
+
+$zindex-select-overlay-in-body: 1070 !default;
+
+// Popovers
+$zindex-popover:            1060 !default;
+$zindex-select-mobile:      1060 !default;
+
+// Modals
+$zindex-dialog:             1058 !default;             // (virtual variable) currently in angular 1050
+$zindex-overmodal:          1055 !default;             // (virtual variable) currently in angular 1050 + index e.g. 1051
+$zindex-modal:              1050 !default;             // (virtual variable) currently in angular 1050
+
+// Panels
+$zindex-dockedpanel-window: 1050 !default;             // the actual z-index of the window
+$zindex-dockedpanel:        1048 !default;             // (virtual variable) docked panel container/wrapper index, angular 1048
+
+
+// Medium off-canvas
+//
+// Floating elements
+
+$zindex-modal-backdrop:     1040 !default;             // is used for modals and docked panels
+$zindex-sticky:             1030 !default;
+$zindex-fixed:              1030 !default;             // float button was 100
+// Menus
+$zindex-dropdown:           990 !default;
+$zindex-aggrid-actions:     990 !default;              // should be dropdown 990
+$zindex-dropdown-metatag:   990 !default;              // should be dropdown 990
+
+// Slightly off-canvas
+
+// Carousels
+$zindex-carousel-overlay:     $zindex-modal-backdrop !default;   // for mobile full screen close button
+$zindex-carousel-mobile:      $zindex-modal-backdrop !default;   // for mobile carousel
+$zindex-carousel:             $zindex-modal-backdrop !default;      // for mobile carousel wrapper
+$zindex-carousel-paddle:      $zindex-offcanvas-1 !default;
+// Headers & dividers
+$zindex-aggrid-scrolling:     $zindex-offcanvas-1 !default;      // just should be below all modals
+$zindex-sidebar:              $zindex-offcanvas-1 !default;
+$zindex-split-gripper:        $zindex-offcanvas-1 !default;      // just should be below all modals/toasts
+// Tab-like components
+$zindex-steps-selection-line: $zindex-offcanvas-1 !default;      // just should be below all modals
+$zindex-tabs-selection-line:  $zindex-offcanvas-1 !default;      // just should be below all modals
+// Trees
+$zindex-tree-toggle:          $zindex-offcanvas-2 !default;      // just should be below all modals
+$zindex-tree-content:         $zindex-offcanvas-1 !default;      // just should be below all modals
+
+//
+// ## Menu
+//
+
+$menu-mobile-header-height: 3.75rem;
+$menu-mobile-item-height: 2.625rem;
+$menu-mobile-button-opener-width: 2.125rem;
+
+//
+// ## Navs
+//
+
+$nav-item-padding: 0;
+
+$nav-link-font-size: .8125rem !default;
+$nav-link-padding-y: 1rem !default;
+$nav-link-padding-x: 2rem !default;
+$nav-link-disabled-color: $gray-500 !default;
+
+$nav-tabs-border-color: $border-color !default;
+$nav-tabs-border-width: $border-width !default;
+$nav-tabs-border-radius: 0 !default;
+$nav-tabs-link-hover-border-color: $border-color !default;
+
+$nav-tabs-link-active-color: $text-primary !default;
+$nav-tabs-link-active-bg: $body-bg !default;
+$nav-tabs-link-active-border-color: $border-color !default;
+
+$nav-pills-border-radius: 0 !default;
+$nav-pills-link-active-color: $text-primary !default;
+$nav-pills-link-active-bg: transparent !default;
+
+$nav-tabs-bg: $color-background !default;
+$nav-tabs-bg-inverse: $color-foreground !default;
+
+$nav-tabs-dropdown-bg: $color-background !default;
+$nav-tabs-dropdown-active-bg: $color-foreground !default;
+
+$nav-tabs-link-color: $text-secondary !default;
+$nav-tabs-link-hover-color: if($accessible-mode, get-contrast-color($color-active, $color-background), $color-active) !default;
+
+$nav-pills-link-color: $text-primary !default;
+$nav-pills-link-padding: .625rem 1rem .625rem !default;
+$nav-pills-stacked-link-padding: .125rem .8125rem .125rem .9375rem !default;
+$nav-pills-stacked-link-margin: 0 0 .3125rem !default;
+$nav-pills-active-border-color: if($accessible-mode, get-contrast-color($color-primary), $color-primary) !default;
+
+$nav-divider-color: $gray-200 !default;
+$nav-divider-margin-y: ($spacer * .5) !default;
+
+$nav-search-icon-y: 9px !default;
+
+// https://github.bmc.com/bmc-ux/adapt-angular/issues/424
+$nav-tabs-letter-space: .5rem !default;
+$nav-font-adjustment: 1 !default;
+
+//Spacing for icon lockups
+$icon-lockup-spacing: $en-space + $thin-space !default;
+$icon-lockup-spacing-tight: $en-space !default;
+$icon-lockup-spacing-toolbar: 4 * $en-space !default;
+$icon-lockup-spacing-close: $en-space + $en-space + $hair-space !default;
+
+@if ($dense-spacing-custom == true) {
+  $nav-link-padding-y: calc(1rem * .875) !default;
+
+  $nav-pills-link-color: $text-primary !default;
+  $nav-pills-link-padding: calc(.625rem * .875) 1rem !default;
+  $nav-pills-stacked-link-padding: calc(.125rem * .875) .8125rem calc(.125rem * .875) .9375rem !default;
+  $nav-pills-stacked-link-margin: 0 0 calc(.3125rem * .875) !default;
+
+  $nav-divider-margin-y: calc(($spacer * .5) * .875) !default;
+
+  $nav-search-icon-y: calc(9px * .875) !default;
+}
+
+//
+// ## Navbar
+//
+
+$navbar-padding-x: $spacer !default;
+$navbar-padding-y: 0 !default;
+
+$navbar-nav-link-padding-x: .5rem !default;
+
+$navbar-brand-font-size: 1.25rem !default;
+// Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
+$nav-link-height: $navbar-brand-font-size * $line-height-base !default;
+$navbar-brand-height: ($font-size-base * $line-height-base + $nav-link-padding-y * 2) !default;
+$navbar-brand-padding-y: ($navbar-brand-height - $nav-link-height) * .5 !default;
+
+$navbar-toggler-padding-x: .75rem !default;
+$navbar-toggler-padding-y: .25rem !default;
+$navbar-toggler-font-size: $font-size-lg !default;
+$navbar-toggler-border-radius: $btn-border-radius !default;
+
+$navbar-dark-color: $white !default;
+$navbar-dark-hover-color: $color-primary !default;
+$navbar-dark-active-color: $color-primary !default;
+$navbar-dark-disabled-color: $gray-100 !default;
+$navbar-dark-toggler-icon-bg: icon($i-hamburger, $navbar-dark-color) !default;
+$navbar-dark-toggler-border-color: transparent !default;
+
+$navbar-light-color: $text-primary !default;
+$navbar-light-hover-color: $color-primary !default;
+$navbar-light-active-color: color-variant($color-primary, hover) !default;
+$navbar-light-disabled-color: $text-secondary !default;
+$navbar-light-toggler-icon-bg: icon($i-hamburger, $navbar-light-color) !default;
+$navbar-light-toggler-border-color: transparent !default;
+
+$navbar-brand-separator: 1px solid transparentize($gray-300, .65) !default;
+
+@if ($dense-spacing-custom == true) {
+  $navbar-toggler-padding-y: calc(.25rem * .875) !default;
+}
+//
+// ## Pagination
+//
+
+$pagination-padding-y: .5rem !default;
+$pagination-padding-x: 1rem !default;
+$pagination-padding-y-sm: .275rem !default;
+$pagination-padding-x-sm: .75rem !default;
+$pagination-padding-y-lg: .75rem !default;
+$pagination-padding-x-lg: 1.5rem !default;
+$pagination-line-height: inherit !default;
+
+$pagination-color: $text-primary !default;
+$pagination-bg: $white !default;
+$pagination-border-width: $border-width !default;
+$pagination-border-color: if($accessible-mode, $gray-500, $border-color) !default;
+
+$pagination-focus-box-shadow: $input-btn-focus-box-shadow !default;
+$pagination-focus-outline: 0 !default;
+
+$pagination-hover-color: if($accessible-mode, get-contrast-color($color-active, $white), $color-active) !default;
+$pagination-hover-bg: $pagination-bg !default;
+$pagination-hover-border-color: color-variant($pagination-border-color, hover) !default;
+
+$pagination-active-color: $color-primary !default;
+$pagination-active-bg: $pagination-hover-bg !default;
+$pagination-active-border-color: color-variant($pagination-border-color, hover) !default;
+
+$pagination-disabled-color: color-variant($text-primary, disabled) !default;
+$pagination-disabled-bg: color-variant($color-secondary, disabled) !default;
+$pagination-disabled-border-color: color-variant($pagination-border-color, hover) !default;
+
+@if ($dense-spacing-custom == true) {
+  $pagination-padding-y: calc(.5rem * .875) !default;
+  $pagination-padding-y-sm: calc(.275rem * .875) !default;
+  $pagination-padding-y-lg: calc(.75rem * .875) !default;
+  $pagination-line-height: inherit !default;
+}
+//
+// ## Jumbotron
+//
+
+$jumbotron-padding: 4rem !default;
+$jumbotron-bg: $color-background-inverse !default;
+
+@if ($dense-spacing-custom == true) {
+  $jumbotron-padding: calc(4rem * .875) 4rem !default;
+}
+//
+// ## Cards, also bootstrap uses it for accordions
+//
+
+$card-spacer-y: .5625rem !default;
+$card-spacer-x: .9375rem !default;
+$card-border-width: 1px !default;
+$card-border-radius: $border-radius !default;
+$card-border-color: $border-color !default;
+$card-border-color-inverse: $border-color-inverse !default;
+$card-inner-border-radius: $card-border-radius !default;
+$card-cap-bg: $color-background !default;
+$card-cap-bg-inverse: $color-background-inverse !default;
+$card-cap-color: $text-primary !default;
+$card-cap-color-inverse: $text-primary-inverse !default;
+$card-cap-font-weight: $font-weight-bold !default;
+$card-footer-bg: $color-foreground !default;
+$card-footer-bg-inverse: $color-foreground-inverse !default;
+$card-bg: $color-foreground !default;
+$card-bg-inverse: $color-foreground-inverse !default;
+
+$card-link-hover-color: $white !default;
+
+$card-img-overlay-padding: 1.25rem !default;
+
+$card-group-margin: ($grid-gutter-width * .5) !default;
+$card-deck-margin: .625rem !default;
+
+$card-columns-count: 3 !default;
+$card-columns-gap: 1.25rem !default;
+$card-columns-margin: $card-spacer-y !default;
+
+$card-step-width: 3.5rem;
+$card-step-color: $color-info;
+$card-step-number-size: 1.125rem;
+$card-step-number-weight: $font-weight-bold;
+
+@if ($dense-spacing-custom == true) {
+  $card-spacer-y: calc(.5625rem * .875) !default;
+
+  $card-img-overlay-padding: calc(1.25rem * .875) 1.25rem !default;
+
+  $card-group-margin: calc(($grid-gutter-width * .5) * .875) ($grid-gutter-width * .5) !default;
+  $card-deck-margin: calc(.625rem * .875) .625rem !default;
+}
+
+// Accordions
+$accordion-tab-caret: $text-primary !default;
+$accordion-tab-caret-hover: if($accessible-mode, get-contrast-color($color-active, $card-cap-bg), $color-active) !default;
+$accordion-tab-caret-disabled: color-variant($accordion-tab-caret, disabled) !default;
+$accordion-tab-card-disabled: $gray-500 !default;
+
+// Card wells
+$card-well-spacer: 1.25rem .9375rem !default;
+$card-well-spacer-sm: .5rem 1.1875rem !default;
+$card-well-spacer-lg: 1.5rem 1.1875rem !default;
+$card-well-bg: $color-background !default;
+$card-well-bg-inverse: $color-background-inverse !default;
+
+@if ($dense-spacing-custom == true) {
+  $card-well-spacer: calc(1.25rem * .875) .9375rem !default;
+  $card-well-spacer-sm: calc(.5rem * .875) 1.1875rem !default;
+  $card-well-spacer-lg: calc(1.5rem * .875) 1.1875rem !default;
+}
+
+//
+// ## Tooltips
+//
+
+$tooltip-font-size: $font-size-sm !default;
+$tooltip-max-width: 200px !default;
+$tooltip-color: $text-primary-inverse !default;
+$tooltip-bg: $color-info !default;
+$tooltip-border: darken($gray-900, 4%) !default;
+$tooltip-border-radius: $border-radius !default;
+$tooltip-opacity: .9 !default;
+$tooltip-padding-y: 3px !default;
+$tooltip-padding-x: 8px !default;
+$tooltip-margin: 3px !default;
+$tooltip-box-shadow: shadow-value(3) !default;
+$tooltip-arrow-width: 10px !default;
+$tooltip-arrow-height: 5px !default;
+$tooltip-arrow-color: $tooltip-bg !default;
+
+@if ($dense-spacing-custom == true) {
+  $tooltip-padding-y: calc(3px * .875) !default;
+  $tooltip-margin: calc(3px * .875) 3px !default;
+}
+
+//
+// ## Popovers
+//
+
+$popover-font-size: $font-size-base !default;
+$popover-bg: $color-foreground !default;
+$popover-max-width: 276px !default;
+$popover-border-width: $border-width !default;
+$popover-border-color: $popover-bg !default;
+$popover-border-radius: $border-radius !default;
+$popover-box-shadow: shadow-value(3) !default;
+$popover-inner-padding: 1px !default;
+
+$popover-header-bg: $card-cap-bg !default;
+$popover-header-color: $text-primary !default;
+$popover-header-border: $border-color !default;
+$popover-header-padding-y: 8px !default;
+$popover-header-padding-x: 14px !default;
+
+$popover-body-color: $text-primary !default;
+$popover-body-padding-x: 14px !default;
+$popover-body-padding-y: 9px !default;
+
+$popover-arrow-width: 20px !default;
+$popover-arrow-height: 10px !default;
+$popover-arrow-color: $popover-bg !default;
+
+$popover-arrow-outer-width: ($popover-arrow-width + 1px) !default;
+$popover-arrow-outer-color: fade-in($popover-border-color, .05) !default;
+
+@if ($dense-spacing-custom == true) {
+  $popover-inner-padding: calc(1px * .875) 1px !default;
+
+  $popover-header-padding-y: calc(8px * .875)!default;
+
+  $popover-body-padding-y: calc(9px * .875) !default;
+}
+//
+// ## Metatags /Tags
+//
+
+$tag-font-size: .75rem; //12px
+$tag-margin: 1.5px 1px;
+$tag-padding: 1px 19px;
+
+$tag-border-radius: $border-radius-round !default;
+
+$tag-color: $text-primary-inverse !default;
+$tag-color-dark: transparentize($text-primary, .2) !default;
+$tag-bg: if($accessible-mode, get-contrast-color($gray-500), $gray-500) !default;
+
+$tag-active-bg:    $color-active !default;
+$tag-secondary-bg: $gray-700 !default;
+$tag-primary-bg:   $color-primary !default;
+$tag-success-bg:   $color-success !default;
+$tag-info-bg:      $color-info !default;
+$tag-warning-bg:   $color-warning !default;
+$tag-danger-bg:    $color-critical !default;
+$adapt-mt-input_focused: inherit;
+
+@if ($dense-spacing-custom == true) {
+  $tag-margin: calc(1.5px * .875) 1px;
+  $tag-padding: calc(1px * .875) 19px;
+}
+
+//TODO: Deprecate:
+$meta-tag-active-color: $text-primary-inverse;
+$meta-tag-active-bg: if($accessible-mode, get-contrast-color($color-active), $color-active) !default;
+$meta-tag-active-border-color: transparent;
+
+$mt-form-invalid: $form-feedback-invalid-color !default;
+$zindex-dropdown-metatag: 2000 !default;
+
+//
+// ## Badges
+//
+
+$badge-color: $text-primary-inverse !default;
+$badge-font-size: .75rem !default;
+$badge-font-weight: $font-weight-base !default;
+$badge-padding-y: .34375rem !default;
+$badge-padding-x: .625rem !default;
+
+$badge-hx-padding-y: .34375em !default;
+$badge-hx-padding-x: .625em !default;
+
+$badge-default-bg: $gray-700 !default;
+$badge-primary-bg: $color-primary !default;
+$badge-success-bg: $color-success !default;
+$badge-info-bg:    $color-info !default;
+$badge-warning-bg: $color-warning !default;
+$badge-danger-bg:  $color-critical !default;
+
+$badge-link-hover-color: $badge-color !default;
+$badge-border-radius: .0625rem !default;
+
+$badge-dot-size: .625rem !default;
+
+$badge-pill-padding-x: .6em !default;
+// Use a higher than normal value to ensure completely rounded edges when
+// customizing padding or font-size on labels.
+$badge-pill-border-radius: $border-radius-round !default;
+
+@if ($dense-spacing-custom == true) {
+  $badge-padding-y: calc(.34375rem * .875) !default;
+
+  $badge-hx-padding-y: calc(.34375em * .875) !default;
+}
+
+// Badge inside the button
+$btn-badge-font-size: .9235em !default; // 13*.923 = ~ 12px
+$btn-badge-padding-top: .41667em !default; // base * font-size = 13*.923 * padding top = ~5px
+$btn-badge-padding-bottom: .41667em !default;
+$btn-badge-margin: -5px -.41667em -5px .8375em !default;
+$btn-badge-margin-rtl: -5px .8375em -.41667em -5px !default;
+
+@if ($dense-spacing-custom == true) {
+  $btn-badge-padding-top: calc(.41667em * .875) !default;
+
+  $btn-badge-padding-bottom: calc(.41667em * .875) !default;
+  $btn-badge-margin: calc(-5px * .875) -.41667em calc(-5px * .875) .8375em !default;
+}
+//
+// ## Modals
+//
+
+$modal-inner-padding: 15px !default;
+
+$modal-overflow-y: auto !default;
+
+$modal-dialog-margin: 10px !default;
+$modal-dialog-margin-y-sm-up: 30px !default;
+
+$modal-title-line-height: $line-height-base !default;
+
+$modal-content-bg: $color-foreground !default;
+$modal-content-border-color: transparent !default;
+$modal-content-border-width: $border-width !default;
+$modal-content-border-radius: $border-radius-lg !default;
+$modal-content-box-shadow-xs: 0 3px 9px rgba($black, .5) !default;
+$modal-content-box-shadow-sm-up: 0 5px 15px rgba($black, .5) !default;
+
+$modal-backdrop-bg: $black !default;
+$modal-backdrop-opacity: .5 !default;
+$modal-header-bg: $gray-100 !default;
+$modal-header-border-color: transparent !default;
+$modal-footer-border-color: $border-color !default;
+$modal-footer-background-color: $color-background !default;
+$modal-header-border-width: $modal-content-border-width !default;
+$modal-footer-border-width: $modal-header-border-width !default;
+$modal-header-padding: 5px 15px !default;
+$modal-header-color: $gray-1000 !default;
+$modal-header-color-inverse: $text-primary-inverse !default;
+
+$modal-size-default: (
+  xs:  95%,
+  sm:  516px,
+  md:  691px,
+  lg:  793px,
+  xl:  854px,
+  xxl: 1040px);
+
+$modal-size-sm: (
+  xs:  95%,
+  sm:  462px,
+  md:  576px,
+  lg:  595px,
+  xl:  600px,
+  xxl: 640px);
+
+$modal-size-lg: (
+  xs:  95%,
+  sm:  516px,
+  md:  729px,
+  lg:  892px,
+  xl:  1020px,
+  xxl: 1280px);
+
+@if ($dense-spacing-custom == true) {
+
+  $modal-inner-padding: calc(15px * .875) 15px !default;
+
+  $modal-overflow-y: auto !default;
+
+  $modal-dialog-margin: calc(10px * .875) 10px !default;
+  $modal-dialog-margin-y-sm-up: calc(30px * .875) !default;
+  $modal-header-padding: calc(5px * .875) 15px !default;
+}
+
+// Start BS overridden styles
+$modal-xxl: 1300px !default;
+$modal-xl:  1100px !default;
+$modal-lg:  800px !default;
+$modal-md:  500px !default;
+$modal-sm:  300px !default;
+
+$modal-transition: transform .3s $ease-transition-in-out !default;
+// End BS overridden styles
+
+//
+// ## Docked Panels
+//
+
+$dp-header-height: 4rem !default;
+$dp-header-bg: $gray-100 !default;
+$dp-child-header-border-color: color-variant($dp-header-bg, hover) !default;
+$dp-header-color: $gray-1000 !default;
+$dp-header-font-size: $h5-font-size !default;
+$dp-padding: 1.25rem !default;
+$dp-close-size: .9375rem !default;
+$dp-overmodal-header-bg: $white !default;
+$dp-overflow-y: auto !default;
+
+$dp-size-default: (
+  xs: 300px,
+  sm: 80vw,
+  md: 55vw,
+  lg: 45vw,
+  xl: 35vw,
+  xxl: 25vw);
+
+// Small size in case it's needed at some point.
+/*$dp-size-small: (
+  xs: 300px,
+  sm: 80vw,
+  md: 50vw,
+  lg: 40vw,
+  xl: 30vw
+  xxl: 20vw);*/
+
+$dp-size-lg: (
+  xs: 300px,  // 300px computed
+  sm: 80vw,   // 80vw computed
+  md: 60vw,   // 58vw computed
+  lg: 50vw,   // 51vw computed
+  xl: 40vw,   // 42vw computed
+  xxl: 30vw); // 31vw computed
+
+//
+// Sidebar
+//
+
+$sidebar-nav-width: 55px !default;
+
+$sidebar-nav-font-size: 1.125rem !default;
+
+$sidebar-light-nav-bg-color: $gray-100 !default;
+$sidebar-light-panel-bg-color: $color-foreground !default;
+$sidebar-light-border-color: $border-color !default;
+$sidebar-light-color: $text-primary !default;
+
+$sidebar-dark-nav-bg-color: $color-background-inverse !default;
+$sidebar-dark-panel-bg-color: $color-background-inverse !default;
+$sidebar-dark-border-color: $border-color-inverse !default;
+$sidebar-dark-color: $text-primary-inverse !default;
+
+$sidebar-panel-header-padding: 0 .9375rem !default;
+
+$sidebar-padding: .9375rem !default;
+
+@if ($dense-spacing-custom == true) {
+  $sidebar-padding: calc(.9375rem * .875) !default;
+}
+
+//
+// Splitter
+//
+
+$split-size: 11px !default;
+$split-border-color: $border-color !default;
+$split-gripper-color: color-variant($gray-100, row-hover) !default;
+$split-gripper-color-hover: color-variant($gray-100, row-active) !default;
+$split-gripper-border-color: $white !default;
+$split-gripper-size: 72px !default;
+$split-gripper-inner-size: 64px !default;
+$split-transition: background-color 250ms ease !default;
+$split-area-transition: flex-basis .1s ease-out;
+
+//
+// Steps`
+//
+
+$steps-hover-state: $color-active !default;
+
+$steps-height: 50px !default;
+$steps-border-radius: 2px !default;
+$steps-border-width: 1px !default;
+$steps-border-color: $input-border-color !default;
+$steps-selection-spot-color: $color-primary !default;
+
+$steps-arrow-width: 20px !default;
+$steps-padding: 10px !default;
+
+@if ($dense-spacing-custom == true) {
+  $steps-padding: calc(10px * .875) !default;
+}
+
+//
+// ## Alerts
+//
+// Define alert colors, border radius, and padding.
+
+$alert-padding-y: .625rem !default;
+$alert-padding-x: 1rem !default;
+$alert-margin-bottom: $spacer !default;
+$alert-border-radius: $border-radius !default;
+$alert-link-font-weight: $font-weight-base !default;
+$alert-border-width: $border-width !default;
+
+@if ($dense-spacing-custom == true) {
+  $alert-padding-y: calc(.625rem * .875) !default;
+  $alert-margin-bottom: calc($spacer * .875) !default;
+}
+
+// close, next, previous buttons
+$alert-btn-color: $white !default;
+
+$alert-text: $text-primary-inverse !default;
+
+// Sass scopes variables with if statement, so we need to define them first
+$alert-bg: null !default;
+$alert-line-height: inherit !default;
+
+$alert-border: null !default;
+
+$alert-success-bg: null !default;
+$alert-success-border: null !default;
+
+$alert-info-bg: null !default;
+$alert-info-border: null !default;
+
+$alert-warning-bg: null !default;
+$alert-warning-border: null !default;
+
+$alert-danger-bg: null !default;
+$alert-danger-border: null !default;
+
+// to meet accessible contrast ratio:
+@if ($accessible-mode) {
+  $alert-bg: get-contrast-color($color-primary) !default;
+  $alert-border: color-variant(get-contrast-color($color-primary), hover) !default;
+
+  $alert-success-bg: get-contrast-color($color-success) !default;
+  $alert-success-border: color-variant(get-contrast-color($color-success), hover) !default;
+
+  $alert-info-bg: get-contrast-color($color-info) !default;
+  $alert-info-border: color-variant(get-contrast-color($color-info), hover) !default;
+
+  $alert-warning-bg: get-contrast-color($color-warning, $black) !default;
+  $alert-warning-border: color-variant(get-contrast-color($color-warning, $black), hover) !default;
+
+  $alert-danger-bg: get-contrast-color($color-critical) !default;
+  $alert-danger-border: color-variant(get-contrast-color($color-critical), hover) !default;
+} @else {
+  $alert-bg: $color-primary !default;
+  $alert-border: color-variant($color-primary, hover) !default;
+
+  $alert-success-bg: $color-success !default;
+  $alert-success-border: color-variant($color-success, hover) !default;
+
+  $alert-info-bg: $color-info !default;
+  $alert-info-border: color-variant($color-info, hover) !default;
+
+  $alert-warning-bg: $color-warning !default;
+  $alert-warning-border: color-variant($color-warning, hover) !default;
+
+  $alert-danger-bg: $color-critical !default;
+  $alert-danger-border: color-variant($color-critical, hover) !default;
+}
+
+$alert-bg-level:     -10 !default;
+$alert-border-level: -9 !default;
+$alert-color-level:   6 !default;
+
+//
+// ## Alert animated
+//
+
+$adapt-alert-success-bg: $color-success !default;
+$adapt-alert-info-bg: $color-info !default;
+$adapt-alert-warning-bg: $color-warning !default; // was #f1b521
+$adapt-alert-danger-bg: $color-critical !default;
+
+//
+// ## Progress bars
+//
+
+$progress-height: .625rem !default;
+$progress-font-size: .75rem !default;
+$progress-bg: $gray-200 !default;
+$progress-border-radius: $progress-height * .5 !default;
+$progress-box-shadow: inset 0 .1rem .1rem rgba($black, .1) !default;
+$progress-bar-color: $white !default;
+$progress-bar-bg: $color-primary !default;
+$progress-bar-animation-timing: 1s linear infinite !default;
+$progress-bar-transition: width .6s ease, background-color .6s ease  !default;
+$progress-indicator-height: 1rem;
+
+$progress-height-sm: .25rem !default;
+
+// Progress SLA
+$progress-sla-height: $progress-height !default;
+$progress-sla-icon-size: .625rem !default;
+$progress-sla-icon-height: 1.25rem !default;
+$progress-sla-icon-color: $text-secondary !default;
+$progress-sla-icon-bg: $white !default;
+$progress-sla-icon-border-width: .125rem !default;
+$progress-sla-icon-check: icon($i-check, $gray-700);
+$progress-sla-icon-cross: icon($i-cross, $gray-700);
+
+//
+// ## List group
+//
+
+$list-group-color: $body-color !default;
+$list-group-bg: $color-foreground !default;
+$list-group-border-color: $border-color !default;
+$list-group-border-width: $border-width !default;
+$list-group-border-radius: $border-radius !default;
+
+$list-group-item-padding-y: .625rem !default;
+$list-group-item-padding-x: .9375rem !default;
+
+$list-group-hover-bg: $white !default;
+$list-group-active-color: $component-active-color !default;
+$list-group-active-bg: $component-active-bg !default;
+$list-group-active-border-color: $list-group-active-bg !default;
+$list-group-active-color: lighten($list-group-active-bg, 40%) !default;
+
+$list-group-disabled-color: color-variant($text-primary, disabled) !default;
+$list-group-disabled-bg: color-variant($gray-200, disabled) !default;
+
+$list-group-action-color: $text-primary !default;
+$list-group-action-hover-color: $color-active !default;
+$list-group-action-heading-color: $text-secondary !default;
+
+$list-group-action-active-color: $list-group-color !default;
+$list-group-action-active-bg: $gray-300 !default;
+
+$list-group-item-caret: icon($i-angle-right, $text-primary) !default;
+$list-group-item-caret-hover: icon($i-angle-right, $color-active) !default;
+
+@if ($dense-spacing-custom == true) {
+  $list-group-item-padding-y: calc(.625rem * .875) !default;
+}
+//
+// ## Image thumbnails
+//
+
+$thumbnail-padding: .125rem !default;
+$thumbnail-bg: $body-bg !default;
+$thumbnail-border-width: $border-width !default;
+$thumbnail-border-color: $border-color !default;
+$thumbnail-border-radius: $border-radius !default;
+$thumbnail-box-shadow: 0 1px 2px rgba(0, 0, 0, .075) !default;
+$thumbnail-transition: all .25s $ease-transition-in-out !default;
+
+@if ($dense-spacing-custom == true) {
+  $thumbnail-padding: calc(.125rem * .875) !default;
+}
+//
+// Uploader
+//
+
+$uploader-container-padding: 10px;
+$uploader-bg: $gray-100 !default;
+
+@if ($dense-spacing-custom == true) {
+  $uploader-container-padding: calc(10px * .875);
+}
+//
+// ## Figures
+//
+
+$figure-caption-font-size: inherit !default;
+$figure-caption-color: $gray-500 !default;
+$figure-caption-style: italic !default;
+
+//
+// ## Breadcrumbs
+//
+
+$breadcrumb-padding-y: .5625rem !default;
+$breadcrumb-padding-x: 0 !default;
+$breadcrumb-item-padding: .5rem !default;
+$breadcrumb-margin-bottom: 1rem !default;
+$breadcrumb-bg: none !default;
+$breadcrumb-divider-color: $gray-500 !default;
+$breadcrumb-active-color: $gray-500 !default;
+$breadcrumb-divider: quote("/") !default;
+$breadcrumb-border-radius: $border-radius !default;
+
+@if ($dense-spacing-custom == true) {
+  $breadcrumb-padding-y: calc(.5625rem * .875) !default;
+  $breadcrumb-item-padding: calc(.5rem * .875) !default;
+  $breadcrumb-margin-bottom: calc(1rem * .875) !default;
+}
+//
+// ## Carousel
+//
+
+$carousel-control-color: $white !default;
+$carousel-control-width: 15% !default;
+$carousel-control-opacity: .5 !default;
+
+$carousel-indicator-width: 6rem !default;
+$carousel-indicator-height: .5rem !default;
+$carousel-indicator-spacer: 1px !default;
+$carousel-indicator-bg: $color-background-inverse !default;
+$carousel-indicator-active-bg: $color-primary !default;
+
+$carousel-caption-width: 70% !default;
+$carousel-caption-color: $white !default;
+
+$carousel-control-icon-width: 40px !default;
+
+$carousel-control-size: 30px !default;
+$carousel-control-prev-icon-bg: icon($i-angle-left, $carousel-control-color) !default;
+$carousel-control-next-icon-bg: icon($i-angle-right, $carousel-control-color) !default;
+
+$carousel-transition: transform .6s $ease-transition-in-out !default;
+$carousel-overlay-color: $gray-900 !default;
+
+$carousel-z-index: 1042 !default;
+$carousel-overlay-z-index: 1044 !default;
+$carousel-mobile-z-index: 1043 !default;
+//
+// ## Close
+//
+
+$close-font-size: .5625rem !default;
+$close-font-weight: bold !default;
+$close-color: $gray-700 !default;
+$close-color-inverse: $gray-300 !default;
+$close-text-shadow: none !default;
+
+$close-icon: icon($i-cross, $close-color) !default;
+$close-icon-inverse: icon($i-cross, $close-color-inverse) !default;
+
+$close-vertical-align: 0 !default;
+
+//
+// ## Code
+//
+
+$code-font-size: 100% !default;
+$code-color-accessible: color-variant($color-info, active);
+$code-color: if($accessible-mode, $code-color-accessible, $color-info) !default;
+$code-bg: transparent !default;
+$code-padding-y: 0 !default;
+$code-padding-x: 0 !default;
+$code-border-radius: 0 !default;
+$code-font-family: $font-family-monospace;
+
+$kbd-font-size: $code-font-size !default;
+$kbd-color: $text-primary-inverse !default;
+$kbd-bg: if($accessible-mode, get-contrast-color($color-info), $color-info) !default;
+$kbd-padding-y: .125rem !default;
+$kbd-padding-x: .25rem !default;
+$kbd-border-radius: $border-radius !default;
+
+$pre-bg: $gray-100 !default;
+$pre-color: $text-primary !default;
+$pre-border-color: $border-color !default;
+$pre-scrollable-max-height: 340px !default;
+
+$samp-font-size: 90% !default;
+
+@if ($dense-spacing-custom == true) {
+  $kbd-padding-y: calc(.125rem * .875) !default;
+}
+//
+// ## Profile
+//
+
+$profile-avatar-transition: background-color .25s $ease-transition-in-out !default;
+$profile-name-transition: color .25s $ease-transition-in-out !default;
+$profile-carrot-transition: top .18s $ease-transition-in-out !default;
+
+$profile-sign-as-color: $text-tertiary !default;
+
+$profile-avatar-bg: null !default;
+$profile-avatar-hover-bg: null !default;
+$profile-avatar-active-bg: null !default;
+$profile-link-color: null !default;
+
+@if ($accessible-mode) {
+  $profile-avatar-bg: get-contrast-color($color-primary) !default;
+  $profile-avatar-hover-bg: get-contrast-color($color-active) !default;
+  $profile-avatar-active-bg: get-contrast-color(color-variant($color-active, hover)) !default;
+  $profile-link-color: get-contrast-color($color-active) !default;
+} @else {
+  $profile-avatar-bg: $color-primary !default;
+  $profile-avatar-hover-bg: $color-active !default;
+  $profile-avatar-active-bg: color-variant($color-active, hover) !default;
+  $profile-link-color: $color-active !default;
+}
+
+$profile-avatar-color: $text-primary-inverse !default;
+
+$profile-link-hover-color: color-variant($color-active, hover) !default;
+
+$profile-light-color: $text-primary;
+$profile-light-hover-color: $color-active;
+$profile-light-active-color: color-variant($color-active, hover);
+
+$profile-dark-color: $text-primary-inverse !default;
+
+$profile-toggle-color: $color-active;
+$profile-toggle-hover-color: color-variant($color-active, hover);
+
+// HP Hack
+
+$nav-theme: $nav-theme-custom !default;
+
+@if $nav-theme == white {
+  $profile-dark-color: $text-primary;
+}
+
+@if $nav-theme == gray {
+  $profile-dark-color: $text-primary;
+}
+
+
+//
+// ## Login
+//
+
+//$login-background-path: "https://s3.amazonaws.com/aws-uxd-cdn/images/" !default;
+$login-background-path: "../assets/" !default; //bmc-ux/adapt-css#659
+
+$login-image-name-1: "bg-login-1.jpg" !default;
+$login-image-name-2: "bg-login-2.jpg" !default;
+$login-image-name-3: "bg-login-3.jpg" !default;
+$login-image-name-4: "bg-login-4.jpg" !default;
+$bg-helix: "login_bg.svg" !default;
+
+//
+// ## Logo
+//
+
+$logo-bmc-dark: $logo-bmc-dark-icon;
+$logo-bmc-light: $logo-bmc-light-icon;
+
+$logo-bmc-helix-dark: $logo-bmc-helix-dark-icon;
+$logo-bmc-helix-light: $logo-bmc-helix-light-icon;
+
+$logo-dark: $logo-dark-custom !default;
+$logo-light: $logo-light-custom !default;
+
+$logo-helix-dark: $logo-helix-dark-custom !default;
+$logo-helix-light: $logo-helix-light-custom !default;
+
+// HP Hack
+
+@if $nav-theme == white or $nav-theme == gray {
+  $logo-light: $logo-dark-custom;
+  $logo-helix-light: $logo-helix-dark-custom;
+}
+
+//
+// ## Empty State
+// TODO: SVG files were added to the component directly so it is no needed to have such variables.
+//  Left it here for backward compatibility
+//
+
+$empty-alerts: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNjUgMTY1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNjUgMTY1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktYWxlcnRzIiBjbGFzcz0ic3QwIiBkPSJNMTk4LDY4YzAsMC44LTAuNywxLjUtMS41LDEuNUgxODhjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoOC41CglDMTk3LjQsNjYuNSwxOTgsNjcuMSwxOTgsNjh6IE0yMTQuOSw2Ni41aC04LjVjLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoOC41YzAuOCwwLDEuNS0wLjcsMS41LTEuNQoJUzIxNS43LDY2LjUsMjE0LjksNjYuNXogTTI2NSw2Ny40YzAsOC41LTcsMTUuNS0xNS41LDE1LjVjLTcuOSwwLTE0LjUtNi0xNS40LTEzLjdjLTAuMiwwLjItMC41LDAuMi0wLjgsMC4yaC04LjUKCWMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNWg4LjVjMC4zLDAsMC41LDAuMSwwLjcsMC4yYzAuNC04LjIsNy4yLTE0LjgsMTUuNS0xNC44QzI1OCw1MS45LDI2NSw1OC45LDI2NSw2Ny40egoJIE0yNjIsNjcuNGMwLTYuOS01LjYtMTIuNS0xMi41LTEyLjVTMjM3LDYwLjUsMjM3LDY3LjRzNS42LDEyLjUsMTIuNSwxMi41UzI2Miw3NC4zLDI2Miw2Ny40eiBNMjQ5LjUsNjguOWMwLjgsMCwxLjUtMC43LDEuNS0xLjUKCXYtN2MwLTAuOC0wLjctMS41LTEuNS0xLjVzLTEuNSwwLjctMS41LDEuNXY3QzI0OCw2OC4yLDI0OC43LDY4LjksMjQ5LjUsNjguOXogTTI0OS40LDcxLjRjLTEuMiwwLTIuMSwwLjktMi4xLDIuMXMwLjksMi4xLDIuMSwyLjEKCXMyLjEtMC45LDIuMS0yLjFTMjUwLjYsNzEuNCwyNDkuNCw3MS40eiBNMjIzLjEsMzYuM2MwLDMtMiw1LjYtNC44LDYuNHYxMC40YzAsMC44LTAuNywxLjUtMS41LDEuNWMtMC4xLDAtMC4yLDAtMC4zLDAKCWMtMC4xLDAtMC4yLDAtMC4zLDBoLTI3LjZjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoMjYuN3YtOC43Yy0zLjEtMC42LTUuNC0zLjMtNS40LTYuNWMwLTMuNywzLTYuNiw2LjYtNi42CglTMjIzLjEsMzIuNywyMjMuMSwzNi4zeiBNMjIwLjEsMzYuM2MwLTItMS42LTMuNi0zLjYtMy42cy0zLjYsMS42LTMuNiwzLjZzMS42LDMuNiwzLjYsMy42UzIyMC4xLDM4LjMsMjIwLjEsMzYuM3ogTTQ0LjcsNTMKCWMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTcuN2MtMC45LDQuOC01LDguNC0xMC4xLDguNEg5LjhjLTUuNCwwLTkuOC00LjQtOS44LTkuOGMwLTQsMi4zLTcuNSw1LjktOWMxLTQuNyw1LjItOC4yLDEwLjEtOC4yCgljNC4yLDAsOCwyLjYsOS42LDYuNWM1LjIsMC4xLDkuNCw0LDEwLDkuMWg3LjZDNDQsNTEuNSw0NC43LDUyLjEsNDQuNyw1M3ogTTMyLjYsNTIuNmMwLTQtMy4zLTcuMy03LjMtNy4zYy0wLjIsMC0wLjUsMC0wLjcsMAoJYy0wLjcsMC4xLTEuNC0wLjQtMS42LTEuMWMtMC45LTMuMi0zLjgtNS40LTctNS40Yy0zLjcsMC02LjgsMi44LTcuMyw2LjRjLTAuMSwwLjYtMC41LDEuMS0xLDEuM0M0LjksNDcuNCwzLDUwLDMsNTMKCWMwLDMuOCwzLjEsNi44LDYuOCw2LjhoMTUuNUMyOS40LDU5LjksMzIuNiw1Ni42LDMyLjYsNTIuNnogTTUzLjEsNTQuNWg4LjVjMC44LDAsMS41LTAuNywxLjUtMS41cy0wLjctMS41LTEuNS0xLjVoLTguNQoJYy0wLjgsMC0xLjUsMC43LTEuNSwxLjVTNTIuMyw1NC41LDUzLjEsNTQuNXogTTcxLjUsNTQuNUg4MGMwLjgsMCwxLjUtMC43LDEuNS0xLjVzLTAuNy0xLjUtMS41LTEuNWgtOC41Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjUKCVM3MC42LDU0LjUsNzEuNSw1NC41eiBNNTguMiw4NC41YzAsMy43LTMsNi42LTYuNiw2LjZzLTYuNi0zLTYuNi02LjZjMC0zLDItNS42LDQuOC02LjRWNjcuN2MwLTAuOCwwLjctMS41LDEuNS0xLjUKCWMwLjEsMCwwLjIsMCwwLjMsMGMwLjEsMCwwLjIsMCwwLjMsMGgyNy42YzAuOCwwLDEuNSwwLjcsMS41LDEuNXMtMC43LDEuNS0xLjUsMS41SDUyLjh2OC43QzU1LjgsNzguNSw1OC4yLDgxLjIsNTguMiw4NC41egoJIE01NS4yLDg0LjVjMC0yLTEuNi0zLjYtMy42LTMuNlM0OCw4Mi41LDQ4LDg0LjVzMS42LDMuNiwzLjYsMy42UzU1LjIsODYuNSw1NS4yLDg0LjV6IE0xMTQuNiwxMTdoMzUuMmwtMC4yLDEuNwoJYy0xLjMsOS44LTguNywxNy4xLTE3LjQsMTcuMXMtMTYuMi03LjQtMTcuNC0xNy4xTDExNC42LDExN3ogTTExOC4xLDEyMGMxLjYsNy40LDcuNSwxMi44LDE0LjEsMTIuOGM2LjcsMCwxMi41LTUuNCwxNC4xLTEyLjgKCUgxMTguMXogTTE5MS4xLDEwMi4xdjYuOGMwLDIuMi0xLjgsNC00LDRINzguNGMtMi4yLDAtNC0xLjgtNC00di02LjhjMC00LDIuNC03LjYsNi05LjJjNy4xLTMuMSwxMC43LTYuNSwxMC43LTEwLjFWNDIuNAoJYzAtMTIuNSwxMC42LTIzLjksMjYuMy0yOC41YzAtMC4zLDAtMC42LDAtMC45YzAtNi41LDcuNy0xMi43LDE1LjktMTIuN2M3LjksMCwxNC44LDUuOSwxNC44LDEyLjdjMCwwLjMsMCwwLjYsMCwwLjlsMCwwCgljMTUuNyw0LjYsMjYuMywxNiwyNi4zLDI4LjV2NDAuNWMwLDMuNiwzLjYsNywxMC43LDEwLjFDMTg4LjgsOTQuNSwxOTEuMSw5OC4xLDE5MS4xLDEwMi4xeiBNMTg4LjEsMTAyLjFjMC0yLjgtMS43LTUuMy00LjItNi40CgljLTguNC0zLjYtMTIuNS03LjgtMTIuNS0xMi44VjQyLjRjMC0xMS4xLTkuNy0yMS40LTI0LjEtMjUuNmwtMi40LTAuN2wwLjMtMi41YzAtMC4yLDAtMC40LDAtMC42YzAtNS4xLTUuNi05LjctMTEuOC05LjcKCWMtNi45LDAtMTIuOSw1LjQtMTIuOSw5LjdjMCwwLjIsMCwwLjQsMCwwLjZsMC4zLDIuNWwtMi40LDAuN0MxMDQsMjEsOTQuMywzMS4zLDk0LjMsNDIuNHY0MC41YzAsNS00LjEsOS4yLTEyLjUsMTIuOAoJYy0yLjYsMS4xLTQuMiwzLjYtNC4yLDYuNHY2LjhjMCwwLjYsMC40LDEsMSwxaDEwOC43YzAuNiwwLDEtMC40LDEtMUwxODguMSwxMDIuMXogTTE0Ny4zLDI2LjNjLTAuOC0wLjYtMS42LTAuNi0yLjIsMAoJYy0wLjYsMS4yLTAuMywyLjIsMS4xLDIuOWMxMC41LDYuNywxMy45LDExLjcsMTMuOSwyMC4xdjI3LjNjMCwwLjgsMC42LDEuNCwxLjQsMS40YzAuOCwwLDEuNC0wLjYsMS40LTEuNFY0OS4zCglDMTYyLjksMzksMTU3LjcsMzMsMTQ3LjMsMjYuM3ogTTE2NC4xLDE1My41Yy0wLjEtMC4xLTAuMi0wLjItMC4zLTAuM2MwLTAuMS0wLjEtMC4zLTAuMi0wLjRsLTAuNS0wLjdjLTAuMS0wLjEtMC4yLTAuMi0wLjMtMC4zCgljMC0wLjEtMC4xLTAuMy0wLjItMC40bC0wLjUtMC43Yy0wLjEtMC4xLTAuMi0wLjItMC4zLTAuM2MwLTAuMS0wLjEtMC4zLTAuMi0wLjRsLTAuNS0wLjdjLTAuMS0wLjEtMC4yLTAuMi0wLjMtMC4zCgljMC0wLjEtMC4xLTAuMy0wLjItMC40bC0wLjUtMC43Yy0wLjEtMC4xLTAuMi0wLjItMC4zLTAuM2MwLTAuMS0wLjEtMC4zLTAuMi0wLjRsLTAuNS0wLjdjLTAuMS0wLjEtMC4yLTAuMi0wLjMtMC4zCgljMC0wLjEtMC4xLTAuMy0wLjItMC40bC0wLjUtMC43Yy0wLjEtMC4xLTAuMi0wLjItMC4zLTAuM2MwLTAuMS0wLjEtMC4zLTAuMi0wLjRsLTAuNS0wLjdjLTAuNS0wLjctMS40LTAuOC0yLjEtMC4zCgljLTAuNywwLjUtMC44LDEuNC0wLjMsMi4xbDAuNSwwLjdjMC4xLDAuMSwwLjIsMC4yLDAuMywwLjNjMCwwLjEsMC4xLDAuMywwLjIsMC40bDAuNSwwLjdjMC4xLDAuMSwwLjIsMC4yLDAuMywwLjMKCWMwLDAuMSwwLjEsMC4zLDAuMiwwLjRsMC41LDAuN2MwLjEsMC4xLDAuMiwwLjIsMC4zLDAuM2MwLDAuMSwwLjEsMC4zLDAuMiwwLjRsMC41LDAuN2MwLjEsMC4xLDAuMiwwLjIsMC4zLDAuMwoJYzAsMC4xLDAuMSwwLjMsMC4yLDAuNGwwLjUsMC43YzAuMSwwLjEsMC4yLDAuMiwwLjMsMC4zYzAsMC4xLDAuMSwwLjMsMC4yLDAuNGwwLjUsMC43YzAuMSwwLjEsMC4yLDAuMiwwLjMsMC4zCgljMCwwLjEsMC4xLDAuMywwLjIsMC40bDAuNSwwLjdjMC4xLDAuMSwwLjIsMC4yLDAuMywwLjNjMCwwLjEsMC4xLDAuMywwLjIsMC40YzAuMywwLjQsMC44LDAuNiwxLjIsMC42YzAuMywwLDAuNi0wLjEsMC45LTAuMwoJQzE2NC40LDE1NS4yLDE2NC42LDE1NC4yLDE2NC4xLDE1My41TDE2NC4xLDE1My41eiBNMTMyLjEsMTUwLjZjLTAuOCwwLTEuNSwwLjctMS41LDEuNXYwLjljMCwwLjIsMCwwLjMsMC4xLDAuNAoJYzAsMC4xLTAuMSwwLjMtMC4xLDAuNHYwLjljMCwwLjIsMCwwLjMsMC4xLDAuNGMwLDAuMS0wLjEsMC4zLTAuMSwwLjR2MC45YzAsMC4yLDAsMC4zLDAuMSwwLjRjMCwwLjEtMC4xLDAuMy0wLjEsMC40djAuOQoJYzAsMC4yLDAsMC4zLDAuMSwwLjRjMCwwLjEtMC4xLDAuMy0wLjEsMC40djAuOWMwLDAuMiwwLDAuMywwLjEsMC40YzAsMC4xLTAuMSwwLjMtMC4xLDAuNHYwLjljMCwwLjIsMCwwLjMsMC4xLDAuNAoJYzAsMC4xLTAuMSwwLjMtMC4xLDAuNHYwLjljMCwwLjgsMC43LDEuNSwxLjUsMS41czEuNS0wLjcsMS41LTEuNXYtMC45YzAtMC4yLDAtMC4zLTAuMS0wLjRjMC0wLjEsMC4xLTAuMywwLjEtMC40di0wLjkKCWMwLTAuMiwwLTAuMy0wLjEtMC40YzAtMC4xLDAuMS0wLjMsMC4xLTAuNHYtMC45YzAtMC4yLDAtMC4zLTAuMS0wLjRjMC0wLjEsMC4xLTAuMywwLjEtMC40di0wLjljMC0wLjIsMC0wLjMtMC4xLTAuNAoJYzAtMC4xLDAuMS0wLjMsMC4xLTAuNHYtMC45YzAtMC4yLDAtMC4zLTAuMS0wLjRjMC0wLjEsMC4xLTAuMywwLjEtMC40di0wLjljMC0wLjIsMC0wLjMtMC4xLTAuNGMwLTAuMSwwLjEtMC4zLDAuMS0wLjR2LTAuOQoJQzEzMy42LDE1MS4zLDEzMywxNTAuNiwxMzIuMSwxNTAuNnogTTEwOS44LDE0My40Yy0wLjctMC41LTEuNi0wLjMtMi4xLDAuM2wtMC41LDAuN2MtMC4xLDAuMS0wLjIsMC4zLTAuMiwwLjQKCWMtMC4xLDAuMS0wLjIsMC4yLTAuMywwLjNsLTAuNSwwLjdjLTAuMSwwLjEtMC4yLDAuMy0wLjIsMC40Yy0wLjEsMC4xLTAuMiwwLjItMC4zLDAuM2wtMC41LDAuN2MtMC4xLDAuMS0wLjIsMC4zLTAuMiwwLjQKCWMtMC4xLDAuMS0wLjIsMC4yLTAuMywwLjNsLTAuNSwwLjdjLTAuMSwwLjEtMC4yLDAuMy0wLjIsMC40Yy0wLjEsMC4xLTAuMiwwLjItMC4zLDAuM2wtMC41LDAuN2MtMC4xLDAuMS0wLjIsMC4zLTAuMiwwLjQKCWMtMC4xLDAuMS0wLjIsMC4yLTAuMywwLjNsLTAuNSwwLjdjLTAuMSwwLjEtMC4yLDAuMy0wLjIsMC40Yy0wLjEsMC4xLTAuMiwwLjItMC4zLDAuM2wtMC41LDAuN2MtMC4xLDAuMS0wLjIsMC4zLTAuMiwwLjQKCWMtMC4xLDAuMS0wLjIsMC4yLTAuMywwLjNjLTAuNSwwLjctMC4zLDEuNiwwLjMsMi4xYzAuMywwLjIsMC42LDAuMywwLjksMC4zYzAuNSwwLDAuOS0wLjIsMS4yLTAuNmwwLDBjMC4xLTAuMSwwLjItMC4zLDAuMi0wLjQKCWMwLjEtMC4xLDAuMi0wLjIsMC4zLTAuM2wwLjUtMC43YzAuMS0wLjEsMC4yLTAuMywwLjItMC40YzAuMS0wLjEsMC4yLTAuMiwwLjMtMC4zbDAuNS0wLjdjMC4xLTAuMSwwLjItMC4zLDAuMi0wLjQKCWMwLjEtMC4xLDAuMi0wLjIsMC4zLTAuM2wwLjUtMC43YzAuMS0wLjEsMC4yLTAuMywwLjItMC40YzAuMS0wLjEsMC4yLTAuMiwwLjMtMC4zbDAuNS0wLjdjMC4xLTAuMSwwLjItMC4zLDAuMi0wLjQKCWMwLjEtMC4xLDAuMi0wLjIsMC4zLTAuM2wwLjUtMC43YzAuMS0wLjEsMC4yLTAuMywwLjItMC40YzAuMS0wLjEsMC4yLTAuMiwwLjMtMC4zbDAuNS0wLjdjMC4xLTAuMSwwLjItMC4zLDAuMi0wLjQKCWMwLjEtMC4xLDAuMi0wLjIsMC4zLTAuM2wwLjUtMC43QzExMC42LDE0NC44LDExMC41LDE0My45LDEwOS44LDE0My40eiIvPgo8L3N2Zz4K");
+$empty-articles: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNjggMTM4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNjggMTM4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktYXJ0aWNsZXMiIGNsYXNzPSJzdDAiIGQ9Ik0yMDIuNDUsMTA2LjU1Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjV2MjJjMCwyLjUtMiw0LjUtNC41LDQuNWgtOTcuOAoJYy0yLjUsMC00LjUtMi00LjUtNC41VjcuNjVjMC0yLjQsMS45LTQuMyw0LjMtNC4zaDcxLjRsMCwwdjI2LjJjMCw0LDMuMyw3LjMsNy4zLDcuM2gyMy43YzAsMC4yLDAuMSwwLjUsMC4xLDAuN3YyMC42CgljMCwwLjgsMC43LDEuNSwxLjUsMS41czEuNS0wLjcsMS41LTEuNXYtMjAuNWMwLTIuMi0xLTQuMy0yLjctNS44bC0yNi41LTI5LjZjLTAuMS0wLjEtMC4xLTAuMS0wLjItMC4yYy0xLjMtMS4xLTMtMS43LTQuOC0xLjcKCWgtNzEuNGMtNCwwLTcuMywzLjMtNy4zLDcuM3YxMjIuNWMwLDQuMSwzLjQsNy41LDcuNSw3LjVoOTcuOGM0LjEsMCw3LjUtMy40LDcuNS03LjV2LTIyCglDMjAzLjk1LDEwNy4zNSwyMDMuMTUsMTA2LjU1LDIwMi40NSwxMDYuNTV6IE0xOTkuMDUsMzMuNzVoLTIxLjljLTIuNCwwLTQuMy0xLjktNC4zLTQuM3YtMjVMMTk5LjA1LDMzLjc1eiBNMTU1Ljk1LDEwMy40NQoJYzAuOCwwLDEuNSwwLjcsMS41LDEuNXMtMC43LDEuNS0xLjUsMS41aC0zOC4yYy0wLjgsMC0xLjUtMC43LTEuNS0xLjVzMC43LTEuNSwxLjUtMS41SDE1NS45NXogTTE2NS45NSw4Ny43NWgtNDguMgoJYy0wLjgsMC0xLjUtMC43LTEuNS0xLjVzMC43LTEuNSwxLjUtMS41aDQ4LjJjMC44LDAsMS41LDAuNywxLjUsMS41UzE2Ni43NSw4Ny43NSwxNjUuOTUsODcuNzV6IE0xMTYuMDUsNDguNzUKCWMwLTAuOCwwLjctMS41LDEuNS0xLjVoMzdjMC44LDAsMS41LDAuNywxLjUsMS41cy0wLjcsMS41LTEuNSwxLjVoLTM3QzExNi44NSw1MC4xNSwxMTYuMDUsNDkuNjUsMTE2LjA1LDQ4Ljc1eiBNMTc0Ljk1LDY4LjA1CgloLTU3LjNjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoNTcuM2MwLjgsMCwxLjUsMC43LDEuNSwxLjVTMTc1Ljg1LDY4LjA1LDE3NC45NSw2OC4wNXogTTUwLjA1LDYxLjc1CgljMC0wLjgsMC43LTEuNSwxLjUtMS41aDguNWMwLjgsMCwxLjUsMC43LDEuNSwxLjVzLTAuNywxLjUtMS41LDEuNWgtOC41QzUwLjc1LDYzLjE1LDUwLjA1LDYyLjU1LDUwLjA1LDYxLjc1eiBNNDMuMTUsNjEuNzUKCWMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTguNWMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNWg4LjVDNDIuNDUsNjAuMTUsNDMuMTUsNjAuNzUsNDMuMTUsNjEuNzV6IE03OS45NSw2MS43NQoJYzAsMC44LTAuNywxLjUtMS41LDEuNWgtOC41Yy0wLjgsMC0xLjUtMC43LTEuNS0xLjVzMC43LTEuNSwxLjUtMS41aDguNUM3OS4xNSw2MC4xNSw3OS45NSw2MC43NSw3OS45NSw2MS43NXogTTc3Ljg1LDc0Ljk1aC0yNy42CgljLTAuMSwwLTAuMiwwLTAuMywwYy0wLjEsMC0wLjIsMC0wLjMsMGMtMC44LDAtMS41LDAuNy0xLjUsMS41djEwLjRjLTIuOCwwLjgtNC44LDMuMy00LjgsNi40YzAsMy43LDMsNi42LDYuNiw2LjZzNi42LTMsNi42LTYuNgoJYzAtMy4yLTIuMy01LjktNS40LTYuNXYtOC44aDI2LjdjMC44LDAsMS41LTAuNywxLjUtMS41Qzc5LjI1LDc1Ljc1LDc4Ljc1LDc0Ljk1LDc3Ljg1LDc0Ljk1eiBNNTMuNjUsOTMuMTVjMCwyLTEuNiwzLjYtMy42LDMuNgoJcy0zLjYtMS42LTMuNi0zLjZzMS42LTMuNiwzLjYtMy42UzUzLjY1LDkxLjE1LDUzLjY1LDkzLjE1eiBNMzEuNzUsNDguNTVjLTAuMy0yLjktMS44LTUuNS00LjEtNy4zYy0yLjMtMS44LTUuMi0yLjUtOC4xLTIuMQoJYy01LjUsMC44LTkuNCw1LjgtOSwxMS4zYzAuMywzLjMsMiw2LjMsNC44LDguMWwwLjcsNC44YzAuMSwwLjcsMC43LDEuMywxLjUsMS4zaDIuM3YybDAsMGgtMi40Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjUKCXMwLjcsMS41LDEuNSwxLjVoNy42YzAuOCwwLDEuNS0wLjcsMS41LTEuNXMtMC43LTEuNS0xLjUtMS41aC0yLjJsMCwwdi0yaDIuMWMwLjcsMCwxLjQtMC42LDEuNS0xLjNsMC43LTQuOQoJQzMwLjM1LDU2LjI1LDMyLjE1LDUyLjU1LDMxLjc1LDQ4LjU1eiBNMjQuOTUsNTYuMjVjLTAuNCwwLjItMC43LDAuNi0wLjcsMS4xbC0wLjYsNC4zaC00LjlsLTAuNy00LjNjLTAuMS0wLjUtMC4zLTAuOS0wLjctMS4xCgljLTIuMi0xLjMtMy43LTMuNS0zLjktNi4xYy0wLjMtNCwyLjUtNy41LDYuNS04LjFjMi4xLTAuMyw0LjIsMC4yLDUuOCwxLjVjMS43LDEuMywyLjcsMy4yLDIuOSw1LjNsMCwwCglDMjkuMDUsNTEuNzUsMjcuNTUsNTQuNzUsMjQuOTUsNTYuMjV6IE0yNS4wNSw3Mi4zNWMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTQuMWMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNWg0LjEKCUMyNC40NSw3MC44NSwyNS4wNSw3MS40NSwyNS4wNSw3Mi4zNXogTTE5LjA1LDMzLjU1di0zLjZjMC0wLjgsMC43LTEuNSwxLjUtMS41czEuNSwwLjcsMS41LDEuNXYzLjZjMCwwLjgtMC43LDEuNS0xLjUsMS41CglTMTkuMDUsMzQuMjUsMTkuMDUsMzMuNTV6IE0xMC45NSwzOS4yNWMtMC4zLDAuMy0wLjcsMC40LTEuMSwwLjRzLTAuOC0wLjEtMS4xLTAuNGwtMi42LTIuNmMtMC42LTAuNi0wLjYtMS41LDAtMi4xczEuNS0wLjYsMi4xLDAKCWwyLjYsMi42QzExLjU1LDM3Ljc1LDExLjU1LDM4Ljc1LDEwLjk1LDM5LjI1eiBNNi44NSw0OC43NWMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTMuNmMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNWgzLjYKCUM2LjE1LDQ3LjI1LDYuODUsNDguMDUsNi44NSw0OC43NXogTTMxLjI1LDM5LjI1Yy0wLjYtMC42LTAuNi0xLjUsMC0yLjFsMi42LTIuNmMwLjYtMC42LDEuNS0wLjYsMi4xLDBzMC42LDEuNSwwLDIuMWwtMi42LDIuNgoJYy0wLjMsMC4zLTAuNywwLjQtMS4xLDAuNFMzMS41NSwzOS42NSwzMS4yNSwzOS4yNXogTTM2Ljg1LDQ3LjI1aDMuNmMwLjgsMCwxLjUsMC43LDEuNSwxLjVzLTAuNywxLjUtMS41LDEuNWgtMy42CgljLTAuOCwwLTEuNS0wLjctMS41LTEuNVMzNi4wNSw0Ny4yNSwzNi44NSw0Ny4yNXogTTE3OS4wNSw4OS45NWwtNS4zLDE1LjhjLTAuMiwwLjUtMC4xLDEuMSwwLjMsMS41YzAuMywwLjMsMC43LDAuNSwxLjEsMC41CgljMC4xLDAsMC4yLDAsMC4zLDBsMTYuMy0yLjhjMC4xLDAsMC4xLDAsMC4yLTAuMWMwLjMsMCwwLjYtMC4xLDAuOC0wLjNsNDcuNC0zOS44YzAuMy0wLjMsMC41LTAuNiwwLjUtMXMtMC4xLTAuOC0wLjMtMS4xbC00LjUtNS4zCglsMi43LTIuM2MwLjYtMC41LDAuNy0xLjUsMC4yLTIuMXMtMS41LTAuNy0yLjEtMC4ybC0yLjcsMi4ybC00LjgtNS43Yy0wLjMtMC4zLTAuNi0wLjUtMS0wLjVzLTAuOCwwLjEtMS4xLDAuM2wtNDcuNCwzOS45CglDMTc5LjE1LDg5LjA1LDE3OS4wNSw4OS40NSwxNzkuMDUsODkuOTV6IE0xODEuMDUsOTIuOTVsNy44LDkuM2wtMTEuNSwyTDE4MS4wNSw5Mi45NXogTTIyNy43NSw1Mi4yNWw5LjMsMTEuMWwtMi45LDIuNWwtOS4zLTExLjEKCUwyMjcuNzUsNTIuMjV6IE0yMjIuNTUsNTYuNzVsOS4zLDExLjFsLTM5LjksMzMuM2wtOS4zLTExLjFMMjIyLjU1LDU2Ljc1eiBNMjQwLjg1LDc3LjM1aDE3LjVjMC44LDAsMS40LDAuNiwxLjQsMS40CglzLTAuNiwxLjQtMS40LDEuNGgtMTcuNWMtMC44LDAtMS40LTAuNi0xLjQtMS40UzI0MC4wNSw3Ny4zNSwyNDAuODUsNzcuMzV6IE0yNTQuNzUsOTguNzVjMCwwLjgtMC42LDEuNC0xLjQsMS40aC0zMy4zCgljLTAuOCwwLTEuNC0wLjYtMS40LTEuNHMwLjYtMS40LDEuNC0xLjRoMzMuM0MyNTQuMDUsOTcuMzUsMjU0Ljc1LDk3Ljk1LDI1NC43NSw5OC43NXogTTI2Ny43NSw4OC43NWMwLDAuOC0wLjYsMS40LTEuNCwxLjRoLTM2LjcKCWMtMC44LDAtMS40LTAuNi0xLjQtMS40czAuNi0xLjQsMS40LTEuNGgzNi43QzI2Ny4wNSw4Ny4zNSwyNjcuNzUsODcuOTUsMjY3Ljc1LDg4Ljc1eiIvPgo8L3N2Zz4K");
+$empty-cart: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyOTcgMTQwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOTcgMTQwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktY2FydCIgY2xhc3M9InN0MCIgZD0iTTI0OS44NSw2OS40NWMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTguNWMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNQoJaDguNUMyNDkuMjUsNjcuODUsMjQ5Ljg1LDY4LjU1LDI0OS44NSw2OS40NXogTTIzMC4wNSw2Ny44NWgtOC41Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDguNQoJYzAuOCwwLDEuNS0wLjcsMS41LTEuNVMyMzAuNzUsNjcuODUsMjMwLjA1LDY3Ljg1eiBNMjk2LjU1LDY4Ljg1YzAsOC41LTcsMTUuNS0xNS41LDE1LjVjLTcuOCwwLTE0LjMtNS44LTE1LjMtMTMuM2gtNy41CgljLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoNy4zYzAuNC04LjIsNy4yLTE0LjcsMTUuNS0xNC43QzI4OS41NSw1My4yNSwyOTYuNTUsNjAuMTUsMjk2LjU1LDY4Ljg1eiBNMjkzLjU1LDY4Ljg1CgljMC02LjktNS42LTEyLjUtMTIuNS0xMi41cy0xMi41LDUuNi0xMi41LDEyLjVjMCw2LjksNS42LDEyLjUsMTIuNSwxMi41QzI4OC4wNSw4MS4yNSwyOTMuNTUsNzUuNTUsMjkzLjU1LDY4Ljg1eiBNMjg1Ljc1LDcwLjQ1CgljMC42LDIuMi0xLDQuMi0yLjksNC44Yy0wLjMsMC4xLTAuNSwwLjEtMC43LDAuMnYwLjljMCwwLjYtMC40LDEtMSwxcy0xLTAuNC0xLTF2LTAuOWMtMS4yLTAuMy0yLjMtMC45LTMuMi0xLjUKCWMtMC41LTAuMy0wLjYtMC45LTAuMi0xLjRjMC4zLTAuNSwwLjktMC42LDEuNC0wLjJjMC43LDAuNSwxLjQsMC45LDIsMS4xdi00LjNjLTAuNS0wLjEtMS0wLjMtMS41LTAuNWMtMS41LTAuNy0yLjQtMi4xLTIuMy0zLjYKCWMwLjEtMS42LDEuMi0zLDIuOC0zLjZjMC4zLTAuMSwwLjYtMC4yLDAuOS0wLjJ2LTAuOGMwLTAuNiwwLjQtMSwxLTFzMSwwLjQsMSwxdjAuOWMxLDAuMywyLDAuOCwzLDEuNmMwLjQsMC40LDAuNSwxLDAuMSwxLjQKCXMtMSwwLjUtMS40LDAuMWMtMC40LTAuMy0xLTAuOC0xLjctMXY0LjFDMjgzLjU1LDY3Ljk1LDI4NS4yNSw2OC41NSwyODUuNzUsNzAuNDV6IE0yODAuMDUsNjcuMDV2LTMuOGMtMC4xLDAtMC4yLDAtMC4zLDAuMQoJYy0wLjksMC4zLTEuNSwxLTEuNSwxLjhjMCwwLjcsMC40LDEuMywxLjIsMS43QzI3OS41NSw2Ni45NSwyNzkuODUsNjYuOTUsMjgwLjA1LDY3LjA1eiBNMjgzLjc1LDcxLjA1Yy0wLjItMC44LTAuOC0xLjEtMS43LTEuNAoJdjMuOGgwLjFDMjgzLjI1LDczLjA1LDI4NC4wNSw3Mi4wNSwyODMuNzUsNzEuMDV6IE0yNTYuNTUsMzcuNzVjMCwzLTIsNS42LTQuOCw2LjR2MTAuNGMwLDAuOC0wLjcsMS41LTEuNSwxLjVjLTAuMSwwLTAuMiwwLTAuMywwCgljLTAuMSwwLTAuMiwwLTAuMywwaC0yNy42Yy0wLjgsMC0xLjUtMC43LTEuNS0xLjVzMC43LTEuNSwxLjUtMS41aDI2Ljd2LTguN2MtMy4xLTAuNi01LjQtMy4zLTUuNC02LjVjMC0zLjcsMy02LjYsNi42LTYuNgoJQzI1My41NSwzMS4yNSwyNTYuNTUsMzQuMDUsMjU2LjU1LDM3Ljc1eiBNMjUzLjU1LDM3Ljc1YzAtMi0xLjYtMy42LTMuNi0zLjZzLTMuNiwxLjYtMy42LDMuNnMxLjYsMy42LDMuNiwzLjYKCVMyNTMuNTUsMzkuNzUsMjUzLjU1LDM3Ljc1eiBNNDUuMDUsNTQuMzVjMCwwLjgtMC43LDEuNS0xLjUsMS41aC03LjdjLTAuOSw0LjgtNSw4LjQtMTAuMSw4LjRoLTE1LjVjLTUuNCwwLTkuOC00LjQtOS44LTkuOAoJYzAtNCwyLjMtNy41LDUuOS05YzEtNC43LDUuMi04LjIsMTAuMS04LjJjNC4yLDAsOCwyLjYsOS42LDYuNWM1LjIsMC4xLDkuNCw0LDEwLDkuMWg3LjZDNDQuNDUsNTIuODUsNDUuMDUsNTMuNTUsNDUuMDUsNTQuMzV6CgkgTTMzLjA1LDU0LjA1YzAtNC0zLjMtNy4zLTcuMy03LjNjLTAuMiwwLTAuNSwwLTAuNywwYy0wLjcsMC4xLTEuNC0wLjQtMS42LTEuMWMtMC45LTMuMi0zLjgtNS40LTctNS40Yy0zLjcsMC02LjgsMi44LTcuMyw2LjQKCWMtMC4xLDAuNi0wLjUsMS4xLTEsMS4zYy0yLjgsMC45LTQuNywzLjUtNC43LDYuNWMwLDMuOCwzLjEsNi44LDYuOCw2LjhoMTUuNUMyOS43NSw2MS4zNSwzMy4wNSw1OC4wNSwzMy4wNSw1NC4wNXogTTgwLjM1LDUyLjg1CgloLTguNWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWg4LjVjMC44LDAsMS41LTAuNywxLjUtMS41UzgxLjE1LDUyLjg1LDgwLjM1LDUyLjg1eiBNNTMuNDUsNTUuODVoOC41CgljMC44LDAsMS41LTAuNywxLjUtMS41cy0wLjctMS41LTEuNS0xLjVoLTguNWMtMC44LDAtMS41LDAuNy0xLjUsMS41UzUyLjY1LDU1Ljg1LDUzLjQ1LDU1Ljg1eiBNODEuMzUsNjkuMTVjMCwwLjgtMC43LDEuNS0xLjUsMS41CgloLTI2Ljd2OC43YzMuMSwwLjYsNS40LDMuMyw1LjQsNi41YzAsMy43LTMsNi42LTYuNiw2LjZzLTYuNi0zLTYuNi02LjZjMC0zLDItNS42LDQuOC02LjR2LTEwLjRjMC0wLjgsMC43LTEuNSwxLjUtMS41CgljMC4xLDAsMC4yLDAsMC4zLDBjMC4xLDAsMC4yLDAsMC4zLDBoMjcuNkM4MC42NSw2Ny42NSw4MS4zNSw2OC40NSw4MS4zNSw2OS4xNXogTTUxLjk1LDgyLjI1Yy0yLDAtMy42LDEuNi0zLjYsMy42CglzMS42LDMuNiwzLjYsMy42czMuNi0xLjYsMy42LTMuNlM1My45NSw4Mi4yNSw1MS45NSw4Mi4yNXogTTIwOC4wNSwxNi4wNWMxLjUsMS43LDIuMiw0LDEuOCw2LjNsLTEwLDY2LjhjLTAuNiwzLjktMy44LDYuNy03LjcsNi43CgloLTgxLjFjLTEuNiwwLTMtMC41LTQuMi0xLjNsNCwyNS41bDAsMGg4NC40YzAuOCwwLDEuNSwwLjcsMS41LDEuNXMtMC43LDEuNS0xLjUsMS41aC04LjljMi40LDEuNywzLjksNC41LDMuOSw3LjYKCWMwLDUuMS00LjIsOS4zLTkuMyw5LjNzLTkuMy00LjItOS4zLTkuM2MwLTMuMSwxLjYtNS45LDMuOS03LjZoLTQ3LjFjMi40LDEuNywzLjksNC41LDMuOSw3LjZjMCw1LjEtNC4yLDkuMy05LjMsOS4zCglzLTkuMy00LjItOS4zLTkuM2MwLTMuMSwxLjYtNS45LDMuOS03LjZoLTguMmMtMC44LDAtMS41LTAuNy0xLjUtMS41YzAtMC4yLDAuMS0wLjQsMC4xLTAuNmMtMC4xLTAuMS0wLjEtMC4zLTAuMi0wLjRMODkuMzUsMy4wNQoJaC0xNS42Yy0wLjgsMC0xLjUtMC43LTEuNS0xLjVzMC43LTEuNSwxLjUtMS41aDE2YzAuNCwwLDAuNywwLjEsMC45LDAuM2MwLjcsMCwxLjQsMC41LDEuNSwxLjNsMi4zLDE0LjRjMS41LTEuNywzLjYtMi43LDUuOS0yLjcKCWgxMDEuOUMyMDQuNDUsMTMuMzUsMjA2LjU1LDE0LjM1LDIwOC4wNSwxNi4wNXogTTEyOS40NSwxMzAuNjVjMC0zLjUtMi44LTYuMy02LjMtNi4zcy02LjMsMi44LTYuMyw2LjNjMCwzLjUsMi44LDYuMyw2LjMsNi4zCglDMTI2LjY1LDEzNy4wNSwxMjkuNDUsMTM0LjE1LDEyOS40NSwxMzAuNjV6IE0xODcuMzUsMTMwLjY1YzAtMy41LTIuOC02LjMtNi4zLTYuM3MtNi4zLDIuOC02LjMsNi4zYzAsMy41LDIuOCw2LjMsNi4zLDYuMwoJQzE4NC40NSwxMzcuMDUsMTg3LjM1LDEzNC4xNSwxODcuMzUsMTMwLjY1eiBNMjA1Ljg1LDE4LjA1Yy0wLjktMS4xLTIuMi0xLjctMy42LTEuN2gtMTAyYy0xLjQsMC0yLjcsMC42LTMuNywxLjcKCWMtMC45LDEuMS0xLjMsMi41LTEuMSwzLjlsMTAuOCw2Ni44YzAuNCwyLjMsMi40LDQuMSw0LjcsNC4xaDgxLjFjMi40LDAsNC40LTEuNyw0LjgtNC4xbDEwLTY2LjgKCUMyMDcuMjUsMjAuNTUsMjA2Ljc1LDE5LjE1LDIwNS44NSwxOC4wNXogTTEzMy4zNSw0MC40NWgzM2MwLjgsMCwxLjUtMC43LDEuNS0xLjVzLTAuNy0xLjUtMS41LTEuNWgtMzNjLTAuOCwwLTEuNSwwLjctMS41LDEuNQoJUzEzMi42NSw0MC40NSwxMzMuMzUsNDAuNDV6IE0xNzUuMzUsNTQuNDVoLTUwLjdjLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoNTAuN2MwLjgsMCwxLjUtMC43LDEuNS0xLjUKCVMxNzYuMTUsNTQuNDUsMTc1LjM1LDU0LjQ1eiBNMTczLjE1LDY5Ljk1aC00Ni4zYy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDQ2LjNjMC44LDAsMS41LTAuNywxLjUtMS41CglDMTc0LjY1LDcwLjU1LDE3My45NSw2OS45NSwxNzMuMTUsNjkuOTV6Ii8+Cjwvc3ZnPgo=");
+$empty-chart: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNjEgMTQxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNjEgMTQxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktY2hhcnQiIGNsYXNzPSJzdDAiIGQ9Ik0yMTMuOCw0OC42aDIxLjNjMC4xLDAsMC4yLDAsMC4zLDBjMC4xLDAsMC4yLDAsMC4zLDBjMC44LDAsMS41LTAuNywxLjUtMS41VjMxLjQKCWMwLTAuMiwwLTAuNC0wLjEtMC42YzAuMSwwLDAuMy0wLjEsMC40LTAuMWMxLjctMC42LDMtMS43LDMuOC0zLjNjMC44LTEuNiwwLjktMy40LDAuNC01LjFjLTAuNi0xLjctMS43LTMtMy4zLTMuOAoJYy0xLjYtMC44LTMuNC0wLjktNS4xLTAuNGMtMS43LDAuNi0zLDEuNy0zLjgsMy4zYy0wLjgsMS42LTAuOSwzLjQtMC40LDUuMWMwLjYsMS43LDEuNywzLDMuMywzLjhjMC42LDAuMywxLjIsMC41LDEuOCwwLjYKCWMwLDAuMS0wLjEsMC4zLTAuMSwwLjR2MTQuMmgtMjAuNGMtMC44LDAtMS41LDAuNy0xLjUsMS41UzIxMi45LDQ4LjYsMjEzLjgsNDguNnogTTIzMS45LDI1LjZjLTAuMy0wLjktMC4yLTEuOSwwLjItMi44CgljMC40LTAuOSwxLjItMS41LDIuMS0xLjhjMC40LTAuMSwwLjgtMC4yLDEuMS0wLjJjMS41LDAsMi45LDEsMy40LDIuNWMwLjYsMS45LTAuNCw0LTIuMyw0LjZjLTAuOSwwLjMtMS45LDAuMi0yLjgtMC4yCglDMjMyLjksMjcuMywyMzIuMiwyNi41LDIzMS45LDI1LjZ6IE0yNTQsNTMuOGMtMy4zLDAtNi4xLDIuNS02LjYsNS43aC0yNy45Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDI4CgljMC4xLDAsMC4xLDAsMC4yLDBjMC45LDIuNywzLjQsNC42LDYuMyw0LjZjMy43LDAsNi42LTMsNi42LTYuNkMyNjAuNiw1Ni43LDI1Ny42LDUzLjgsMjU0LDUzLjh6IE0yNTQsNjRjLTIsMC0zLjYtMS42LTMuNi0zLjYKCXMxLjYtMy42LDMuNi0zLjZzMy42LDEuNiwzLjYsMy42UzI1Niw2NCwyNTQsNjR6IE0yMzUuNSw2OS4yYy0zLjEsMC01LjgsMi4yLTYuNSw1LjFoLTE2LjFjLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjUKCUgyMjljMC43LDIuOSwzLjMsNS4xLDYuNCw1LjFjMy43LDAsNi42LTMsNi42LTYuNlMyMzkuMiw2OS4yLDIzNS41LDY5LjJ6IE0yMzUuNSw3OS40Yy0yLDAtMy42LTEuNi0zLjYtMy42czEuNi0zLjYsMy42LTMuNgoJczMuNiwxLjYsMy42LDMuNlMyMzcuNSw3OS40LDIzNS41LDc5LjR6IE00Ni40LDc0SDE4LjhjLTAuMSwwLTAuMiwwLTAuMywwcy0wLjIsMC0wLjMsMGMtMC44LDAtMS41LDAuNy0xLjUsMS41djEwLjQKCWMtMi44LDAuOC00LjgsMy4zLTQuOCw2LjRjMCwzLjcsMyw2LjYsNi42LDYuNnM2LjYtMyw2LjYtNi42YzAtMy4yLTIuMy01LjktNS40LTYuNXYtOC43aDI2LjdjMC44LDAsMS41LTAuNywxLjUtMS41CglTNDcuMyw3NCw0Ni40LDc0eiBNMjIuMiw5Mi4zYzAsMi0xLjYsMy42LTMuNiwzLjZTMTUsOTQuMywxNSw5Mi4zczEuNi0zLjYsMy42LTMuNlMyMi4yLDkwLjMsMjIuMiw5Mi4zeiBNNDEuNCw2Mi41CgljMC44LDAsMS41LTAuNywxLjUtMS41cy0wLjctMS41LTEuNS0xLjVIMTMuNWMtMC4xLDAtMC4xLDAtMC4yLDBjLTAuOS0yLjctMy40LTQuNi02LjMtNC42Yy0zLjcsMC02LjYsMy02LjYsNi42czMsNi42LDYuNiw2LjYKCWMzLjMsMCw2LjEtMi41LDYuNi01LjdMNDEuNCw2Mi41TDQxLjQsNjIuNXogTTcsNjUuMmMtMiwwLTMuNi0xLjYtMy42LTMuNlM1LDU4LDcsNThzMy42LDEuNiwzLjYsMy42UzksNjUuMiw3LDY1LjJ6IE00Ny44LDQ0LjYKCUgzMC43Yy0wLjctMi45LTMuMy01LjEtNi40LTUuMWMtMy43LDAtNi42LDMtNi42LDYuNnMzLDYuNiw2LjYsNi42YzMuMSwwLDUuOC0yLjIsNi41LTUuMWgxNy4xYzAuOCwwLDEuNS0wLjcsMS41LTEuNQoJUzQ4LjYsNDQuNiw0Ny44LDQ0LjZ6IE0yNC4yLDQ5LjhjLTIsMC0zLjYtMS42LTMuNi0zLjZzMS42LTMuNiwzLjYtMy42czMuNiwxLjYsMy42LDMuNlMyNi4yLDQ5LjgsMjQuMiw0OS44eiBNMTYzLjYsMjcuOGgtMS41Cgl2MjIuOUgxODV2LTEuNUMxODUsMzcuNCwxNzUuNCwyNy44LDE2My42LDI3Ljh6IE0xNjUuMSw0Ny43VjMwLjhjOSwwLjcsMTYuMSw3LjksMTYuOCwxNi44aC0xNi44VjQ3Ljd6IE0xNTkuOCwzMS4zaC0xLjUKCWMtMTIuOSwwLTIzLjQsMTAuNS0yMy40LDIzLjRzMTAuNSwyMy40LDIzLjQsMjMuNHMyMy40LTEwLjUsMjMuNC0yMy40di0xLjVoLTIxLjlWMzEuM3ogTTE3OC42LDU2LjJjLTAuOCwxMC41LTkuNiwxOC45LTIwLjMsMTguOQoJYy0xMS4yLDAtMjAuNC05LjEtMjAuNC0yMC40YzAtMTAuNyw4LjMtMTkuNiwxOC45LTIwLjN2MjEuOEgxNzguNnogTTEyMy41LDU5Ljl2MTRjMCwwLjgtMC43LDEuNS0xLjUsMS41cy0xLjUtMC43LTEuNS0xLjV2LTE0CgljMC0wLjgsMC43LTEuNSwxLjUtMS41UzEyMy41LDU5LjEsMTIzLjUsNTkuOXogTTExMi4zLDQ1Ljl2MjhjMCwwLjgtMC43LDEuNS0xLjUsMS41cy0xLjUtMC43LTEuNS0xLjV2LTI4YzAtMC44LDAuNy0xLjUsMS41LTEuNQoJUzExMi4zLDQ1LjEsMTEyLjMsNDUuOXogTTEwMS4xLDMxLjl2NDJjMCwwLjgtMC43LDEuNS0xLjUsMS41cy0xLjUtMC43LTEuNS0xLjV2LTQyYzAtMC44LDAuNy0xLjUsMS41LTEuNVMxMDEuMSwzMS4xLDEwMS4xLDMxLjl6CgkgTTg5LjksNDUuOXYyOGMwLDAuOC0wLjcsMS41LTEuNSwxLjVzLTEuNS0wLjctMS41LTEuNXYtMjhjMC0wLjgsMC43LTEuNSwxLjUtMS41Uzg5LjksNDUuMSw4OS45LDQ1Ljl6IE03OS43LDY1LjV2OC40CgljMCwwLjgtMC43LDEuNS0xLjUsMS41cy0xLjUtMC43LTEuNS0xLjV2LTguNGMwLTAuOCwwLjctMS41LDEuNS0xLjVTNzkuNyw2NC43LDc5LjcsNjUuNXogTTE5NS40LDAuMkg2NS41Yy0zLjMsMC02LDIuNy02LDZ2OTkuMQoJYzAsMy4zLDIuNyw2LDYsNmg2My40djI2LjVoLTIyLjhjLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoNDguNWMwLjgsMCwxLjUtMC43LDEuNS0xLjVzLTAuNy0xLjUtMS41LTEuNWgtMjIuOHYtMjYuNQoJaDYzLjRjMy4zLDAsNi0yLjcsNi02VjYuMkMyMDEuNCwyLjksMTk4LjcsMC4yLDE5NS40LDAuMnogTTE5OC40LDEwNS4zYzAsMS43LTEuMywzLTMsM0g2NS41Yy0xLjcsMC0zLTEuMy0zLTNWNi4yYzAtMS43LDEuMy0zLDMtMwoJaDEyOS45YzEuNywwLDMsMS4zLDMsM1YxMDUuM3oiLz4KPC9zdmc+Cg==");
+$empty-config: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNjkgMTM1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNjkgMTM1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktY29uZmlnIiBjbGFzcz0ic3QwIiBkPSJNMTE3LDY3LjU1YzAsOS41LDcuOCwxNy4zLDE3LjMsMTcuM3MxNy4zLTcuOCwxNy4zLTE3LjNzLTcuOC0xNy4zLTE3LjMtMTcuMwoJUzExNyw1Ny45NSwxMTcsNjcuNTV6IE0xNDguNiw2Ny41NWMwLDcuOS02LjQsMTQuMy0xNC4zLDE0LjNzLTE0LjMtNi40LTE0LjMtMTQuM3M2LjQtMTQuMywxNC4zLTE0LjNTMTQ4LjYsNTkuNjUsMTQ4LjYsNjcuNTV6CgkgTTE3Ny4yLDY1Ljk1YzAuNiwwLjYsMC42LDEuNSwwLDIuMWwtNi42LDYuNWMtMC4zLDAuMy0wLjcsMC40LTEuMSwwLjRjLTAuNCwwLTAuOC0wLjEtMS4xLTAuNGMwLDAsMC0wLjEtMC4xLTAuMQoJYzAsMC0wLjEtMC4xLTAuMi0wLjFsLTYuMi02LjNjLTAuNi0wLjYtMC42LTEuNSwwLTIuMXMxLjUtMC42LDIuMSwwbDMuOSwzLjljMC0wLjcsMC4xLTEuNCwwLjEtMi4yYzAtMTkuMS0xNS41LTM0LjYtMzQuNi0zNC42CglzLTM0LjYsMTUuNS0zNC42LDM0LjZzMTUuNSwzNC42LDM0LjYsMzQuNmM4LDAsMTUuNS0yLjYsMjEuNy03LjZjMC42LTAuNSwxLjYtMC40LDIuMSwwLjJjMC41LDAuNiwwLjQsMS42LTAuMiwyLjEKCWMtNi42LDUuMy0xNSw4LjMtMjMuNSw4LjNjLTIwLjcsMC0zNy42LTE2LjktMzcuNi0zNy42czE2LjktMzcuNiwzNy42LTM3LjZzMzcuNiwxNi45LDM3LjYsMzcuNmMwLDAuNywwLDEuNC0wLjEsMi4xbDQtNAoJQzE3NS43LDY1LjQ1LDE3Ni42LDY1LjQ1LDE3Ny4yLDY1Ljk1eiBNMjAxLjIsNTYuMTVsLTguNi0zLjFjLTIuNy0xLTQuOS0yLjktNi4zLTUuM2wtOC4yLTE0LjdjLTEuNS0yLjctMS45LTUuNy0xLjEtOC42bDIuMS04LjEKCWMwLjktMy4zLTAuNi02LjgtMy41LTguNWwtOC44LTUuMmMtMi44LTEuNy02LjQtMS40LTguOSwwLjdsLTcsNS45Yy0yLjIsMS44LTQuOSwyLjgtNy43LDIuOGwtMTUuOC0wLjJjLTMuNywwLTcuMy0xLjUtOS45LTQuMQoJbC01LjItNS4xYy0yLjQtMi40LTYuMi0yLjktOS4xLTEuMmwtOSw1Yy0yLjksMS42LTQuNCw0LjktMy44LDguMWwxLjYsOWMwLjUsMi44LDAsNS43LTEuNSw4LjFsLTguNiwxNC41Yy0xLjYsMi42LTQsNC41LTYuOSw1LjMKCWwtOCwyLjJjLTMuMywwLjktNS42LDMuOS01LjYsNy4zbC0wLjEsMTAuM2MwLDMuMywyLDYuMiw1LjEsNy40bDguNiwzLjFjMi43LDEsNC45LDIuOSw2LjMsNS4zbDguMiwxNC43YzEuNSwyLjYsMS45LDUuNywxLjEsOC42CglsLTIuMSw4LjFjLTAuOCwzLjMsMC42LDYuOCwzLjUsOC41bDguOCw1LjNjMi44LDEuNyw2LjQsMS40LDguOS0wLjdsNy01LjljMi4xLTEuOCw0LjgtMi44LDcuNi0yLjhoMC4xbDE2LjgsMC4zYzMsMCw1LjksMS4yLDgsMy40CglsNS45LDUuOGMxLjUsMS41LDMuNCwyLjIsNS40LDIuMmMxLjMsMCwyLjYtMC4zLDMuOC0xbDktNWMyLjktMS42LDQuNC00LjgsMy44LTguMWwtMS42LTljLTAuNS0yLjgsMC01LjYsMS41LTguMWw4LjYtMTQuNQoJYzEuNi0yLjYsNC00LjUsNi45LTUuM2w4LTIuMmMzLjMtMC45LDUuNi0zLjksNS42LTcuM2wwLjItMTAuM0MyMDYuMyw2MC4yNSwyMDQuMyw1Ny4yNSwyMDEuMiw1Ni4xNXogTTIwMy4xLDczLjc1CgljMCwyLjEtMS40LDMuOS0zLjQsNC41bC04LDIuMmMtMy43LDEtNi44LDMuNC04LjcsNi42bC04LjYsMTQuNWMtMS44LDMuMS0yLjUsNi43LTEuOCwxMC4ybDEuNiw5YzAuNCwyLTAuNiw0LTIuMyw0LjlsLTksNQoJYy0xLjgsMS00LjEsMC43LTUuNi0wLjdsLTUuOS01LjhjLTIuNy0yLjctNi4zLTQuMi0xMC4xLTQuMmwtMTYuOS0wLjNjLTAuMSwwLTAuMSwwLTAuMiwwYy0zLjUsMC02LjksMS4yLTkuNSwzLjVsMCwwbC03LDUuOQoJYy0xLjUsMS4zLTMuNywxLjUtNS40LDAuNGwtOC44LTUuM2MtMS44LTEuMS0yLjctMy4yLTIuMS01LjJsMi4xLTguMWMwLjktMy43LDAuNC03LjUtMS40LTEwLjlsLTguMi0xNC43Yy0xLjctMy4xLTQuNS01LjUtNy45LTYuNwoJbC04LjYtMy4xYy0xLjktMC43LTMuMS0yLjUtMy4xLTQuNWwwLjEtMTAuM2MwLTIuMSwxLjQtMy45LDMuNS00LjVsOC0yLjJjMy43LTEsNi44LTMuNCw4LjctNi42bDguNi0xNC41YzEuOC0zLDIuNS02LjcsMS45LTEwLjIKCWwtMS42LTljLTAuNC0yLDAuNi00LDIuMy00LjlsOS01YzEuOC0xLDQuMS0wLjcsNS42LDAuN2w1LjIsNS4xYzMuMiwzLjIsNy41LDQuOSwxMiw1bDE1LjgsMC4yYzAuMSwwLDAuMSwwLDAuMiwwCgljMy41LDAsNi45LTEuMiw5LjUtMy41bDctNS45YzEuNS0xLjMsMy43LTEuNSw1LjUtMC40bDguOCw1LjJjMS44LDEuMSwyLjcsMy4yLDIuMSw1LjJsLTIuMSw4LjFjLTEsMy43LTAuNSw3LjUsMS40LDEwLjlsOC4yLDE0LjcKCWMxLjcsMy4xLDQuNSw1LjUsNy45LDYuN2w4LjYsMy4xYzEuOSwwLjcsMy4xLDIuNSwzLjEsNC41TDIwMy4xLDczLjc1eiBNMjIxLjgsNTcuMTVoMjEuM2MwLjEsMCwwLjIsMCwwLjMsMGMwLjEsMCwwLjIsMCwwLjMsMAoJYzAuOCwwLDEuNS0wLjcsMS41LTEuNXYtMTUuN2MwLTAuMiwwLTAuNC0wLjEtMC42YzAuMSwwLDAuMy0wLjEsMC40LTAuMWMxLjctMC42LDMtMS43LDMuOC0zLjNjMC44LTEuNiwwLjktMy40LDAuNC01LjEKCWMtMC42LTEuNy0xLjctMy0zLjMtMy44Yy0xLjYtMC44LTMuNC0wLjktNS4xLTAuNGMtMS43LDAuNi0zLDEuNy0zLjgsMy4zYy0wLjgsMS42LTAuOSwzLjQtMC40LDUuMWMwLjYsMS43LDEuNywzLDMuMywzLjgKCWMwLjYsMC4zLDEuMiwwLjUsMS44LDAuNmMwLDAuMS0wLjEsMC4zLTAuMSwwLjR2MTQuMmgtMjAuNGMtMC44LDAtMS41LDAuNy0xLjUsMS41UzIyMSw1Ny4xNSwyMjEuOCw1Ny4xNXogTTIzOS45LDM0LjE1CgljLTAuMy0wLjktMC4yLTEuOSwwLjItMi44YzAuNC0wLjksMS4yLTEuNSwyLjEtMS44YzAuNC0wLjEsMC44LTAuMiwxLjEtMC4yYzEuNSwwLDIuOSwxLDMuNCwyLjVjMC42LDEuOS0wLjQsNC0yLjMsNC42CgljLTAuOSwwLjMtMS45LDAuMi0yLjgtMC4yQzI0MC45LDM1Ljc1LDI0MC4yLDM1LjA1LDIzOS45LDM0LjE1eiBNMjYyLDYyLjI1Yy0zLjMsMC02LjEsMi41LTYuNiw1LjdoLTI3LjljLTAuOCwwLTEuNSwwLjctMS41LDEuNQoJczAuNywxLjUsMS41LDEuNWgyOGMwLjEsMCwwLjEsMCwwLjIsMGMwLjksMi43LDMuNCw0LjYsNi4zLDQuNmMzLjcsMCw2LjYtMyw2LjYtNi42UzI2NS42LDYyLjI1LDI2Miw2Mi4yNXogTTI2Miw3Mi41NQoJYy0yLDAtMy42LTEuNi0zLjYtMy42czEuNi0zLjYsMy42LTMuNnMzLjYsMS42LDMuNiwzLjZTMjY0LDcyLjU1LDI2Miw3Mi41NXogTTI0My41LDc3Ljc1Yy0zLjEsMC01LjgsMi4yLTYuNSw1LjFoLTE2LjEKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNUgyMzdjMC43LDIuOSwzLjMsNS4xLDYuNCw1LjFjMy43LDAsNi42LTMsNi42LTYuNlMyNDcuMiw3Ny43NSwyNDMuNSw3Ny43NXogTTI0My41LDg3Ljk1CgljLTIsMC0zLjYtMS42LTMuNi0zLjZzMS42LTMuNiwzLjYtMy42czMuNiwxLjYsMy42LDMuNlMyNDUuNSw4Ny45NSwyNDMuNSw4Ny45NXogTTQ2LjUsODAuNTVIMTguOGMtMC4xLDAtMC4yLDAtMC4zLDBzLTAuMiwwLTAuMywwCgljLTAuOCwwLTEuNSwwLjctMS41LDEuNXYxMC40Yy0yLjgsMC44LTQuOCwzLjMtNC44LDYuNGMwLDMuNywzLDYuNiw2LjYsNi42czYuNi0zLDYuNi02LjZjMC0zLjItMi4zLTUuOS01LjQtNi41di04LjdoMjYuOAoJYzAuOCwwLDEuNS0wLjcsMS41LTEuNVM0Ny4zLDgwLjU1LDQ2LjUsODAuNTV6IE0yMi4yLDk4Ljg1YzAsMi0xLjYsMy42LTMuNiwzLjZzLTMuNi0xLjYtMy42LTMuNnMxLjYtMy42LDMuNi0zLjYKCVMyMi4yLDk2Ljg1LDIyLjIsOTguODV6IE00MS40LDY5LjA1YzAuOCwwLDEuNS0wLjcsMS41LTEuNXMtMC43LTEuNS0xLjUtMS41SDEzLjVjLTAuMSwwLTAuMSwwLTAuMiwwYy0wLjktMi43LTMuNC00LjYtNi4zLTQuNgoJYy0zLjcsMC02LjYsMy02LjYsNi42YzAsMy42LDMsNi42LDYuNiw2LjZjMy4zLDAsNi4xLTIuNSw2LjYtNS43TDQxLjQsNjkuMDVMNDEuNCw2OS4wNXogTTcsNzEuNzVjLTIsMC0zLjYtMS42LTMuNi0zLjYKCXMxLjYtMy42LDMuNi0zLjZzMy42LDEuNiwzLjYsMy42UzksNzEuNzUsNyw3MS43NXogTTQ3LjgsNTEuMTVIMzAuN2MtMC43LTIuOS0zLjMtNS4xLTYuNC01LjFjLTMuNywwLTYuNiwzLTYuNiw2LjZzMyw2LjYsNi42LDYuNgoJYzMuMSwwLDUuOC0yLjIsNi41LTUuMWgxNy4xYzAuOCwwLDEuNS0wLjcsMS41LTEuNVM0OC42LDUxLjE1LDQ3LjgsNTEuMTV6IE0yNC4zLDU2LjM1Yy0yLDAtMy42LTEuNi0zLjYtMy42czEuNi0zLjYsMy42LTMuNgoJczMuNiwxLjYsMy42LDMuNlMyNi4zLDU2LjM1LDI0LjMsNTYuMzV6Ii8+Cjwvc3ZnPgo=");
+$empty-events: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAzMDIgMTIzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMDIgMTIzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktZXZlbnRzIiBjbGFzcz0ic3QwIiBkPSJNMjU1LjQsNzEuOGMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTguNWMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNQoJaDguNUMyNTQuNyw3MC4zLDI1NS40LDcxLDI1NS40LDcxLjh6IE0yMzUuNSw3MC4zSDIyN2MtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWg4LjVjMC44LDAsMS41LTAuNywxLjUtMS41CglTMjM2LjQsNzAuMywyMzUuNSw3MC4zeiBNMzAyLDcxLjNjMCw4LjUtNywxNS41LTE1LjUsMTUuNWMtNy44LDAtMTQuMy01LjktMTUuMy0xMy40aC03LjNjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjUKCWg3LjJjMC41LTguMSw3LjItMTQuNiwxNS41LTE0LjZDMjk1LDU1LjgsMzAyLDYyLjcsMzAyLDcxLjN6IE0yOTksNzEuM2MwLTYuOS01LjYtMTIuNS0xMi41LTEyLjVTMjc0LDY0LjQsMjc0LDcxLjMKCXM1LjYsMTIuNSwxMi41LDEyLjVTMjk5LDc4LjEsMjk5LDcxLjN6IE0yOTIuNSw3MS44SDI4N3YtNy41YzAtMC44LTAuNy0xLjUtMS41LTEuNXMtMS41LDAuNy0xLjUsMS41djljMCwwLjgsMC43LDEuNSwxLjUsMS41aDcKCWMwLjgsMCwxLjUtMC43LDEuNS0xLjVTMjkzLjMsNzEuOCwyOTIuNSw3MS44eiBNMjYyLjEsNDAuMmMwLDMtMiw1LjYtNC44LDYuNFY1N2MwLDAuOC0wLjcsMS41LTEuNSwxLjVjLTAuMSwwLTAuMiwwLTAuMywwCgljLTAuMSwwLTAuMiwwLTAuMywwaC0yNy42Yy0wLjgsMC0xLjUtMC43LTEuNS0xLjVzMC43LTEuNSwxLjUtMS41aDI2Ljd2LTguN2MtMy4xLTAuNi01LjQtMy4zLTUuNC02LjVjMC0zLjcsMy02LjYsNi42LTYuNgoJUzI2Mi4xLDM2LjUsMjYyLjEsNDAuMnogTTI1OS4xLDQwLjJjMC0yLTEuNi0zLjYtMy42LTMuNnMtMy42LDEuNi0zLjYsMy42czEuNiwzLjYsMy42LDMuNlMyNTkuMSw0Mi4yLDI1OS4xLDQwLjJ6IE04MCw1NS4zaC04LjUKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNUg4MGMwLjgsMCwxLjUtMC43LDEuNS0xLjVTODAuOCw1NS4zLDgwLDU1LjN6IE01My4xLDU4LjNoOC41YzAuOCwwLDEuNS0wLjcsMS41LTEuNQoJcy0wLjctMS41LTEuNS0xLjVoLTguNWMtMC44LDAtMS41LDAuNy0xLjUsMS41UzUyLjMsNTguMyw1My4xLDU4LjN6IE00NC43LDU2LjhjMCwwLjgtMC43LDEuNS0xLjUsMS41aC03LjcKCWMtMC45LDQuOC01LDguNC0xMC4xLDguNEg5LjhjLTUuNCwwLTkuOC00LjQtOS44LTkuOGMwLTQsMi4zLTcuNSw1LjktOWMxLTQuNyw1LjItOC4yLDEwLjEtOC4yYzQuMiwwLDgsMi42LDkuNiw2LjUKCWM1LjIsMC4xLDkuNCw0LDEwLDkuMWg3LjZDNDQsNTUuMyw0NC43LDU2LDQ0LjcsNTYuOHogTTMyLjYsNTYuNWMwLTQtMy4zLTcuMy03LjMtNy4zYy0wLjIsMC0wLjUsMC0wLjcsMGMtMC43LDAuMS0xLjQtMC40LTEuNi0xLjEKCWMtMC45LTMuMi0zLjgtNS40LTctNS40Yy0zLjcsMC02LjgsMi44LTcuMyw2LjRjLTAuMSwwLjYtMC41LDEuMS0xLDEuM0M0LjksNTEuMywzLDUzLjksMyw1Ni45YzAsMy44LDMuMSw2LjgsNi44LDYuOGgxNS41CglDMjkuNCw2My44LDMyLjYsNjAuNSwzMi42LDU2LjV6IE04MC45LDcxLjZjMCwwLjgtMC43LDEuNS0xLjUsMS41SDUyLjd2OC43YzMuMSwwLjYsNS40LDMuMyw1LjQsNi41YzAsMy43LTMsNi42LTYuNiw2LjYKCXMtNi42LTMtNi42LTYuNmMwLTMsMi01LjYsNC44LTYuNFY3MS41YzAtMC44LDAuNy0xLjUsMS41LTEuNWMwLjEsMCwwLjIsMCwwLjMsMGMwLjEsMCwwLjIsMCwwLjMsMGgyNy42CglDODAuMyw3MC4xLDgwLjksNzAuNyw4MC45LDcxLjZ6IE01MS41LDg0LjdjLTIsMC0zLjYsMS42LTMuNiwzLjZzMS42LDMuNiwzLjYsMy42czMuNi0xLjYsMy42LTMuNlM1My41LDg0LjcsNTEuNSw4NC43eiBNMjE2LDE3LjcKCXY5Ny44YzAsNC0zLjMsNy4zLTcuMyw3LjNIOTguOGMtNCwwLTcuMy0zLjMtNy4zLTcuM1YxNy43YzAtNCwzLjMtNy4zLDcuMy03LjNoMjRWMS43YzAtMC44LDAuNy0xLjUsMS41LTEuNXMxLjUsMC43LDEuNSwxLjV2OC43CgloNTUuNVYxLjdjMC0wLjgsMC43LTEuNSwxLjUtMS41czEuNSwwLjcsMS41LDEuNXY4LjdoMjQuNUMyMTIuNywxMC40LDIxNiwxMy43LDIxNiwxNy43eiBNOTQuNSwxNy43djE5LjlIMjEzVjE3LjcKCWMwLTIuNC0xLjktNC4zLTQuMy00LjNoLTI0LjV2OC4yYzAsMC44LTAuNywxLjUtMS41LDEuNXMtMS41LTAuNy0xLjUtMS41di04LjJoLTU1LjV2OC4yYzAsMC44LTAuNywxLjUtMS41LDEuNXMtMS41LTAuNy0xLjUtMS41Cgl2LTguMmgtMjRDOTYuNCwxMy40LDk0LjUsMTUuMyw5NC41LDE3Ljd6IE0yMTMsMTE1LjVWNDAuN0g5NC41djc0LjhjMCwyLjQsMS45LDQuMyw0LjMsNC4zaDEwOS45QzIxMSwxMTkuNywyMTMsMTE3LjgsMjEzLDExNS41egoJIE0xMjkuMiw1NC4yaC0xMi45Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDEyLjljMC44LDAsMS41LTAuNywxLjUtMS41UzEzMCw1NC4yLDEyOS4yLDU0LjJ6IE0xNTkuNSw1NC4yaC0xMi45CgljLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoMTIuOWMwLjgsMCwxLjUtMC43LDEuNS0xLjVTMTYwLjMsNTQuMiwxNTkuNSw1NC4yeiBNMTg5LjgsNTQuMmgtMTIuOQoJYy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDEyLjljMC44LDAsMS41LTAuNywxLjUtMS41UzE5MC43LDU0LjIsMTg5LjgsNTQuMnogTTEyOS4yLDcwLjhoLTEyLjkKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWgxMi45YzAuOCwwLDEuNS0wLjcsMS41LTEuNVMxMzAsNzAuOCwxMjkuMiw3MC44eiBNMTU5LjUsNzAuOGgtMTIuOQoJYy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDEyLjljMC44LDAsMS41LTAuNywxLjUtMS41UzE2MC4zLDcwLjgsMTU5LjUsNzAuOHogTTE4OS44LDcwLjhoLTEyLjkKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWgxMi45YzAuOCwwLDEuNS0wLjcsMS41LTEuNVMxOTAuNyw3MC44LDE4OS44LDcwLjh6IE0xMjkuMiw4Ny41aC0xMi45CgljLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoMTIuOWMwLjgsMCwxLjUtMC43LDEuNS0xLjVTMTMwLDg3LjUsMTI5LjIsODcuNXogTTE1OS41LDg3LjVoLTEyLjkKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWgxMi45YzAuOCwwLDEuNS0wLjcsMS41LTEuNVMxNjAuMyw4Ny41LDE1OS41LDg3LjV6IE0xODkuOCw4Ny41aC0xMi45CgljLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoMTIuOWMwLjgsMCwxLjUtMC43LDEuNS0xLjVTMTkwLjcsODcuNSwxODkuOCw4Ny41eiBNMTI5LjIsMTAyLjNoLTEyLjkKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWgxMi45YzAuOCwwLDEuNS0wLjcsMS41LTEuNVMxMzAsMTAyLjMsMTI5LjIsMTAyLjN6IE0xNTkuNSwxMDIuM2gtMTIuOQoJYy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDEyLjljMC44LDAsMS41LTAuNywxLjUtMS41UzE2MC4zLDEwMi4zLDE1OS41LDEwMi4zeiBNMTg5LjgsMTAyLjNoLTEyLjkKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWgxMi45YzAuOCwwLDEuNS0wLjcsMS41LTEuNVMxOTAuNywxMDIuMywxODkuOCwxMDIuM3oiLz4KPC9zdmc+Cg==");
+$empty-grid: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyOTggMTE0IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOTggMTE0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktZ3JpZCIgY2xhc3M9InN0MCIgZD0iTTIwMi42LDAuNEg5MS44Yy00LDAtNy4zLDMuMy03LjMsNy4zdjk4LjZjMCw0LDMuMyw3LjMsNy4zLDcuM2gxMTAuOAoJYzQsMCw3LjMtMy4zLDcuMy03LjNWNy43QzIwOS45LDMuNywyMDYuNywwLjQsMjAyLjYsMC40eiBNMTEyLjUsODkuNnYtMTdoMjF2MTdIMTEyLjV6IE0xMzMuNSw5Mi42djE4aC0yMXYtMThIMTMzLjV6IE0xMzMuNSwzMi44Cgl2MTYuOGgtMjFWMzIuOEgxMzMuNXogTTExMi41LDI5LjhWMy40aDIxdjI2LjRIMTEyLjV6IE04Ny41LDUyLjZoMjIuMXYxN0g4Ny41VjUyLjZ6IE0xMTIuNSw1Mi42aDIxdjE3aC0yMVY1Mi42eiBNMTM2LjUsNTIuNmg3MC40Cgl2MTdoLTcwLjRWNTIuNnogTTIwNi45LDQ5LjZoLTcwLjRWMzIuOGg3MC40VjQ5LjZ6IE0xMDkuNSw0OS42SDg3LjRWMzIuOGgyMi4xVjQ5LjZ6IE04Ny41LDcyLjZoMjIuMXYxN0g4Ny41VjcyLjZ6IE0xMzYuNSw3Mi42CgloNzAuNHYxN2gtNzAuNFY3Mi42eiBNMjA2LjksNy43djIyLjFoLTcwLjRWMy40aDY2LjFDMjA1LDMuNCwyMDYuOSw1LjMsMjA2LjksNy43eiBNOTEuOCwzLjRoMTcuN3YyNi40SDg3LjRWNy43CglDODcuNSw1LjMsODkuNCwzLjQsOTEuOCwzLjR6IE04Ny41LDEwNi4zVjkyLjZoMjIuMXYxOEg5MS45Qzg5LjQsMTEwLjYsODcuNSwxMDguNyw4Ny41LDEwNi4zeiBNMjAyLjYsMTEwLjZoLTY2LjF2LTE4aDcwLjR2MTMuNwoJQzIwNi45LDEwOC43LDIwNSwxMTAuNiwyMDIuNiwxMTAuNnogTTI1MS40LDYxLjdjMCwwLjgtMC43LDEuNS0xLjUsMS41aC04LjVjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoOC41CglDMjUwLjcsNjAuMiwyNTEuNCw2MC45LDI1MS40LDYxLjd6IE0yMzMsNjEuN2MwLDAuOC0wLjcsMS41LTEuNSwxLjVIMjIzYy0wLjgsMC0xLjUtMC43LTEuNS0xLjVzMC43LTEuNSwxLjUtMS41aDguNQoJQzIzMi4zLDYwLjIsMjMzLDYwLjksMjMzLDYxLjd6IE0yODIuNSw0NS42Yy04LjIsMC0xNSw2LjUtMTUuNSwxNC42aC03LjJjLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoNy4zCgljMSw3LjYsNy41LDEzLjQsMTUuMywxMy40YzguNSwwLDE1LjUtNywxNS41LTE1LjVTMjkxLDQ1LjYsMjgyLjUsNDUuNnogTTI4Mi41LDczLjZjLTYuOSwwLTEyLjUtNS42LTEyLjUtMTIuNXM1LjYtMTIuNSwxMi41LTEyLjUKCVMyOTUsNTQuMiwyOTUsNjEuMVMyODkuNCw3My42LDI4Mi41LDczLjZ6IE0yODEsNjEuMXYtN2MwLTAuOCwwLjctMS41LDEuNS0xLjVzMS41LDAuNywxLjUsMS41djdjMCwwLjgtMC43LDEuNS0xLjUsMS41CglTMjgxLDYxLjksMjgxLDYxLjF6IE0yODQuNSw2Ny4yYzAsMS4yLTAuOSwyLjEtMi4xLDIuMXMtMi4xLTAuOS0yLjEtMi4xczAuOS0yLjEsMi4xLTIuMVMyODQuNSw2Ni4xLDI4NC41LDY3LjJ6IE0yNTEuNCwyMy40CgljLTMuNywwLTYuNiwzLTYuNiw2LjZjMCwzLjIsMi4zLDUuOSw1LjQsNi41djguN2gtMjcuN2MtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWgyOC42YzAuMSwwLDAuMiwwLDAuMywwCgljMC4xLDAsMC4yLDAsMC4zLDBjMC44LDAsMS41LTAuNywxLjUtMS41VjM2LjNjMi44LTAuOCw0LjgtMy4zLDQuOC02LjRDMjU4LjEsMjYuNCwyNTUuMSwyMy40LDI1MS40LDIzLjR6IE0yNTEuNCwzMy43CgljLTIsMC0zLjYtMS42LTMuNi0zLjZzMS42LTMuNiwzLjYtMy42czMuNiwxLjYsMy42LDMuNlMyNTMuNCwzMy43LDI1MS40LDMzLjd6IE02MS45LDQ2LjdjMC0wLjgsMC43LTEuNSwxLjUtMS41aDguNQoJYzAuOCwwLDEuNSwwLjcsMS41LDEuNXMtMC43LDEuNS0xLjUsMS41aC04LjVDNjIuNiw0OC4yLDYxLjksNDcuNSw2MS45LDQ2Ljd6IE00My42LDQ2LjdjMC0wLjgsMC43LTEuNSwxLjUtMS41aDguNQoJYzAuOCwwLDEuNSwwLjcsMS41LDEuNXMtMC43LDEuNS0xLjUsMS41aC04LjVDNDQuMiw0OC4yLDQzLjYsNDcuNSw0My42LDQ2Ljd6IE0zNS4xLDQ4LjJjMC44LDAsMS41LTAuNywxLjUtMS41cy0wLjctMS41LTEuNS0xLjUKCWgtN1YzM3YtMC4xdi0wLjFjMC00LjEtNi03LjItMTQtNy4ycy0xNCwzLjEtMTQsNy4ydjAuMWMwLDAsMCwwLDAsMC4xdjUuOGwwLDBsMCwwdjYuNGwwLDBsMCwwdjYuNmwwLDBsMCwwdjAuMwoJYzAsMC4xLDAsMC4zLDAuMSwwLjRjMC43LDMuNyw2LjUsNi40LDE0LDYuNHMxMy4zLTIuNywxNC02LjRjMC0wLjEsMC4xLTAuMywwLjEtMC40VjQ4aDYuOFY0OC4yeiBNMjUuMSw0NS4zYzAsMS43LTQuMyw0LjItMTEsNC4yCglzLTExLTIuNS0xMS00LjJ2LTEuOGMyLjUsMS42LDYuNSwyLjcsMTEsMi43YzQuNiwwLDguNS0xLDExLTIuN1Y0NS4zeiBNMTQuMSw0My4xYy02LjcsMC0xMS0yLjUtMTEtNC4ydi0xLjUKCWMyLjUsMS42LDYuNSwyLjcsMTEsMi43YzQuNiwwLDguNS0xLDExLTIuN3YxLjVDMjUuMSw0MC42LDIwLjgsNDMuMSwxNC4xLDQzLjF6IE0xNC4xLDI4LjdjNi43LDAsMTEsMi41LDExLDQuMnMtNC4zLDQuMi0xMSw0LjIKCXMtMTEtMi41LTExLTQuMkMzLDMxLjIsNy4zLDI4LjcsMTQuMSwyOC43eiBNMTQuMSw1Ni4xYy02LjcsMC0xMS0yLjUtMTEtNC4ydi0yLjFjMi41LDEuNiw2LjUsMi43LDExLDIuN2M0LjYsMCw4LjUtMSwxMS0yLjd2Mi4xCglDMjUuMSw1My42LDIwLjgsNTYuMSwxNC4xLDU2LjF6IE03My40LDU5LjlINDAuOGMtMC4xLDAtMC4yLDAtMC4zLDBjLTAuMSwwLTAuMiwwLTAuMywwYy0wLjgsMC0xLjUsMC43LTEuNSwxLjV2MTAuNAoJYy0yLjgsMC44LTQuOCwzLjMtNC44LDYuNGMwLDMuNywzLDYuNiw2LjYsNi42czYuNi0zLDYuNi02LjZjMC0zLjItMi4zLTUuOS01LjQtNi41VjYzaDMxLjdjMC44LDAsMS41LTAuNywxLjUtMS41CglTNzQuMiw1OS45LDczLjQsNTkuOXogTTQ0LjEsNzguMmMwLDItMS42LDMuNi0zLjYsMy42cy0zLjYtMS42LTMuNi0zLjZzMS42LTMuNiwzLjYtMy42UzQ0LjEsNzYuMiw0NC4xLDc4LjJ6Ii8+Cjwvc3ZnPgo=");
+$empty-messages: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAzMjMgMTAyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMjMgMTAyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktbWVzc2FnZXMiIGNsYXNzPSJzdDAiIGQ9Ik0yNzQuNCw1NS4zNWMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTguNWMtMC44LDAtMS41LTAuNy0xLjUtMS41CglzMC43LTEuNSwxLjUtMS41aDguNUMyNzMuNyw1My44NSwyNzQuNCw1NC41NSwyNzQuNCw1NS4zNXogTTMyMyw1NC44NWMwLDguNS03LDE1LjUtMTUuNSwxNS41Yy03LjksMC0xNC41LTYtMTUuNC0xMy43CgljLTAuMiwwLjItMC41LDAuMi0wLjgsMC4yaC04LjVjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoOC41YzAuMywwLDAuNSwwLjEsMC43LDAuMmMwLjQtOC4yLDcuMi0xNC44LDE1LjUtMTQuOAoJQzMxNiwzOS4zNSwzMjMsNDYuMjUsMzIzLDU0Ljg1eiBNMzIwLDU0Ljg1YzAtNi45LTUuNi0xMi41LTEyLjUtMTIuNXMtMTIuNSw1LjYtMTIuNSwxMi41YzAsNi45LDUuNiwxMi41LDEyLjUsMTIuNQoJUzMyMCw2MS43NSwzMjAsNTQuODV6IE0zMDcuNSw1Ni4zNWMwLjgsMCwxLjUtMC43LDEuNS0xLjV2LTdjMC0wLjgtMC43LTEuNS0xLjUtMS41cy0xLjUsMC43LTEuNSwxLjV2NwoJQzMwNiw1NS42NSwzMDYuNyw1Ni4zNSwzMDcuNSw1Ni4zNXogTTMwNy40LDU4Ljg1Yy0xLjIsMC0yLjEsMC45LTIuMSwyLjFzMC45LDIuMSwyLjEsMi4xczIuMS0wLjksMi4xLTIuMVMzMDguNiw1OC44NSwzMDcuNCw1OC44NQoJeiBNMjg1LjIsNDIuMDVoLTIyLjZjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoMjEuN3YtOC43Yy0zLjEtMC42LTUuNC0zLjMtNS40LTYuNWMwLTMuNywzLTYuNiw2LjYtNi42CglzNi42LDMsNi42LDYuNmMwLDMtMiw1LjYtNC44LDYuNHYxMC40YzAsMC44LTAuNywxLjUtMS41LDEuNWMtMC4xLDAtMC4yLDAtMC4zLDBDMjg1LjQsNDEuOTUsMjg1LjMsNDIuMDUsMjg1LjIsNDIuMDV6CgkgTTI4NS41LDI3LjM1YzIsMCwzLjYtMS42LDMuNi0zLjZzLTEuNi0zLjYtMy42LTMuNnMtMy42LDEuNi0zLjYsMy42UzI4My41LDI3LjM1LDI4NS41LDI3LjM1eiBNMzUuNCw0MS44NQoJYy0wLjksNC44LTUsOC40LTEwLjEsOC40SDkuOGMtNS40LDAtOS44LTQuNC05LjgtOS44YzAtNCwyLjMtNy41LDUuOS05YzEtNC43LDUuMi04LjIsMTAuMS04LjJjNC4yLDAsOCwyLjYsOS42LDYuNQoJYzUuMiwwLjEsOS40LDQsMTAsOS4xaDcuNmMwLjgsMCwxLjUsMC43LDEuNSwxLjVzLTAuNywxLjUtMS41LDEuNUgzNS40eiBNMzIuNiw0MC4wNWMwLTQtMy4zLTcuMy03LjMtNy4zYy0wLjIsMC0wLjUsMC0wLjcsMAoJYy0wLjcsMC4xLTEuNC0wLjQtMS42LTEuMWMtMC45LTMuMi0zLjgtNS40LTctNS40Yy0zLjcsMC02LjgsMi44LTcuMyw2LjRjLTAuMSwwLjYtMC41LDEuMS0xLDEuM2MtMi44LDAuOS00LjcsMy41LTQuNyw2LjUKCWMwLDMuOCwzLjEsNi44LDYuOCw2LjhoMTUuNUMyOS40LDQ3LjM1LDMyLjYsNDQuMDUsMzIuNiw0MC4wNXogTTUzLjEsNDEuODVoOC41YzAuOCwwLDEuNS0wLjcsMS41LTEuNXMtMC43LTEuNS0xLjUtMS41aC04LjUKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41UzUyLjMsNDEuODUsNTMuMSw0MS44NXogTTY3LjksNTUuMTVjMCwwLjgtMC43LDEuNS0xLjUsMS41SDQyLjd2OC43YzMuMSwwLjYsNS40LDMuMyw1LjQsNi41CgljMCwzLjctMyw2LjYtNi42LDYuNnMtNi42LTMtNi42LTYuNmMwLTMsMi01LjYsNC44LTYuNHYtMTAuNGMwLTAuOCwwLjctMS41LDEuNS0xLjVjMC4xLDAsMC4yLDAsMC4zLDBjMC4xLDAsMC4yLDAsMC4zLDBoMjQuNgoJQzY3LjMsNTMuNjUsNjcuOSw1NC4zNSw2Ny45LDU1LjE1eiBNNDEuNSw2OC4yNWMtMiwwLTMuNiwxLjYtMy42LDMuNnMxLjYsMy42LDMuNiwzLjZzMy42LTEuNiwzLjYtMy42UzQzLjUsNjguMjUsNDEuNSw2OC4yNXoKCSBNMjUxLjQsNDYuNTVjMCwxMy4yLTcuMSwyNS43LTE5LjYsMzQuNWMwLjUsOS40LDUuMywxOC4zLDUuNCwxOC40YzAuMiwwLjQsMC4yLDEsMCwxLjRzLTAuNywwLjctMS4yLDAuOGMtMS4xLDAuMS0yLjIsMC4xLTMuMywwLjEKCWMtNi4zLDAtMTEuNy0xLjQtMTYuMi00LjFjLTMuNy0yLjMtNS44LTUtNi45LTYuN2MtNS42LDEuNC0xMS41LDItMTcuNCwyYy0xOS41LDAtMzYuOC03LjQtNDcuNi0xOC44Yy02LDItMTIuMywzLTE4LjgsMwoJYy00LjgsMC05LjYtMC42LTE0LjItMS42Yy0xLjgsMi44LTcuMiw4LjktMTkuMSw4LjljLTAuOSwwLTEuOCwwLTIuNy0wLjFjLTAuNSwwLTEtMC4zLTEuMi0wLjhjLTAuMi0wLjQtMC4yLTEsMC0xLjQKCWMwLTAuMSwzLjktNy4zLDQuNC0xNC45Yy0xMC4zLTcuMy0xNi4xLTE3LjctMTYuMS0yOC41YzAtMjEuMiwyMi0zOC41LDQ5LTM4LjVjMTEuNSwwLDIyLjcsMy4yLDMxLjUsOWM5LjgtNS42LDIxLjktOSwzNC45LTkKCUMyMjQuOSwwLjE1LDI1MS40LDIwLjk1LDI1MS40LDQ2LjU1eiBNMTQyLjUsNzEuNzVjLTYtNy4zLTkuNS0xNS45LTkuNS0yNS4yYzAtMTQuMyw4LjMtMjcuMiwyMS40LTM1LjdjLTguMS01LTE4LjItNy43LTI4LjYtNy43CgljLTI1LjQsMC00NiwxNS45LTQ2LDM1LjVjMCwxMC4xLDUuNywxOS44LDE1LjUsMjYuNmMwLjQsMC4zLDAuNywwLjgsMC43LDEuM2MtMC4yLDYuMS0yLjQsMTEuOS0zLjgsMTQuOQoJYzEyLjQsMC4xLDE2LjYtNi45LDE3LjMtOC4zYzAuMy0wLjYsMS0wLjksMS43LTAuOGM0LjcsMS4yLDkuNiwxLjgsMTQuNiwxLjhDMTMxLjYsNzQuMTUsMTM3LjIsNzMuMzUsMTQyLjUsNzEuNzV6IE0yNDguNCw0Ni41NQoJYzAtMjMuOS0yNS4yLTQzLjQtNTYuMi00My40UzEzNiwyMi42NSwxMzYsNDYuNTVjMCw5LjEsMy42LDE3LjUsOS44LDI0LjVjMC40LDAuMiwwLjcsMC41LDAuOSwwLjljMCwwLDAsMCwwLDAuMQoJYzEwLjIsMTAuOSwyNi44LDE4LDQ1LjUsMThjNiwwLDEyLTAuNywxNy43LTIuMmMwLjEsMCwwLjIsMCwwLjQsMGMwLjYsMCwxLjEsMC4zLDEuMywwLjhjMC45LDEuOCw2LjMsMTAuNiwyMS44LDEwLjMKCWMtMS42LTMuNS00LjUtMTAuOC00LjctMTguNWMwLTAuNSwwLjItMSwwLjctMS4zQzI0MS41LDcwLjc1LDI0OC40LDU4Ljk1LDI0OC40LDQ2LjU1eiBNMTY5LjgsMzUuMzVoMzEuNGMwLjgsMCwxLjUtMC43LDEuNS0xLjUKCXMtMC43LTEuNS0xLjUtMS41aC0zMS40Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjVTMTY5LDM1LjM1LDE2OS44LDM1LjM1eiBNMjEyLjcsNDUuNDVoLTQyLjljLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjUKCWg0Mi45YzAuOCwwLDEuNS0wLjcsMS41LTEuNVMyMTMuNiw0NS40NSwyMTIuNyw0NS40NXogTTIwNC41LDU4LjY1aC0zNC43Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41aDM0LjcKCWMwLjgsMCwxLjUtMC43LDEuNS0xLjVTMjA1LjMsNTguNjUsMjA0LjUsNTguNjV6Ii8+Cjwvc3ZnPgo=");
+$empty-objects: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAzMTggMTQzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMTggMTQzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktb2JqZWN0cyIgY2xhc3M9InN0MCIgZD0iTTIyNC4xLDMxLjkzbC02Mi45LTMxLjdjLTAuNC0wLjItMC45LTAuMi0xLjMsMEw5NywzMS45MwoJYy0wLjUsMC4zLTAuOCwwLjgtMC44LDEuM3YyLjVjMCwwLjEsMCwwLjIsMCwwLjNsMC4zLDczLjVjMCwwLjYsMC4zLDEuMSwwLjgsMS4zbDYyLjcsMzEuOWMwLjIsMC4xLDAuNCwwLjIsMC43LDAuMgoJYzAuMiwwLDAuNS0wLjEsMC43LTAuMmw2Mi45LTMxLjdjMC41LTAuMywwLjgtMC44LDAuOC0xLjN2LTc2LjVDMjI0LjksMzIuNzIsMjI0LjYsMzIuMjIsMjI0LjEsMzEuOTN6IE0xNjAuNCwzLjMzbDYxLjQsMzAuOXYwLjgKCWwtNjEuNCwzMC45TDk5LDM1LjAzdi0wLjhMMTYwLjQsMy4zM3ogTTk5LDM4LjQzbDYwLjQsMzAuNHY3MC41bC02MC4xLTMwLjZMOTksMzguNDN6IE0xNjIuNCwxMzguODN2LTcwLjVsNTkuNS0yOS45djcwLjUKCUwxNjIuNCwxMzguODN6IE0yMTQuOSw4MS4zM3YyMi4yYzAsMC42LTAuMywxLjEtMC44LDEuM2wtMTguMSw5LjRjLTAuMiwwLjEtMC41LDAuMi0wLjcsMC4yYy0wLjUsMC0xLjEtMC4zLTEuMy0wLjgKCWMtMC40LTAuNy0wLjEtMS42LDAuNi0ybDE3LjMtOC45di0yMS4zYzAtMC44LDAuNy0xLjUsMS41LTEuNVMyMTQuOSw4MC41MywyMTQuOSw4MS4zM3ogTTEyNy44LDExMy41M2MtMC4zLDAuNS0wLjgsMC44LTEuMywwLjgKCWMtMC4yLDAtMC41LTAuMS0wLjctMC4ybC0xOC4xLTkuNGMtMC41LTAuMy0wLjgtMC44LTAuOC0xLjN2LTIyLjJjMC0wLjgsMC43LTEuNSwxLjUtMS41czEuNSwwLjcsMS41LDEuNXYyMS4zbDE3LjMsOC45CglDMTI3LjksMTExLjkyLDEyOC4yLDExMi44MywxMjcuOCwxMTMuNTN6IE0xMzkuNywyMy4yM2wyMC4xLTkuNWMwLjQtMC4yLDAuOS0wLjIsMS4zLDBsMTkuNiw5LjVjMC43LDAuNCwxLjEsMS4zLDAuNywyCgljLTAuNCwwLjctMS4zLDEuMS0yLDAuN2wtMTktOS4ybC0xOS40LDkuMmMtMC4yLDAuMS0wLjQsMC4xLTAuNiwwLjFjLTAuNiwwLTEuMS0wLjMtMS40LTAuOUMxMzguNiwyNC41MywxMzguOSwyMy42MywxMzkuNywyMy4yM3oKCSBNMjY5LjQsNzQuMTNjMCwwLjgtMC43LDEuNS0xLjUsMS41aC04LjVjLTAuOCwwLTEuNS0wLjctMS41LTEuNXMwLjctMS41LDEuNS0xLjVoOC41QzI2OC43LDcyLjYzLDI2OS40LDczLjMzLDI2OS40LDc0LjEzegoJIE0yNTEsNzQuMTNjMCwwLjgtMC43LDEuNS0xLjUsMS41SDI0MWMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNWg4LjVDMjUwLjQsNzIuNjMsMjUxLDczLjMzLDI1MSw3NC4xM3ogTTMwMi41LDU4LjEyCgljLTguMywwLTE1LjEsNi42LTE1LjUsMTQuOGMtMC4yLTAuMS0wLjUtMC4yLTAuNy0wLjJoLTguNWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWg4LjVjMC4zLDAsMC42LTAuMSwwLjgtMC4yCgljMC45LDcuNyw3LjUsMTMuNywxNS40LDEzLjdjOC41LDAsMTUuNS03LDE1LjUtMTUuNVMzMTEsNTguMTIsMzAyLjUsNTguMTJ6IE0zMDIuNSw4Ni4xM2MtNi45LDAtMTIuNS01LjYtMTIuNS0xMi41CgljMC02LjksNS42LTEyLjUsMTIuNS0xMi41YzYuOSwwLDEyLjUsNS42LDEyLjUsMTIuNUMzMTUsODAuNTMsMzA5LjQsODYuMTMsMzAyLjUsODYuMTN6IE0zMDEsNzMuNjN2LTdjMC0wLjgsMC43LTEuNSwxLjUtMS41CglzMS41LDAuNywxLjUsMS41djdjMCwwLjgtMC43LDEuNS0xLjUsMS41UzMwMSw3NC40MiwzMDEsNzMuNjN6IE0zMDQuNSw3OS43MmMwLDEuMi0wLjksMi4xLTIuMSwyLjFzLTIuMS0wLjktMi4xLTIuMQoJczAuOS0yLjEsMi4xLTIuMVMzMDQuNSw3OC41MywzMDQuNSw3OS43MnogTTI2OS41LDM1LjkzYy0zLjcsMC02LjYsMy02LjYsNi42YzAsMy4yLDIuMyw1LjksNS40LDYuNXY4LjdoLTI2LjcKCWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWgyNy42YzAuMSwwLDAuMiwwLDAuMywwczAuMiwwLDAuMywwYzAuOCwwLDEuNS0wLjcsMS41LTEuNXYtMTAuNGMyLjgtMC44LDQuOC0zLjMsNC44LTYuNAoJQzI3Ni4xLDM4LjgzLDI3My4xLDM1LjkzLDI2OS41LDM1LjkzeiBNMjY5LjUsNDYuMTJjLTIsMC0zLjYtMS42LTMuNi0zLjZzMS42LTMuNiwzLjYtMy42czMuNiwxLjYsMy42LDMuNlMyNzEuNSw0Ni4xMiwyNjkuNSw0Ni4xMgoJeiBNODEuNSw1OS4xMmMwLDAuOC0wLjcsMS41LTEuNSwxLjVoLTguNWMtMC44LDAtMS41LTAuNy0xLjUtMS41czAuNy0xLjUsMS41LTEuNUg4MEM4MC44LDU3LjYyLDgxLjUsNTguMzMsODEuNSw1OS4xMnoKCSBNNTEuNiw1OS4xMmMwLTAuOCwwLjctMS41LDEuNS0xLjVoOC41YzAuOCwwLDEuNSwwLjcsMS41LDEuNXMtMC43LDEuNS0xLjUsMS41aC04LjVDNTIuMyw2MC42Miw1MS42LDYwLjAzLDUxLjYsNTkuMTJ6CgkgTTQzLjIsNTcuNjJoLTcuNmMtMC42LTUtNC44LTktMTAtOS4xYy0xLjUtMy45LTUuMy02LjUtOS42LTYuNWMtNC45LDAtOS4xLDMuNS0xMC4xLDguMmMtMy42LDEuNS01LjksNS4xLTUuOSw5CgljMCw1LjQsNC40LDkuOCw5LjgsOS44aDE1LjVjNSwwLDkuMi0zLjYsMTAuMS04LjRoNy43YzAuOCwwLDEuNS0wLjcsMS41LTEuNVM0NCw1Ny42Miw0My4yLDU3LjYyeiBNMjUuNCw2Ni4xMkg5LjgKCWMtMy44LDAtNi44LTMuMS02LjgtNi44YzAtMywxLjktNS42LDQuNy02LjVjMC42LTAuMiwxLTAuNywxLTEuM2MwLjQtMy43LDMuNS02LjQsNy4zLTYuNGMzLjMsMCw2LjIsMi4yLDcsNS40CgljMC4yLDAuNywwLjksMS4yLDEuNiwxLjFjMC4yLDAsMC41LDAsMC43LDBjNCwwLDcuMywzLjMsNy4zLDcuM1MyOS40LDY2LjEyLDI1LjQsNjYuMTJ6IE03OS40LDcyLjQySDUxLjhjLTAuMSwwLTAuMiwwLTAuMywwCgljLTAuMSwwLTAuMiwwLTAuMywwYy0wLjgsMC0xLjUsMC43LTEuNSwxLjV2MTAuNGMtMi44LDAuOC00LjgsMy4zLTQuOCw2LjRjMCwzLjcsMyw2LjYsNi42LDYuNnM2LjYtMyw2LjYtNi42CgljMC0zLjItMi4zLTUuOS01LjQtNi41di04LjdoMjYuN2MwLjgsMCwxLjUtMC43LDEuNS0xLjVTODAuMyw3Mi40Miw3OS40LDcyLjQyeiBNNTUuMiw5MC43MmMwLDItMS42LDMuNi0zLjYsMy42cy0zLjYtMS42LTMuNi0zLjYKCXMxLjYtMy42LDMuNi0zLjZTNTUuMiw4OC43Miw1NS4yLDkwLjcyeiIvPgo8L3N2Zz4K");
+$empty-rules: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyNTMgMTM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTMgMTM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktcnVsZXMiIGNsYXNzPSJzdDAiIGQ9Ik0yNDUuOSw2MS4zYy0zLjUsMC02LjUsMi42LTcuMSw2aC01MS41Yy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41CgloNTEuNmMwLjgsMy4xLDMuNiw1LjQsNi45LDUuNGM0LDAsNy4yLTMuMiw3LjItNy4yUzI0OS45LDYxLjMsMjQ1LjksNjEuM3ogTTI0NS45LDcyLjdjLTIuMywwLTQuMi0xLjktNC4yLTQuMnMxLjktNC4yLDQuMi00LjIKCXM0LjIsMS45LDQuMiw0LjJTMjQ4LjIsNzIuNywyNDUuOSw3Mi43eiBNMjMwLjgsODBjLTMuNywwLTYuNywyLjgtNy4xLDYuNGgtOS42Yy0wLjEsMC0wLjEsMC0wLjIsMGwtMTIuMi05LjgKCWMtMC42LTAuNS0xLjYtMC40LTIuMSwwLjJjLTAuNSwwLjYtMC40LDEuNiwwLjIsMi4xbDEyLjgsMTAuM2MwLjMsMC4yLDAuNiwwLjMsMC45LDAuM2MwLjIsMCwwLjUtMC4xLDAuNy0wLjJoOS43CgljMC45LDIuOSwzLjYsNSw2LjgsNWM0LDAsNy4yLTMuMiw3LjItNy4yUzIzNC43LDgwLDIzMC44LDgweiBNMjMwLjgsOTEuM2MtMi4zLDAtNC4yLTEuOS00LjItNC4yczEuOS00LjIsNC4yLTQuMnM0LjIsMS45LDQuMiw0LjIKCVMyMzMuMSw5MS4zLDIzMC44LDkxLjN6IE0xOTkuOCw2MS4xYzAuMywwLDAuNi0wLjEsMC45LTAuM2wxMi44LTkuM2MwLjEtMC4xLDAuMi0wLjIsMC4zLTAuM2g5LjdjMC44LDMuMSwzLjYsNS4zLDYuOSw1LjMKCWM0LDAsNy4yLTMuMiw3LjItNy4ycy0zLjItNy4yLTcuMi03LjJjLTMuNiwwLTYuNSwyLjYtNy4xLDZoLTkuN2MtMC41LDAtMC45LDAuMi0xLjIsMC42Yy0wLjMsMC0wLjUsMC4xLTAuOCwwLjNsLTEyLjgsOS4zCgljLTAuNywwLjUtMC44LDEuNC0wLjMsMi4xQzE5OC45LDYwLjksMTk5LjMsNjEuMSwxOTkuOCw2MS4xeiBNMjMwLjQsNDUuMmMyLjMsMCw0LjIsMS45LDQuMiw0LjJzLTEuOSw0LjItNC4yLDQuMnMtNC4yLTEuOS00LjItNC4yCglDMjI2LjIsNDcuMSwyMjguMSw0NS4yLDIzMC40LDQ1LjJ6IE02Mi42LDcxLjdjMC44LDAsMS41LTAuNywxLjUtMS41cy0wLjctMS41LTEuNS0xLjVINDIuOGMtMC43LDAtMS4zLDAuNS0xLjQsMS4xCgljLTAuMiwwLjItMC40LDAuNC0wLjYsMC43bC00LjQsMTAuMmwtNS4zLTE4LjFjLTAuMi0wLjgtMS4xLTEuMi0xLjktMWgtMC4xYy0wLjYsMC0xLjIsMC41LTEuMywxLjFsLTMuNywxM2gtOS45CgljLTAuMy0xLjMtMC45LTIuNS0xLjktMy40Yy0xLjQtMS40LTMuMi0yLjEtNS4xLTIuMXMtMy43LDAuNy01LjEsMi4xQzAuNyw3My43LDAsNzUuNSwwLDc3LjRjMCwxLjksMC43LDMuNywyLjEsNS4xCgljMS40LDEuNCwzLjIsMi4xLDUuMSwyLjFjMS44LDAsMy43LTAuNyw1LjEtMi4xYzEtMSwxLjctMi4zLDItMy43aDExLjFjMC44LDAsMS41LTAuNywxLjUtMS41di0wLjFsMi42LTkuM2w1LjEsMTcuMgoJYzAuMSwwLjIsMC4xLDAuMywwLjIsMC41YzAuMSwwLjQsMC40LDAuOCwwLjgsMC45YzAuMiwwLjEsMC40LDAuMSwwLjYsMC4xYzAuNiwwLDEuMS0wLjMsMS40LTAuOWw2LTEzLjhoMTlMNjIuNiw3MS43TDYyLjYsNzEuN3oKCSBNMTAuMiw4MC4yYy0xLjYsMS42LTQuMywxLjYtNS45LDBjLTAuOC0wLjgtMS4yLTEuOC0xLjItM2MwLTEuMSwwLjQtMi4yLDEuMi0zczEuOC0xLjIsMy0xLjJjMS4xLDAsMi4yLDAuNCwzLDEuMgoJQzExLjksNzYsMTEuOSw3OC42LDEwLjIsODAuMnogTTIwMS42LDEwNC45YzAuNiwwLjYsMC42LDEuNSwwLDIuMWMtMC4zLDAuMy0wLjcsMC40LTEuMSwwLjRzLTAuOC0wLjEtMS4xLTAuNGwtOC4zLTguM3YzMS4xCgljMCw1LTQuMSw5LjEtOS4xLDkuMUg2OGMtNSwwLTkuMS00LjEtOS4xLTkuMVY5NmMwLTAuOCwwLjctMS41LDEuNS0xLjVzMS41LDAuNywxLjUsMS41djMzLjhjMCwzLjMsMi43LDYuMSw2LjEsNi4xaDExNC4xCgljMy4zLDAsNi4xLTIuNyw2LjEtNi4xVjk4LjVsLTguMyw4LjJjLTAuMywwLjMtMC43LDAuNC0xLjEsMC40Yy0wLjQsMC0wLjgtMC4xLTEuMS0wLjRjLTAuNi0wLjYtMC42LTEuNSwwLTIuMWwxMC43LTEwLjcKCWMwLjYtMC42LDEuNS0wLjYsMi4xLDBsMCwwbDAsMEwyMDEuNiwxMDQuOXogTTQ4LjUsMzguOGMtMC42LTAuNi0wLjYtMS41LDAtMi4xczEuNS0wLjYsMi4xLDBsOC40LDguNFY5LjJjMC01LDQuMS05LjEsOS4xLTkuMQoJaDExNC4xYzUsMCw5LjEsNC4xLDkuMSw5LjF2MzUuNGMwLDAuOC0wLjcsMS41LTEuNSwxLjVzLTEuNS0wLjctMS41LTEuNVY5LjJjMC0zLjMtMi43LTYuMS02LjEtNi4xSDY4LjFjLTMuMywwLTYuMSwyLjctNi4xLDYuMQoJdjM1LjlsMCwwbDguMi04LjJjMC42LTAuNiwxLjUtMC42LDIuMSwwczAuNiwxLjUsMCwyLjFMNjEuNiw0OS43Yy0wLjMsMC4zLTAuNywwLjQtMS4xLDAuNGMtMC40LDAtMC44LTAuMS0xLjEtMC40bDAsMGwwLDAKCUw0OC41LDM4Ljh6IE0xMTMuNCwxMDAuMWMwLTAuMSwwLTAuMSwwLTAuMmMwLTAuMSwwLTAuMSwwLTAuMlY5OWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMC45CgljMC0wLjIsMC0wLjMsMC4xLTAuNGMwLTAuMS0wLjEtMC4zLTAuMS0wLjR2LTAuOWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMC45YzAtMC4yLDAtMC4zLDAuMS0wLjQKCWMwLTAuMS0wLjEtMC4zLTAuMS0wLjR2LTAuOWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMC45YzAtMC44LDAuNy0xLjUsMS41LTEuNXMxLjUsMC43LDEuNSwxLjV2MC45CgljMCwwLjIsMCwwLjMtMC4xLDAuNGMwLDAuMSwwLjEsMC4zLDAuMSwwLjR2MC45YzAsMC4yLDAsMC4zLTAuMSwwLjRjMCwwLjEsMC4xLDAuMywwLjEsMC40djAuOWMwLDAuMiwwLDAuMy0wLjEsMC40CgljMCwwLjEsMC4xLDAuMywwLjEsMC40djAuOWMwLDAuMiwwLDAuMy0wLjEsMC40YzAsMC4xLDAuMSwwLjMsMC4xLDAuNHYwLjljMCwwLjIsMCwwLjMtMC4xLDAuNGwwLDBjMC4xLDAsMC4xLDAsMC4yLDBoMC45CgljMC4yLDAsMC4zLDAsMC40LDAuMWMwLjEsMCwwLjMtMC4xLDAuNC0wLjFoMC45YzAuMiwwLDAuMywwLDAuNCwwLjFjMC4xLDAsMC4zLTAuMSwwLjQtMC4xaDAuOWMwLjIsMCwwLjMsMCwwLjQsMC4xCgljMC4xLDAsMC4zLTAuMSwwLjQtMC4xaDAuOWMwLjIsMCwwLjMsMCwwLjQsMC4xYzAuMSwwLDAuMy0wLjEsMC40LTAuMWgwLjljMC44LDAsMS41LDAuNywxLjUsMS41cy0wLjcsMS41LTEuNSwxLjVoLTAuOQoJYy0wLjIsMC0wLjMsMC0wLjQtMC4xYy0wLjEsMC0wLjMsMC4xLTAuNCwwLjFoLTAuOWMtMC4yLDAtMC4zLDAtMC40LTAuMWMtMC4xLDAtMC4zLDAuMS0wLjQsMC4xaC0wLjljLTAuMiwwLTAuMywwLTAuNC0wLjEKCWMtMC4xLDAtMC4zLDAuMS0wLjQsMC4xaC0wLjljLTAuMiwwLTAuMywwLTAuNC0wLjFjLTAuMSwwLTAuMywwLjEtMC40LDAuMWgtMC45Yy0wLjIsMC0wLjMsMC0wLjQtMC4xYy0wLjEsMC0wLjMsMC4xLTAuNCwwLjFIMTE1CglDMTE0LDEwMS42LDExMy40LDEwMC45LDExMy40LDEwMC4xeiBNMTEzLjQsODMuMmMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMC45YzAtMC4yLDAtMC4zLDAuMS0wLjQKCWMwLTAuMS0wLjEtMC4zLTAuMS0wLjR2LTAuOWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMC45YzAtMC4yLDAtMC4zLDAuMS0wLjRjMC0wLjEtMC4xLTAuMy0wLjEtMC40di0wLjkKCWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMS4xYzAtMC44LDAuNy0xLjUsMS41LTEuNXMxLjUsMC43LDEuNSwxLjV2MC45YzAsMC4yLDAsMC4zLTAuMSwwLjQKCWMwLDAuMSwwLjEsMC4zLDAuMSwwLjR2MC45YzAsMC4yLDAsMC4zLTAuMSwwLjRjMCwwLjEsMC4xLDAuMywwLjEsMC40djAuOWMwLDAuMiwwLDAuMy0wLjEsMC40YzAsMC4xLDAuMSwwLjMsMC4xLDAuNHYwLjkKCWMwLDAuMiwwLDAuMy0wLjEsMC40YzAsMC4xLDAuMSwwLjMsMC4xLDAuNHYwLjljMCwwLjIsMCwwLjMtMC4xLDAuNGMwLDAuMSwwLjEsMC4zLDAuMSwwLjR2MC43YzAsMC44LTAuNywxLjUtMS41LDEuNQoJcy0xLjUtMC43LTEuNS0xLjVWODMuMnogTTExMy40LDYzLjhjMC0wLjIsMC0wLjMsMC4xLTAuNGMwLTAuMS0wLjEtMC4zLTAuMS0wLjR2LTAuOWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNAoJdi0wLjljMC0wLjIsMC0wLjMsMC4xLTAuNGMwLTAuMS0wLjEtMC4zLTAuMS0wLjR2LTAuOWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNFY1N2MwLTAuMiwwLTAuMywwLjEtMC40CgljMC0wLjEtMC4xLTAuMy0wLjEtMC40di0wLjljMC0wLjgsMC43LTEuNSwxLjUtMS41czEuNSwwLjcsMS41LDEuNXYwLjljMCwwLjIsMCwwLjMtMC4xLDAuNGMwLDAuMSwwLjEsMC4zLDAuMSwwLjR2MC45CgljMCwwLjIsMCwwLjMtMC4xLDAuNGMwLDAuMSwwLjEsMC4zLDAuMSwwLjR2MC45YzAsMC4yLDAsMC4zLTAuMSwwLjRjMCwwLjEsMC4xLDAuMywwLjEsMC40djAuOWMwLDAuMiwwLDAuMy0wLjEsMC40CgljMCwwLjEsMC4xLDAuMywwLjEsMC40VjYzYzAsMC4yLDAsMC4zLTAuMSwwLjRjMCwwLjEsMC4xLDAuMywwLjEsMC40djAuN2MwLDAuOC0wLjcsMS41LTEuNSwxLjVzLTEuNS0wLjctMS41LTEuNVY2My44eiBNMTEzLjQsNDgKCWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMC45YzAtMC4yLDAtMC4zLDAuMS0wLjRjMC0wLjEtMC4xLTAuMy0wLjEtMC40di0xYzAtMC4yLDAtMC4zLDAuMS0wLjQKCWMwLTAuMS0wLjEtMC4zLTAuMS0wLjR2LTAuOWMwLTAuMiwwLTAuMywwLjEtMC40YzAtMC4xLTAuMS0wLjMtMC4xLTAuNHYtMC45YzAtMC4yLDAtMC4zLDAuMS0wLjRjMC0wLjEtMC4xLTAuMy0wLjEtMC40di0wLjkKCWMwLTAuMywwLjEtMC42LDAuMy0wLjljLTAuMi0wLjItMC4zLTAuNi0wLjMtMC45YzAtMC44LDAuNy0xLjUsMS41LTEuNWgwLjdjMC4yLDAsMC4zLDAsMC40LDAuMWMwLjEsMCwwLjMtMC4xLDAuNC0wLjFoMC45CgljMC4yLDAsMC4zLDAsMC40LDAuMWMwLjEsMCwwLjMtMC4xLDAuNC0wLjFoMC45YzAuMiwwLDAuMywwLDAuNCwwLjFjMC4xLDAsMC4zLTAuMSwwLjQtMC4xaDAuOWMwLjIsMCwwLjMsMCwwLjQsMC4xCgljMC4xLDAsMC4zLTAuMSwwLjQtMC4xaDAuOWMwLjIsMCwwLjMsMCwwLjQsMC4xYzAuMSwwLDAuMy0wLjEsMC40LTAuMWgwLjljMC44LDAsMS41LDAuNywxLjUsMS41cy0wLjcsMS41LTEuNSwxLjVoLTAuOQoJYy0wLjIsMC0wLjMsMC0wLjQtMC4xYy0wLjEsMC0wLjMsMC4xLTAuNCwwLjFoLTAuOWMtMC4yLDAtMC4zLDAtMC40LTAuMWMtMC4xLDAtMC4zLDAuMS0wLjQsMC4xaC0wLjljLTAuMiwwLTAuMywwLTAuNC0wLjEKCWMtMC4xLDAtMC4zLDAuMS0wLjQsMC4xaC0wLjljLTAuMiwwLTAuMywwLTAuNC0wLjFjLTAuMSwwLTAuMywwLjEtMC40LDAuMWgtMC45aC0wLjFjMCwwLjEsMCwwLjIsMCwwLjN2MC45YzAsMC4yLDAsMC4zLTAuMSwwLjQKCWMwLDAuMSwwLjEsMC4zLDAuMSwwLjRWNDJjMCwwLjIsMCwwLjMtMC4xLDAuNGMwLDAuMSwwLjEsMC4zLDAuMSwwLjR2MC45YzAsMC4yLDAsMC4zLTAuMSwwLjRjMCwwLjEsMC4xLDAuMywwLjEsMC40djAuOQoJYzAsMC4yLDAsMC4zLTAuMSwwLjRjMCwwLjEsMC4xLDAuMywwLjEsMC40djAuOWMwLDAuMiwwLDAuMy0wLjEsMC40YzAsMC4xLDAuMSwwLjMsMC4xLDAuNHYwLjdjMCwwLjgtMC43LDEuNS0xLjUsMS41CglzLTEuNS0wLjctMS41LTEuNVY0OEgxMTMuNHogTTEzNi42LDM5LjFjMC4zLDUuOCw1LjEsMTAuNSwxMSwxMC41YzYuMSwwLDExLjEtNSwxMS4xLTExLjFzLTUtMTEuMS0xMS4xLTExLjEKCWMtNS4zLDAtOS43LDMuNy0xMC44LDguNmgtNi4yYy0wLjgsMC0xLjUsMC43LTEuNSwxLjVzMC43LDEuNSwxLjUsMS41TDEzNi42LDM5LjFMMTM2LjYsMzkuMXogTTE0Ny43LDMwLjRjNC40LDAsOC4xLDMuNiw4LjEsOC4xCglzLTMuNiw4LjEtOC4xLDguMXMtOC4xLTMuNi04LjEtOC4xUzE0My4yLDMwLjQsMTQ3LjcsMzAuNHogTTEzNi43LDk4LjZoLTYuMWMtMC44LDAtMS41LDAuNy0xLjUsMS41czAuNywxLjUsMS41LDEuNWg2LjEKCWMwLjgsNS4zLDUuNCw5LjQsMTAuOSw5LjRjNi4xLDAsMTEuMS01LDExLjEtMTEuMXMtNS0xMS4xLTExLjEtMTEuMUMxNDIsODguOSwxMzcuNCw5My4xLDEzNi43LDk4LjZ6IE0xNTUuNyw5OS45CgljMCw0LjQtMy42LDguMS04LjEsOC4xcy04LjEtMy42LTguMS04LjFzMy42LTguMSw4LjEtOC4xUzE1NS43LDk1LjUsMTU1LjcsOTkuOXogTTE2Ni4zLDY5LjFjMC02LjEtNS0xMS4xLTExLjEtMTEuMQoJYy01LjcsMC0xMC40LDQuNC0xMSw5LjlsLTUuOC01LjhjLTAuNi0wLjYtMS41LTAuNi0yLjEsMHMtMC42LDEuNSwwLDIuMWwzLjUsMy41SDEwMmMtMC43LTUuNS01LjMtOS43LTExLTkuNwoJYy02LjEsMC0xMS4xLDUtMTEuMSwxMS4xczUsMTEuMSwxMS4xLDExLjFjNS41LDAsMTAuMS00LjEsMTAuOS05LjRoMzcuN2wtMy41LDMuNWMtMC42LDAuNi0wLjYsMS41LDAsMi4xYzAuMywwLjMsMC43LDAuNCwxLjEsMC40CglzMC44LTAuMSwxLjEtMC40bDYtNmMwLDAsMCwwLDAtMC4xYzAuNiw1LjYsNS4zLDkuOSwxMSw5LjlDMTYxLjQsODAuMiwxNjYuMyw3NS4yLDE2Ni4zLDY5LjF6IE05MSw3Ny4yYy00LjQsMC04LjEtMy42LTguMS04LjEKCWMwLTQuNCwzLjYtOC4xLDguMS04LjFzOC4xLDMuNiw4LjEsOC4xQzk5LjEsNzMuNiw5NS40LDc3LjIsOTEsNzcuMnogTTE1NS4zLDc3LjJjLTQuNCwwLTguMS0zLjYtOC4xLTguMWMwLTQuNCwzLjYtOC4xLDguMS04LjEKCXM4LjEsMy42LDguMSw4LjFDMTYzLjMsNzMuNiwxNTkuNyw3Ny4yLDE1NS4zLDc3LjJ6Ii8+Cjwvc3ZnPgo=");
+$empty-search: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjAuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyODAgMTc2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyODAgMTc2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0Q2RDdEODt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJzdGF0ZV94MkZfZW1wdHktc2VhcmNoIiBjbGFzcz0ic3QwIiBkPSJNMTg1LjQzLDEyMy40Yy0wLjQtMC43LTEuMy0xLTItMC42bDAsMGwtNS43LTEwLjNjMTMuNC05LjgsMjIuNS0yNC43LDI0LjktNDEuNQoJYzAuMS0wLjgtMC41LTEuNi0xLjMtMS43Yy0wLjgtMC4xLTEuNiwwLjUtMS43LDEuM2MtMi45LDIwLjgtMTYuOCwzOC42LTM2LjMsNDYuNmMtMC44LDAuMy0xLjEsMS4yLTAuOCwyYzAsMC4xLDAuMSwwLjEsMC4xLDAuMQoJYzAsMC4yLDAuMSwwLjMsMC4yLDAuNWw2LjMsMTEuNGwtMS4xLDAuNmMtMC4zLDAuMi0wLjYsMC41LTAuNywwLjlzMCwwLjgsMC4xLDEuMWwyMy44LDQxLjNjMC4zLDAuNSwwLjgsMC44LDEuMywwLjgKCWMwLjMsMCwwLjUtMC4xLDAuNy0wLjJsMTUuNS04LjljMC4zLTAuMiwwLjYtMC41LDAuNy0wLjlzMC0wLjgtMC4xLTEuMUwxODUuNDMsMTIzLjR6IE0xNjUuODMsMTE5LjNjMy4zLTEuNCw2LjQtMy4xLDkuMy01LjEKCWw1LjYsMTAuMWwtOS4yLDUuM0wxNjUuODMsMTE5LjN6IE0xODMuNTMsMTI2LjJsMTEuOCwyMC41bC0xMyw3LjJsLTExLjctMjAuM0wxODMuNTMsMTI2LjJ6IE0xOTIuOTMsMTcyLjNsLTkuMS0xNS44bDEzLTcuMmw5LDE1LjYKCUwxOTIuOTMsMTcyLjN6IE05Ny4xMyw1My44Yy0wLjgtMC4yLTEuMy0xLTEuMi0xLjhjMi42LTEzLDEwLjgtMjQuMiwyMi40LTMwLjdjMC43LTAuNCwxLjYtMC4yLDIsMC42YzAuNCwwLjcsMC4yLDEuNi0wLjYsMgoJYy0xMC44LDYuMS0xOC40LDE2LjYtMjAuOSwyOC43Yy0wLjEsMC43LTAuOCwxLjItMS41LDEuMkM5Ny4zMyw1My44LDk3LjIzLDUzLjgsOTcuMTMsNTMuOHogTTk2LjMzLDcyLjFjLTAuMi0wLjgsMC4zLTEuNiwxLjEtMS44CgljMC44LTAuMiwxLjYsMC4zLDEuOCwxLjFjNC43LDE5LjIsMjEuOCwzMi42LDQxLjYsMzIuNmMxOS42LDAsMzYuNi0xMy4yLDQxLjUtMzIuMmMwLjItMC44LDEtMS4zLDEuOC0xLjFjMC44LDAuMiwxLjMsMSwxLjEsMS44CgljLTUuMiwyMC4zLTIzLjQsMzQuNC00NC40LDM0LjRDMTE5LjYzLDEwNi44LDEwMS4zMyw5Mi42LDk2LjMzLDcyLjF6IE0xODUuNzMsNTIuMmMtMy42LTE4LjEtMTcuNS0zMi4yLTM1LjYtMzYKCWMtMC4zLTEtMC44LTEuOS0xLjUtMi43Yy0yLjQtMi43LTYuNi0yLjktOS4yLTAuNGMtMS4zLDEuMi0yLDIuOC0yLjEsNC41czAuNSwzLjQsMS43LDQuN2MxLjIsMS4zLDIuOCwyLDQuNSwyLjFjMC4xLDAsMC4yLDAsMC4zLDAKCWMxLjYsMCwzLjItMC42LDQuNC0xLjdjMS0wLjksMS43LTIuMSwyLTMuNGMxNi42LDMuNywyOS4zLDE2LjcsMzIuNiwzMy41YzAuMSwwLjcsMC44LDEuMiwxLjUsMS4yYzAuMSwwLDAuMiwwLDAuMywwCglDMTg1LjMzLDUzLjksMTg1LjkzLDUzLjEsMTg1LjczLDUyLjJ6IE0xNDYuMTMsMjAuNWMtMC43LDAuNi0xLjYsMS0yLjUsMC45Yy0wLjksMC0xLjgtMC41LTIuNC0xLjJjLTAuNi0wLjctMS0xLjYtMC45LTIuNQoJYzAtMC45LDAuNS0xLjgsMS4yLTIuNGMwLjctMC42LDEuNS0wLjksMi40LTAuOWMxLDAsMS45LDAuNCwyLjYsMS4yYzAuNiwwLjcsMSwxLjYsMC45LDIuNUMxNDcuMjMsMTksMTQ2LjgzLDIwLDE0Ni4xMywyMC41egoJIE0xMzMuOTMsMTE4LjFjLTAuOSwwLjgtMS41LDEuNy0xLjgsMi44Yy0yNS43LTMuOC00Ni4yLTI0LjItNTAtNDkuOWMtMC4xLTAuOC0wLjktMS40LTEuNy0xLjNjLTAuOCwwLjEtMS40LDAuOS0xLjMsMS43CgljNCwyNywyNS43LDQ4LjYsNTIuNyw1Mi41YzAuMiwxLjMsMC43LDIuNCwxLjYsMy40YzEuMywxLjQsMy4xLDIuMSw0LjgsMi4xYzEuNiwwLDMuMS0wLjYsNC40LTEuN2MyLjctMi40LDIuOS02LjYsMC40LTkuMgoJQzE0MC43MywxMTUuOSwxMzYuNTMsMTE1LjgsMTMzLjkzLDExOC4xeiBNMTQwLjYzLDEyNS42Yy0xLjQsMS4zLTMuNywxLjItNS0wLjJjLTAuNi0wLjctMS0xLjYtMC45LTIuNWMwLTAuOSwwLjUtMS44LDEuMi0yLjQKCWMwLjctMC42LDEuNS0wLjksMi40LTAuOWMxLDAsMS45LDAuNCwyLjYsMS4yQzE0Mi4yMywxMjIuMSwxNDIuMTMsMTI0LjMsMTQwLjYzLDEyNS42eiBNNzkuMjMsNTIuNmMyLjMtMTQuNSw5LjctMjcuOCwyMC45LTM3LjQKCWMxMS4zLTkuNywyNS43LTE1LjEsNDAuNi0xNS4xYzE1LDAsMjkuNSw1LjQsNDAuOCwxNS4yYzExLjIsOS43LDE4LjYsMjMuMSwyMC44LDM3LjdjMC4xLDAuOC0wLjQsMS42LTEuMywxLjdjLTAuMSwwLTAuMiwwLTAuMiwwCgljLTAuNywwLTEuNC0wLjUtMS41LTEuM2MtMi4xLTEzLjktOS4xLTI2LjYtMTkuOC0zNS45QzE2OC43Myw4LjIsMTU0LjkzLDMsMTQwLjczLDNzLTI3LjksNS0zOC43LDE0LjMKCWMtMTAuNiw5LjItMTcuNywyMS44LTE5LjksMzUuNmMtMC4xLDAuOC0wLjksMS40LTEuNywxLjJDNzkuNjMsNTQuMSw3OS4xMyw1My40LDc5LjIzLDUyLjZ6IE0yNzcuNjMsNjMuOWMtMS40LTEuNC0zLjQtMi4yLTUuNC0yLjIKCXMtNCwwLjgtNS40LDIuMmMtMSwxLTEuNywyLjMtMiwzLjZoLTEwLjNsLTMuOS0xMy44Yy0wLjItMC42LTAuNy0xLTEuNC0xLjFoLTAuMWMtMC44LTAuMi0xLjYsMC4yLTEuOSwxbC01LjcsMTkuM2wtNC43LTExCgljLTAuMS0wLjMtMC40LTAuNi0wLjctMC43Yy0wLjItMC41LTAuNy0wLjgtMS4zLTAuOGgtMzljLTAuOCwwLTEuNSwwLjctMS41LDEuNXMwLjcsMS41LDEuNSwxLjVoMzguM2w2LjIsMTQuNAoJYzAuMiwwLjYsMC44LDAuOSwxLjQsMC45YzAuMiwwLDAuNCwwLDAuNi0wLjFjMC40LTAuMiwwLjctMC41LDAuOC0wLjljMC4xLTAuMSwwLjItMC4zLDAuMi0wLjVsNS40LTE4LjVsMi45LDEwLjF2MC4xCgljMCwwLjgsMC43LDEuNSwxLjUsMS41aDExLjRjMC4yLDEuNiwxLDMuMSwyLjEsNC4yYzEuNSwxLjUsMy41LDIuMiw1LjQsMi4yYzIsMCwzLjktMC43LDUuNC0yLjJjMS40LTEuNCwyLjItMy40LDIuMi01LjQKCUMyNzkuODMsNjcuNCwyNzkuMDMsNjUuNCwyNzcuNjMsNjMuOXogTTI3NS41Myw3Mi42Yy0xLjgsMS44LTQuOCwxLjgtNi42LDBjLTAuOS0wLjktMS40LTIuMS0xLjQtMy4zczAuNS0yLjQsMS40LTMuMwoJYzAuOS0wLjksMi4xLTEuNCwzLjMtMS40YzEuMiwwLDIuNCwwLjUsMy4zLDEuNGMwLjksMC45LDEuNCwyLjEsMS40LDMuM0MyNzYuODMsNzAuNiwyNzYuMzMsNzEuOCwyNzUuNTMsNzIuNnogTTg0LjIzLDYzLjQKCWMwLjgsMCwxLjUtMC43LDEuNS0xLjVzLTAuNy0xLjUtMS41LTEuNWgtMzljLTAuNiwwLTEuMSwwLjMtMS4zLDAuOGMtMC4zLDAuMi0wLjYsMC40LTAuNywwLjdsLTQuNywxMWwtNS43LTE5LjMKCWMtMC4yLTAuOC0xLjEtMS4yLTEuOS0xaC0wLjFjLTAuNiwwLTEuMiwwLjUtMS40LDEuMWwtMy45LDEzLjhoLTEwLjJjLTAuMy0xLjMtMS0yLjYtMi0zLjZjLTEuNC0xLjQtMy40LTIuMi01LjQtMi4yCglzLTQsMC44LTUuNCwyLjJjLTEuNCwxLjQtMi4yLDMuNC0yLjIsNS40czAuOCw0LDIuMiw1LjRjMS41LDEuNSwzLjUsMi4yLDUuNCwyLjJzMy45LTAuNyw1LjQtMi4yYzEuMi0xLjIsMS45LTIuNywyLjEtNC4yaDExLjQKCWMwLjgsMCwxLjUtMC43LDEuNS0xLjV2MGwyLjktMTAuMWw1LjQsMTguNWMwLjEsMC4yLDAuMSwwLjMsMC4yLDAuNWMwLjEsMC40LDAuNCwwLjgsMC44LDAuOWMwLjIsMC4xLDAuNCwwLjEsMC42LDAuMQoJYzAuNiwwLDEuMS0wLjMsMS40LTAuOWw2LjItMTQuNGgzOC40TDg0LjIzLDYzLjRMODQuMjMsNjMuNHogTTExLjEzLDcyLjZjLTEuOCwxLjgtNC44LDEuOC02LjYsMGMtMC45LTAuOS0xLjQtMi4xLTEuNC0zLjMKCXMwLjUtMi40LDEuNC0zLjNjMC45LTAuOSwyLTEuNCwzLjMtMS40czIuNCwwLjUsMy4zLDEuNEMxMy4wMyw2Ny45LDEzLjAzLDcwLjksMTEuMTMsNzIuNnogTTEyMy4xMyw2NS4xYy0wLjIsMC0wLjQtMC4yLTAuNC0wLjQKCXYtNS4yYzAtMC4yLDAuMi0wLjQsMC40LTAuNGg1LjJjMC4yLDAsMC40LDAuMiwwLjQsMC40djUuMmMwLDAuMi0wLjIsMC40LTAuNCwwLjRIMTIzLjEzeiBNMTM5LjYzLDY1LjFjLTAuMiwwLTAuNC0wLjItMC40LTAuNAoJdi01LjJjMC0wLjIsMC4yLTAuNCwwLjQtMC40aDUuMmMwLjIsMCwwLjQsMC4yLDAuNCwwLjR2NS4yYzAsMC4yLTAuMiwwLjQtMC40LDAuNEgxMzkuNjN6IE0xNTYuMDMsNjUuMWMtMC4yLDAtMC40LTAuMi0wLjQtMC40Cgl2LTUuMmMwLTAuMiwwLjItMC40LDAuNC0wLjRoNS4yYzAuMiwwLDAuNCwwLjIsMC40LDAuNHY1LjJjMCwwLjItMC4yLDAuNC0wLjQsMC40SDE1Ni4wM3oiLz4KPC9zdmc+Cg==");
+
+//
+// #TreeView
+//
+
+$tree-node-color: $text-primary !default;
+$tree-node-active-color: $color-active !default;
+$tree-node-selected-color: $color-primary !default;
+
+$tree-icon-spacing: .5rem !default;
+//
+// #Printing
+//
+
+$print-page-size: a3 !default;
+$print-body-min-width: map-get($grid-breakpoints, "lg") !default;
+
+//
+// ## TOASTS
+//
+
+// #begin variables fot angular toast
+$angular-toast-padding: 1.125rem 3.75rem 1.125rem 1.5rem !default;
+$angular-toast-font-size: 1.3125rem !default;
+$angular-toast-font-weight: $font-weight-bold !default;
+$angular-toast-border-radius: $border-radius !default;
+$angular-toast-white: $white !default;
+$angular-toast-teal: $color-active !default;
+$angular-toast-primary: $color-background-inverse !default;
+
+@if ($dense-spacing-custom == true) {
+  $angular-toast-padding: calc(1.125rem * .875) 3.75rem calc(1.125rem * .875) 1.5rem !default;
+}
+
+// $angular toast info
+$angular-toast-info: $color-info !default;
+$angular-toast-info-border: color-variant($color-info, hover) !default;
+
+// $angular toast warn
+$angular-toast-warn: get-status-text-color($color-warning) !default;
+$angular-toast-warn-background: $color-warning !default;
+$angular-toast-warn-border: color-variant($color-warning, hover) !default;
+
+// $angular toast error
+$angular-toast-danger: $color-critical !default;
+$angular-toast-danger-border: color-variant($color-critical, hover) !default;
+
+// $angular toast success
+$angular-toast-success: $color-success !default;
+$angular-toast-success-border: color-variant($color-success, hover) !default;
+
+// $angular toast details|content
+$angular-toast-details-font-size: .8125rem !default;
+$angular-toast-details-line-height: 1.4 !default;
+
+//
+// ## Default, inline, pages, special loaders
+//
+$busy-font-weight: $font-weight-light !default;
+$busy-text-color: $text-primary !default;
+
+$busy-z-index: 1002 !default;
+
+$busy-backdrop-z-index: 1001 !default;
+$busy-backdrop-color: transparentize($white, 0) !default;
+
+$busy-default-outer-color: color-variant($color-active, hover) !default;
+$busy-default-middle-color: $color-active !default;
+$busy-default-inner-color: color-variant($color-active, active) !default;
+
+$busy-section-color: $color-active !default;
+
+$busy-inline-color: $color-active !default;
+$busy-inline-circle-color: $gray-300 !default;
+$busy-inline-text-color: $text-primary !default;
+
+$busy-special-color: $color-active !default;
+$busy-special-bg-color: $gray-200 !default;
+$busy-special-font-size: $h2-font-size !default;
+$busy-special-font-weight: $font-weight-base !default;
+
+//
+// ## Color picker
+//
+
+$cp-base-width: 242px;
+$cp-base-height: 38px;
+$cp-base-example-dist: 6px;
+$cp-base-border-radius: $border-radius;
+$cp-base-border-width: 1px;
+$cp-base-invalid-color: $color-critical !default;
+$cp-base-area-padding: 7px;
+$cp-base-inner-height: 34px;
+
+$cp-border-color: $input-border-color !default;
+$cp-mask-color: $gray-500 !default;
+$cp-handler: $gray-100 !default;
+
+$cp-input-color: $text-primary !default;
+$cp-input-bg: $white !default;
+$cp-input-focus: $color-active !default;
+
+$cp-toggle-non-selected: $gray-500 !default;
+$cp-toggle-non-selected-hover: $color-active !default;
+$cp-toggle-selected: $color-primary !default;
+
+@if ($dense-spacing-custom == true) {
+  $cp-base-area-padding: calc(7px * .875);
+}
+
+//
+// ## Datetime
+//
+
+$dt-panel-bg: $white !default;
+$dt-border-color: $border-color !default;
+$dt-invalid-color: $form-icon-danger-color !default;
+
+$dt-highlight-primary: if($accessible-mode, get-contrast-color($color-primary), $color-primary) !default;
+$dt-highlight-active: if($accessible-mode, get-contrast-color($color-active), $color-active) !default;
+
+$dt-text-color: $text-primary !default;
+$dt-text-color-hover: $dt-highlight-active !default;
+$dt-text-color-selected: $dt-highlight-primary !default;
+
+$dt-secondary-text-color: $text-secondary !default;
+
+$dt-header-bg: $gray-100 !default;
+$dt-header-text-color: $text-primary !default;
+
+$dt-arrows: $dt-header-text-color !default;
+$dt-arrows-active: $dt-highlight-active !default;
+$dt-arrows-disabled: color-variant($dt-header-text-color, disabled) !default;
+
+$dt-range-bg: $gray-200 !default;
+$dt-range-color: $white !default;
+
+$dt-disabled-day: $gray-500 !default;
+$dt-disabled-day-active-bg: $gray-300 !default;
+
+$dt-icon-color: $gray-600 !default;
+$dt-icon-color-active: $dt-highlight-active !default;
+$dt-icon-size: 1rem !default;
+$dt-calendar-icon-padding: .5625rem !default;
+
+$dt-header-seconds-height: 69px; // to avoid dynamic height change
+
+//
+// ## Charts
+//
+
+$chart-bg: $color-foreground !default;
+$chart-text-color: $text-primary !default;
+$chart-border-color: $border-color !default;
+
+$chart-legend-text: $text-secondary !default;
+
+$chart-tick-color: $gray-700 !default;
+$chart-empty-text: $gray-900 !default;
+
+$chart-tooltip-bg-color: $white !default;
+$chart-tooltip-color: $text-primary !default;
+
+$chart-axis-size: 30px;
+$chart-axis-path: $gray-500 !default;
+$chart-axis-line: $gray-300 !default;
+
+$chart-donut-label: $text-tertiary;
+$chart-pie-label: $text-tertiary;
+$chart-pie-label-sum: $text-secondary;
+
+$chart-chart-zone-margin: 0 30px 0 0;
+
+$chart-legend-checkbox-border-color: $border-color !default;
+$chart-legend-checkbox-color-item-width: 16px;
+$chart-legend-checkbox-color-item-height: 16px;
+$chart-legend-checkbox-color-item-margin: 5px;
+
+$chart-legend-checkbox-color: $text-primary-inverse !default;
+$chart-legend-text-color: $text-primary !default;
+
+$chart-header-height: 55px;
+
+// Rating
+$rating-large: 2.5rem;
+$rating-medium: 2rem;
+$rating-small: 1.5rem;
+$rating-extra-small: .8125rem;
+$rating-padding: $thin-space !default;
+$rating-bg: $color-warning;
+$rating-selected-scale: 1.15;
+
+@if ($dense-spacing-custom == true) {
+  $rating-padding: calc($thin-space * .875) $thin-space !default;
+}
+// inline editor
+
+// text background on hover
+$editor-bg-hover: rgba(0, 167, 157, .35) !default;
+$editor-bg-selection: #00867e !default;
+
+//
+// ## Code viewer
+//
+$cv-border-radius: $border-radius !default;
+$cv-border-color: $border-color !default;
+$cv-dark-theme-background: $gray-900 !default;
+$cv-light-theme-background: $gray-100 !default;
+$cv-line-number-padding: 3rem !default;
+
+@if ($dense-spacing-custom == true) {
+  $cv-line-number-padding: calc(3rem * .875) 3em !default;
+}
+
+// IE11 input height
+$ie11-input-height: ($line-height-base * $font-size-base) + 2 * $input-btn-padding-y + .125rem; // line-height + font-size + padding(top, bottom) + border;
+$ie11-input-height-lg: ($input-btn-line-height-lg * $font-size-lg) + 2 * $input-btn-padding-y-lg + .125rem; // line-height + font-size + padding(top, bottom) + border;
+$ie11-input-height-sm: ($input-btn-line-height-sm * $font-size-sm) + 2 * $input-btn-padding-y-sm + .125rem; // line-height + font-size + padding(top, bottom) + border;
+
+$dropable-element-max-height: 55vh !default;
+
+$dropdown-menu-max-height: $dropable-element-max-height;
+$m-select-header: 3.75rem;
+$select-loader-height: 11.25rem !default;
+
+// workflow
+$w-workflow-bar-step-small: 175px !default;
+$w-workflow-bar-step-large: 250px !default;
+$w-workflow-bar-step-medium: 200px !default;
+
+$workflow-carousel-padding: 12px !default;
+
+$w-step-large-width: 250px !default;
+$w-step-medium-width: 200px !default;
+$w-step-small-width: 175px !default;
+
+//
+// ## Anchor Navigator
+//
+
+$an-sublist-padding: 20px !default;
+$an-link-title-dot-indicator-padding: 15px !default;
+$an-link-title-line-indicator-padding: 12px !default;
+$an-link-title-dot-indicator-size: 7px !default;

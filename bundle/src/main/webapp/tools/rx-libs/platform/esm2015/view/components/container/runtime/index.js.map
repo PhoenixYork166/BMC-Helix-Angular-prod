@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/container/runtime/index.ts"],"names":[],"mappings":"AAAA,cAAc,uBAAuB,CAAC;AACtC,cAAc,oBAAoB,CAAC;AACnC,cAAc,mBAAmB,CAAC","sourcesContent":["export * from './container.component';\nexport * from './container.module';\nexport * from './container.types';\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/rich-text/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,8BAA8B,CAAC;AAC7C,cAAc,2BAA2B,CAAC","sourcesContent":["export * from './rich-text-design.component';\nexport * from './rich-text-design.module';\n"]}

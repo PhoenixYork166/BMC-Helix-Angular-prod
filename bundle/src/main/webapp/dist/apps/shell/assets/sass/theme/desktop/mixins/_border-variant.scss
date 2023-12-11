@@ -1,0 +1,80 @@
+@import "color";
+@import "shadow";
+// Contextual borders
+
+//Mixin to compute border gradient classes for our basic color ramp
+@mixin border-variant($parent, $color) {
+  #{$parent} {
+    border-color: color-variant($color, hover) !important;
+
+    &.focus,
+    &.hover {
+      border-color: color-variant($color, active) !important;
+    }
+
+    &.active {
+      border-color: color-variant($color, active-hover) !important;
+    }
+  }
+  a#{$parent} {
+    @include hover-focus {
+      border-color: color-variant($color, active) !important;
+    }
+
+    &:active {
+      border-color: color-variant($color, active-hover) !important;
+    }
+  }
+}
+
+//Mixin to compute border gradient classes for our muted color ramp
+@mixin border-variant-muted($parent, $color) {
+  #{$parent}-muted {
+    border-color: color-variant($color, row-hover) !important;
+
+    &.focus,
+    &.hover {
+      border-color: color-variant($color, row-active) !important;
+    }
+
+    &.active {
+      border-color: color-variant($color, row-active-hover) !important;
+    }
+  }
+  a#{$parent}-muted {
+    @include hover-focus {
+      border-color: color-variant($color, row-active) !important;
+    }
+
+    &:active {
+      border-color: color-variant($color, row-active-hover) !important;
+    }
+  }
+}
+
+// Border Gradients
+//
+// Mixin for applying a border gradient to a container div around an item
+@mixin border-gradient($from, $to, $weight: 0, $shadow: 0) {
+  $mix-main: mix($from, $to);
+  $mix-sub-from: mix($mix-main, $from);
+  $mix-sub-to: mix($mix-main, $to);
+
+  @if ($accessible-mode) {
+      border: 1px solid $border-color;
+  } @else {
+    @if ($shadow == 0) {
+      box-shadow: none;
+    } @else {
+      box-shadow: shadow-value($shadow),
+      0 -.0625rem 0 $weight rgba($from, .75),
+      0 .0625rem 0 $weight rgba($to, .75),
+      -.0625rem -.0625rem 0 $weight rgba($mix-sub-from, .25),
+      .0625rem -.0625rem 0 $weight rgba($mix-sub-from, .25),
+      .0625rem .0625rem 0 $weight rgba($mix-sub-to, .25),
+      -.0625rem .0625rem 0 $weight rgba($mix-sub-to, .25),
+      .0625rem 0 0 $weight rgba($mix-main, .5),
+      -.0625rem 0 0 $weight rgba($mix-main, .5);
+    }
+  }
+}

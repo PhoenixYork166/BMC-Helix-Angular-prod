@@ -1,0 +1,1 @@
+{"version":3,"file":"root-injector.class.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/application/root-injector.class.ts"],"names":[],"mappings":"AAEA,WAAW;AACX,MAAM,OAAO,cAAc;CAE1B","sourcesContent":["import { Injector } from '@angular/core';\n\n// @dynamic\nexport class RxRootInjector {\n  static injector: Injector;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/function/index.ts"],"names":[],"mappings":"AAAA,cAAc,8BAA8B,CAAC;AAC7C,cAAc,kCAAkC,CAAC","sourcesContent":["export * from './function-data-page.service';\nexport * from './function-descriptor.interfaces';\n"]}

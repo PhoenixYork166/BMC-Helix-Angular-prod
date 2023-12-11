@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/cognitive-training/index.ts"],"names":[],"mappings":"AAAA,cAAc,gCAAgC,CAAC;AAC/C,cAAc,0CAA0C,CAAC","sourcesContent":["export * from './cognitive-training.component';\nexport * from './cognitive-training-registration.module';\n"]}

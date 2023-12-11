@@ -1,0 +1,30 @@
+import { Injector, OnInit } from '@angular/core';
+import { IViewComponent } from '@helix/platform/view/runtime';
+import { BaseRecordEditorFieldComponent } from '../../base-record-editor-field/runtime/base-record-editor-field-component.class';
+import { IBaseRecordEditorFieldComponentConfig } from '../../base-record-editor-field/runtime/base-record-editor-field-component.types';
+import { DownloadConfig, FileObj, UploaderTexts } from '@bmc-ux/adapt-angular';
+import { IFieldDefinition } from '@helix/platform/record/api';
+import { FormControl } from '@angular/forms';
+import * as i0 from "@angular/core";
+export declare class AttachmentFieldComponent extends BaseRecordEditorFieldComponent implements IViewComponent, OnInit {
+    fieldDefinition: IFieldDefinition;
+    attachment: File;
+    attachmentFormControl: FormControl;
+    filesCount: number;
+    mode: import("@bmc-ux/adapt-angular").UploaderMode;
+    selectionMode: import("@bmc-ux/adapt-angular").UploaderSelectionMode;
+    chunkSize: string;
+    maxFileSize: string;
+    showFiles: FileObj[];
+    texts: UploaderTexts;
+    readStateConfig: DownloadConfig;
+    constructor(injector: Injector);
+    onConfigInitialized(config: IBaseRecordEditorFieldComponentConfig): void;
+    addAttachedFileToAttachmentList(fileName?: string): void;
+    onConfigUpdated(config: IBaseRecordEditorFieldComponentConfig): void;
+    removeAttachment(attachment: any): void;
+    addAttachment(attachments: FileObj[]): void;
+    onBlur(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AttachmentFieldComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AttachmentFieldComponent, "rx-attachment-field", never, {}, {}, never, never>;
+}

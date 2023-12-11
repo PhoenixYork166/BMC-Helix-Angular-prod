@@ -1,0 +1,1 @@
+{"version":3,"file":"service-list.types.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/components/service-list/service-list.types.ts"],"names":[],"mappings":"","sourcesContent":["export interface IServiceListProperties {\n  serviceRequestId: string;\n  serviceRequestName: string;\n  serviceRequestGuid: string;\n}\n"]}

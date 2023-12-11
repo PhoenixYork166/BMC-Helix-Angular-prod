@@ -1,0 +1,1 @@
+{"version":3,"file":"application-initializer.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/application/application-initializer.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IRxApplicationInitializer {\n  initialize(): void;\n}\n"]}

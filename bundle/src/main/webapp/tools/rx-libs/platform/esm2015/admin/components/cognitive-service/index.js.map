@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/cognitive-service/index.ts"],"names":[],"mappings":"AAAA,cAAc,+BAA+B,CAAC;AAC9C,cAAc,yCAAyC,CAAC","sourcesContent":["export * from './cognitive-service.component';\nexport * from './cognitive-service-registration.module';\n"]}

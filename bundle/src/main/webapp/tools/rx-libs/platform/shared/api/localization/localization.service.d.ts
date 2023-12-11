@@ -1,0 +1,34 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { AdaptTranslateService } from '@bmc-ux/adapt-angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { RxCurrentUserService } from '../user/current-user.service';
+import { ILocalizedStrings, ILocalizedStringsForLoginPageResponse } from './localization.types';
+import { RxRssoDebugService } from '../dev/rsso-debug.service';
+import * as i0 from "@angular/core";
+export declare class RxLocalizationService {
+    private httpClient;
+    private translateService;
+    private rxCurrentUserService;
+    private adaptTranslateService;
+    private rxRssoDebugService;
+    private document;
+    private defaultStrings;
+    currentLocale: string;
+    angularLocale: string;
+    onTranslationsLoaded$: Observable<import("@ngx-translate/core").LangChangeEvent>;
+    loginLocalizedStrings$: Observable<HttpResponse<ILocalizedStringsForLoginPageResponse>>;
+    private preferredLocale$;
+    constructor(httpClient: HttpClient, translateService: TranslateService, rxCurrentUserService: RxCurrentUserService, adaptTranslateService: AdaptTranslateService, rxRssoDebugService: RxRssoDebugService, document: any, defaultStrings: ILocalizedStrings);
+    getDefaultApplicationStrings(): ILocalizedStrings;
+    setDefaultApplicationStrings(defaultApplicationStrings: ILocalizedStrings): void;
+    initLoginTranslations(): Observable<ILocalizedStringsForLoginPageResponse>;
+    initTranslations(useDefault?: boolean): Observable<string>;
+    private setLocale;
+    private getCurrentLocaleDescriptor;
+    private getLocalizedStringsForLoginPage;
+    private setDocumentLang;
+    private normalizeLocale;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxLocalizationService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxLocalizationService>;
+}

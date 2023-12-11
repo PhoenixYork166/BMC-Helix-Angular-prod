@@ -1,0 +1,1 @@
+{"version":3,"file":"error.class.js","sourceRoot":"","sources":["../../../../../../libs/platform/utils/error/error.class.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,OAAQ,SAAQ,KAAK;CAAG","sourcesContent":["export class RxError extends Error {}\n"]}

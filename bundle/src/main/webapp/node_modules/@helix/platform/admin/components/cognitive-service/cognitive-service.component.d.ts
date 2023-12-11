@@ -1,0 +1,37 @@
+import { OnInit } from '@angular/core';
+import { RxSelectOption } from '@bmc-ux/adapt-angular';
+import { IUserOverlayGroupDescriptorChildren, RxCurrentUserService, RxOverlayService, RxSystemConfigurationService } from '@helix/platform/shared/api';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { BaseViewComponent } from '@helix/platform/view/runtime';
+import { TranslateService } from '@ngx-translate/core';
+import { RxCognitiveServiceService } from './cognitive-service.service';
+import { CognitiveServiceAdministrationCredentialsComponent } from './components/administration-credentials/cognitive-service-administration-credentials.component';
+import { CognitiveServiceChatbotComponent } from './components/chatbot/cognitive-service-chatbot.component';
+import { CognitiveServiceConnectionsComponent } from './components/connections/cognitive-service-connections.component';
+import { CognitiveServiceRegionsComponent } from './components/regions/cognitive-service-regions.component';
+import { CognitiveServiceSummarizationComponent } from './components/summarization/cognitive-service-summarization.component';
+import { CognitiveServiceToneAnalyzerComponent } from './components/tone-analyzer/cognitive-service-tone-analyzer.component';
+import * as i0 from "@angular/core";
+export declare class CognitiveServiceAdminComponent extends BaseViewComponent implements OnInit {
+    private rxModalService;
+    private rxCognitiveServiceService;
+    private rxCurrentUserService;
+    private rxOverlayService;
+    private rxSystemConfigurationService;
+    translateService: TranslateService;
+    selectedConfiguration: CognitiveServiceAdministrationCredentialsComponent | CognitiveServiceConnectionsComponent | CognitiveServiceChatbotComponent | CognitiveServiceRegionsComponent | CognitiveServiceSummarizationComponent | CognitiveServiceToneAnalyzerComponent;
+    cognitiveServices: RxSelectOption[];
+    selectedService: [RxSelectOption];
+    supportedCognitiveServices: RxSelectOption[];
+    isAdministrator: boolean;
+    currentOverlayContext: IUserOverlayGroupDescriptorChildren;
+    isNativeClassificationProvider: boolean;
+    constructor(rxModalService: RxModalService, rxCognitiveServiceService: RxCognitiveServiceService, rxCurrentUserService: RxCurrentUserService, rxOverlayService: RxOverlayService, rxSystemConfigurationService: RxSystemConfigurationService, translateService: TranslateService);
+    ngOnInit(): void;
+    optionFormatter(option: RxSelectOption): string;
+    getSelectedServiceId(): string;
+    isOwnCognitiveProviderButtonVisible(): boolean;
+    openOnboardServicesPanel(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CognitiveServiceAdminComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CognitiveServiceAdminComponent, "rx-admin-cognitive-service", never, {}, {}, never, never>;
+}

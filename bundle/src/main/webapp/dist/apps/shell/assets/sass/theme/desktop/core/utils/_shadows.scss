@@ -1,0 +1,11 @@
+@for $i from 0 through 5 {
+  .shadow-#{$i} {
+    @include shadow($i);
+  }
+}
+
+@for $i from 0 through 5 {
+  .text-shadow-#{$i} {
+    @include text-shadow($i);
+  }
+}

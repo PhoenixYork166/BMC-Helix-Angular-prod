@@ -1,0 +1,1 @@
+{"version":3,"file":"data-page-params.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/data-page/data-page-params.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IDataPageParams {\n  pageSize?: number;\n  startIndex?: number;\n  additionalQueryCriteria?: string;\n  [name: string]: any;\n}\n"]}

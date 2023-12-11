@@ -1,0 +1,1 @@
+{"version":3,"file":"field-components.constant.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/components/field-components/field-components.constant.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,mBAAmB,GAAG;IACjC,gBAAgB,EAAE,sBAAsB;CACzC,CAAC","sourcesContent":["export const RX_FIELD_COMPONENTS = {\n  stencilGroupName: 'Record editor inputs'\n};\n"]}

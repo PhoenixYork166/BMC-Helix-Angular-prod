@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/iframe-security/index.ts"],"names":[],"mappings":"AAAA,cAAc,6BAA6B,CAAC;AAC5C,cAAc,uCAAuC,CAAC","sourcesContent":["export * from './iframe-security.component';\nexport * from './iframe-security-registration.module';\n"]}

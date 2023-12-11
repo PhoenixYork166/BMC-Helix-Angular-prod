@@ -1,0 +1,33 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IComponentCanDeactivate, IDesignerConfiguration, RxBundleCacheService, RxComponentCanDeactivateGuard, RxDefinitionNameService, RxPageTitleService } from '@helix/platform/shared/api';
+import { RxUtilityModalsService } from '@helix/platform/ui-kit';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class RxNamedListDesignerPageComponent implements OnInit, OnDestroy, IComponentCanDeactivate {
+    private activatedRoute;
+    private router;
+    private rxBundleCacheService;
+    private rxComponentCanDeactivateGuard;
+    private rxDefinitionNameService;
+    private rxPageTitleService;
+    private rxUtilityModalsService;
+    private translateService;
+    configuration: IDesignerConfiguration;
+    isInitialized: boolean;
+    private definitionsRoute;
+    private pageTitle;
+    private isNewDefinition;
+    private subscription;
+    private designerComponent;
+    constructor(activatedRoute: ActivatedRoute, router: Router, rxBundleCacheService: RxBundleCacheService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard, rxDefinitionNameService: RxDefinitionNameService, rxPageTitleService: RxPageTitleService, rxUtilityModalsService: RxUtilityModalsService, translateService: TranslateService);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    canDeactivate(): boolean;
+    confirmDeactivation(): Promise<boolean>;
+    onCloseDesigner(): void;
+    onDefinitionSaved(definitionName: string): void;
+    onDefinitionErrorLoading(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxNamedListDesignerPageComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxNamedListDesignerPageComponent, "rx-named-list-designer-page", never, {}, {}, never, never>;
+}

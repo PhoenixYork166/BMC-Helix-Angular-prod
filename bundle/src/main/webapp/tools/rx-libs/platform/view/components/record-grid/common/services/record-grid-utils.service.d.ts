@@ -1,0 +1,37 @@
+import { RecordsSource } from '@helix/platform/view/api';
+import { Observable } from 'rxjs';
+import { IAssociationDescriptor } from '@helix/platform/association/api';
+import { IFieldDefinition, IRecordDefinition, RxRecordDefinitionCacheService } from '@helix/platform/record/api';
+import { RxDefinitionNameService, RxLogService } from '@helix/platform/shared/api';
+import { RxStringService } from '@helix/platform/utils';
+import { IColumnDescriptor } from '../types/column-descriptor.interface';
+import { IFieldLocator } from '../types/field-locator.interface';
+import { IRecordGridFilterTag, ISharedFilterPresetTagModel } from '../types/record-grid-filter.types';
+import { TagModel } from '@bmc-ux/adapt-angular';
+import { RxFieldDefinitionService } from '@helix/platform/record/api';
+import * as i0 from "@angular/core";
+export declare class RxRecordGridUtilsService {
+    private rxLogService;
+    private rxRecordDefinitionCacheService;
+    private stringService;
+    private rxDefinitionNameService;
+    private rxFieldDefinitionService;
+    constructor(rxLogService: RxLogService, rxRecordDefinitionCacheService: RxRecordDefinitionCacheService, stringService: RxStringService, rxDefinitionNameService: RxDefinitionNameService, rxFieldDefinitionService: RxFieldDefinitionService);
+    getColumnDescriptors(recordDefinitionName: string, source: RecordsSource): Promise<IColumnDescriptor[]>;
+    getAssociationDescriptors(recordDefinitionName: string): Observable<IAssociationDescriptor[]>;
+    getFieldDefinition(gridColumnFieldId: string, primaryRecordDefinition: IRecordDefinition): Observable<IFieldDefinition>;
+    isAssociatedRecordFieldId(fieldId: string): boolean;
+    getFieldIdForGridColumn(fieldId: string | number, associationDescriptor?: IAssociationDescriptor): string;
+    getAssociationDescriptor(gridColumnFieldId: string, primaryRecordDefinition: IRecordDefinition): Observable<IAssociationDescriptor>;
+    getDisplayFieldDescriptor(fieldId: string, primaryRecordDefinition: IRecordDefinition, associatedRecordDefinitionName: string): Observable<IFieldDefinition>;
+    getColumnLabel(fieldDefinition: IFieldDefinition, associationDescriptor?: IAssociationDescriptor): string;
+    findAssociationDescriptor(associationDescriptors: IAssociationDescriptor[], locator: IFieldLocator): IAssociationDescriptor;
+    getFieldLocator(gridColumnFieldId: string): IFieldLocator;
+    private isNeedSide;
+    private getAssociationLabel;
+    isSharedFilterPresetTag(tag: IRecordGridFilterTag): tag is TagModel<ISharedFilterPresetTagModel>;
+    getTestIdForGridColumn(fieldId: string): string;
+    isSearchable(fieldDefinition: IFieldDefinition, recordDefinition?: IRecordDefinition): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxRecordGridUtilsService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxRecordGridUtilsService>;
+}

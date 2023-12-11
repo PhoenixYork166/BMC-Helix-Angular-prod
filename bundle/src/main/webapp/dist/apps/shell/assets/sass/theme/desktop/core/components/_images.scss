@@ -1,0 +1,30 @@
+// Image thumbnails
+.img-thumbnail {
+  padding: 0;
+  border: 0;
+}
+
+a.img-thumbnail {
+  display: block;
+  overflow: hidden;
+  padding: $thumbnail-padding;
+  background-color: $thumbnail-bg;
+  border: $thumbnail-border-width solid $thumbnail-border-color;
+  @include border-radius($thumbnail-border-radius);
+  @include transition($thumbnail-transition);
+  @include box-shadow($thumbnail-box-shadow);
+
+  img {
+    @include img-fluid;
+    transition: transform .2s;
+  }
+
+  &:hover {
+    border-color: darken($thumbnail-border-color, 40%);
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+}
+

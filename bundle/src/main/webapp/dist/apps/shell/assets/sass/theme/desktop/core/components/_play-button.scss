@@ -1,0 +1,223 @@
+/****************************************************************
+ *
+ * Based on CSS Percentage Circle
+ * Author: Andre Firchow
+ *
+*****************************************************************/
+
+$circle-width: .025em;
+$circle-width-hover: .025em;
+$circle-scale-size: 1.025;
+
+// colors default
+$primary-color: $color-primary;
+$secondary-color: inherit;
+$main-circle-color: $white;
+$bg-color: rgba($black, .3);
+
+$size-normal: 7.5rem; // 120px
+$size-big: 15rem; // 240px;
+$size-small: 3.75rem; // 80px;
+
+// CIRCLE
+
+.rect-auto {
+  clip: rect(auto, auto, auto, auto);
+}
+
+.pie {
+  position: absolute;
+  border: $circle-width solid $primary-color;
+  width: 1 - (2 * $circle-width);
+  height: 1 - (2 * $circle-width);
+  clip: rect(0, .5em, 1em, 0);
+  border-radius: 50%;
+  transform: rotate(0deg);
+  top: 0;
+}
+
+.pie-fill {
+  transform: rotate(180deg);
+}
+
+// main
+.c100 {
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: content-box;
+  }
+
+  position: relative;
+  font-size: $size-normal;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  float: left;
+  margin: 0 .1em .1em 0;
+  background-color: $secondary-color;
+  border: 0;
+  padding: 0;
+  transition: all .25s ease;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, .14), 0 9px 10px rgba(0, 0, 0, .06); //shadow-1
+
+  // center circle to its parent
+  &.play--center {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -($size-normal*.5);
+    margin-top: -($size-normal*.5);
+  }
+
+  // bigger size
+  &.big {
+    font-size: $size-big;
+    margin-left: -($size-big*.5);
+    margin-top: -($size-big*.5);
+  }
+
+  // smaller size
+  &.small {
+    font-size: $size-small;
+    margin-left: -($size-small*.5);
+    margin-top: -($size-small*.5);
+  }
+
+  // background inside the circle
+  &:before {
+    position: absolute;
+    top: $circle-width;
+    left: $circle-width;
+    display: block;
+    content: " ";
+    border-radius: 50%;
+    background-color: $bg-color;
+    width: 1 - (2 * $circle-width);
+    height: 1 - (2 * $circle-width);
+    transition: background-color .12s ease-in;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: .25em 0 .25em .43em;
+    border-color: transparent transparent transparent $white;
+    left: .335em;
+    top: .25em;
+  }
+
+  &.playing {
+    .slice {
+      display: block;
+    }
+
+    &:after {
+      display: block;
+      height: .45em;
+      width: .4em;
+      border-width: 0;
+      background: linear-gradient(to right, $white 0%, $white 38%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0) 62%, $white 62%, $white 100%);
+      margin-left: 0;
+      top: .275em;
+      left: .3em;
+    }
+
+  }
+  //.play-pause {
+  //    //content: '';
+  //    position: absolute;
+  //    width: 0;
+  //    height: 0;
+  //    border-style: solid;
+  //    border-width: 0.25em 0 0.25em .43em;
+  //    border-color: transparent transparent transparent white;
+  //    left: .335em;
+  //    top: 0.25em;
+  //
+  //    &::after {
+  //    }
+  //}
+  .circle {
+    /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+    @extend .pie;
+    border-color: $main-circle-color;
+    clip: auto;
+  }
+
+  // the slice (mask)
+  .slice {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    clip: rect(0, 1em, 1em, .5em);
+    display: none;
+    top: 0;
+  }
+
+  // circle to show the status
+  .bar {
+    /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+    @extend .pie;
+  }
+
+  // loop to create all needed elements automatically
+  @for $j from 51 through 100 {
+
+    &.p#{$j} .slice {
+      /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+      @extend .rect-auto;
+    }
+
+    &.p#{$j} .bar:after {
+      /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+      @extend .pie-fill;
+    }
+
+    &.p#{$j} .fill {
+      /* stylelint-disable scss/at-extend-no-missing-placeholder */
+      @extend .pie;
+      @extend .pie-fill;
+      /* stylelint-enable scss/at-extend-no-missing-placeholder */
+    }
+
+  }
+
+  // loop to rotate all 100 circles
+  @for $j from 1 through 100 {
+    &.p#{$j} .bar {
+      transform: rotate((360*.01*$j) + deg);
+    }
+  }
+
+  // hover styles
+  &:hover {
+    cursor: pointer;
+    transform: scale($circle-scale-size);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, .17), 0 18px 20px rgba(0, 0, 0, .09), inset 0 0 5px 2px rgba(0, 0, 0, .35) !important; //shadow-2
+
+    &:before {
+      top: $circle-width-hover;
+      left: $circle-width-hover;
+      width: 1 - (2 * $circle-width-hover);
+      height: 1 - (2 * $circle-width-hover);
+      background-color: rgba(255, 255, 255, .25);
+    }
+
+    &:after {
+      -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=2, Color='#444')";
+      filter: drop-shadow(0 0 4px rgba(0, 0, 0, .25));
+    }
+
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+
+}

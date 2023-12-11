@@ -1,0 +1,415 @@
+$color-white: $color-foreground !default;
+$color-gray: $color-background !default;
+$color-dark: $color-foreground-inverse !default;
+$color-darken: $color-background-inverse !default;
+
+.a-multi-carousel {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.adapt-multi-card {
+  display: block;
+  padding: 10px 16px;
+}
+
+.a-multi-carousel__next,
+.a-multi-carousel__prev {
+  height: 110px;
+  width: 58px;
+  color: $text-primary;
+  font-size: 42px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top:  0;
+  border: 1px solid $border-color;
+  z-index: $zindex-carousel-paddle;
+  transition: color .25s $ease-transition-in-out;
+
+  &:hover:not(.a-multi-carousel__nav-btn--disabled) {
+    color: $color-active;
+    border-color: $border-color;
+  }
+
+  &:hover:active {
+    color: color-variant($color-active, hover);
+    border-color: $border-color;
+  }
+}
+
+.a-multi-carousel__prev {
+  left: -16px;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.a-multi-carousel__next {
+  right: -16px;
+  border-right: none;
+  z-index: $zindex-carousel-paddle;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.a-multi-carousel__viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 4px 0;
+}
+
+.a-multi-card__cover {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y !important;
+
+  &::after,
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    background: linear-gradient(-180deg, rgba(217, 217, 217, 0) 0%, $border-color 5%, $border-color 95%, rgba(217, 217, 217, 0) 100%);
+    z-index: 21;
+    transition: all .5s $ease-transition-in-out;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.is-border-line {
+    &::after {
+      right: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &.is-border-line-left {
+    &::before {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.a-multi-carousel__list {
+  display: flex;
+  align-items: flex-start;
+  width: 9999px;
+  margin: 0;
+  padding: 0 3px;
+  list-style: none;
+  transition: margin-left .3s ease-out;
+}
+
+.a-multi-carousel__item {
+  display: inline-flex;
+  position: relative;
+}
+
+.a-multi-carousel__item:last-child {
+  padding-right: 0;
+}
+
+.a-multi-carousel__item.is-focus:focus {
+  @include tab-focus();
+  border:0;
+  z-index: 1;
+}
+
+.a-multi-card__header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $border-color;
+}
+
+.a-multi-card__title {
+  margin: 0;
+}
+
+.a-multi-carousel__item-border {
+  height: auto;
+  width: 1px;
+  background: linear-gradient(-180deg, $border-color 0%, $border-color 5%, $border-color 95%, $border-color 100%);
+}
+
+// THEME/SKIN
+
+.a-multi-card_foreground {
+  background: $color-white;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $color-white;
+
+    &:hover {
+      background: $color-white;
+    }
+  }
+}
+
+.a-multi-card_skin1 {
+  background: $gray-100;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-100;
+
+    &:hover {
+      background: $gray-100;
+    }
+  }
+}
+
+.a-multi-card_background {
+  background: $gray-200;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $color-gray;
+
+    &:hover {
+      background: $color-gray;
+    }
+  }
+}
+
+.a-multi-card_foreground,
+.a-multi-card_skin1,
+.a-multi-card_background {
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    border-color: $gray-300;
+
+    &:hover {
+      border-color: $gray-300;
+    }
+  }
+
+  .a-multi-carousel__item-border,
+  .a-multi-carousel__viewport::after,
+  .a-multi-carousel__viewport::before {
+    background: $gray-300;
+  }
+
+  .a-multi-card__header {
+    border-color: $gray-300;
+  }
+
+  .a-multi-carousel__pills {
+    border-color: $gray-300;
+  }
+}
+
+.a-multi-card_skin3 {
+  background: $gray-300;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-300;
+
+    &:hover {
+      background: $gray-300;
+    }
+  }
+}
+
+.a-multi-card_skin4 {
+  background: $gray-400;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-400;
+
+    &:hover {
+      background: $gray-400;
+    }
+  }
+}
+
+.a-multi-card_skin3,
+.a-multi-card_skin4 {
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    border-color: $gray-500;
+
+    &:hover {
+      border-color: $gray-500;
+    }
+  }
+
+  .a-multi-carousel__item-border,
+  .a-multi-carousel__viewport::after,
+  .a-multi-carousel__viewport::before {
+    background: $gray-500;
+  }
+
+  .a-multi-card__header {
+    border-color: $gray-500;
+  }
+
+  .a-multi-carousel__pills {
+    border-color: $gray-500;
+  }
+}
+
+.a-multi-card_skin5 {
+  background: $gray-500;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-500;
+
+    &:hover {
+      background: $gray-500;
+    }
+  }
+}
+
+.a-multi-card_skin6 {
+  background: $gray-600;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-600;
+
+    &:hover {
+      background: $gray-600;
+    }
+  }
+}
+
+.a-multi-card_skin7 {
+  background: $gray-700;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-700;
+
+    &:hover {
+      background: $gray-700;
+    }
+  }
+}
+
+.a-multi-card_skin8 {
+  background: $gray-800;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-800;
+
+    &:hover {
+      background: $gray-800;
+    }
+  }
+}
+
+.a-multi-card_foreground-inverse {
+  background: $gray-900;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-900;
+
+    &:hover {
+      background: $gray-900;
+    }
+  }
+}
+
+.a-multi-card_background-inverse {
+  background: $gray-1000;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $gray-1000;
+
+    &:hover {
+      background: $gray-1000;
+    }
+  }
+}
+
+.a-multi-card_skin11 {
+  background: $black;
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    background: $black;
+
+    &:hover {
+      background: $black;
+    }
+  }
+}
+
+.a-multi-card_skin5,
+.a-multi-card_skin6,
+.a-multi-card_skin7,
+.a-multi-card_skin8,
+.a-multi-card_foreground-inverse,
+.a-multi-card_background-inverse,
+.a-multi-card_skin11 {
+  .a-multi-card__title,
+  .a-multi-card__count {
+    color: $white;
+  }
+
+  .a-multi-carousel__next,
+  .a-multi-carousel__prev {
+    color: $text-primary-inverse;
+    border-color: $white;
+
+    &:hover {
+      color: $color-active;
+      border-color: $white;
+    }
+
+    &:hover:active {
+      color: color-variant($color-active, hover);
+    }
+  }
+
+  .nav-pills .nav-link,
+  .nav-pills .nav-link.active {
+    color: $white;
+  }
+
+  .a-multi-carousel__item-border,
+  .a-multi-carousel__viewport::after,
+  .a-multi-carousel__viewport::before {
+    background: $white;
+  }
+
+  .a-multi-card__header {
+    border-color: $white;
+  }
+
+  .a-multi-carousel__pills {
+    border-color: $white;
+  }
+}
+
+.a-multi-carousel__pills {
+  height: 2.5rem;
+}
+
+.a-multi-carousel__nav-btn--disabled {
+  cursor: not-allowed !important;
+
+  &:before {
+    opacity: $btn-disabled-opacity;
+  }
+}

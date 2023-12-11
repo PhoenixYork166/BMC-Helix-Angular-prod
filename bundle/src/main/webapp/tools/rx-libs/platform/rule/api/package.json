@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-rule-api.umd.js",
+  "module": "../../fesm2015/helix-platform-rule-api.js",
+  "es2015": "../../fesm2015/helix-platform-rule-api.js",
+  "esm2015": "../../esm2015/rule/api/helix-platform-rule-api.js",
+  "fesm2015": "../../fesm2015/helix-platform-rule-api.js",
+  "typings": "helix-platform-rule-api.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/rule/api"
+}

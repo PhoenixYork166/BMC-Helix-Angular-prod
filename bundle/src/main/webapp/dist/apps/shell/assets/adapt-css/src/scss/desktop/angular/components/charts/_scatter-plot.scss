@@ -1,0 +1,22 @@
+.line-graph-svg > g {
+  overflow: hidden;
+}
+
+.adapt-scatter-plot {
+  overflow: visible !important;
+}
+
+.scatter-plot-circle {
+  opacity: .8;
+}
+
+.scatter-regression-line,
+.scatter-plot-circle,
+.line-chart-lines {
+  transition: all .25s $ease-transition-in-out;
+}
+
+.scatter-transition {
+  transition: all .35s $ease-transition-in-out;
+}
+

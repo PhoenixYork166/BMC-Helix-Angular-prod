@@ -1,0 +1,9 @@
+// Hide empty paths as Firefox returns zero bounding box co-ordinates because of them and graph don't get aligned center.
+@-moz-document url-prefix() {
+  .joint-theme-rx .joint-link {
+    .marker-source[d='M 0 0'],
+    .marker-target[d='M 0 0'] {
+      display: none;
+    }
+  }
+}

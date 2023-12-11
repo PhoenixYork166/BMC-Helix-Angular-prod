@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/email-profiles/index.ts"],"names":[],"mappings":"AAAA,cAAc,4BAA4B,CAAC;AAC3C,cAAc,sCAAsC,CAAC","sourcesContent":["export * from './email-profiles.component';\nexport * from './email-profiles-registration.module';\n"]}

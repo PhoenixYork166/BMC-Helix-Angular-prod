@@ -1,0 +1,86 @@
+//
+// Angular Components
+//
+@import "../desktop/angular/components/accordion";
+@import "../desktop/angular/components/alerts";
+@import "../desktop/angular/components/beard";
+@import "../desktop/angular/components/busy-preloader";
+@import "../desktop/angular/components/anchor-navigator";
+@import "../desktop/angular/components/carousel";
+@import "../desktop/angular/components/carousel-multi";
+@import "../desktop/angular/components/collapse";
+@import "../desktop/angular/components/colorpicker";
+@import "../desktop/angular/components/counter";
+@import "../desktop/angular/components/datetime";
+@import "../desktop/angular/components/datetime2";
+@import "../desktop/angular/components/dropdown";
+@import "../desktop/angular/components/focus-tracker";
+@import "../desktop/angular/components/lists";
+@import "../desktop/angular/components/adapt-table";
+@import "../desktop/angular/components/inline-editor";
+@import "../desktop/angular/components/metatag";
+// TODO: remove navigation-rtl after proper testing
+@import "../desktop/angular/components/navigation";
+@import "../desktop/angular/components/not-found";
+@import "../desktop/angular/components/empty";
+@import "../desktop/angular/components/profile";
+@import "../desktop/angular/components/rating/rating.component";
+@import "../desktop/angular/components/rating/rating-binary.component";
+@import "../desktop/angular/components/rating/rating-like.component";
+@import "../desktop/angular/components/rating/rating-voting.component";
+@import "../desktop/angular/components/search";
+@import "../desktop/angular/components/select";
+@import "../desktop/angular/components/select-inline";
+@import "../desktop/angular/components/sidebar";
+@import "../desktop/angular/components/slider";
+@import "../desktop/angular/components/split";
+@import "../desktop/angular/components/steps";
+@import "../desktop/angular/components/tabs";
+@import "../desktop/core/components/button-group";
+@import "../desktop/angular/components/time-slots";
+@import "../desktop/angular/components/textfield";
+@import "../desktop/angular/components/treeview";
+@import "../desktop/angular/components/typeahead";
+@import "../desktop/angular/components/uploader";
+@import "../desktop/angular/components/toast";
+@import "../desktop/angular/components/tooltip";
+@import "../desktop/angular/components/tracking";
+@import "../desktop/angular/components/chat/text-entry";
+@import "../desktop/angular/components/chat/chat-messages";
+@import "../desktop/angular/components/rich-editor";
+@import "../desktop/angular/components/menu";
+@import "../desktop/angular/components/advanced-filtering";
+@import "../desktop/angular/components/rx-form-control";
+@import "../desktop/angular/components/rx-feedback";
+@import "../desktop/angular/components/rx-counter";
+@import "../desktop/angular/components/rx-search";
+@import "../desktop/angular/components/rx-lists";
+@import "../desktop/angular/components/rx-select";
+@import "../desktop/angular/components/rx-typeahead";
+@import "../desktop/angular/components/rx-uploader";
+@import "../desktop/angular/components/rx-textfield";
+
+//charts
+@import "../desktop/angular/components/charts/common";
+@import "../desktop/angular/components/charts/legend";
+@import "../desktop/angular/components/charts/line-graph";
+@import "../desktop/angular/components/charts/pie";
+@import "../desktop/angular/components/charts/scatter-plot";
+@import "../desktop/angular/components/charts/stacked";
+@import "../desktop/angular/components/charts/treemap";
+@import "../desktop/angular/components/charts/chart-slider";
+@import "../desktop/angular/components/charts/flow-chart";
+
+//workflow
+@import "../desktop/angular/components/workflow/workflow";
+@import "../desktop/angular/components/workflow/workflow-bar";
+@import "../desktop/angular/components/workflow/workflow-carousel";
+@import "../desktop/angular/components/workflow/workflow-dot";
+@import "../desktop/angular/components/workflow/workflow-step";
+
+
+@import "../desktop/angular/components/treeview";
+@import "../desktop/angular/components/downloader";
+
+// CSS variables
+@import "../css-var-alias";

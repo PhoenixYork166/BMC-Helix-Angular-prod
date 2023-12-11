@@ -1,0 +1,44 @@
+// Toggles
+//
+// Used in conjunction with global variables to enable certain theme features.
+
+// need to move BS sources and color-helpers from node_modules to sources to allow building CSS on non-node env
+// to get back to import from node_modules just replace '../../bs/' with '~bootstrap/scss/'
+
+// Utilities
+@import "../vendor/bootstrap/mixins/breakpoints";
+@import "../vendor/bootstrap/mixins/hover";
+@import "../vendor/bootstrap/mixins/image";
+//@import "../../bs/mixins/badge"; // Overwritten with ADAPT mixin
+@import "../vendor/bootstrap/mixins/resize";
+@import "../vendor/bootstrap/mixins/screen-reader";
+@import "../vendor/bootstrap/mixins/size";
+@import "bs-core/mixins/reset-text-rtl";
+@import "../vendor/bootstrap/mixins/text-emphasis";
+@import "../vendor/bootstrap/mixins/text-hide";
+@import "../vendor/bootstrap/mixins/text-truncate";
+@import "../vendor/bootstrap/mixins/visibility";
+
+// // Components
+@import "../vendor/bootstrap/mixins/alert";
+@import "../vendor/bootstrap/mixins/buttons";
+@import "bs-core/mixins/caret-rtl";
+@import "bs-core/mixins/pagination-rtl";
+@import "bs-core/mixins/lists-rtl";
+//@import "../../bs/mixins/list-group"; // Overwritten with ADAPT mixin
+@import "../vendor/bootstrap/mixins/nav-divider";
+@import "bs-core/mixins/forms-rtl";
+@import "../vendor/bootstrap/mixins/table-row";
+
+// // Skins
+//@import "../../bs/mixins/background-variant"; // Overwritten with ADAPT mixin
+@import "../vendor/bootstrap/mixins/border-radius";
+@import "../vendor/bootstrap/mixins/box-shadow";
+@import "../vendor/bootstrap/mixins/gradients";
+@import "../vendor/bootstrap/mixins/transition";
+
+// // Layout
+@import "../vendor/bootstrap/mixins/clearfix";
+@import "../vendor/bootstrap/mixins/grid-framework";
+@import "bs-core/mixins/grid-rtl";
+@import "../vendor/bootstrap/mixins/float";

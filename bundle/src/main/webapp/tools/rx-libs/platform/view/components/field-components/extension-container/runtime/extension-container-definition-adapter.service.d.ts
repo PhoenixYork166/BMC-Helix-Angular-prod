@@ -1,0 +1,35 @@
+import { TranslateService } from '@ngx-translate/core';
+import { IDefinitionAdapter, RxDefinitionNameService, RxGlobalCacheService, RxNotificationService } from '@helix/platform/shared/api';
+import { RxTreeService } from '@helix/platform/utils';
+import { IContainerViewComponentDefinition, IViewDefinition, RxViewDefinitionDataPageService, RxViewDefinitionLocalizationService, RxViewDefinitionParserService } from '@helix/platform/view/api';
+import { RxRuntimeViewUtilsService } from '@helix/platform/view/runtime';
+import { Observable } from 'rxjs';
+import { RxExtensionContainerHelperService } from './extension-container-helper.service';
+import { IRxViewDefinitionMap } from './extension-container.types';
+import * as i0 from "@angular/core";
+export declare class RxExtensionContainerDefinitionAdapterService implements IDefinitionAdapter<IContainerViewComponentDefinition, IViewDefinition> {
+    private rxViewDefinitionParserService;
+    private rxViewDefinitionDataPageService;
+    private rxGlobalCacheService;
+    private rxDefinitionNameService;
+    private rxTreeService;
+    private rxExtensionContainerHelperService;
+    private rxNotificationService;
+    private rxRuntimeViewUtilsService;
+    private rxViewDefinitionLocalizationService;
+    private translateService;
+    constructor(rxViewDefinitionParserService: RxViewDefinitionParserService, rxViewDefinitionDataPageService: RxViewDefinitionDataPageService, rxGlobalCacheService: RxGlobalCacheService, rxDefinitionNameService: RxDefinitionNameService, rxTreeService: RxTreeService, rxExtensionContainerHelperService: RxExtensionContainerHelperService, rxNotificationService: RxNotificationService, rxRuntimeViewUtilsService: RxRuntimeViewUtilsService, rxViewDefinitionLocalizationService: RxViewDefinitionLocalizationService, translateService: TranslateService);
+    adaptDefinition(extensionContainerComponentDefinition: IContainerViewComponentDefinition, viewDefinition: IViewDefinition): Observable<any>;
+    getExtensionViewDefinitions(extensionContainerGuid: string): Observable<IViewDefinition[]>;
+    getTargetRecordEditorComponentDefinition(viewDefinition: IViewDefinition, extensionContainerComponentDefinition: IContainerViewComponentDefinition): IContainerViewComponentDefinition;
+    getViewDefinitionMap(viewDefinitions: IViewDefinition[]): IRxViewDefinitionMap[];
+    filterDuplicatedRecordEditorComponentDefinitions(viewDefinitionMaps: IRxViewDefinitionMap[]): IRxViewDefinitionMap[];
+    filterIncompatibleRecordEditorComponentDefinitions(viewDefinitionMaps: IRxViewDefinitionMap[], targetRecordEditorComponentDefinition: IContainerViewComponentDefinition): IRxViewDefinitionMap[];
+    setRecordEditorLabels(viewDefinitionMaps: IRxViewDefinitionMap[]): Observable<IRxViewDefinitionMap[]>;
+    getExtensionRecordEditorComponentDefinitions(viewDefinitionMaps: IRxViewDefinitionMap[]): IContainerViewComponentDefinition[];
+    processRecordEditorComponentDefinition(extensionRecordEditorComponentDefinition: IContainerViewComponentDefinition, targetRecordEditorComponentDefinition: IContainerViewComponentDefinition, extensionContainerComponentDefinition: IContainerViewComponentDefinition): IContainerViewComponentDefinition;
+    patchFieldComponentExpressions(componentDefinition: any, extensionRecordEditorComponentDefinition: any, targetRecordEditorComponentDefinition: any, targetExtensionContainerComponentDefinition: any): void;
+    getExtensionContainerSectionViewComponentDefinition(recordEditorComponentDefinition: IContainerViewComponentDefinition, targetRecordEditorComponentDefinition: IContainerViewComponentDefinition): IContainerViewComponentDefinition;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxExtensionContainerDefinitionAdapterService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxExtensionContainerDefinitionAdapterService>;
+}

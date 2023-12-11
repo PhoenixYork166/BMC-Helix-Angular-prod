@@ -1,0 +1,68 @@
+.treemap-node-text {
+  cursor: pointer;
+}
+
+.treemap-chart_hidden-menu {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+}
+
+.treemap__group-tooltip {
+  max-width: 25rem;
+}
+
+.treemap__group-parent-tooltip-wrapper {
+  font-size: .75rem;
+  height: 0;
+  margin-top: 1rem;
+  fill: $gray-900;
+  text-align: center;
+}
+
+.treemap__group-parent-tooltip {
+  display: inline-flex;
+  padding: $tooltip-padding-y $tooltip-padding-x;
+  object-fit: contain;
+  border: $popover-border-width solid $popover-border-color;
+  @include border-radius($popover-border-radius);
+  background-color: $popover-bg;
+  margin: 0 .5rem;
+}
+
+.treemap__group-parent-tooltip-color {
+  width: .75rem;
+  height: .75rem;
+  margin-top: 3px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+
+.treemap__group-parent-tooltip-text {
+  width: calc(100% - .75rem);
+  @include rtl(padding-left, 7px);
+}
+
+.treemap_tooltip.adapt-tooltip-bottom {
+  margin-top: -.375rem;
+}
+
+.treemap_tooltip.adapt-tooltip-top {
+  margin-top: .375rem;
+}
+
+.treemap_tooltip.adapt-tooltip-left {
+  margin-left: .375rem;
+}
+
+.treemap_tooltip.adapt-tooltip-right {
+  margin-left: -.375rem;
+}
+
+.treemap_tooltip .adapt-tooltip-inner {
+  padding: 0;
+}
+
+.treemap_tooltip .adapt-tooltip-inner > div {
+  padding: .625rem .875rem;
+}

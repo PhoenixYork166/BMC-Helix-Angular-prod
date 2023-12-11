@@ -1,0 +1,1 @@
+{"version":3,"file":"helix-platform.umd.js","sources":["../../../../libs/platform/public-api.ts","../../../../libs/platform/helix-platform.ts"],"sourcesContent":["export const version = '22.1.7';\n","/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './public-api';\n"],"names":[],"mappings":";;;;;;KAAa,OAAO,GAAG;;CCAvB;;;;;;;;;;;;"}

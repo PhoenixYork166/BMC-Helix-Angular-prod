@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/approval-notifications/index.ts"],"names":[],"mappings":"AAAA,cAAc,oCAAoC,CAAC;AACnD,cAAc,8CAA8C,CAAC","sourcesContent":["export * from './approval-notifications.component';\nexport * from './approval-notifications-registration.module';\n"]}

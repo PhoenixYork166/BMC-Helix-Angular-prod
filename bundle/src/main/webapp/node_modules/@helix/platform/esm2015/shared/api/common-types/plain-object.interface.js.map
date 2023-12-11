@@ -1,0 +1,1 @@
+{"version":3,"file":"plain-object.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/common-types/plain-object.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IPlainObject {\n  [name: string]: any;\n}\n"]}

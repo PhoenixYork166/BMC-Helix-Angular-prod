@@ -1,0 +1,31 @@
+import { Compiler, Injector } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { Observable } from 'rxjs';
+import { RxBundleService } from '../bundle/bundle.service';
+import { RxBundleCacheService } from '../caching/bundle-cache.service';
+import { RxGlobalCacheService } from '../caching/global-cache.service';
+import { RxLocalizationService } from '../localization';
+import { RxLogService } from '../logging/log.service';
+import { RxComponentCanDeactivateGuard } from '../navigation/component-can-deactivate.guard';
+import { RxApplicationLoaderService } from './application-loader.service';
+import * as i0 from "@angular/core";
+export declare class RxApplicationResolver implements Resolve<any> {
+    private document;
+    private rxBuildEnvironment;
+    private injector;
+    private compiler;
+    private rxBundleService;
+    private rxLogService;
+    private rxBundleCacheService;
+    private rxComponentCanDeactivateGuard;
+    private rxGlobalCacheService;
+    private rxApplicationLoaderService;
+    private rxLocalizationService;
+    private devResolver$;
+    private prodResolver$;
+    constructor(document: any, rxBuildEnvironment: any, injector: Injector, compiler: Compiler, rxBundleService: RxBundleService, rxLogService: RxLogService, rxBundleCacheService: RxBundleCacheService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard, rxGlobalCacheService: RxGlobalCacheService, rxApplicationLoaderService: RxApplicationLoaderService, rxLocalizationService: RxLocalizationService);
+    resolve(route: ActivatedRouteSnapshot): Observable<any>;
+    private getResolver;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxApplicationResolver, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxApplicationResolver>;
+}

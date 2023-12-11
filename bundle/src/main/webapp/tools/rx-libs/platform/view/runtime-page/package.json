@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-view-runtime-page.umd.js",
+  "module": "../../fesm2015/helix-platform-view-runtime-page.js",
+  "es2015": "../../fesm2015/helix-platform-view-runtime-page.js",
+  "esm2015": "../../esm2015/view/runtime-page/helix-platform-view-runtime-page.js",
+  "fesm2015": "../../fesm2015/helix-platform-view-runtime-page.js",
+  "typings": "helix-platform-view-runtime-page.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/view/runtime-page"
+}

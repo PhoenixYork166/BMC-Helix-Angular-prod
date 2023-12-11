@@ -1,0 +1,1 @@
+{"version":3,"file":"association-records.interface.js","sourceRoot":"","sources":["../../../../../../libs/platform/association/api/association-records.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IAssociationRecords {\n  existing: any[];\n  pending: any[];\n  deleted: any[];\n  extensions: any[];\n}\n"]}

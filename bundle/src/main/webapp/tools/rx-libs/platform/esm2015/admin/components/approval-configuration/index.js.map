@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/approval-configuration/index.ts"],"names":[],"mappings":"AAAA,cAAc,oCAAoC,CAAC;AACnD,cAAc,8CAA8C,CAAC","sourcesContent":["export * from './approval-configuration.component';\nexport * from './approval-configuration-registration.module';\n"]}

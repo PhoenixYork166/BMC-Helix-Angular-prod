@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/designer/form-controls/view-revert-customization/index.ts"],"names":[],"mappings":"AAAA,cAAc,oCAAoC,CAAC;AACnD,cAAc,uCAAuC,CAAC","sourcesContent":["export * from './view-revert-customization.module';\nexport * from './view-revert-customization.component';\n"]}

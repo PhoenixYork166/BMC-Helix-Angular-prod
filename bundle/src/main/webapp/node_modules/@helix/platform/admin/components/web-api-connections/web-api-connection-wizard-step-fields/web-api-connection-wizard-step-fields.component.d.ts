@@ -1,0 +1,30 @@
+import { OnInit, EventEmitter, OnDestroy } from '@angular/core';
+import { IWebApiConnectionWizardStep, IWebApiConnection, IWebApiConnectionField, IAuthTypeDetails } from '../web-api-connections.interfaces';
+import { RxSelectOption } from '@bmc-ux/adapt-angular';
+import { NgForm } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { RxUrlUtilsService } from '@helix/platform/utils';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class WebApiConnectionWizardStepFieldsComponent implements OnInit, OnDestroy {
+    private rxUrlUtilsService;
+    private translateService;
+    step: IWebApiConnectionWizardStep;
+    webApiConnection: IWebApiConnection;
+    configurationForm: NgForm;
+    selectionChange: EventEmitter<object>;
+    formStatusChange: EventEmitter<object>;
+    authEndpoint: string;
+    stepDetails: IWebApiConnection | IAuthTypeDetails;
+    private destroyed$;
+    private defaultSelection;
+    constructor(rxUrlUtilsService: RxUrlUtilsService, translateService: TranslateService);
+    optionFormatter: (option: RxSelectOption) => string;
+    onRadioButtonChange(event: any, field: IWebApiConnectionField): void;
+    getSelectionValue(selectedValue: any, field: IWebApiConnectionField): any;
+    validate(field: IWebApiConnectionField): (control: AbstractControl) => ValidationErrors | null;
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<WebApiConnectionWizardStepFieldsComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<WebApiConnectionWizardStepFieldsComponent, "rx-web-api-connection-wizard-step-fields", never, { "step": "step"; "webApiConnection": "webApiConnection"; "stepDetails": "stepDetails"; }, { "selectionChange": "selectionChange"; "formStatusChange": "formStatusChange"; }, never, never>;
+}

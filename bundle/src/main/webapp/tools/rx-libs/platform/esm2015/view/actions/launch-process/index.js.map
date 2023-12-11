@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/actions/launch-process/index.ts"],"names":[],"mappings":"AAAA,cAAc,qCAAqC,CAAC;AACpD,cAAc,sCAAsC,CAAC","sourcesContent":["export * from './launch-process-view-action.module';\nexport * from './launch-process-view-action.service';\n"]}

@@ -1,0 +1,33 @@
+import { AfterViewInit, ElementRef, EventEmitter, NgZone, OnDestroy, Renderer2, TemplateRef } from '@angular/core';
+import { AdaptTableComponent, ColumnConfig, ColumnHeaderTemplateParams, DataCellTemplateParams } from '@bmc-ux/adapt-table';
+import { IRowDataItem } from '@helix/platform/view/api';
+import { ResizeSensor } from 'css-element-queries';
+import { IChangedCardLayoutEvent } from './changed-card-layout-event.interface';
+import * as i0 from "@angular/core";
+export declare class GridCardLayoutDirective implements AfterViewInit, OnDestroy {
+    private adaptTable;
+    private ngZone;
+    private renderer;
+    cardLayoutFieldsHeaderTemplate: TemplateRef<ColumnHeaderTemplateParams>;
+    cardLayoutValuesHeaderTemplate: TemplateRef<ColumnHeaderTemplateParams>;
+    cardLayoutFieldsDataCellTemplate: TemplateRef<DataCellTemplateParams<IRowDataItem>>;
+    cardLayoutValuesDataCellTemplate: TemplateRef<DataCellTemplateParams<IRowDataItem>>;
+    recordGridGetDataCellClass: () => string;
+    recordGridElementRef: ElementRef;
+    set cardLayoutWidth(value: number);
+    get cardLayoutWidth(): number;
+    changedCardLayout: EventEmitter<IChangedCardLayoutEvent>;
+    hasCardLayout: boolean;
+    resizeSensor: ResizeSensor;
+    private _cardLayoutWidth;
+    private _hasViewInitialized;
+    constructor(adaptTable: AdaptTableComponent, ngZone: NgZone, renderer: Renderer2);
+    ngAfterViewInit(): void;
+    private changeTableCardLayout;
+    getCardLayoutColumns(): ColumnConfig[];
+    private getDataCellClass;
+    scrollToFirstVisibleRow(): void;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<GridCardLayoutDirective, [{ host: true; }, null, null]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<GridCardLayoutDirective, "[rxCardLayout]", never, { "cardLayoutFieldsHeaderTemplate": "cardLayoutFieldsHeaderTemplate"; "cardLayoutValuesHeaderTemplate": "cardLayoutValuesHeaderTemplate"; "cardLayoutFieldsDataCellTemplate": "cardLayoutFieldsDataCellTemplate"; "cardLayoutValuesDataCellTemplate": "cardLayoutValuesDataCellTemplate"; "recordGridGetDataCellClass": "cardLayoutGetDataCellClass"; "recordGridElementRef": "cardLayoutRecordGridElementRef"; "cardLayoutWidth": "cardLayoutWidth"; }, { "changedCardLayout": "changedCardLayout"; }, never>;
+}

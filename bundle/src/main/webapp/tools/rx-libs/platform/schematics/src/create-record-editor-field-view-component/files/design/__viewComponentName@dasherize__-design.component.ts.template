@@ -1,0 +1,12 @@
+import { Component, Input } from '@angular/core';
+import { <%= classify(viewComponentName) %>DesignModel } from './<%= dasherize(viewComponentName) %>-design.model';
+
+@Component({
+  selector: '<%= dasherize(viewComponentSelector) %>-design',
+  styleUrls: ['./<%= dasherize(viewComponentName) %>-design.scss'],
+  templateUrl: './<%= dasherize(viewComponentName) %>-design.component.html'
+})
+export class <%= classify(viewComponentName) %>DesignComponent {
+  @Input()
+  model: <%= classify(viewComponentName) %>DesignModel;
+}

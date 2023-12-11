@@ -1,0 +1,37 @@
+import { EventEmitter, OnInit } from '@angular/core';
+import { IRecordGridConfig, RecordGridComponent } from '@helix/platform/view/components';
+import { Observable } from 'rxjs';
+import { IRecordDefinition, RxRecordInstanceDataPageService } from '@helix/platform/record/api';
+import { TranslateService } from '@ngx-translate/core';
+import { IPlainObject, RxNotificationService } from '@helix/platform/shared/api';
+import { RxIpaasBaseApisService } from './ipaas-base-apis.service';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { RxViewActionUtilsService } from '@helix/platform/view/api';
+import { IIpaasApisConfig, IIpaasApiInfo } from './ipaas-base-apis.types';
+import * as i0 from "@angular/core";
+export declare class IpaasBaseApisComponent implements OnInit {
+    private translateService;
+    private rxIpaasBaseApisService;
+    private rxNotificationService;
+    private rxModalService;
+    private rxViewActionUtilsService;
+    private rxRecordInstanceDataPageService;
+    ipaasApisConfig: IIpaasApisConfig;
+    createApi: EventEmitter<IIpaasApiInfo>;
+    editApi: EventEmitter<IIpaasApiInfo>;
+    deleteApis: EventEmitter<string[]>;
+    ipaasApisGrid: RecordGridComponent;
+    gridConfig$: Observable<IRecordGridConfig>;
+    recordDefinition: IRecordDefinition;
+    constructor(translateService: TranslateService, rxIpaasBaseApisService: RxIpaasBaseApisService, rxNotificationService: RxNotificationService, rxModalService: RxModalService, rxViewActionUtilsService: RxViewActionUtilsService, rxRecordInstanceDataPageService: RxRecordInstanceDataPageService);
+    ngOnInit(): void;
+    private getData;
+    private getColumns;
+    private getActionButtons;
+    private renameGroup;
+    openAddApiDialog(): void;
+    openEditApiDialog(row: IPlainObject): void;
+    refreshIpaasGrid(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<IpaasBaseApisComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<IpaasBaseApisComponent, "rx-ipaas-base-apis", never, { "ipaasApisConfig": "ipaasApisConfig"; }, { "createApi": "createApi"; "editApi": "editApi"; "deleteApis": "deleteApis"; }, never, never>;
+}

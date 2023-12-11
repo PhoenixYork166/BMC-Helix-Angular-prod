@@ -1,0 +1,93 @@
+Arguments: 
+  /Users/kkramarenko/.nvm/versions/node/v16.13.0/bin/node /Users/kkramarenko/Projects/adapt-css/.yarn/releases/yarn-1.22.19.cjs set version 3.x
+
+PATH: 
+  /usr/local/opt/openjdk@8/bin:/Users/kkramarenko/.nvm/versions/node/v16.13.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.13.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: Release not found: 3.x
+      at /Users/kkramarenko/Projects/adapt-css/.yarn/releases/yarn-1.22.19.cjs:94385:17
+      at Generator.next (<anonymous>)
+      at step (/Users/kkramarenko/Projects/adapt-css/.yarn/releases/yarn-1.22.19.cjs:310:30)
+      at /Users/kkramarenko/Projects/adapt-css/.yarn/releases/yarn-1.22.19.cjs:321:13
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+
+npm manifest: 
+  {
+    "name": "@bmc-ux/adapt-css",
+    "version": "4.107.0",
+    "description": "Contains all CSS and style-related utilities for the ADAPT component language",
+    "keywords": [
+      "Adapt",
+      "Bootstrap",
+      "CSS",
+      "HTML"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.bmc.com/bmc-ux/adapt-css"
+    },
+    "author": {
+      "name": "BMC",
+      "url": "https://github.bmc.com/pages/bmc-ux/adapt-css/docs"
+    },
+    "peerDependencies": {
+      "@bmc-ux/dpl-iconfont": ">=2.112.1"
+    },
+    "devDependencies": {
+      "@angular/cdk": "^10.2.7",
+      "@bmc-ux/dpl-iconfont": "2.112.1",
+      "autoprefixer": "10.4.0",
+      "bootstrap": "4.1.2",
+      "cowsay": "^1.5.0",
+      "cssnano": "^4.1.8",
+      "cssnano-cli": "^1.0.5",
+      "husky": "^5.1.3",
+      "onchange": "7.1.0",
+      "postcss": "8.2.7",
+      "postcss-cli": "8.3.1",
+      "sass": "^1.37.2",
+      "sass-color-helpers": "2.1.1",
+      "standard-version": "^9.3.2",
+      "stylelint": "^13.11.0",
+      "stylelint-scss": "^3.21.0"
+    },
+    "scripts": {
+      "lint": "stylelint src/scss/** --config .stylelintrc.json",
+      "compile": "sass src/scss:dist/css --no-source-map",
+      "css:prefix": "postcss --no-map dist/css/*.css --replace --use autoprefixer",
+      "css:lint": "rm -rf dist/css/*.min.* && stylelint dist/css/*.css --config .stylelintcss.json --fix",
+      "sass:compile": "npm run lint && npm run compile && npm run css:prefix",
+      "sass:watch": "onchange 'src/scss/**/*.scss' -- npm run sass:compile",
+      "sass:build": "./css.sh",
+      "release": "standard-version",
+      "publish:cdn": "npm config set @bmc-ux:registry http://10.19.48.202:4873 && npm publish",
+      "publish:backup": "npm config set @bmc-ux:registry http://172.25.144.178:4873 && npm publish",
+      "publish:nexus": "npm config set @bmc-ux:registry http://10.19.48.11:4873/repository/bmc-ux/ && npm publish",
+      "publish:all": "npm run publish:backup && npm run publish:nexus",
+      "prepare": "husky install"
+    },
+    "browserslist": [
+      ">0.25%",
+      "not ie 10",
+      "not op_mini all"
+    ],
+    "publishConfig": {
+      "registry": "http://10.19.48.202:4873"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

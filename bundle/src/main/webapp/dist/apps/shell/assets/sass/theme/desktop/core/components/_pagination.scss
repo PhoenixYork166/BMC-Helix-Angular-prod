@@ -1,0 +1,158 @@
+//
+// Pager pagination
+// --------------------------------------------------
+
+.page-prev .page-link::before,
+.page-next .page-link::after {
+  position: relative;
+  display: inline-block;
+  width: .7em;
+  height: 1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  vertical-align: -2px;
+  content: "";
+}
+
+.page-prev .page-link::before {
+  left: 0;
+  background-image: icon($i-angle-left, $pagination-color);
+  transition: left .25s $ease-transition-in-out;
+}
+
+.page-next .page-link::after {
+  right: 0;
+  background-image: icon($i-angle-right, $pagination-color);
+  transition: right .25s $ease-transition-in-out;
+}
+
+.pager {
+  .page-prev a::before {
+    margin-right: 4px;
+  }
+
+  .page-next a::after {
+    margin-left: 4px;
+  }
+
+  .page-link {
+    width: auto;
+    border-radius: 0;
+  }
+}
+
+
+.page-prev,
+.page-next {
+  .pager & {
+    min-width: 8rem;
+  }
+
+  a {
+    text-align: center;
+    @include border-radius($border-radius);
+  }
+}
+
+.page-prev .page-link:hover::before,
+.page-prev .page-link:focus::before {
+  left: -3px;
+  background-image: icon($i-angle-left, $pagination-hover-color);
+}
+
+.page-next .page-link:hover::after,
+.page-next .page-link:focus::after {
+  right: -3px;
+  background-image: icon($i-angle-right, $pagination-hover-color);
+}
+
+.page-item {
+  &:first-child,
+  &:last-child {
+    .page-link {
+      //background: $pagination-arrows-bg;
+
+      @include hover-focus {
+        color: $pagination-hover-color;
+        border-color: $pagination-hover-border-color;
+        background-color: $pagination-hover-bg;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &.active {
+    .page-link {
+      position: relative;
+      font-weight: 600;
+      color: $text-primary; //temp fix until we find out where the orange color is coming from.
+      border-color: $pagination-border-color;
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: -1px;
+        left: 0;
+        content: "";
+        display: block;
+        border-bottom: 2px solid $color-primary;
+      }
+    }
+  }
+
+  &.disabled .page-link {
+    pointer-events: all;
+  }
+
+  &.page-prev.disabled .page-link::before {
+    background-image: icon($i-angle-left, $pagination-disabled-color);
+  }
+
+  &.page-next.disabled .page-link::after {
+    background-image: icon($i-angle-right, $pagination-disabled-color);
+  }
+
+  &:not(:first-child) > button,
+  &:not(:last-child) > button {
+    border-radius: 0;
+  }
+}
+
+.page-link {
+  transition: $btn-transition;
+  width: 3.125rem;
+  text-align: center;
+
+}
+
+.page-item.page-prev.disabled,
+.page-item.page-next.disabled {
+  cursor: not-allowed;
+
+  .page-link {
+    color: $pagination-disabled-color;
+    border-color: $pagination-disabled-border-color;
+    background-color: $pagination-disabled-bg;
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus {
+    .page-link {
+      color: transparentize($pagination-disabled-color, .4);
+    }
+  }
+}
+
+.page-prev.disabled:hover .page-link::before,
+.page-prev.disabled:focus .page-link::before {
+  left: 0;
+  background-image: icon($i-angle-left, transparentize($pagination-disabled-color, .4));
+}
+
+.page-next.disabled:hover .page-link::after,
+.page-next.disabled:focus .page-link::after {
+  right: 0;
+  background-image: icon($i-angle-right, transparentize($pagination-disabled-color, .4));
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/tone-analysis-testing/index.ts"],"names":[],"mappings":"AAAA,cAAc,6CAA6C,CAAC;AAC5D,cAAc,mCAAmC,CAAC","sourcesContent":["export * from './tone-analysis-testing-registration.module';\nexport * from './tone-analysis-testing.component';\n"]}

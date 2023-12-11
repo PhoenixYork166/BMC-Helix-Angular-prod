@@ -1,0 +1,32 @@
+import { OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, TemplateRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { IFormControlComponent } from '@helix/platform/shared/api';
+import { ValueAccessor } from '../../form-builder/value-accessor';
+import { ISelectFormControlOptions, ISelectOption } from './select-form-control.interfaces';
+import { AdaptRxControlLabelTooltip, AdaptRxSelectComponent, RxSelectOption } from '@bmc-ux/adapt-angular';
+import * as i0 from "@angular/core";
+export declare class SelectFormControlComponent extends ValueAccessor<string | string[]> implements IFormControlComponent, OnInit, OnChanges, OnDestroy {
+    private renderer;
+    options: ISelectFormControlOptions;
+    appendToBody: boolean;
+    formControl: FormControl;
+    adaptSelectComponent: AdaptRxSelectComponent;
+    popoverContent: TemplateRef<{}>;
+    adaptSelectValue: ISelectOption[];
+    selectOptions: ISelectOption[];
+    tooltip: AdaptRxControlLabelTooltip;
+    private destroyed$;
+    private isSortAlphabetically;
+    constructor(renderer: Renderer2);
+    writeValue(value: string | string[]): void;
+    focus(): void;
+    sortAlphabetically(items: ISelectOption[]): ISelectOption[];
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    optionFormatter(option: ISelectOption): string;
+    onSelectionChange(value: RxSelectOption[]): void;
+    ngOnDestroy(): void;
+    private getAdaptSelectValue;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SelectFormControlComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SelectFormControlComponent, "rx-select-form-control", never, { "options": "options"; "appendToBody": "appendToBody"; "formControl": "formControl"; }, {}, never, never>;
+}

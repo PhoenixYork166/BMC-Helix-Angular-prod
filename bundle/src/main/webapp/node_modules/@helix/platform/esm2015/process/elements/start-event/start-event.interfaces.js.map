@@ -1,0 +1,1 @@
+{"version":3,"file":"start-event.interfaces.js","sourceRoot":"","sources":["../../../../../../../libs/platform/process/elements/start-event/start-event.interfaces.ts"],"names":[],"mappings":"","sourcesContent":["export interface IStartEventModel {\n  description: string;\n  guid: string;\n  label: string;\n  name: string;\n  resourceType: string;\n  type: string;\n}\n"]}

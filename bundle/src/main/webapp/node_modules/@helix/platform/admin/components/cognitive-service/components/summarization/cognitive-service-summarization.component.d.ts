@@ -1,0 +1,34 @@
+import { OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { IUserOverlayGroupDescriptorChildren, RxCurrentUserService, RxNotificationService, RxSystemConfigurationService } from '@helix/platform/shared/api';
+import { ConnectionTestStatus } from '@helix/platform/ui-kit';
+import { RxCognitiveServiceService } from '../../cognitive-service.service';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class CognitiveServiceSummarizationComponent implements OnInit {
+    private rxCurrentUserService;
+    private rxCognitiveServiceService;
+    private rxNotificationService;
+    private rxSystemConfigurationService;
+    private formBuilder;
+    private translateService;
+    isAdministrator: boolean;
+    currentOverlayContext: IUserOverlayGroupDescriptorChildren;
+    summarizationConfigurationForm: FormGroup;
+    connectionTestStatus: ConnectionTestStatus;
+    isAdministratorOverlayConfigured: boolean;
+    isSummarizationServiceConfigured: boolean;
+    constructor(rxCurrentUserService: RxCurrentUserService, rxCognitiveServiceService: RxCognitiveServiceService, rxNotificationService: RxNotificationService, rxSystemConfigurationService: RxSystemConfigurationService, formBuilder: FormBuilder, translateService: TranslateService);
+    ngOnInit(): void;
+    isFormDirty(): boolean;
+    private loadSystemSettings;
+    save(): void;
+    isSaveButtonDisabled(): boolean;
+    isEnableSummarizationCheckboxDisabled(): boolean;
+    private isConnectionTestStatusInvalid;
+    resetConnectionTest(): void;
+    private testConnection;
+    onTestConnection(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CognitiveServiceSummarizationComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CognitiveServiceSummarizationComponent, "rx-cognitive-service-summarization", never, { "isAdministrator": "isAdministrator"; "currentOverlayContext": "currentOverlayContext"; }, {}, never, never>;
+}

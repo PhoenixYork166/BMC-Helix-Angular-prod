@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-association-api.umd.js",
+  "module": "../../fesm2015/helix-platform-association-api.js",
+  "es2015": "../../fesm2015/helix-platform-association-api.js",
+  "esm2015": "../../esm2015/association/api/helix-platform-association-api.js",
+  "fesm2015": "../../fesm2015/helix-platform-association-api.js",
+  "typings": "helix-platform-association-api.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/association/api"
+}

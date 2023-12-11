@@ -1,0 +1,474 @@
+// Mixins
+//
+//Applies easing curve to element
+@mixin ease($ease: linear) {
+  transition-timing-function: $ease;
+}
+
+//Animation class mixin
+@mixin animation($animation-name, $animation...) {
+  .#{$animation-name} {
+    animation-name: $animation;
+  }
+}
+
+//General Keyframe Animations
+//
+//Disolve in animation
+@keyframes dissolve-in {
+  from {
+    opacity: $animation-opacity-hidden;
+  }
+
+  to {
+    opacity: $animation-opacity-shown;
+  }
+}
+
+//Dissolve in with delay - Used in some animations
+@keyframes delay-dissolve-in {
+  from {
+    opacity: $animation-opacity-hidden;
+  }
+
+  20% {
+    opacity: $animation-opacity-hidden;
+  }
+
+  to {
+    opacity: $animation-opacity-shown;
+  }
+}
+
+//Disolve out animation
+@keyframes dissolve-out {
+  from {
+    opacity: $animation-opacity-shown;
+  }
+
+  to {
+    opacity: $animation-opacity-hidden;
+  }
+}
+
+//Dissolve out with delay - Used in some animations
+@keyframes delay-dissolve-out {
+  from {
+    opacity: $animation-opacity-shown;
+  }
+
+  80% {
+    opacity: $animation-opacity-hidden;
+  }
+
+  to {
+    opacity: $animation-opacity-hidden;
+  }
+}
+
+//Scales up and in animation
+@keyframes scale-up-in {
+  from {
+    transform: scale($animation-scaling-in, $animation-scaling-in);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+//Scale up and out animation
+@keyframes scale-up-out {
+  from {
+    transform: scale(1, 1);
+  }
+
+  to {
+    transform: scale($animation-scaling-out, $animation-scaling-out);
+  }
+}
+
+//Scales down and in animation
+@keyframes scale-down-in {
+  from {
+    transform: scale($animation-scaling-out, $animation-scaling-out);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+//Scales down and out animation
+@keyframes scale-down-out {
+  from {
+    transform: scale(1, 1);
+  }
+
+  to {
+    transform: scale($animation-scaling-in, $animation-scaling-in);
+  }
+}
+
+//Pop in animation
+@keyframes pop-in {
+  from {
+    transform: scale($animation-scaling-in, $animation-scaling-in);
+  }
+
+  80% {
+    transform: scale($animation-pop-scale, $animation-pop-scale);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+//pop out animation
+@keyframes pop-out {
+  from {
+    transform: scale(1, 1);
+  }
+
+  20% {
+    transform: scale($animation-pop-scale, $animation-pop-scale);
+  }
+
+  to {
+    transform: scale($animation-scaling-in, $animation-scaling-in);
+  }
+}
+
+//move in, top to bottom
+@keyframes move-down-in {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+//move out, bottom to top
+@keyframes move-down-out {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: translate3d(0, 50%, 0);
+  }
+}
+
+@keyframes move-up-in {
+  from {
+    transform: translate3d(0, 50%, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+//move out, bottom to top
+@keyframes move-up-out {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+//move in, right to center
+@keyframes move-right-in {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+//move out, center to right
+@keyframes move-right-out {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+//move in, left to center
+@keyframes move-left-in {
+  from {
+    transform: translate3d(50%, 0, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+//move out, center to left
+@keyframes move-left-out {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+//flashes an element
+@keyframes flash {
+  from {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+//Pulses and element backward
+@keyframes pulse-in {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(.95, .95, .95);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+//pulses and element forward
+@keyframes pulse-out {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+//Spins an element 90 Deg
+@keyframes spin-90 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+//Spins an element 180 Deg
+@keyframes spin-180 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+//Spins an element 360 Deg
+@keyframes spin-360 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+//Component Specific keyframe animations
+
+//Indeterminate Loader animation
+@keyframes loader-indeterminate {
+  0% {
+    margin-left: 0;
+    width: 0;
+  }
+
+  50% {
+    margin-left: 0;
+    width: 50%;
+  }
+
+  100% {
+    margin-left: 100%;
+    width: 100%;
+  }
+}
+
+//Section loader animation. Pulses an element from white to active color
+@keyframes loader-flash {
+  0% {
+    background-color: transparent;
+  }
+
+  30% {
+    background-color: $color-active;
+  }
+
+  60% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+//Menu transition. Used in dropdowns, etc.
+@keyframes menu-in {
+  from {
+    transform: scale(.5);
+    top: -33%;
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes menu-out {
+  from {
+    transform: scale(1);
+    top: 100%;
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(.5);
+    top: -33%;
+    opacity: 0;
+  }
+}
+
+// animations used in uploader, single-uploader, rx-uploader
+@keyframes jumping {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  40% {
+    transform: translate3d(0, -2px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes updown {
+  from {
+    transform: translateX(-35px);
+  }
+
+  to {
+    transform: translateX(35px);
+  }
+}
+
+@keyframes circle {
+  from {
+    transform: rotate(0deg) translateX(15px) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(15px) rotate(-360deg);
+  }
+}
+
+//Animation core classes
+.animated {
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+
+  transition-timing-function: ease;
+
+  &.fast {
+    animation-duration: $animation-fast !important;
+  }
+
+  &.medium {
+    animation-duration: $animation-medium !important;
+  }
+
+  &.slow {
+    animation-duration: $animation-slow !important;
+  }
+
+  &.xtra-slow {
+    animation-duration: $animation-extra-slow !important;
+  }
+
+  &.infinite {
+    animation-iteration-count: $animation-infinite !important;
+  }
+
+  &.transition-in {
+    @include ease($ease-transition-in);
+  }
+
+  &.transition-out {
+    @include ease($ease-transition-out);
+  }
+
+  &.transition-in-out {
+    @include ease($ease-transition-in-out);
+  }
+}
+
+//Includes for desired animation classes
+@include animation(dissolve-in, dissolve-in);
+@include animation(dissolve-out, dissolve-out);
+@include animation(scale-up-in, scale-up-in, delay-dissolve-in);
+@include animation(scale-up-out, scale-up-out, delay-dissolve-out);
+@include animation(scale-down-in, scale-down-in, delay-dissolve-in);
+@include animation(scale-down-out, scale-down-out, delay-dissolve-out);
+@include animation(pop-in, pop-in, delay-dissolve-in);
+@include animation(pop-out, pop-out, delay-dissolve-out);
+@include animation(move-up-in, move-up-in, delay-dissolve-in);
+@include animation(move-down-in, move-down-in, delay-dissolve-in);
+@include animation(move-right-in, move-right-in, delay-dissolve-in);
+@include animation(move-left-in, move-left-in, delay-dissolve-in);
+@include animation(move-up-out, move-up-out, delay-dissolve-out);
+@include animation(move-down-out, move-down-out, delay-dissolve-out);
+@include animation(move-right-out, move-right-out, delay-dissolve-out);
+@include animation(move-left-out, move-left-out, delay-dissolve-out);
+@include animation(pulse-in, pulse-in);
+@include animation(pulse-out, pulse-out);
+@include animation(flash, flash);
+@include animation(spin-90, spin-90);
+@include animation(spin-180, spin-180);
+@include animation(spin-360, spin-360);

@@ -1,0 +1,31 @@
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { RxAdminSettingsService } from '../administration/admin-settings.service';
+import { IServerResponseMessage } from '../error-handling/error-handling.types';
+import { RxLogService } from '../logging/log.service';
+import { RxCurrentUserService } from '../user/current-user.service';
+import { Message } from 'primeng/api';
+import { INotificationConfig } from './notification.interfaces';
+import * as i0 from "@angular/core";
+export declare class RxNotificationService {
+    private rxLogService;
+    private translateService;
+    private rxAdminSettingsService;
+    private rxCurrentUserService;
+    private issuesToReportSubject$;
+    private notificationSettings;
+    private componentName;
+    private messagesSubject;
+    messages$: Observable<Message>;
+    issuesToReport$: Observable<IServerResponseMessage>;
+    constructor(rxLogService: RxLogService, translateService: TranslateService, rxAdminSettingsService: RxAdminSettingsService, rxCurrentUserService: RxCurrentUserService);
+    addErrorMessage(message: string, title?: string, config?: INotificationConfig): void;
+    addWarningMessage(message: string, title?: string, config?: INotificationConfig): void;
+    addInfoMessage(message: string, title?: string, config?: INotificationConfig): void;
+    addSuccessMessage(message: string, title?: string, config?: INotificationConfig): void;
+    reportIssue(issue: IServerResponseMessage): void;
+    initialize(): void;
+    private isSticky;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxNotificationService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxNotificationService>;
+}

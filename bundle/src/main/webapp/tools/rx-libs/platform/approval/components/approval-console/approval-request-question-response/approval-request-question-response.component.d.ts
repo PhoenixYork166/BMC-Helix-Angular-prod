@@ -1,0 +1,34 @@
+import { Injector, OnInit } from '@angular/core';
+import { ActiveModalRef, FileObj, KeyValueObject } from '@bmc-ux/adapt-angular';
+import { RxRecordInstanceService } from '@helix/platform/record/api';
+import { RxNotificationService } from '@helix/platform/shared/api';
+import { TranslateService } from '@ngx-translate/core';
+import { RxApprovalConsoleService } from '../approval-console.service';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import * as i0 from "@angular/core";
+export declare class ApprovalRequestQuestionResponseComponent extends RxModalClass implements OnInit {
+    private activeModalRef;
+    private rxRecordInstanceService;
+    private rxNotificationService;
+    private translateService;
+    private rxApprovalConsoleService;
+    protected injector: Injector;
+    request: KeyValueObject;
+    attachment: FileObj[];
+    response: string;
+    enableCustomDownload: boolean;
+    private shouldSaveAttachment;
+    existingAttachmentName: string;
+    constructor(activeModalRef: ActiveModalRef, rxRecordInstanceService: RxRecordInstanceService, rxNotificationService: RxNotificationService, translateService: TranslateService, rxApprovalConsoleService: RxApprovalConsoleService, injector: Injector);
+    isDirty(): boolean;
+    ngOnInit(): void;
+    sendResponse(): void;
+    onRemovedFileFromQueue(): void;
+    onAfterFilesAdded(): void;
+    downloadAttachment: () => void;
+    cancel(): void;
+    private getExistingFile;
+    isSaveButtonDisabled(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ApprovalRequestQuestionResponseComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ApprovalRequestQuestionResponseComponent, "rx-approval-request-question-response", never, {}, {}, never, never>;
+}

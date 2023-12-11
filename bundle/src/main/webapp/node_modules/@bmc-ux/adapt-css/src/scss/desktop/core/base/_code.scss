@@ -1,0 +1,23 @@
+code {
+  font-size: $code-font-size;
+  color: $code-color;
+  padding: $code-padding-y $code-padding-x;
+  background-color: $code-bg;
+  border-radius: $kbd-border-radius;
+  font-family: $code-font-family;
+}
+
+kbd {
+  padding: $kbd-padding-y $kbd-padding-x;
+  background-color: $kbd-bg;
+  box-shadow: $kbd-box-shadow;
+  @include border-radius($kbd-border-radius);
+
+  kbd {
+    box-shadow: none;
+  }
+}
+
+samp {
+  font-size: $samp-font-size;
+}

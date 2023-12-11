@@ -1,0 +1,88 @@
+//
+// Angular Components
+//
+@import "angular/components/accordion";
+@import "angular/components/alerts";
+@import "angular/components/beard";
+@import "angular/components/busy-preloader";
+@import "angular/components/carousel";
+@import "angular/components/carousel-multi";
+@import "angular/components/collapse";
+@import "angular/components/code-viewer";
+@import "angular/components/colorpicker";
+@import "angular/components/counter";
+@import "angular/components/crop";
+@import "angular/components/datetime";
+@import "angular/components/datetime2";
+@import "angular/components/downloader";
+@import "angular/components/dropdown";
+@import "angular/components/empty-state";
+@import "angular/components/focus-tracker";
+@import "angular/components/adapt-table";
+@import "angular/components/inline-editor";
+@import "angular/components/lists";
+@import "angular/components/metatag";
+@import "angular/components/navigation";
+@import "angular/components/not-found";
+@import "angular/components/empty";
+@import "angular/components/profile";
+@import "angular/components/rating/rating.component";
+@import "angular/components/rating/rating-binary.component";
+@import "angular/components/rating/rating-like.component";
+@import "angular/components/rating/rating-voting.component";
+@import "angular/components/search";
+@import "angular/components/select";
+@import "angular/components/select-inline";
+@import "angular/components/slider";
+@import "angular/components/sidebar";
+@import "angular/components/split";
+@import "angular/components/steps";
+@import "angular/components/tabs";
+@import "angular/components/time";
+@import "angular/components/time-slots";
+@import "angular/components/textfield";
+@import "angular/components/treeview";
+@import "angular/components/typeahead";
+@import "angular/components/uploader";
+@import "angular/components/toast";
+@import "angular/components/tooltip";
+@import "angular/components/tracking";
+@import "angular/components/menu";
+@import "angular/components/rich-editor";
+@import "angular/components/anchor-navigator";
+@import "angular/components/chat/text-entry";
+@import "angular/components/chat/chat-messages";
+@import "angular/components/advanced-filtering";
+@import "angular/components/rx-form-control";
+@import "angular/components/rx-feedback";
+@import "angular/components/rx-counter";
+@import "angular/components/rx-lists";
+@import "angular/components/rx-search";
+@import "angular/components/rx-select";
+@import "angular/components/rx-typeahead";
+@import "angular/components/rx-uploader";
+@import "angular/components/rx-textfield";
+@import "angular/components/illustration";
+
+//charts
+@import "angular/components/charts/common";
+@import "angular/components/charts/legend";
+@import "angular/components/charts/line-graph";
+@import "angular/components/charts/pie";
+@import "angular/components/charts/scatter-plot";
+@import "angular/components/charts/stacked";
+@import "angular/components/charts/treemap";
+@import "angular/components/charts/chart-slider";
+@import "angular/components/charts/flow-chart";
+
+
+//workflow
+@import "angular/components/workflow/workflow";
+@import "angular/components/workflow/workflow-bar";
+@import "angular/components/workflow/workflow-carousel";
+@import "angular/components/workflow/workflow-dot";
+@import "angular/components/workflow/workflow-step";
+
+// CSS variables
+@import "../css-var-alias";
+

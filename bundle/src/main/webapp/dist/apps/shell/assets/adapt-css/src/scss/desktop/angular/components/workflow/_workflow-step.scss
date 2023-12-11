@@ -1,0 +1,312 @@
+.a-workflow__step {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  font-size: $font-size-base;
+  color: $gray-500;
+  @include rtl(text-align, left);
+  user-select: none;
+
+  &.is-last {
+
+    justify-content: flex-end;
+
+    .a-workflow__step-sub,
+    .a-workflow__step-title {
+      justify-content: flex-end;
+    }
+
+    &.is-small,
+    &.is-medium,
+    &.is-large {
+      .a-workflow__step-title,
+      .a-workflow__step-sub {
+        width: auto;
+      }
+    }
+
+  }
+
+  &.is-rtl {
+    justify-content: flex-end;
+
+    .a-workflow__step-icon {
+      padding-right: 0;
+      padding-left: .25rem;
+    }
+  }
+
+  &.is-large {
+    width: $w-step-large-width;
+
+    .a-workflow__step-title,
+    .a-workflow__step-sub {
+      width: $w-step-large-width;
+    }
+  }
+
+  &.is-small {
+    width: $w-step-small-width;
+
+    .a-workflow__step-title,
+    .a-workflow__step-sub {
+      width: $w-step-small-width;
+    }
+  }
+
+  &.is-medium {
+    width: $w-step-medium-width;
+
+    .a-workflow__step-title,
+    .a-workflow__step-sub {
+      width: $w-step-medium-width;
+    }
+  }
+
+  &.is-active {
+    color: $gray-900;
+
+    .a-workflow__step-title {
+      color: $gray-900;
+    }
+  }
+
+  &:not(:last-child) {
+    padding-right: $sidebar-padding;
+  }
+
+  &:hover {
+    .a-workflow__step-title {
+      color: $gray-900;
+    }
+
+    .a-workflow__step-sub {
+      color: $color-active;
+    }
+
+    .a-workflow__dot {
+      &:not(.is-active) {
+        transform: scale($animation-scaling-out);
+        background: $color-active;
+        border-color: $color-active;
+      }
+    }
+  }
+
+  &.is-success {
+    .a-workflow__step-title {
+      color: $color-success;
+    }
+
+    .a-workflow__step-icon {
+      color: $color-success;
+    }
+  }
+
+  &.is-warning {
+    .a-workflow__step-title {
+      color: $color-primary;
+    }
+
+    .a-workflow__step-icon {
+      color: $color-warning;
+    }
+  }
+
+  &.is-info {
+    .a-workflow__step-title,
+    .a-workflow__step-icon {
+      color: $color-info;
+    }
+  }
+
+  &.is-danger {
+    .a-workflow__step-title,
+    .a-workflow__step-icon {
+      color: $color-critical;
+    }
+  }
+}
+
+.a-workflow__step-icon {
+  font-size: $font-size-lg;
+  line-height: 1;
+  padding-right: .25rem;
+}
+
+.a-workflow__step-title {
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: $gray-500;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+}
+
+.a-workflow__step-sub {
+  font-size: $font-size-base;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+
+.a-workflow__step-title,
+.a-workflow__step-sub {
+  position: relative;
+  transition: color .2s cubic-bezier(.4, 0, .2, 1);
+  @include text-truncate();
+}
+
+.a-workflow__step-sub_icon {
+  transition: none !important;
+}
+
+adapt-workflow-bar {
+  display: block;
+  position: relative;
+}
+
+.a-workflow {
+  .a-workflow__step {
+    align-items: baseline;
+    width: auto;
+    text-align: left;
+    padding-right: 0;
+
+    &.is-rtl {
+      text-align: right;
+
+      .a-workflow__step-down {
+        right: auto;
+        left: 0;
+      }
+    }
+
+    &:not(:last-child) {
+      padding-bottom: 1.75rem;
+    }
+
+    .a-workflow__step-sub {
+      display: inline-block;
+    }
+
+    .a-workflow__step-title,
+    .a-workflow__step-sub {
+      width: auto;
+    }
+
+    &::after {
+      top: 0;
+      left: -1.25rem;
+      margin-left: 0;
+    }
+
+    &:first-child {
+      .a-workflow__step-progress {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+      }
+    }
+
+    &:last-child {
+      .a-workflow__step-progress {
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+      }
+
+      &::after {
+        top: .25rem;
+      }
+    }
+
+    &:hover {
+      .a-workflow__step-down {
+        color: $gray-900;
+      }
+    }
+  }
+
+  .a-workflow__step-content {
+    position: relative;
+    width: 100%;
+    white-space: normal;
+  }
+}
+
+.a-workflow-bar__step-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  &.is-first {
+    .a-workflow__dot {
+      margin-left: 10px;
+    }
+  }
+
+  &.is-complete-last {
+    .a-workflow__dot {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+    }
+  }
+
+  .a-workflow__dot {
+    top: 0;
+    position: relative;
+    left: -.25rem;
+  }
+
+  &.is-rtl {
+    &.is-first {
+      .a-workflow__dot {
+        margin-left: 0;
+        margin-right: 10px;
+        @if($rtl-mode) {
+          margin: 0 !important;
+          right: .25rem !important;
+          left: auto;
+        }
+      }
+    }
+
+    .a-workflow__dot {
+      left: .25rem !important;
+      @if($rtl-mode) {
+        right: auto !important;
+      }
+    }
+  }
+}
+
+.a-workflow__step-down {
+  display: inline-block;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: $gray-700;
+  border: none;
+  outline: none;
+  transition: all .25s cubic-bezier(.4, 0, .2, 1);
+
+  &.is-collapsed {
+    transform: rotate(-180deg);
+  }
+}
+
+.a-workflow__step-content {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}

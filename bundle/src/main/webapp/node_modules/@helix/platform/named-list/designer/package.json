@@ -1,0 +1,14 @@
+{
+  "name": "@helix/platform/named-list/designer",
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-named-list-designer.umd.js",
+  "module": "../../fesm2015/helix-platform-named-list-designer.js",
+  "es2015": "../../fesm2015/helix-platform-named-list-designer.js",
+  "esm2015": "../../esm2015/named-list/designer/helix-platform-named-list-designer.js",
+  "fesm2015": "../../fesm2015/helix-platform-named-list-designer.js",
+  "typings": "helix-platform-named-list-designer.d.ts",
+  "sideEffects": false
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/user-preferences/index.ts"],"names":[],"mappings":"AAAA,cAAc,4BAA4B,CAAC;AAC3C,cAAc,8BAA8B,CAAC","sourcesContent":["export * from './user-preferences.service';\nexport * from './user-preferences.constants';\n"]}

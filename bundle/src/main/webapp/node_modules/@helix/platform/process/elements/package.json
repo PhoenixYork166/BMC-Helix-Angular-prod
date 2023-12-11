@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-process-elements.umd.js",
+  "module": "../../fesm2015/helix-platform-process-elements.js",
+  "es2015": "../../fesm2015/helix-platform-process-elements.js",
+  "esm2015": "../../esm2015/process/elements/helix-platform-process-elements.js",
+  "fesm2015": "../../fesm2015/helix-platform-process-elements.js",
+  "typings": "helix-platform-process-elements.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/process/elements"
+}

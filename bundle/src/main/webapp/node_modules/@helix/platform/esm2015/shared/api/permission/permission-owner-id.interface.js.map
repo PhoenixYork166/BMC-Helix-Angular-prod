@@ -1,0 +1,1 @@
+{"version":3,"file":"permission-owner-id.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/permission/permission-owner-id.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IPermissionOwnerId {\n  value: number;\n  type: 'GROUP' | 'ROLE' | 'USER';\n  name: string;\n  roleApplicationName?: string;\n}\n"]}

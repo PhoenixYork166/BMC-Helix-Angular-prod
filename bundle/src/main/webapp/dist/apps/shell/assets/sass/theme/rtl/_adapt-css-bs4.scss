@@ -1,0 +1,58 @@
+//
+// Core CSS
+//
+@import "../desktop/core/base/reboot";
+@import "core/type-rtl";
+@import "../desktop/core/base/code";
+
+@import "../desktop/core/utils/bidi";
+//
+//
+// Components
+//
+@import "../desktop/core/components/alerts";
+@import "core/badges-rtl";
+@import "../desktop/core/components/breadcrumbs";
+@import "core/buttons-rtl";
+@import "../desktop/core/components/card";
+@import "../desktop/core/components/carousel";
+@import "../desktop/core/components/close";
+@import "core/docked-panel-rtl";
+@import "core/dropdowns-rtl";
+@import "../desktop/core/components/figure";
+@import "core/forms-rtl";
+@import "../desktop/core/components/images";
+@import "../desktop/core/components/list-group";
+@import "../desktop/core/components/logo";
+@import "core/metatags-rtl";
+@import "core/modal-rtl";
+@import "../desktop/core/components/navbar";
+@import "core/navs-rtl";
+@import "../desktop/core/components/pagination";
+@import "../desktop/core/components/pins";
+@import "../desktop/core/components/play-button";
+@import "../desktop/core/components/popover";
+@import "core/progress-rtl";
+@import "../desktop/core/components/switcher";
+@import "../desktop/core/components/tables";
+@import "../desktop/core/components/tooltip";
+//
+//
+// Utility and helper classes
+//
+@import "../desktop/core/utils/animation";
+@import "../desktop/core/utils/background";
+@import "../desktop/core/utils/border";
+@import "../desktop/core/utils/prevent-focus";
+@import "../desktop/core/utils/shadows";
+@import "../desktop/core/utils/utilities";
+//
+//
+// Login screen
+//
+@import "../desktop/core/templates/login";
+//
+//
+// Page loader
+//
+@import "../desktop/core/components/page-loader-indeterminate";

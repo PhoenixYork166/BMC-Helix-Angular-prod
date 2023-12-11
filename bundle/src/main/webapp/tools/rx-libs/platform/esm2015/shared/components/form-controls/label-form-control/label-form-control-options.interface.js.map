@@ -1,0 +1,1 @@
+{"version":3,"file":"label-form-control-options.interface.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/shared/components/form-controls/label-form-control/label-form-control-options.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface ILabelFormControlOptions {\n  label: string;\n  labelKey?: string;\n}\n"]}

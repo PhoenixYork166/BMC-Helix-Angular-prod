@@ -1,0 +1,213 @@
+.nav-item {
+  padding: $nav-item-padding;
+}
+
+.nav-link {
+  font-size: $nav-link-font-size;
+}
+
+.nav-tabs {
+  background-color: $nav-tabs-bg;
+  padding: 0 1rem;
+
+  .nav-item + .nav-item {
+    margin-right: -1px;
+  }
+
+  .nav-link {
+    color: $nav-tabs-link-color;
+    transition: color .25s, opacity .25s, background .25s, padding .25s;
+
+    &:hover {
+      color: $nav-tabs-link-hover-color;
+    }
+
+    &.disabled {
+      color: color-variant($nav-tabs-link-color, disabled);
+
+      &:hover {
+        opacity: .65;
+        cursor: not-allowed;
+      }
+    }
+
+    &.active {
+      color: $nav-tabs-link-active-color;
+      font-weight: 600;
+      cursor: default;
+      border-bottom-color: transparent;
+    }
+  }
+
+  &.nav-inverse {
+    background-color: $nav-tabs-bg-inverse;
+
+    .nav-link.active {
+      background-color: $nav-tabs-bg;
+      border-bottom-color: transparent;
+    }
+  }
+
+  &.nav-bordered {
+    border-top: $nav-tabs-border-width solid $nav-tabs-border-color;
+
+    .nav-item {
+      margin-top: -1px;
+    }
+  }
+
+  &.nav-justified {
+    border-bottom: 0;
+    padding: 0;
+
+    .nav-item {
+      display: table-cell;
+      float: none;
+      width: 1%;
+      text-align: center;
+
+      &:first-child a {
+        border-right: 0;
+      }
+
+      &:last-child a {
+        border-left: 0;
+      }
+
+      a {
+        border-bottom-color: $nav-tabs-link-hover-border-color;
+
+        &.active {
+          border-bottom-color: transparent;
+        }
+
+        &.disabled {
+          border-bottom-color: $nav-tabs-link-hover-border-color;
+        }
+      }
+    }
+  }
+
+  &.nav-bordered.nav-justified {
+    .nav-item a {
+      //border-top: 0;
+    }
+  }
+}
+
+.tab-content {
+  &.is-inverse {
+    background: $nav-tabs-bg;
+  }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* IE10+ specific styles go here */
+  // fix for https://github.bmc.com/bmc-ux/adapt-css/issues/614
+  .nav-justified.nav-tabs .nav-item {
+    display: list-item;
+  }
+}
+
+.nav-pills:not(.nav-stacked) {
+  .nav-link {
+    &::after {
+      height: .125rem;
+      width: 0;
+      left: 50%;
+      right: 0;
+      bottom: 0;
+      will-change: width, left;
+      transition: width .2s ease, left .2s ease;
+    }
+
+    &.active:not(.disabled) {
+      &::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+}
+
+.nav-pills {
+  border-bottom: 1px solid $nav-tabs-border-color;
+
+  .nav-item {
+    margin-bottom: -1px;
+  }
+
+  .nav-link {
+    color: $nav-pills-link-color;
+    padding: $nav-pills-link-padding;
+    transition: color .25s;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      background: $nav-pills-active-border-color;
+      z-index: 333;
+    }
+
+    &:hover,
+    &:focus {
+      color: $nav-tabs-link-hover-color;
+    }
+
+    &:active:hover:not(.disabled) {
+      color: color-variant($nav-tabs-link-hover-color, active);
+    }
+
+    &.active:not(.disabled) {
+      color: $nav-pills-link-color;
+      font-weight: 600;
+      cursor: default;
+    }
+
+    &.disabled {
+      color: color-variant($text-secondary, disabled);
+
+      &:hover {
+        opacity: .65;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.nav-stacked {
+  border-bottom: 0;
+  flex-direction: column;
+
+  .nav-link {
+    padding: $nav-pills-stacked-link-padding;
+    margin: $nav-pills-stacked-link-margin;
+    border-bottom: 0;
+    transition: color .25s;
+
+    &::after {
+      width: .125rem;
+      height: 0;
+      right: 0;
+      bottom: 0;
+      top: 50%;
+      will-change: width, left;
+      transition: height .2s ease, top .2s ease;
+    }
+
+    &.active:not(.disabled) {
+      color: $nav-pills-link-color;
+
+      &::after {
+        height: 100%;
+        top: 0;
+      }
+    }
+  }
+
+  .nav-item {
+    margin-bottom: 0;
+  }
+}

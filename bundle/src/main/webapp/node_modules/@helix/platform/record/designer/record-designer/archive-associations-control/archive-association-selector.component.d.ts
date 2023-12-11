@@ -1,0 +1,42 @@
+import { Injector, OnInit, TemplateRef } from '@angular/core';
+import { ActiveModalRef } from '@bmc-ux/adapt-angular';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { ColumnConfig } from '@bmc-ux/adapt-table';
+import { IArchiveAssociationGridRow } from './archive-associations-control.types';
+import { AssociationSelectionType, IAssociationsToFollowForArchive } from '@helix/platform/record/api';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class ArchiveAssociationSelectorComponent extends RxModalClass implements OnInit {
+    private activeModalRef;
+    private translateService;
+    protected injector: Injector;
+    nameCellTemplate: TemplateRef<any>;
+    enforceCellTemplate: TemplateRef<any>;
+    isOverlayMode: any;
+    isReadOnly: any;
+    actualAssociationsToFollow: IAssociationsToFollowForArchive;
+    private selectedAssociationsToFollow;
+    associationType: AssociationSelectionType;
+    associationTypes: {
+        followParent: AssociationSelectionType;
+        selected: AssociationSelectionType;
+        allEnforced: AssociationSelectionType;
+        all: AssociationSelectionType;
+    };
+    columns: ColumnConfig[];
+    associationGridRows: IArchiveAssociationGridRow[];
+    selectedAssociationGridRows: IArchiveAssociationGridRow[];
+    constructor(activeModalRef: ActiveModalRef, translateService: TranslateService, injector: Injector);
+    ngOnInit(): void;
+    cancel(): void;
+    onSelectionChange(selectedRows: IArchiveAssociationGridRow[]): void;
+    disabledRowSelectionResolver(rowData: IArchiveAssociationGridRow): boolean;
+    selectAssociations(): void;
+    private selectAssociationsFromBase;
+    private disableRowSelectionForEnforcedAssociations;
+    private disableRowSelection;
+    private enableRowSelection;
+    save(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ArchiveAssociationSelectorComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ArchiveAssociationSelectorComponent, "rx-archive-associations-editor", never, {}, {}, never, never>;
+}

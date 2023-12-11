@@ -1,0 +1,348 @@
+%ng-busy-absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.ng-busy {
+  z-index: $zindex-loader;
+
+  &,
+  > * {
+    @extend %ng-busy-absolute;
+  }
+}
+
+.ng-busy-backdrop {
+  @extend %ng-busy-absolute;
+  z-index: $zindex-loader-backdrop;
+  background: $busy-backdrop-color;
+
+  &.app,
+  &.page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &.inline {
+    position: static;
+    display: inline-block;
+  }
+}
+
+.ng-busy-default-wrapper {
+  @extend %ng-busy-absolute;
+  display: flex;
+  text-align: center;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-container {
+  position: relative;
+  display: inline-block;
+  padding: 1.25rem;
+
+  .loader-app {
+    width: 200px;
+    height: 200px;
+    border: 4px solid transparent;
+    border-top-color: $busy-default-inner-color;
+    border-radius: 50%;
+    animation: spin-360 2s linear infinite;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      border: 4px solid transparent;
+      border-radius: 50%;
+    }
+
+    &::before {
+      top: 4px;
+      right: 4px;
+      bottom: 4px;
+      left: 4px;
+      border-top-color: $busy-default-outer-color;
+      animation: spin-360 3s linear infinite;
+    }
+
+    &::after {
+      top: 12px;
+      right: 12px;
+      bottom: 12px;
+      left: 12px;
+      border-top-color: $busy-default-middle-color;
+      animation: spin-360 1.5s linear infinite;
+    }
+  }
+
+  .loader-app-title {
+    position: absolute;
+    top: 50%;
+    left: 50%; // For RTL and LTL
+    margin: 0;
+    padding: 0;
+    font-weight: $busy-font-weight;
+    transform: translate(-50%, -50%);
+  }
+
+  .loader-app__determinate,
+  .loader-inline__determinate {
+    transform-origin: center;
+
+    circle {
+      fill: transparent;
+      transform-origin: center;
+      transform: rotate(-90deg);
+      transition: stroke-dashoffset $animation-fast $ease-transition-in;
+    }
+
+    text {
+      font-size: 1.3125rem;
+      font-weight: 300;
+    }
+  }
+
+  .loader-app__determinate {
+    --color-final: #{if($rtl-mode, $busy-default-outer-color, $busy-default-inner-color)};
+    --color-middle: #{if($rtl-mode, $busy-default-middle-color, $busy-default-outer-color)};
+    --color-initial: #{if($rtl-mode, $busy-default-inner-color, $busy-default-middle-color)};
+
+    circle {
+      stroke: $busy-backdrop-color;
+    }
+
+    .gradient-color-initial {
+      stop-color: var(--color-initial);
+    }
+
+    .gradient-color-middle {
+      stop-color: var(--color-middle);
+    }
+
+    .gradient-color-final {
+      stop-color: var(--color-final);
+    }
+  }
+
+  .loader-inline__determinate circle {
+    stroke: $busy-inline-color;
+  }
+
+  .loader-inline__determinate .loader-footprint {
+    stroke: $busy-inline-circle-color;
+  }
+
+  .loader-page {
+    /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+    @extend .loader-app;
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+    animation: spin-360 .8s linear infinite;
+
+    &::before,
+    &::after {
+      border-width: 3px;
+    }
+
+    &::before {
+      animation: spin-360 3s linear infinite;
+    }
+
+    &::after {
+      animation: spin-360 1.5s linear infinite;
+    }
+  }
+
+  .loader-page-title {
+    position: absolute;
+    bottom: -5px;
+    left: 50%; // For RTL and LTL
+    transform: translate(-50%);
+  }
+
+  .loader-section {
+    position: relative;
+    width: 11px;
+    height: 11px;
+    margin: 0 calc(11px + .5625rem);
+    border-radius: 50%;
+    background: $busy-section-color;
+    animation: loader-flash 1.4s linear infinite .2s;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      display: block;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: $busy-section-color;
+      animation: loader-flash 1.4s linear infinite;
+    }
+
+    &::before {
+      left: -1.25rem; // For RTL and LTL
+      animation-delay: if($rtl-mode, .4s, 0s);
+    }
+
+    &::after {
+      right: -1.25rem; // For RTL and LTL
+      animation-delay: if($rtl-mode, 0s, .4s);
+    }
+  }
+
+  .loader-section__determinate {
+    display: inline-flex;
+
+    .dot_1,
+    .dot_2,
+    .dot_3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: $gray-200;
+
+      &:not(:last-child) {
+        @include rtl(margin-right, .5625rem);
+      }
+
+      > svg {
+        fill: $busy-section-color;
+        transition: r $animation-fast $ease-transition-in, fill-opacity $animation-fast $ease-transition-in;
+      }
+    }
+  }
+
+  .loader-inline {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-bottom: -2px;
+    border: 1px solid $busy-inline-circle-color;
+    border-top-color: $busy-inline-color;
+    border-radius: 50%;
+    animation: spin-360 .8s linear infinite;
+  }
+
+  .loader-special {
+    position: relative;
+    display: inline-block;
+    width: 85px;
+    height: 85px;
+    margin: 10px;
+    font-size: $h2-font-size;
+    font-weight: $font-weight-base;
+    line-height: 85px;
+    border-radius: 50%;
+    background-color: $busy-special-bg-color;
+    background-size: contain;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      bottom: -7px;
+      left: -7px;
+      border: 3px solid transparent;
+      border-top-color: $busy-special-color;
+      border-radius: 50%;
+      animation: spin-360 1s linear infinite;
+    }
+  }
+
+  .loader-special__determinate {
+    transform-origin: center;
+
+    circle:first-child {
+      fill: $busy-special-bg-color;
+    }
+
+    circle:last-child {
+      fill: transparent;
+      stroke: $busy-inline-color;
+      transform-origin: center;
+      transform: rotate(-90deg);
+      transition: stroke-dashoffset $animation-fast $ease-transition-in;
+    }
+  }
+}
+
+.ng-busy-app,
+.ng-busy-page {
+  position: fixed;
+}
+
+.ng-busy-page {
+  .loader-page-title {
+    white-space: nowrap;
+  }
+}
+
+.ng-busy-inline {
+  position: static;
+  display: inline-block;
+  color: $busy-inline-text-color;
+
+  .ng-busy-default-wrapper {
+    position: static;
+    display: inline-block;
+  }
+
+  .loader-container {
+    margin: 0 10px;
+    padding: 0;
+    vertical-align: middle;
+  }
+}
+
+.adapt-build-in-loader {
+  position: relative;
+  transition: if($rtl-mode, padding-right, padding-left) .25s ease-out; // animation ends, need to shrink button down
+
+  &::before {
+    position: absolute;
+    top: calc(50% - 1.25rem/2);
+    @include rtl(left, 2.5rem);
+    box-sizing: border-box;
+    content: "";
+    width: 1.25rem;
+    height: 1.25rem;
+    opacity: 0;
+    border-radius: 50%;
+    //transition: left .25s ease-out; // move spinner off
+    //animation: dissolve-out .125s ease-out forwards;  // need to dissolve spinner at the end
+  }
+}
+
+.adapt-build-in-loader-active {
+  transition: if($rtl-mode, padding-right, padding-left) .25s ease-in-out; // start of animation - expand the button
+  @include rtl(padding-left, 2.75rem !important);
+
+  &::before {
+    @include rtl(left, 1rem);
+    opacity: 1;
+    animation: spin-360 .6s linear infinite, dissolve-in .25s ease-in-out forwards; // rotate and fade in spinner
+    transition: if($rtl-mode, right, left) .25s ease-in-out;    // move spinner to the left
+  }
+}
+
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}

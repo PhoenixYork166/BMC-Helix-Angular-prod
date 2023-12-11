@@ -1,0 +1,25 @@
+import { Component, Input } from '@angular/core';
+import { RxShellMenuGroupDesignModel } from './shell-menu-group-design.model';
+import { RX_SHELL } from '@helix/platform/view/api';
+import * as i0 from "@angular/core";
+import * as i1 from "@bmc-ux/adapt-angular";
+import * as i2 from "@helix/platform/view/designer";
+import * as i3 from "@angular/common";
+export class RxShellMenuGroupDesignComponent {
+    dropPredicate(data) {
+        return data.draggedViewComponentDescriptor.type === RX_SHELL.navBar.menuItem;
+    }
+}
+RxShellMenuGroupDesignComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.1.3", ngImport: i0, type: RxShellMenuGroupDesignComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+RxShellMenuGroupDesignComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.1.3", type: RxShellMenuGroupDesignComponent, selector: "rx-shell-menu-group-design", inputs: { model: "model" }, ngImport: i0, template: "<div adaptDropdown [autoClose]=\"false\" [placement]=\"['bottom-left']\">\n  <div class=\"label-wrapper pr-0\" adaptDropdownToggle>\n    <span class=\"label d-icon-right-angle_down\">{{ model.label$ | async }}</span>\n  </div>\n\n  <rx-canvas-outlet adaptDropdownMenu [dropPredicate]=\"dropPredicate\"></rx-canvas-outlet>\n</div>\n", styles: [":root{--border-radius: 4px;--nav-background: var(--gray-900);--nav-links-color: var(--white);--font-family: \"Open Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;--color-primary-disabled-hover: #ff8d2a;--color-primary-disabled: #ff7d18;--color-primary: #f86e00;--color-primary-hover: #e45f00;--color-primary-active: #d05100;--color-primary-active-hover: #bc4300;--color-secondary-disabled-hover: #ffffff;--color-secondary-disabled: #ffffff;--color-secondary: #f9f9fa;--color-secondary-hover: #e5e5e6;--color-secondary-active: #d2d2d3;--color-secondary-active-hover: #c0c0c2;--color-active-disabled-hover: #45c8bd;--color-active-disabled: #2db7ad;--color-active: #00a79d;--color-active-hover: #00978e;--color-active-active: #00887f;--color-active-active-hover: #007970;--color-info-disabled-hover: #66d9f1;--color-info-disabled: #52c7df;--color-info: #3cb6ce;--color-info-hover: #21a6bd;--color-info-active: #0096ad;--color-info-active-hover: #00879e;--color-success-disabled-hover: #aae860;--color-success-disabled: #99d550;--color-success: #89c341;--color-success-hover: #7ab232;--color-success-active: #6ba122;--color-success-active-hover: #5d9110;--color-warning-disabled-hover: #ffda46;--color-warning-disabled: #ffc734;--color-warning: #f1b521;--color-warning-hover: #dea406;--color-warning-active: #cc9400;--color-warning-active-hover: #ba8400;--color-danger-disabled-hover: #ff5323;--color-danger-disabled: #ff4313;--color-danger: #f83200;--color-danger-hover: #e31f00;--color-danger-active: #cd0500;--color-danger-active-hover: #b80000;--dense-spacing-custom: false;--table-scroll-width: 0}.label-wrapper{min-height:42px;display:flex;align-items:center;cursor:pointer}.label{padding:0 10px;font-size:14px}rx-canvas-outlet{background:#313538;color:#fff;width:250px;overflow-x:hidden}rx-canvas-outlet ::ng-deep>rx-canvas-item-container>.row>.col>rx-canvas-item-column>.cdk-drop-list{min-height:200px}\n"], components: [{ type: i1.AdaptDropdownDirective, selector: "adapt-dropdown, [adaptDropdown]", inputs: ["autoClose", "customClass", "closeOnEscape", "placement", "animationPlacement", "holdFocusInMenu", "holdFocusOnOpen", "autoFocusFirst", "restoreFocusAfterClose", "focusNextElementAfterClose", "appendToBody", "appendTo", "positionTo", "anchorPositionTrackingIntervalMs", "enableAnchorPositionTracking", "recalculatePositionOnElementResize", "setMobileState", "mobileView"], outputs: ["onOpen", "onClose", "anchorPositionChange", "popupAnimationDone"], exportAs: ["adaptDropdown"] }, { type: i2.CanvasOutletComponent, selector: "rx-canvas-outlet", inputs: ["name", "skipParentPredicate", "containerComponent", "dropListOrientation", "dropPredicate"], outputs: ["beforeViewComponentDrop"] }], directives: [{ type: i1.AdaptDropdownToggleDirective, selector: "[adaptDropdownToggle]", inputs: ["showCaret", "dropdownTogglerType"] }, { type: i1.AdaptDropdownMenuDirective, selector: "[adaptDropdownMenu]" }], pipes: { "async": i3.AsyncPipe } });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.1.3", ngImport: i0, type: RxShellMenuGroupDesignComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'rx-shell-menu-group-design',
+                    templateUrl: './shell-menu-group-design.component.html',
+                    styleUrls: ['./shell-menu-group-design.component.scss']
+                }]
+        }], propDecorators: { model: [{
+                type: Input
+            }] } });
+//# sourceMappingURL=shell-menu-group-design.component.js.map

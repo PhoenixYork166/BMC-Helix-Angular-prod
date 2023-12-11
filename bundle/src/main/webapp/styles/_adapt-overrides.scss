@@ -1,0 +1,276 @@
+// Override adapt docked panel and modal dialog styles to support more sizes.
+
+$rx-modal-xsmall-width: 450px !default;
+$rx-modal-small-width: 650px !default;
+$rx-modal-medium-width: 800px !default;
+$rx-modal-large-width: 1024px !default;
+$rx-modal-xlarge-width: 1200px !default;
+$rx-modal-xxlarge-width: 1600px !default;
+$rx-modal-xsmall-min-height: 400px !default;
+$rx-modal-small-min-height: 400px !default;
+$rx-modal-medium-min-height: 600px !default;
+$rx-modal-large-min-height: 768px !default;
+$rx-modal-xlarge-min-height: 768px !default;
+$rx-modal-xxlarge-min-height: 768px !default;
+
+@mixin rx-row-wrap-column($breakpoint) {
+  @for $i from 1 through 12 {
+    .col-#{$breakpoint}-#{$i} {
+      flex: 1 1 auto;
+      max-width: 100%;
+    }
+  }
+}
+
+@mixin rx-responsive-blade {
+  width: 100vw;
+}
+
+adapt-docked-panel {
+  .dp-size {
+    &-rx-xs {
+      width: $rx-modal-xsmall-width;
+
+      @media (max-width: $rx-modal-xsmall-width) {
+        @include rx-responsive-blade;
+      }
+
+      rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+        @include rx-row-wrap-column(sm);
+        @include rx-row-wrap-column(md);
+        @include rx-row-wrap-column(lg);
+        @include rx-row-wrap-column(xl);
+        @include rx-row-wrap-column(xxl);
+      }
+    }
+
+    &-rx-sm {
+      width: $rx-modal-small-width;
+
+      @media (max-width: $rx-modal-small-width) {
+        @include rx-responsive-blade;
+      }
+
+      rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+        @include rx-row-wrap-column(md);
+        @include rx-row-wrap-column(lg);
+        @include rx-row-wrap-column(xl);
+        @include rx-row-wrap-column(xxl);
+      }
+    }
+
+    &-rx-md {
+      width: $rx-modal-medium-width;
+
+      @media (max-width: $rx-modal-medium-width) {
+        @include rx-responsive-blade;
+      }
+
+      rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+        @include rx-row-wrap-column(lg);
+        @include rx-row-wrap-column(xl);
+        @include rx-row-wrap-column(xxl);
+      }
+    }
+
+    &-rx-lg {
+      width: $rx-modal-large-width;
+
+      @media (max-width: $rx-modal-large-width) {
+        @include rx-responsive-blade;
+      }
+
+      rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+        @include rx-row-wrap-column(xl);
+        @include rx-row-wrap-column(xxl);
+      }
+    }
+
+    &-rx-xl {
+      width: $rx-modal-xlarge-width;
+
+      @media (max-width: $rx-modal-xlarge-width) {
+        @include rx-responsive-blade;
+      }
+
+      rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+        @include rx-row-wrap-column(xxl);
+      }
+    }
+
+    &-rx-xxl {
+      width: $rx-modal-xxlarge-width;
+
+      @media (max-width: $rx-modal-xxlarge-width) {
+        @include rx-responsive-blade;
+      }
+    }
+  }
+}
+
+@mixin rx-responsive-modal($width) {
+  max-width: $width;
+
+  @media (max-width: $width) {
+    padding: 0 5px 5px;
+  }
+}
+
+adapt-modal {
+  .modal {
+    padding: 0;
+
+    .modal-header {
+      .modal-title {
+        @include ellipsis();
+      }
+    }
+
+    .modal-body {
+      rx-runtime-view-root,
+      .content-outlet {
+        overflow: visible;
+      }
+    }
+
+    .modal-dialog.modal-size {
+      &-rx-xs {
+        .modal-body {
+          min-height: $rx-modal-xsmall-min-height;
+        }
+        @include rx-responsive-modal($rx-modal-xsmall-width);
+
+        rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+          @include rx-row-wrap-column(sm);
+          @include rx-row-wrap-column(md);
+          @include rx-row-wrap-column(lg);
+          @include rx-row-wrap-column(xl);
+          @include rx-row-wrap-column(xxl);
+        }
+      }
+      &-rx-sm {
+        .modal-body {
+          min-height: $rx-modal-small-min-height;
+        }
+        @include rx-responsive-modal($rx-modal-small-width);
+
+        rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+          @include rx-row-wrap-column(md);
+          @include rx-row-wrap-column(lg);
+          @include rx-row-wrap-column(xl);
+          @include rx-row-wrap-column(xxl);
+        }
+      }
+      &-rx-md {
+        .modal-body {
+          min-height: $rx-modal-medium-min-height;
+        }
+        @include rx-responsive-modal($rx-modal-medium-width);
+
+        rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+          @include rx-row-wrap-column(lg);
+          @include rx-row-wrap-column(xl);
+          @include rx-row-wrap-column(xxl);
+        }
+      }
+      &-rx-lg {
+        .modal-body {
+          min-height: $rx-modal-large-min-height;
+        }
+        @include rx-responsive-modal($rx-modal-large-width);
+
+        rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+          @include rx-row-wrap-column(xl);
+          @include rx-row-wrap-column(xxl);
+        }
+      }
+      &-rx-xl {
+        .modal-body {
+          min-height: $rx-modal-xlarge-min-height;
+        }
+        @include rx-responsive-modal($rx-modal-xlarge-width);
+
+        rx-runtime-view rx-runtime-view-canvas-item-container > .row > {
+          @include rx-row-wrap-column(xxl);
+        }
+      }
+
+      &-rx-xxl {
+        .modal-body {
+          min-height: $rx-modal-xxlarge-min-height;
+        }
+        @include rx-responsive-modal($rx-modal-xxlarge-width);
+      }
+
+      &-rx-full-size {
+        max-width: 100%;
+        padding-left: 0;
+        margin: -15px 0;
+
+        .modal-body {
+          padding: 0;
+        }
+
+        .modal-content {
+          min-height: 100vh;
+        }
+      }
+    }
+  }
+}
+
+adapt-code-viewer.full-size {
+  height: 100%;
+  overflow: auto;
+
+  .code-viewer {
+    height: 100%;
+
+    .code-viewer__highlighted-code-wrap {
+      height: 100%;
+
+      .code-toolbar {
+        height: 100%;
+
+        pre[class*='language-'] {
+          height: 100%;
+          resize: none;
+        }
+      }
+    }
+  }
+}
+
+// TODO: remove after ADAPT issue is resolved:
+// https://github.bmc.com/bmc-ux/adapt-angular/issues/2436
+.a3t-datetime--input-control {
+  padding-right: 2.2rem;
+}
+
+// .ng-valid is not added to fields without validation, so have to use :not()
+.textfield.is-icons .form-control:not(.ng-invalid) {
+  padding-right: 1rem;
+}
+
+// TODO: remove after ADAPT issue is resolved:
+// https://github.bmc.com/bmc-ux/adapt-angular/issues/2482
+adapt-select button.dropdown-toggle {
+  height: 38px;
+}
+
+// TODO: remove after ADAPT issue is resolved:
+// https://github.bmc.com/bmc-ux/adapt-angular/issues/2483
+// Override adapt styles to allow rx-record-grid to fill all available virtical space.
+adapt-table,
+adapt-table > div,
+p-table {
+  height: 100% !important;
+}
+
+adapt-dropdown-window2 {
+  .rx-truncate-option-content {
+    .rx-select__option-content {
+      overflow: hidden;
+    }
+  }
+}

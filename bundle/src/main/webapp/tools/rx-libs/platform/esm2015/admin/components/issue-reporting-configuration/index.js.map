@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/issue-reporting-configuration/index.ts"],"names":[],"mappings":"AAAA,cAAc,2CAA2C,CAAC;AAC1D,cAAc,qDAAqD,CAAC","sourcesContent":["export * from './issue-reporting-configuration.component';\nexport * from './issue-reporting-configuration-registration.module';\n"]}

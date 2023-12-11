@@ -1,0 +1,80 @@
+@mixin setRatingDimensions($val) {
+  width: $val;
+  height: $val;
+}
+
+.a-rating {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.a-rating__item {
+  padding: 0 $rating-padding;
+  font-size: $rating-extra-small;
+  color: $rating-bg;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  background: transparent;
+
+  .icon:before {
+    vertical-align: middle;
+  }
+
+  .a-rating__icon {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    @include setRatingDimensions($rating-extra-small);
+
+    .icon {
+      display: flex;
+      position: absolute;
+      opacity: 0;
+      transition: $animation-fast $ease-transition-in;
+
+      &.icon-visible {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.is-readonly {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.a-rating_small {
+  .a-rating__item {
+    font-size: $rating-small;
+
+    .a-rating__icon {
+      @include setRatingDimensions($rating-small);
+    }
+  }
+}
+
+.a-rating_medium {
+  .a-rating__item {
+    font-size: $rating-medium;
+
+    .a-rating__icon {
+      @include setRatingDimensions($rating-medium);
+    }
+  }
+}
+
+.a-rating_large {
+  .a-rating__item {
+    font-size: $rating-large;
+
+    .a-rating__icon {
+      font-size: $rating-large;
+      @include setRatingDimensions($rating-large);
+    }
+  }
+}
+

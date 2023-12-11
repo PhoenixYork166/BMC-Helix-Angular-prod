@@ -1,0 +1,57 @@
+import { Injector, TemplateRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActiveModalRef, RxSelectionChangeEvent, RxSelectOption } from '@bmc-ux/adapt-angular';
+import { ColumnConfig, DataCellTemplateParams } from '@bmc-ux/adapt-table';
+import { IScopeSelectionOption } from '@helix/platform/shared/api';
+import { RxModalClass, RxModalService } from '@helix/platform/ui-kit';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { IRecordCustomizationOptionsEditorData } from './record-customization-options.interfaces';
+import { IRecordDefinitionModel } from '../../record-designer.types';
+import * as i0 from "@angular/core";
+export declare class RecordCustomizationOptionsEditorComponent extends RxModalClass {
+    private rxModalService;
+    activeModalRef: ActiveModalRef;
+    protected injector: Injector;
+    private translateService;
+    data: IRecordCustomizationOptionsEditorData;
+    scopeSelectionOptions: IScopeSelectionOption[];
+    recordDefinition: IRecordDefinitionModel;
+    columns: ColumnConfig[];
+    recordCustomizationOptionsEditorForm: NgForm;
+    recordFieldsColumnTemplate: TemplateRef<DataCellTemplateParams>;
+    private customizationControlProperties;
+    initialCustomizationOptions: import("./record-customization-options.interfaces").IRecordCustomizationControlValue;
+    allowOverlay: boolean;
+    fields: import("../../record-designer.types").IRecordFieldDefinitionModel[];
+    customizationOptions: {
+        allowOtherPropertiesOverlay: boolean;
+        allowPermissionsOverlay: boolean;
+        allowIndexesOverlay: boolean;
+        allowFieldsOverlay: boolean;
+    };
+    private isFieldsOverlayAllowedSubject;
+    isDisabled: boolean;
+    private definitionScopeName;
+    scope: IScopeSelectionOption[];
+    private isPublicSubject;
+    areCustomizationOptionsDisabled$: Observable<Boolean>;
+    isFieldsOverlayDisabled$: Observable<Boolean>;
+    vm$: Observable<{
+        areCustomizationOptionsDisabled: Boolean;
+    }>;
+    constructor(rxModalService: RxModalService, activeModalRef: ActiveModalRef, injector: Injector, translateService: TranslateService);
+    onFieldsPropertyChange(): void;
+    ngOnInit(): void;
+    optionFormatter(option: RxSelectOption): string;
+    save(): void;
+    onScopeChange(rxSelectionChangeEvent: RxSelectionChangeEvent): void;
+    closeModal(): void;
+    cancel(): void;
+    handleAllowOverlayChange(): void;
+    onRecordCustomizationOptionChange(): void;
+    isDirty(): boolean;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RecordCustomizationOptionsEditorComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RecordCustomizationOptionsEditorComponent, "rx-record-customization-options-editor", never, {}, {}, never, never>;
+}

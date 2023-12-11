@@ -1,0 +1,67 @@
+%default-logo {
+  width: 2.9em;
+  background: {
+    repeat: no-repeat;
+    size: contain;
+    position: center center;
+  }
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: inherit;
+    vertical-align: bottom;
+  }
+}
+
+.logo {
+  @extend %default-logo;
+
+  background-image: $logo-dark;
+
+  &.logo-light {
+    background-image: $logo-light;
+  }
+
+  &.logo-dark {
+    background-image: $logo-dark;
+  }
+}
+
+.logo-helix {
+  @extend %default-logo;
+  width: 6.35rem;
+  background-image: $logo-helix-dark;
+
+  &.logo-light {
+    background-image: $logo-helix-light;
+  }
+}
+
+.logo-bmc {
+  @extend %default-logo;
+
+  background-image: $logo-bmc-dark;
+
+  &.logo-light {
+    background-image: $logo-bmc-light;
+  }
+}
+
+.logo-bmc-helix {
+  @extend %default-logo;
+  width: 6.35rem;
+  background-image: $logo-bmc-helix-dark;
+
+  &.logo-light {
+    background-image: $logo-bmc-helix-light;
+  }
+}
+
+.logo-sm {
+  width: 2em;
+}
+
+.logo-lg {
+  width: 4em;
+}

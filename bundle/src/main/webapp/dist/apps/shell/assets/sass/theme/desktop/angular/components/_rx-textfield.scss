@@ -1,0 +1,70 @@
+adapt-rx-textfield {
+  .has-tag {
+    .form-control {
+      @include rtl(padding-right, 0);
+      @include rtl(border-right, none);
+      }
+
+    .form-control.form-control-disabled-look {
+      @include rtl(padding-left, 1rem);
+
+      @if $rtl-mode {
+        border-left: none !important;
+      } @else {
+        border-right: none !important;
+      }
+    }
+
+    .has-disabled-icon .input-group-custom-tag {
+      @if $rtl-mode {
+        border-right: none !important;
+      } @else {
+        border-left: none !important;
+      }
+    }
+  }
+
+  .input-group-custom-tag {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    border: $input-border-width solid $input-border-color;
+    border-radius: $input-border-radius;
+    background-color: var(--color-foreground);
+    @include rtl(border-left, none);
+
+    @if $rtl-mode {
+      @include border-right-radius(0);
+    } @else {
+      @include border-left-radius(0);
+    }
+
+    @include box-shadow($input-box-shadow);
+    @include transition($input-transition);
+  }
+
+  .has-danger-icon .input-group-custom-tag,
+  .has-success-icon .input-group-custom-tag,
+  .has-warning .input-group-custom-tag {
+    @include rtl(padding-left, 0);
+  }
+
+  .disabled-look .input-group-custom-tag {
+
+    adapt-badge {
+      opacity: $disabled;
+    }
+  }
+
+  .input-group.input-group-lg {
+    .input-group-custom-tag {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .input-group.input-group-sm {
+    .input-group-custom-tag {
+      font-size: $font-size-sm;
+    }
+  }
+}

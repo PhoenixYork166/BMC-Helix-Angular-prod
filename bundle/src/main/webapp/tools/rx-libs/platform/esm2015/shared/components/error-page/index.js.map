@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/error-page/index.ts"],"names":[],"mappings":"AAAA,cAAc,qBAAqB,CAAC;AACpC,cAAc,wBAAwB,CAAC","sourcesContent":["export * from './error-page.module';\nexport * from './error-page.component';\n"]}

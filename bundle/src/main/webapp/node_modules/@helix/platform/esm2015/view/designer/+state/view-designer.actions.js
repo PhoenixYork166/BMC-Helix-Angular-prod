@@ -1,0 +1,22 @@
+import { createAction, props } from '@ngrx/store';
+export const viewDefinitionSaveSuccess = createAction('[View Designer] View Definition Save Success', props());
+export const viewDefinitionSaveError = createAction('[View Designer] View Definition Save Error');
+export const viewDefinitionLoadSuccess = createAction('[View Designer] View Definition Load Success', props());
+export const viewDefinitionLoadError = createAction('[View Designer] View Definition Load Error');
+export const setGeneratedViewDefinition = createAction('[View Designer] Set Generated View Definition', props());
+export const loadViewDefinition = createAction('[View Designer] Load View Definition', props());
+export const friendlyBundleNameLoadSuccess = createAction('[View Designer] Bundle Friendly Name Load Success', props());
+export const friendlyBundleNameLoadError = createAction('[View Designer] Bundle Friendly Name Load Error', props());
+export const viewModelsInitialized = createAction('[View Designer] View Models Initialized');
+export const viewModelsUpdatedAfterSave = createAction('[View Designer] View Models Updated After Save');
+export const updateViewModel = createAction('[View Designer] Update View Model', props());
+export const setViewModel = createAction('[View Designer] Set View Model', props());
+export const selectInspectorTab = createAction('[View Designer] Select Inspector Tab', props());
+export const saveViewDefinition = createAction('[View Designer] Save View Definition', props());
+export const runPreview = createAction('[View Designer] Run Preview');
+export const loadFriendlyBundleName = createAction('[View Designer] Load Bundle Friendly Name');
+export const generateViewDefinition = createAction('[View Designer] Generate View Definition', props());
+export const clearCanvas = createAction('[View Designer] Clear Canvas');
+export const initViewDesigner = createAction('[View Designer] Init', props());
+export const destroyViewDesigner = createAction('[View Designer] Destroy');
+//# sourceMappingURL=view-designer.actions.js.map

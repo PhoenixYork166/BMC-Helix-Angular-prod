@@ -1,0 +1,71 @@
+import { Injector, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { RxSelectOption } from '@bmc-ux/adapt-angular';
+import { RxRecordDefinitionCacheService } from '@helix/platform/record/api';
+import { IPlainObject, RxDefinitionNameService } from '@helix/platform/shared/api';
+import { IExpressionFormControlOptions, RxExpressionEditorService, RxWizardModalComponent } from '@helix/platform/shared/components';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { IRecordGridConfig, RecordGridComponent, RxRecordGridUtilsService } from '@helix/platform/view/components';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import * as i0 from "@angular/core";
+interface IDataImportOptionsByRecordDefinitionName {
+    dataFilter?: string;
+    dataFilterExpression?: string;
+    dataFilterColumnExpressionFormControlOptions?: IPlainObject;
+    defaultFilter?: string;
+    duplicateDataActionType: string | string[];
+    ignoreRuleExecution?: boolean;
+}
+interface IRecordDefinitionData extends IDataImportOptionsByRecordDefinitionName {
+    aliasName?: string;
+    dataSource: string;
+    disabled: boolean;
+    name: string;
+    selected?: string;
+    shouldExportData: boolean;
+}
+export declare class AddBundleContentDataWizardStepComponent implements OnInit, OnDestroy {
+    private injector;
+    private rxDefinitionNameService;
+    private rxExpressionEditorService;
+    private rxModalService;
+    private rxRecordDefinitionCacheService;
+    private rxRecordGridUtilsService;
+    private rxWizardModalComponent;
+    private translateService;
+    options: IPlainObject;
+    definitionsDataGrid: RecordGridComponent;
+    recordNameCellTemplate: TemplateRef<any>;
+    dataFilterCellTemplate: TemplateRef<any>;
+    ignoreRulesCellTemplate: TemplateRef<any>;
+    duplicateDataActionTypeCellTemplate: TemplateRef<any>;
+    addDataForm: FormGroup;
+    recordDefinitionsFormControl: FormControl;
+    dataFilterColumnExpressionFormControlOptions: IExpressionFormControlOptions;
+    globalDataFilterExpressionFormControlOptions: IExpressionFormControlOptions;
+    duplicateDataActionTypeOptions: RxSelectOption[];
+    recordDefinitions: IRecordDefinitionData[];
+    selectedDataSources: IPlainObject;
+    selectedDefinitions: IRecordDefinitionData[];
+    duplicateConfigurationDataActionTypeOptions: RxSelectOption[];
+    recordGridConfig$: Observable<IRecordGridConfig>;
+    private destroyed$;
+    private isSingleSelectDataSourceSelected;
+    protected dataFilterColumnExpressionConfigurator: any;
+    protected globalDataFilterExpressionConfigurator: any;
+    constructor(injector: Injector, rxDefinitionNameService: RxDefinitionNameService, rxExpressionEditorService: RxExpressionEditorService, rxModalService: RxModalService, rxRecordDefinitionCacheService: RxRecordDefinitionCacheService, rxRecordGridUtilsService: RxRecordGridUtilsService, rxWizardModalComponent: RxWizardModalComponent, translateService: TranslateService);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    optionFormatter(recordDefinitionData: IRecordDefinitionData): string;
+    titleFormatter(selectedOptions: RxSelectOption[]): string;
+    duplicateDataActionTypesOptionFormatter(option: RxSelectOption): string;
+    openDataFilterColumnExpressionEditor(dataItem: IRecordDefinitionData, columnField: string): void;
+    openGlobalDataFilterExpressionEditor(): void;
+    updateDataImportOptionsByRecordDefinitionName(cellValue: string | RxSelectOption, recordDefinitionData: IRecordDefinitionData, columnField: string): void;
+    private getAssociationsDataDictionary;
+    private getDataImportOptionsByRecordDefinitionName;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AddBundleContentDataWizardStepComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AddBundleContentDataWizardStepComponent, "ax-add-bundle-content-data-wizard-step", never, { "options": "options"; }, {}, never, never>;
+}
+export {};

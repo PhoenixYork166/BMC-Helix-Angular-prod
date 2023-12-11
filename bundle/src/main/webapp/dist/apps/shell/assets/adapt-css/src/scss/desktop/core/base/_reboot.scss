@@ -1,0 +1,45 @@
+html {
+  -webkit-font-kerning: normal;
+  -moz-font-kerning: normal;
+  -webkit-fontfeature-settings: "liga";
+  -webkit-font-feature-settings: "liga", "kern";
+  font-feature-settings: "liga", "kern";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-color: $color-foreground;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}
+
+label {
+  margin-bottom: $label-margin-bottom;
+}
+
+a {
+  &:focus,
+  &.focus {
+    @include tab-focus();
+  }
+}
+
+//
+//
+// Horizontal row
+
+hr {
+  margin: ($spacer * 1.5) 0;
+
+  &.secondary {
+    border-style: dashed;
+  }
+}
+
+input::-ms-clear {
+  display: none;
+}

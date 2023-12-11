@@ -1,0 +1,189 @@
+// main chart
+.adapt-chart {
+  user-select: none;
+
+  .adapt-legend-zone {
+    overflow: hidden;
+  }
+
+  &.adapt-chart-mobile {
+    .adapt-chart-body {
+      flex-direction: column;
+      transition: all 250ms $ease-transition-in-out;
+    }
+
+    .adapt-legend-zone {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+.adapt-chart-svg {
+  flex: 1 1 auto;
+  overflow: visible !important;
+  font-family: $font-family-base;
+}
+
+.adapt-chart-svg:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.adapt-chart-group {
+  font-size: 0;
+
+  .cell {
+    font-size: .8125rem;
+  }
+}
+
+.adapt-chart-body:first-of-type {
+  height: 100% !important;
+}
+
+.adapt-chart-body {
+  display: flex;
+  height: calc(100% - #{$chart-header-height});
+}
+
+.adapt-chart-zone {
+  position: relative;
+  flex: 1 1 auto;
+  font-size: 0;
+}
+
+// Header
+.adapt-chart-header {
+  display: flex;
+  height: $chart-header-height;
+}
+
+.adapt-chart-header-title {
+  display: inline-flex;
+  font-size: 15px;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.adapt-chart-context-menu-btn {
+  color: $color-active;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+
+  &:hover {
+    color: color-variant($color-active, hover);
+  }
+}
+
+// Axis
+.adapt-chart-axis-title {
+  text {
+    font-size: 13px;
+    font-weight: $font-weight-bold;
+    fill: $chart-legend-text;
+  }
+}
+
+.adapt-chart-axis {
+  .tick text {
+    fill: $chart-tick-color;
+    font-size: 13px;
+  }
+
+  path {
+    stroke: $chart-axis-path;
+  }
+}
+
+// Tooltip
+
+.adapt-tooltip-top .adapt-chart-tooltip .adapt-tooltip-inner::after {
+  border-color: $chart-tooltip-bg-color transparent transparent transparent;
+}
+
+.adapt-tooltip-right .adapt-chart-tooltip .adapt-tooltip-inner::after {
+  border-color: transparent $chart-tooltip-bg-color transparent transparent;
+}
+
+.adapt-tooltip-bottom .adapt-chart-tooltip .adapt-tooltip-inner::after {
+  border-color: transparent transparent $chart-tooltip-bg-color transparent;
+}
+
+.adapt-tooltip-left .adapt-chart-tooltip .adapt-tooltip-inner::after {
+  border-color: transparent transparent transparent $chart-tooltip-bg-color;
+}
+
+.adapt-chart-tooltip {
+  .adapt-tooltip-inner {
+    padding: 10px 14px;
+    color: $chart-tooltip-color;
+    background-color: $chart-tooltip-bg-color;
+    border-color: $chart-tooltip-bg-color;
+    @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+  }
+
+  .adapt-chart-tooltip-color-spot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+  }
+
+  .adapt-chart-tooltip-category {
+    margin-left: 8px;
+  }
+}
+
+// for mobile
+.adapt-chart-mobile {
+  .adapt-chart-header-title {
+    font-size: 18px;
+  }
+
+  .adapt-legend-zone {
+    margin-top: 10px;
+  }
+
+  .adapt-chart-axis .tick text,
+  .adapt-chart-axis-title text {
+    font-size: 15px;
+  }
+}
+
+.adapt-legend-zone__hidden {
+  display: none !important;
+}
+
+.adapt-chart-axis__hidden {
+  display: none;
+}
+
+// ThresholdLine
+.threshold-line-title-background,
+.threshold-line-title {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.threshold-line-title-background {
+  fill: $white;
+  stroke: $white;
+  stroke-width: 7px;
+}
+
+.threshold-line-title {
+  fill: $gray-1000;
+}
+
+.threshold-line-marker {
+  stroke: none;
+  fill: $gray-1000;
+}
+
+.threshold-line {
+  stroke: $gray-1000;
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "rx-action",
+  "type": "object",
+  "properties": {
+    "actionName": {
+      "type": "string",
+      "description": "Action Name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for view action?"
+    }
+  },
+  "required": ["actionName"]
+}

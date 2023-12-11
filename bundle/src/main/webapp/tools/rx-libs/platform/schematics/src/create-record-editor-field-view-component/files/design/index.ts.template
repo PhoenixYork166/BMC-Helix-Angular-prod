@@ -1,0 +1,3 @@
+export * from './<%= dasherize(viewComponentName) %>-design.component';
+export * from "./<%= dasherize(viewComponentName) %>-design.model";
+export * from './<%= dasherize(viewComponentName) %>-design.module';

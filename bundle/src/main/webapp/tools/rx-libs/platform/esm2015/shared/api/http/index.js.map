@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/http/index.ts"],"names":[],"mappings":"AAAA,cAAc,mBAAmB,CAAC;AAClC,cAAc,eAAe,CAAC","sourcesContent":["export * from './http.interfaces';\nexport * from './http.module';\n"]}

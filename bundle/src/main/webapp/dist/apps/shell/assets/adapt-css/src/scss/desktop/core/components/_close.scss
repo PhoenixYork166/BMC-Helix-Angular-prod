@@ -1,0 +1,57 @@
+.close {
+  line-height: 20px;
+  opacity: .6;
+  transition: opacity .2s;
+
+  @include hover-focus {
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .8;
+  }
+
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: $close-vertical-align;
+    width: 1em;
+    height: 1em;
+    background: $close-icon no-repeat;
+    background-size: contain;
+  }
+
+  @media screen and (-ms-high-contrast: active) {
+    &:before {
+      background: $close-icon-inverse;
+    }
+  }
+
+  @media screen and (-ms-high-contrast: black-on-white) {
+    &:before {
+      background: $close-icon;
+    }
+  }
+
+  &.close-inverse {
+    opacity: .7;
+
+    &:before {
+      background: $close-icon-inverse;
+    }
+
+    &:hover {
+      opacity: .9;
+    }
+
+    @media screen and (-ms-high-contrast: active) {
+      &:before {
+        background: $close-icon-inverse;
+      }
+    }
+
+    @media screen and (-ms-high-contrast: black-on-white) {
+      &:before {
+        background: $close-icon;
+      }
+    }
+  }
+}

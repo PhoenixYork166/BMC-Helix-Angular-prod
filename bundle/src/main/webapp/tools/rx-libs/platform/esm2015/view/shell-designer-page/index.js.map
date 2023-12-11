@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/view/shell-designer-page/index.ts"],"names":[],"mappings":"AAAA,cAAc,8BAA8B,CAAC;AAC7C,cAAc,iCAAiC,CAAC","sourcesContent":["export * from './shell-designer-page.module';\nexport * from './shell-designer-page.component';\n"]}

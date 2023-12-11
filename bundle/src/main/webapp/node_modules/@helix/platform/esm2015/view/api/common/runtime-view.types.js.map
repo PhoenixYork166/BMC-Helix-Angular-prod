@@ -1,0 +1,1 @@
+{"version":3,"file":"runtime-view.types.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/api/common/runtime-view.types.ts"],"names":[],"mappings":"","sourcesContent":["import { IPlainObject } from '@helix/platform/shared/api';\n\nexport interface IRuntimeComponentApiCallResult<T = IPlainObject> {\n  guid: string;\n  data: T;\n}\n"]}

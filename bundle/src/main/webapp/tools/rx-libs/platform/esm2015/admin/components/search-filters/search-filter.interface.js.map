@@ -1,0 +1,1 @@
+{"version":3,"file":"search-filter.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/search-filters/search-filter.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface ISearchFilter {\n  id?: string;\n  name: string;\n  tagsOperator: string;\n  tags: string[];\n}\n"]}

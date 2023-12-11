@@ -1,0 +1,36 @@
+import { Injector, OnInit } from '@angular/core';
+import { ActiveModalRef } from '@bmc-ux/adapt-angular';
+import { RxModalClass, RxModalService } from '@helix/platform/ui-kit';
+import { IRecordGridEditViewPresetsModalData, IRecordGridEditViewPresetsModalOptions } from './record-grid-edit-view-presets-modal.types';
+import { IRecordGridSortEditorModel } from '../../record-grid-sort-editor-control';
+import { RxRecordGridDesignUtilsService } from '../../../record-grid-design-utils.service';
+import { RxRecordGridFilterSelectHelperService } from '../../record-grid-filter-select-control/record-grid-filter-select-helper.service';
+import { RxRecordGridUtilsService } from '../../../../common/services/record-grid-utils.service';
+import { RxStringService } from '@helix/platform/utils';
+import * as i0 from "@angular/core";
+export declare class RecordGridEditViewPresetsModalComponent extends RxModalClass implements OnInit {
+    private activeModalRef;
+    protected injector: Injector;
+    private rxModalService;
+    private rxRecordGridDesignUtilsService;
+    private rxRecordGridFilterSelectHelperService;
+    private rxRecordGridUtilsService;
+    private rxStringService;
+    params: IRecordGridEditViewPresetsModalOptions;
+    presets: IRecordGridEditViewPresetsModalData[];
+    isReadOnly: boolean;
+    private namedFilterOptions;
+    private gridColumns$;
+    constructor(activeModalRef: ActiveModalRef, injector: Injector, rxModalService: RxModalService, rxRecordGridDesignUtilsService: RxRecordGridDesignUtilsService, rxRecordGridFilterSelectHelperService: RxRecordGridFilterSelectHelperService, rxRecordGridUtilsService: RxRecordGridUtilsService, rxStringService: RxStringService);
+    ngOnInit(): void;
+    saveChanges(): void;
+    cancel(): void;
+    expandAll(event: MouseEvent): void;
+    collapseAll(event: MouseEvent): void;
+    openPresetColumnsModal(preset: IRecordGridEditViewPresetsModalData): void;
+    trackByPreset(index: number, item: IRecordGridEditViewPresetsModalData): string;
+    private getTags;
+    onSortChange(sortModel: IRecordGridSortEditorModel, preset: IRecordGridEditViewPresetsModalData): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RecordGridEditViewPresetsModalComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RecordGridEditViewPresetsModalComponent, "rx-record-grid-edit-view-presets-modal", never, {}, {}, never, never>;
+}

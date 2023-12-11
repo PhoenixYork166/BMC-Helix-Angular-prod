@@ -1,0 +1,13 @@
+@import '~@bmc-ux/adapt-css/src/scss/desktop/bs-mixins';
+@import '~@bmc-ux/adapt-css/src/scss/desktop/adapt-mixins';
+@import '~@bmc-ux/adapt-css/src/scss/desktop/variables/icons';
+@import '~@bmc-ux/adapt-css/src/scss/desktop/variables/var-default';
+@import '~@bmc-ux/adapt-css/src/scss/variables';
+@import '~@bmc-ux/adapt-css/src/scss/desktop/variables/variables';
+
+$rx-font-size-md: 0.875rem !default;
+$rx-input-max-width: 400px;
+$rx-designer-header-height: 50px;
+$rx-designer-modal-height: 740px;
+$rx-modal-header-height: 34px;
+$rx-modal-footer-height: 61px;

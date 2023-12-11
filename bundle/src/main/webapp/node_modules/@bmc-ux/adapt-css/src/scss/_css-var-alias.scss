@@ -1,0 +1,100 @@
+// TEMP variable file
+// global scope variables
+// the :root selector matches the document's root element
+
+:root {
+  // Brand colors
+  // --color-primary: #{$color-primary};
+  // --color-secondary: #{$color-secondary};
+  // --color-active: #{$color-active};
+
+  // Status-oriented colors
+  // --color-info: #{$color-info};
+  // --color-success: #{$color-success};
+  // --color-warning: #{$color-warning};
+  // --color-danger: #{$color-danger};
+
+  // --color-primary-hover: #{$color-primary-hover};
+  // --color-primary-active: #{$color-primary-active};
+  // --color-primary-active-hover: #{$color-primary-active-hover};
+  // --color-primary-disabled: #{$color-primary-disabled};
+  // --color-primary-disabled-hover: #{$color-primary-disabled-hover};
+
+  // --color-secondary-hover: #{$color-secondary-hover};
+  // --color-secondary-active: #{$color-secondary-active};
+  // --color-secondary-active-hover: #{$color-secondary-active-hover};
+  // --color-secondary-disabled: #{$color-secondary-disabled};
+  // --color-secondary-disabled-hover: #{$color-secondary-disabled-hover};
+
+  // --color-active-hover: #{$color-active-hover};
+  // --color-active-active: #{$color-active-active};
+  // --color-active-active-hover: #{$color-active-active-hover};
+  // --color-active-disabled: #{$color-active-disabled};
+  // --color-active-disabled-hover: #{$color-active-disabled-hover};
+
+  // --color-info-hover: #{$color-info-hover};
+  // --color-info-active: #{$color-info-active};
+  // --color-info-active-hover: #{$color-info-active-hover};
+  // --color-info-disabled: #{$color-info-disabled};
+  // --color-info-disabled-hover: #{$color-info-disabled-hover};
+
+  // --color-success-hover: #{$color-success-hover};
+  // --color-success-active: #{$color-success-active};
+  // --color-success-active-hover: #{$color-success-active-hover};
+  // --color-success-disabled: #{$color-success-disabled};
+  // --color-success-disabled-hover: #{$color-success-disabled-hover};
+
+  // --color-warning-hover: #{$color-warning-hover};
+  // --color-warning-active: #{$color-warning-active};
+  // --color-warning-active-hover: #{$color-warning-active-hover};
+  // --color-warning-disabled: #{$color-warning-disabled};
+  // --color-warning-disabled-hover: #{$color-warning-disabled-hover};
+
+  // --color-danger-hover: #{$color-danger-hover};
+  // --color-danger-active: #{$color-danger-active};
+  // --color-danger-active-hover: #{$color-danger-active-hover};
+  // --color-danger-disabled: #{$color-danger-disabled};
+  // --color-danger-disabled-hover: #{$color-danger-disabled-hover};
+
+  // Muted
+  --color-info-muted: #{$color-info-muted};
+  --color-success-muted: #{$color-success-muted};
+  --color-warning-muted: #{$color-warning-muted};
+  --color-critical-muted: #{$color-critical-muted};
+
+  // Text and backgrounds
+  --text-primary: #{$text-primary};
+  --text-primary-inverse: #{$text-primary-inverse};
+  --text-secondary: #{$text-secondary};
+  --text-secondary-inverse: #{$text-secondary-inverse};
+  --text-tertiary: #{$text-tertiary};
+  --text-tertiary-inverse: #{$text-tertiary-inverse};
+  --color-foreground: #{$color-foreground};
+  --color-foreground-inverse: #{$color-foreground-inverse};
+  --color-background: #{$color-background};
+  --color-background-inverse: #{$color-background-inverse};
+
+  // Color system
+  --white: #{$white};
+  --black: #{$black};
+  --gray-100: #{$gray-100};
+  --gray-200: #{$gray-200};
+  --gray-300: #{$gray-300};
+  --gray-400: #{$gray-400};
+  --gray-500: #{$gray-500};
+  --gray-600: #{$gray-600};
+  --gray-700: #{$gray-700};
+  --gray-800: #{$gray-800};
+  --gray-900: #{$gray-900};
+  --gray-1000: #{$gray-1000};
+
+  // borders
+  --border-color: #{$border-color};
+
+  //custom nav style
+  --nav-background: #{$gray-900};
+  --nav-links-color: #{$text-primary-inverse};
+
+  --accessible-mode: #{$accessible-mode};
+  --dark-mode: #{$dark-mode};
+}

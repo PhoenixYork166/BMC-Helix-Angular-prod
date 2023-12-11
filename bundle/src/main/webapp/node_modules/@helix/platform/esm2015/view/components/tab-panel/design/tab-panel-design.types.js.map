@@ -1,0 +1,1 @@
+{"version":3,"file":"tab-panel-design.types.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/tab-panel/design/tab-panel-design.types.ts"],"names":[],"mappings":"","sourcesContent":["import { IRxStandardProps } from '@helix/platform/view/api';\n\nexport interface ITabPanelProperties extends IRxStandardProps {\n  name?: string;\n}\n"]}

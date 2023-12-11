@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/ui-kit/json-viewer/index.ts"],"names":[],"mappings":"AAAA,cAAc,sBAAsB,CAAC;AACrC,cAAc,qCAAqC,CAAC","sourcesContent":["export * from './json-viewer.module';\nexport * from './json-viewer/json-viewer.component';\n"]}

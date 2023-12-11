@@ -1,0 +1,16 @@
+.navbar-brand {
+  font-size: $navbar-brand-font-size;
+  padding: $navbar-brand-padding-y;
+  font-weight: 100;
+}
+
+.navbar-toggler {
+  font-size: 20px;
+  padding: 10px 15px;
+}
+
+.separator {
+  align-self: stretch;
+  margin-right: .5rem;
+  border-right: $navbar-brand-separator;
+}

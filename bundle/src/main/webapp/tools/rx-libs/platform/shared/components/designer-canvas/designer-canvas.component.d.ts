@@ -1,0 +1,37 @@
+import { AfterViewInit, ElementRef, EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop/drag-events';
+import { RxCommandManagerService } from '@helix/platform/shared/api';
+import { IDesignerCanvasConfiguration } from './designer-canvas.interfaces';
+import * as i0 from "@angular/core";
+export declare class RxDesignerCanvasComponent implements OnInit, AfterViewInit, OnChanges {
+    private elementRef;
+    private rxCommandManagerService;
+    configuration: IDesignerCanvasConfiguration;
+    graph: any;
+    droppedElement: CdkDragDrop<any>;
+    elementSelected: EventEmitter<string>;
+    private commandManager;
+    private paper;
+    private paperScroller;
+    constructor(elementRef: ElementRef, rxCommandManagerService: RxCommandManagerService);
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    hasRedo(): boolean;
+    hasUndo(): boolean;
+    onClearCanvas(): void;
+    onCopy(): void;
+    onCut(): void;
+    onExportToPng(): void;
+    onPaste(): void;
+    onPrint(): void;
+    onRedo(): void;
+    onUndo(): void;
+    onZoomIn(): void;
+    onZoomOut(): void;
+    private addElementToCanvas;
+    private canDrop;
+    private getCanvasDropArea;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxDesignerCanvasComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxDesignerCanvasComponent, "rx-designer-canvas", never, { "configuration": "configuration"; "graph": "graph"; "droppedElement": "droppedElement"; }, { "elementSelected": "elementSelected"; }, never, never>;
+}

@@ -1,0 +1,31 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { RxUtilityModalsService } from '@helix/platform/ui-kit';
+import { RxBundleCacheService, RxDefinitionNameService, RxPageTitleService, IComponentCanDeactivate, RxComponentCanDeactivateGuard } from '@helix/platform/shared/api';
+import * as i0 from "@angular/core";
+export declare class RxEventDesignerPageComponent implements OnInit, OnDestroy, IComponentCanDeactivate {
+    private rxUtilityModalService;
+    private rxBundleCacheService;
+    private rxDefinitionNameService;
+    private rxPageTitleService;
+    private rxComponentCanDeactivateGuard;
+    private translateService;
+    private activatedRoute;
+    private router;
+    isInitialized: boolean;
+    eventDefinitionName: string;
+    private isNewEvent;
+    private destroyed$;
+    private eventDesignerComponent;
+    constructor(rxUtilityModalService: RxUtilityModalsService, rxBundleCacheService: RxBundleCacheService, rxDefinitionNameService: RxDefinitionNameService, rxPageTitleService: RxPageTitleService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard, translateService: TranslateService, activatedRoute: ActivatedRoute, router: Router);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    onCloseDesigner(): void;
+    confirmDeactivation(): Promise<boolean>;
+    canDeactivate(): boolean;
+    onEventDefinitionSaved(eventDefinitionName: string): void;
+    onEventDefinitionErrorLoading(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxEventDesignerPageComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxEventDesignerPageComponent, "rx-event-designer-page", never, {}, {}, never, never>;
+}

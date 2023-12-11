@@ -1,0 +1,30 @@
+import { RxRecordInstanceUtilsService } from '@helix/platform/record/api';
+import { RxDefinitionNameService } from '@helix/platform/shared/api';
+import { RxNumberUtilsService } from '@helix/platform/utils';
+import { TranslateService } from '@ngx-translate/core';
+import { RxRecordGridUtilsService } from '../../common/services/record-grid-utils.service';
+import { IRecordGridFilterConfigs } from '../../common/types/record-grid-filter-config.interfaces';
+import { RxRecordGridFilterService } from './record-grid-filter.service';
+import { RxNamedListService } from '@helix/platform/named-list/api';
+import * as i0 from "@angular/core";
+export declare class RxRecordGridFilterConfigService {
+    private rxRecordGridFilterService;
+    private rxNumberUtilsService;
+    private rxNamedListService;
+    private translateService;
+    private rxRecordInstanceUtilsService;
+    private rxRecordGridUtilsService;
+    private rxDefinitionNameService;
+    private associatedFieldIdPatternRegExp;
+    constructor(rxRecordGridFilterService: RxRecordGridFilterService, rxNumberUtilsService: RxNumberUtilsService, rxNamedListService: RxNamedListService, translateService: TranslateService, rxRecordInstanceUtilsService: RxRecordInstanceUtilsService, rxRecordGridUtilsService: RxRecordGridUtilsService, rxDefinitionNameService: RxDefinitionNameService);
+    getConfigs(): IRecordGridFilterConfigs;
+    private getDateSelectedAdvancedFilterData;
+    private getFilterRangeDataOperator;
+    private getNamedFilterOptionGuids;
+    private getSelectedNamedOptionExpressions;
+    private getNamedFilterOptionsOperators;
+    private getRecordGridFilterOperator;
+    private getBooleanFilterValue;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxRecordGridFilterConfigService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxRecordGridFilterConfigService>;
+}

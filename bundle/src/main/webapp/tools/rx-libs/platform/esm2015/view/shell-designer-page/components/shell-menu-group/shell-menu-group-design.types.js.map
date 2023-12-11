@@ -1,0 +1,1 @@
+{"version":3,"file":"shell-menu-group-design.types.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/shell-designer-page/components/shell-menu-group/shell-menu-group-design.types.ts"],"names":[],"mappings":"","sourcesContent":["export interface IRxShellMenuGroupProps {\n  menuGroupName: string;\n  hidden: boolean;\n  styles: string;\n}\n"]}

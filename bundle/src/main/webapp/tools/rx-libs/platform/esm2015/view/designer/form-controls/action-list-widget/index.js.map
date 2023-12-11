@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/designer/form-controls/action-list-widget/index.ts"],"names":[],"mappings":"AAAA,cAAc,6BAA6B,CAAC;AAC5C,cAAc,gCAAgC,CAAC","sourcesContent":["export * from './action-list-widget.module';\nexport * from './action-list-widget.component';\n"]}

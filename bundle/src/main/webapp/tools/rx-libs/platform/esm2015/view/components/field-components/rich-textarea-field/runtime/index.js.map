@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/rich-textarea-field/runtime/index.ts"],"names":[],"mappings":"AAAA,cAAc,iCAAiC,CAAC;AAChD,cAAc,8BAA8B,CAAC","sourcesContent":["export * from './rich-textarea-field.component';\nexport * from './rich-textarea-field.module';\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/process/elements/process/index.ts"],"names":[],"mappings":"AAAA,cAAc,iBAAiB,CAAC;AAChC,cAAc,mBAAmB,CAAC","sourcesContent":["export * from './process.types';\nexport * from './process.service';\n"]}

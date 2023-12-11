@@ -1,0 +1,62 @@
+//
+//  The rules for contrast checking:
+//    - gray color fall down for one step darker e.g. primary-text to black, secondary to 333 and so on
+//    - other color should be tested with get-contrast-color function
+//
+
+// need to move BS sources and color-helpers from node_modules to sources to allow building CSS on non-node env
+// to get back to import from node_modules just replace '../../../color-helpers/' with '~sass-color-helpers/stylesheets/'
+
+@import "../../vendor/color-helpers/color-helpers/math";
+@import "../../vendor/color-helpers/color-helpers/contrast";
+
+$accessible-contrast: 4.5 !default;
+$light-increment: 5% !default;
+
+//
+//  Recursively apply darken/lighten to the given color.
+//  Checks for contrast with Base color
+//
+//  Returns the color with contrast to base color.
+//  $make-darker = true - applies darken(), false - lighten()
+//
+
+@function get-contrast-color($c: "", $base: white, $make-darker: true) {
+  @if ($make-darker) {
+    @if ch-color_contrast($c, $base) < $accessible-contrast {
+      $n: darken($c, $light-increment);
+      @return get-contrast-color($n, $base, $make-darker);
+    } @else {
+      @return $c;
+    }
+  } @else {
+    @if ch-color_contrast($c, $base) < $accessible-contrast {
+      $n: lighten($c, $light-increment);
+      @return get-contrast-color($n, $base, $make-darker);
+    } @else {
+      @return $c;
+    }
+  }
+}
+
+@function getTextColor($bg-color, $base: white) {
+  @if ch-color_contrast($bg-color, $base) < $accessible-contrast {
+    @return black;
+  } @else {
+    @return white;
+  }
+}
+
+//
+//  Based on given color sets the background and text color
+//
+@mixin getBackgroundColor($background-color, $text-color: white) {
+  $accessible-color: get-contrast-color($background-color, $text-color);
+  background-color: $accessible-color;
+
+  @if ch-color_contrast($accessible-color, white) < $accessible-contrast {
+    color: mix($black, $background-color, 70%);
+  } @else {
+    color: mix($white, $background-color, 90%);
+  }
+}

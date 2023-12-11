@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/rsso-oauth/index.ts"],"names":[],"mappings":"AAAA,cAAc,wBAAwB,CAAC;AACvC,cAAc,kCAAkC,CAAC","sourcesContent":["export * from './rsso-oauth.component';\nexport * from './rsso-oauth-registration.module';\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/ui-kit/read-only-fields/index.ts"],"names":[],"mappings":"AAAA,cAAc,2BAA2B,CAAC;AAC1C,cAAc,8BAA8B,CAAC","sourcesContent":["export * from './read-only-fields.module';\r\nexport * from './read-only-fields.component';\r\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/process/elements/end-event/index.ts"],"names":[],"mappings":"AAAA,cAAc,iCAAiC,CAAC;AAChD,cAAc,wBAAwB,CAAC;AACvC,cAAc,qBAAqB,CAAC","sourcesContent":["export * from './end-event-registration.module';\nexport * from './end-event.interfaces';\nexport * from './end-event.service';\n"]}

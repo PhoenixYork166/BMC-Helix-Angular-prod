@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-named-list-api.umd.js",
+  "module": "../../fesm2015/helix-platform-named-list-api.js",
+  "es2015": "../../fesm2015/helix-platform-named-list-api.js",
+  "esm2015": "../../esm2015/named-list/api/helix-platform-named-list-api.js",
+  "fesm2015": "../../fesm2015/helix-platform-named-list-api.js",
+  "typings": "helix-platform-named-list-api.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/named-list/api"
+}

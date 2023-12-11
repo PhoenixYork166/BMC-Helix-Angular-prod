@@ -1,0 +1,106 @@
+
+.adapt-alert-bar {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: $color-primary;
+
+  &.determinate {
+    background: desaturate(lighten($color-primary, 18%), 6%);
+  }
+
+  .progress-bar-determinate {
+    position: absolute;
+    width: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: $color-primary;
+    transition: width $animation-fast $ease-transition-in;
+  }
+
+  .progress-bar-intermediate {
+    position: absolute;
+    height: 5px;
+    background: desaturate(lighten($color-primary, 18%), 6%); //#FAA15A
+    background-blend-mode: screen;
+    mix-blend-mode: screen;
+    opacity: .45;
+  }
+
+  .lay1 {
+    animation: layer1 2s ease infinite;
+  }
+
+  .lay2 {
+    animation: layer2 2s .1s ease infinite;
+  }
+
+  .lay3 {
+    animation: layer3 2s .2s ease infinite;
+  }
+}
+
+.adapt-alert-bar__help-text {
+  color: $gray-700;
+  text-align: center;
+  width: 100%;
+  margin-top: -30px;
+  opacity: 0;
+
+  &.is-animated {
+    animation: layer4 2s 10s ease 1 forwards;
+  }
+}
+
+@keyframes layer1 {
+  from {
+    left: -80%;
+    width: 80%;
+  }
+
+  to {
+    left: 110%;
+    width: 150%;
+  }
+}
+
+@keyframes layer2 {
+  from {
+    left: -60%;
+    width: 60%;
+  }
+
+  to {
+    left: 130%;
+    width: 150%;
+  }
+}
+
+@keyframes layer3 {
+  from {
+    left: -30%;
+    width: 30%;
+  }
+
+  to {
+    left: 150%;
+    width: 150%;
+  }
+}
+
+@keyframes layer4 {
+  from {
+    padding-top: 10px;
+    opacity: 0;
+  }
+
+  to {
+    padding-top: 50px;
+    opacity: 1;
+  }
+}
+
+

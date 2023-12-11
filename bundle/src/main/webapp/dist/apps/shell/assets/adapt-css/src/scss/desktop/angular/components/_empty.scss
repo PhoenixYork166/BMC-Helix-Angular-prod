@@ -1,0 +1,68 @@
+.empty-state {
+  background-size: auto;
+  background: no-repeat center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // TODO: SVG files were added to the component directly so it is no needed to have such classes.
+  //  Left it here for backward compatibility
+  &--alerts {
+    background-image: $empty-alerts;
+  }
+
+  &--articles {
+    background-image: $empty-articles;
+  }
+
+  &--cart {
+    background-image: $empty-cart;
+  }
+
+  &--chart {
+    background-image: $empty-chart;
+  }
+
+  &--config {
+    background-image: $empty-config;
+  }
+
+  &--events {
+    background-image: $empty-events;
+  }
+
+  &--grid {
+    background-image: $empty-grid;
+  }
+
+  &--messages {
+    background-image: $empty-messages;
+  }
+
+  &--objects {
+    background-image: $empty-objects;
+  }
+
+  &--rules {
+    background-image: $empty-rules;
+  }
+
+  &--search {
+    background-image: $empty-search;
+  }
+}
+
+.empty-state__container {
+  margin: 0 auto;
+  padding: 1.25rem 0;
+}
+
+.empty-state__label {
+  margin: 1.25rem 0 0 0;
+  text-align: center;
+  color: $text-tertiary;
+
+  &.inverted {
+    color: $text-secondary-inverse;
+  }
+}

@@ -1,0 +1,54 @@
+.rx-suggestions-panel {
+  max-height: 360px;
+  border: var(--dropdown-border);
+  border-radius: var(--dropdown-border-radius);
+  box-shadow: var(--dropdown-box-shadow);
+}
+
+.rx-suggestions-panel_container {
+  font-size: 16px; /* most browsers have 16px as default value for font size of root element, CKEditor sets it to 12px */
+  overflow-y: auto !important;
+}
+
+.rx-suggestions-panel_container * {
+  color: var(--dropdown-menu-color);
+  font-family: var(--font-family-base);
+}
+
+.rx-suggestions-panel_container .cke_menu {
+  padding: var(--dropdown-padding);
+  padding-top: 0; /* equal to .pt-0 in templates of adapt-rx-select component */
+}
+
+.rx-suggestions-panel_container .cke_menubutton__suggestionBox {
+  padding: var(--select-option-padding);
+}
+
+.cke_menubutton__suggestionBox:focus,
+.cke_menubutton__suggestionBox:hover {
+  background-color: inherit;
+}
+
+.cke_menubutton__suggestionBox:active {
+  background-color: var(--dropdown-item-active-bg-color);
+}
+
+.cke_menubutton__suggestionBox .cke_menubutton_label {
+  font-size: var(--dropdown-font-size);
+  line-height: var(--line-height-base);
+  padding: 0; /* overwrite CKEditor */
+}
+
+.cke_menubutton__suggestionBox:focus .cke_menubutton_label,
+.cke_menubutton__suggestionBox:hover .cke_menubutton_label {
+  color: var(--active-color);
+}
+
+.cke_menubutton__suggestionBox:focus,
+.cke_panel_block:focus {
+  outline: none;
+}
+
+.cke_menubutton__suggestionBox .cke_menubutton_icon {
+  display: none;
+}

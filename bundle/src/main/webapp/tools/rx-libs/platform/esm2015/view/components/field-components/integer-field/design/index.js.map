@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/integer-field/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,kCAAkC,CAAC;AACjD,cAAc,+BAA+B,CAAC","sourcesContent":["export * from './integer-field-design.component';\nexport * from './integer-field-design.module';\n"]}

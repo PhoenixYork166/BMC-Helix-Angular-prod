@@ -1,0 +1,66 @@
+// dropdown menu in typeahead
+ngb-typeahead-window {
+  top: 105%;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: top 0s, left 0s;
+  max-height: $dropable-element-max-height;
+  overflow: auto;
+  z-index: $zindex-dropdown-metatag;
+
+  & .ngb-highlight {
+    font-weight: 600 !important;
+  }
+
+  & .active {
+    background-image: none;
+  }
+
+  &.dropdown-menu {
+    opacity: initial;
+    transform: none;
+  }
+
+  .add-new {
+    border-top: 1px solid $input-border-color;
+    padding-top: 5px;
+  }
+
+  .dropdown-item {
+    border-top: 0;
+    padding: 6px 14px;
+    line-height: 1.4286;
+
+    &.active {
+      color: $dropdown-link-hover-color !important;
+      background-color: transparent;
+    }
+
+    &.selected {
+      color: $dropdown-item-selected !important;
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+    opacity: $disabled;
+    cursor: $cursor-disabled;
+  }
+
+  &.dropdown-menu_virtual-scroll {
+    padding: 0;
+
+    .cdk-virtual-scroll-content-wrapper {
+      padding: 5px 0;
+    }
+
+    ngb-highlight {
+      white-space: normal;
+    }
+  }
+}
+
+.rx-typeahead-popup-content > cdk-virtual-scroll-viewport {
+  overflow-x: hidden;
+}

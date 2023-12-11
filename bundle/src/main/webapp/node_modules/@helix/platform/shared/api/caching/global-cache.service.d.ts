@@ -1,0 +1,32 @@
+import { RxBundleDataPageService } from '../bundle/bundle-data-page.service';
+import { IBundleDescriptor } from '../bundle/bundle.interfaces';
+import { Observable } from 'rxjs';
+import { RxLogService } from '../logging/log.service';
+import { IFunctionDescriptor } from '../function/function-descriptor.interfaces';
+import { RxFunctionDataPageService } from '../function/function-data-page.service';
+import * as i0 from "@angular/core";
+export declare class RxGlobalCacheService {
+    private rxBundleDataPageService;
+    private rxFunctionDataPageService;
+    private rxLogService;
+    private bundleDescriptorsById;
+    private bundleDescriptors;
+    private functionDescriptors;
+    private applicationIdValue;
+    private applicationIdSubject;
+    applicationId$: Observable<string>;
+    get applicationId(): string;
+    set applicationId(value: string);
+    constructor(rxBundleDataPageService: RxBundleDataPageService, rxFunctionDataPageService: RxFunctionDataPageService, rxLogService: RxLogService);
+    getBundleDescriptors(): Observable<IBundleDescriptor[]>;
+    getFunctionDescriptors(): Observable<IFunctionDescriptor[]>;
+    getLicensedBundleDescriptors(): Observable<IBundleDescriptor[]>;
+    getBundleDescriptor(bundleId: string): Observable<IBundleDescriptor>;
+    getApplicationBundleDescriptor(): Observable<IBundleDescriptor>;
+    private _getBundleFriendlyName;
+    getBundleFriendlyName(bundleId: string, defaultValue?: string): Observable<string>;
+    getBundleDisplayName(bundleId: string): Observable<string>;
+    clear(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxGlobalCacheService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxGlobalCacheService>;
+}

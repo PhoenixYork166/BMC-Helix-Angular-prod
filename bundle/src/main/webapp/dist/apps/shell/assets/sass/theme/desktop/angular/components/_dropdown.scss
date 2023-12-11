@@ -1,0 +1,241 @@
+// Dropdown
+
+.a-dropdown-window {
+  position: absolute;
+  z-index: $zindex-dropdown;
+  top: 0;
+  left: 0;
+}
+
+.a-dropdown-window--wrapper {
+  z-index: 1;
+  display: flex !important;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 50%;
+  max-height: 100%;
+  overflow: auto;
+  background: $white;
+
+  .dropdown-menu {
+    position: static;
+    display: flex !important; // Need for 'show' class overriding
+    flex-direction: column;
+    flex: 1 0 auto;
+    width: 100%;
+    max-height: $dropable-element-max-height;
+    overflow: auto;
+    outline: none;
+  }
+
+  &.is-picker {
+    flex: 0 0 auto;
+    align-self: center;
+    justify-content: center;
+    background: none;
+    min-height: 0;
+
+    // for pickers like date, time, range etc shouldn't be max-height
+    .dropdown-menu {
+      max-height: unset;
+    }
+  }
+
+  &.full-height {
+    height: 100%;
+
+    .dropdown-menu {
+      max-height: unset !important;
+    }
+  }
+}
+
+.a-dropdown-window--header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 0 auto;
+  background: $white;
+  border-bottom: 1px solid $border-color;
+  min-height: 3.75rem;
+
+  h2 {
+    flex: 1 1 auto;
+    padding: 5px 0;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .btn {
+    flex: 0 0 auto;
+    min-width: 78px;
+  }
+}
+
+.a-dropdown-window--menu {
+  position: absolute;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.a-dropdown-window--backdrop {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .4);
+}
+
+// Mobile
+
+.a-dropdown-window_mobile {
+  position: fixed;
+  z-index: 1060;
+  width: 100vw;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+
+  .a-dropdown-window--menu {
+    position: static;
+    overflow: auto;
+  }
+
+  .dropdown-menu {
+    margin: 0;
+  }
+}
+
+// Tablet support
+
+.is-tablet {
+  &.a-dropdown-window--wrapper {
+    max-height: 97%;
+    @include shadow(3);
+  }
+
+  .modal-header {
+    border-bottom: 1px solid $border-color;
+  }
+
+  .a-dropdown-window--menu {
+    background-color: $color-foreground;
+
+    @include border-radius($dropdown-border-radius);
+    box-shadow: $box-shadow;
+    width: 90vw;
+
+    @media (max-width: map-get($grid-breakpoints, xxl)) {
+      width: 65vw;
+    }
+
+    @media (max-width: map-get($grid-breakpoints, xl)) {
+      width: 75vw;
+    }
+
+    @media (max-width: map-get($grid-breakpoints, lg)) {
+      width: 85vw;
+    }
+
+    @media (max-width: map-get($grid-breakpoints, md)) {
+      width: 90vw;
+    }
+
+  }
+
+  .dropdown-menu {
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: 0;
+  }
+
+  .dropdown-item:not(:first-child) {
+    border-top: 1px solid $border-color;
+  }
+
+  .dropdown-divider + .dropdown-item {
+    border-top-color: transparent;
+  }
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Dropdown-editable
+
+.adapt-dd-editable {
+  position: relative;
+  display: inline-block;
+}
+
+.adapt-dd-editable-editable,
+.adapt-dd-editable-readonly {
+  width: 100%;
+}
+
+.adapt-dd-editable-editable .form-group {
+  margin: 0;
+}
+
+.adapt-dd-editable-btn,
+.adapt-dd-editable-field {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.adapt-dd-editable-btn {
+  @include text-truncate();
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 8px;
+    padding: 0;
+  }
+}
+
+.adapt-dd-editable-list-item {
+  transition: color .25s ease-in-out;
+}
+
+.adapt-dd-editable-list-item:hover:not(.active) {
+  color: $color-active !important;
+}
+
+.dropdown-item-editable {
+  &:hover {
+    span {
+      color: $dropdown-link-hover-color !important;
+    }
+  }
+
+  &.active {
+    &:hover {
+      span {
+        color: inherit !important;
+      }
+    }
+  }
+}
+
+.dropdown-menu-mobile-placement {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  overflow: auto;
+  max-height: 100vh;
+
+  &.sticky {
+    overflow: hidden;
+  }
+}
+
+.adapt-dd-menu-desktop {
+  border-radius: $border-radius;
+}

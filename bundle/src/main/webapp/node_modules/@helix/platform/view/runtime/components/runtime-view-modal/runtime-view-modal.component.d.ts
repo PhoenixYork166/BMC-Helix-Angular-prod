@@ -1,0 +1,33 @@
+import { ChangeDetectorRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { ActiveModalRef, DockedPanelContext } from '@bmc-ux/adapt-angular';
+import { RxUtilityModalsService } from '@helix/platform/ui-kit';
+import { IRuntimeViewConfiguration } from '../../interfaces/runtime-view-configuration.interface';
+import { IRuntimeViewOutputParameter } from '../../interfaces/runtime-view-output-parameter.interface';
+import { RxRuntimeViewRegistryService } from '../../runtime-view-registry.service';
+import * as i0 from "@angular/core";
+export declare class RuntimeViewModalComponent {
+    private rxRuntimeViewRegistryService;
+    private rxUtilityModalsService;
+    private translateService;
+    private changeDetector;
+    private activeModalRef?;
+    private dockedPanelContext?;
+    configuration: IRuntimeViewConfiguration;
+    context: ActiveModalRef | DockedPanelContext;
+    title: string;
+    notification: string;
+    isCancellable: boolean;
+    isBlade: boolean;
+    closeLabel: string;
+    busySubscription: Subscription;
+    constructor(rxRuntimeViewRegistryService: RxRuntimeViewRegistryService, rxUtilityModalsService: RxUtilityModalsService, translateService: TranslateService, changeDetector: ChangeDetectorRef, activeModalRef?: ActiveModalRef, dockedPanelContext?: DockedPanelContext);
+    onCancelView(): void;
+    closeModal(): void;
+    onClose(viewOutputParams: IRuntimeViewOutputParameter): void;
+    onBeforeLoad(): void;
+    onAfterLoad(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RuntimeViewModalComponent, [null, null, null, null, { optional: true; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RuntimeViewModalComponent, "rx-runtime-view-modal", never, {}, {}, never, never>;
+}

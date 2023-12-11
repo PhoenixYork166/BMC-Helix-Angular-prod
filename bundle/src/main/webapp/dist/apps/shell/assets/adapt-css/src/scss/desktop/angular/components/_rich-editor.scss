@@ -1,0 +1,501 @@
+.adapt-rich-editor {
+
+  &.has-warning {
+    .ql-toolbar.ql-snow,
+    .ql-container.ql-snow,
+    .cke_top,
+    .cke_contents {
+      border-color: $color-warning;
+    }
+
+    .alert-icon-lockup-space {
+      @include rtl(padding-right, 0 !important);
+    }
+  }
+
+  &.has-danger {
+    .ql-toolbar.ql-snow,
+    .ql-container.ql-snow,
+    .cke_top,
+    .cke_contents {
+      border-color: $color-critical;
+    }
+
+
+    .form-control-label,
+    .form-control-feedback {
+      color: $color-critical;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__response {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    .warnings-list {
+      flex: 0 1 auto;
+
+      adapt-alert > p {
+        margin-bottom: 0;
+      }
+    }
+
+    .symbols-count-block {
+      flex: 0 0 auto;
+      color: $gray-500;
+    }
+  }
+
+  // toolbar
+  .ql-toolbar {
+    overflow: hidden;
+    scroll-behavior: smooth;
+    display: flex;
+    padding: 11px 16px;
+    font-family: inherit;
+    border: 1px solid $border-color;
+    border-radius: $border-radius $border-radius 0 0;
+    transition: border-color .15s ease-in-out;
+    border-bottom: none;
+
+    // Needed to compensate padding-right when scrolled to the end
+    &:after {
+      content: "";
+      display: block;
+      flex: 0 0 auto;
+      margin-right: -16px;
+      padding-right: 16px;
+    }
+
+    .ql-formats {
+      /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+      @extend .btn-group;
+
+      position: static;
+      @include rtl(margin-right, 1rem);
+
+      button + div,
+      div + button,
+      div + div {
+        @include rtl(margin-left, -$btn-border-width);
+      }
+
+      > div:first-child > button {
+        @include rtl(margin-left, 0);
+      }
+
+      > div:not(:last-child) > button {
+        @if $rtl-mode {
+          @include border-left-radius(0);
+        } @else {
+          @include border-right-radius(0);
+        }
+      }
+
+      > div:not(:first-child) > button {
+        @if $rtl-mode {
+          @include border-right-radius(0);
+        } @else {
+          @include border-left-radius(0);
+        }
+      }
+
+      &:last-of-type:not(:first-of-type) {
+        @include rtl(margin-right, 0);
+
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      // buttons
+      button,
+      .ql-picker-label {
+        /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+        @extend .btn, .btn-secondary;
+
+        display: flex;
+        align-items: center;
+      }
+
+      button.ql-active {
+        color: $text-primary;
+        border-color: color-variant($color-secondary, active);
+        background-color: color-variant($color-secondary, hover);
+        background-image: none;
+        @include box-shadow($btn-active-box-shadow);
+
+        @include hover-supported() {
+          color: $text-primary;
+          border-color: color-variant($color-secondary, active-hover);
+          background-color: color-variant($color-secondary, active);
+        }
+
+        @include focus-supported() {
+          color: $text-primary;
+          border-color: color-variant($color-secondary, active-hover);
+          background-color: color-variant($color-secondary, active);
+        }
+
+        z-index: 1;
+
+        &:hover {
+          z-index: 2;
+        }
+      }
+    }
+
+    .ql-picker {
+      position: relative;
+
+      &.ql-expanded {
+
+        .ql-picker-options {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 1px;
+          top: 100%;
+          z-index: 1;
+        }
+      }
+
+      &.ql-color-picker {
+        .ql-picker-options {
+          padding: 3px 5px;
+          width: 152px;
+
+          /* stylelint-disable-next-line max-nesting-depth */
+          .ql-picker-item {
+            border: 1px solid transparent;
+            height: 1rem;
+            margin: 2px;
+            padding: 0;
+            width: 1rem;
+
+            /* stylelint-disable-next-line max-nesting-depth */
+            &.ql-selected,
+            &:hover {
+              border-color: $black;
+            }
+          }
+        }
+
+        &.ql-background .ql-picker-item {
+          background-color: $white;
+        }
+
+        &.ql-color .ql-picker-item {
+          background-color: $black;
+        }
+      }
+    }
+
+    .ql-picker-options {
+      background-color: $white;
+      display: none;
+      min-width: 100%;
+      padding: 4px 8px;
+      position: absolute;
+      white-space: nowrap;
+
+      .ql-picker-item {
+        cursor: pointer;
+        display: block;
+        padding-bottom: 5px;
+        padding-top: 5px;
+      }
+    }
+
+    input.ql-image[type=file] {
+      display: none;
+    }
+  }
+
+  // container
+  .ql-container {
+    position: relative;
+    border: 1px solid $border-color;
+    border-radius: 0 0 $border-radius $border-radius;
+    transition: border-color .15s ease-in-out;
+    height: 180px;
+
+    .ql-editor {
+      counter-reset: list-0;
+      height: 100%;
+      outline: none;
+      overflow-y: auto;
+      padding: 12px 15px;
+      tab-size: 4;
+      @include rtl(text-align, left);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+
+      &.drop-area {
+        outline: 1px dashed $color-active;
+
+        * {
+          pointer-events: none;
+        }
+      }
+
+      &.ql-blank::before {
+        color: $input-placeholder-color;
+        content: attr(data-placeholder);
+        font-size: $font-size-base;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      > * {
+        cursor: text;
+      }
+    }
+
+    .ql-clipboard {
+      @include rtl(left, -100000px);
+      height: 1px;
+      overflow-y: hidden;
+      position: absolute;
+      top: 50%;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .ql-direction-rtl {
+      direction: rtl;
+      text-align: inherit;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .ql-video {
+      display: block;
+      max-width: 100%;
+
+      &.ql-align-center {
+        margin: 0 auto;
+      }
+
+      &.ql-align-right {
+        margin: 0 0 0 auto;
+      }
+    }
+  }
+
+  // color indicator for ql-color and ql-background
+  .ql-picker-color-indicator {
+    display: block;
+    width: 10px;
+    height: 20px;
+    border-radius: 1px;
+    background-color: $black;
+  }
+
+  input.ql-image[type=file],
+  input.ql-attachment[type=file] {
+    display: none;
+  }
+
+  .attachment-wrp[data-type="loaded"] {
+    display: block;
+
+    a {
+      cursor: pointer;
+    }
+  }
+
+  // tooltip styling
+  &.popover {
+    max-width: unset;
+
+    .popover-body {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+
+      & > * {
+        flex: 0 0 auto;
+        max-width: 100%;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+
+        & > * {
+          flex: 0 0 auto;
+        }
+      }
+
+      .editing {
+        display: none;
+      }
+
+      .preview {
+        display: flex;
+        align-items: center;
+
+        .ql-preview {
+          max-width: $popover-max-width;
+        }
+      }
+    }
+
+    &.ql-editing {
+
+      .popover-body {
+        flex-direction: column;
+
+        & > * {
+          width: 100%;
+        }
+
+        .editing {
+          display: block;
+        }
+
+        .preview,
+        .btn-remove {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // list styles
+  .ql-editor ul > li,
+  .ql-editor ol > li {
+    list-style-position: inside;
+  }
+
+  .adapt-rich-editor__restrict {
+    color: $text-tertiary;
+  }
+}
+
+.transform {
+  transform: rotateY(180deg);
+}
+
+// mention module blot
+.mention {
+  border-radius: $border-radius;
+  background-color: $gray-200;
+}
+
+.adapt-rte-toolbar-buttons {
+  position: relative;
+  z-index: 3;
+
+  .adapt-rte-toolbar-back-shadow,
+  .adapt-rte-toolbar-forward-shadow {
+    position: absolute;
+    z-index: 0;
+    top: 6px;
+    width: 75px;
+    height: 50px;
+  }
+
+  .adapt-rte-toolbar-back-shadow {
+    left: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 70%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .adapt-rte-toolbar-forward-shadow {
+    right: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  .adapt-rte-toolbar-shadow__mobile {
+    width: 20px;
+  }
+
+  .adapt-rte-toolbar-back-btn,
+  .adapt-rte-toolbar-forward-btn {
+    position: absolute;
+    z-index: 1;
+    top: 15px;
+    padding: 0;
+    width: 34px;
+    height: 30px;
+    line-height: 30px;
+    border: 0;
+    border-radius: 15px;
+    font-size: 20px;
+    text-align: center;
+    color: $gray-700;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $color-secondary;
+      color: $color-active;
+      transition: color .25s;
+    }
+
+    &.is-mouse-focused {
+      box-shadow: 0 3px 4px rgba(0, 0, 0, .14), 0 9px 10px rgba(0, 0, 0, .06) !important;
+    }
+
+    @include shadow(1);
+  }
+
+  .adapt-rte-toolbar-back-btn {
+    left: 16px;
+    padding-right: 3px;
+  }
+
+  .adapt-rte-toolbar-forward-btn {
+    right: 16px;
+    padding-left: 3px;
+  }
+}
+
+// Styles for ql-picker when it's appended to body
+.ql-picker-options {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  width: 152px;
+  padding: 3px 5px;
+  margin-top: 1px;
+  background-color: $white;
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  .ql-picker-item {
+    border: 1px solid transparent;
+    height: 1rem;
+    margin: 2px;
+    padding: 0;
+    width: 1rem;
+    background-color: $black;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &.ql-selected,
+    &:hover {
+      border-color: $black;
+    }
+  }
+}
+
+.popover.ql-editing {
+  .popover-body > .preview,
+  .popover-body > .actions > .btn-remove {
+    display: none;
+  }
+}
+
+.ql-hidden {
+  display: none !important;
+}

@@ -1,0 +1,194 @@
+//Returns a muted version of a color fed into it
+//
+@use "sass:math";
+@import "./CAM02.scss";
+
+@function color-mute($color) {
+  $muted-color: lighten(desaturate($color, 15.7%), 33.5%);
+  @return $muted-color;
+}
+
+// for dark mode
+@function color-mute-dark($color) {
+  $muted-color: darken(desaturate($color, 15.7%), 33.5%);
+  @return $muted-color;
+}
+
+//Mixin to compute solid from alpha based on white background - This is used for converting disabled states
+//
+@function alpha-to-solid($color, $opacity-value, $background: $color-foreground) {
+  @return mix($color, $background, $opacity-value * 100%);
+}
+
+// for alerts
+@function text-for-background($bg-color) {
+  // 1. check $primary-text and $primary-text-inverse against given background
+  // 2. go with that text variable that gives highest contrast
+
+  @return color-yiq($bg-color);
+}
+
+//status colors in utilities and text alert messages
+@function get-status-text-color($status-color, $n: 0) {
+
+  // check a given text for a contrast against white (dark in dark mode)
+  // if the contrast is not enough go deeper dark for normal mode and lighter for dark mode
+  @if (ch-color_contrast($status-color, $color-foreground) < 4.5) {
+    $jabColor: jabConverter($status-color);
+    @if ($dark-mode) {
+      $newColor: JABColorVariant($jabColor, -1 * ($n + 1));
+      @return get-status-text-color($newColor);
+    } @else {
+      $newColor: JABColorVariant($jabColor, 1 * ($n + 1));
+      @return get-status-text-color($newColor);
+    }
+  } @else {
+    @return $status-color;
+  }
+}
+
+
+//Checks the lightness of a color and darkens it a bit if it's too light - This is to prevent programmatic grays from washing out
+//
+@function check-lightness($seed-color, $output-string, $darken-value) {
+  @if lightness($seed-color) > 85% { //Checks the lightness of a provided base color it gets to see if it's greater than 85%
+    @return darken($output-string, $darken-value); //If it is it darkens it again by our $darken-value
+  } @else {
+    @return $output-string;
+  }
+  //If not it returns the same color
+}
+
+// for dark mode
+//
+@function check-lightness-dark($seed-color, $output-string, $lighten-value) {
+  @if lightness($seed-color) < 15% { //Checks the lightness of a provided base color it gets to see if it's less than 15%
+    @return lighten($output-string, $lighten-value); //If it is it lighten it again by our $lighten-value
+  } @else {
+    @return $output-string;
+  }
+  //If not it returns the same color
+}
+
+// Function to call color with a simple syntax - color(color-name, variant)
+//
+// usage: color($color-primary, disabled)
+//
+@function color-variant($color, $variant: base, $dark: $dark-mode) {
+  @if ($variant == hover) {
+    @if ($dark == true) {
+      @return check-lightness-dark($color, lighten($color, $hover), $hover);
+    } @else {
+      @return check-lightness($color, darken($color, $hover), $hover);
+    }
+
+  } @else if ($variant == active) {
+    @if ($dark == true) {
+      @return check-lightness-dark($color, lighten($color, $active), $hover);
+    } @else {
+      @return check-lightness($color, darken($color, $active), $hover);
+    }
+
+  } @else if ($variant == active-hover) {
+    @return check-lightness($color, darken($color, $active-hover), $hover);
+
+  } @else if ($variant == disabled) {
+    @return alpha-to-solid($color, $disabled);
+
+  } @else if ($variant == disabled-hover) {
+    @return alpha-to-solid(darken($color, $hover), $disabled);
+
+  } @else if ($variant == row or $variant == muted or $variant == mute) {
+    @if ($dark == true) {
+      @return color-mute-dark($color);
+    } @else {
+      @return check-lightness($color, color-mute($color), math.div($hover, 3.5));
+    }
+
+  } @else if ($variant == row-hover or $variant == muted-hover or $variant == mute-hover) {
+    @return check-lightness($color, darken(color-mute($color), math.div($hover, 1.5)), math.div($hover, 3.5));
+
+  } @else if ($variant == row-active or $variant == muted-active or $variant == mute-active) {
+    @return check-lightness($color, darken(color-mute($color), math.div($active, 1.5)), math.div($active, 3.5));
+
+  } @else if ($variant == row-active-hover or $variant == muted-active-hover or $variant == mute-active-hover) {
+    @return check-lightness($color, darken(color-mute($color), math.div($active-hover, 1.5)), math.div($active-hover, 3.5));
+
+  } @else {
+    @return $color;
+  }
+}
+
+@function color-variantNew($color, $variant: base, $dark: $dark-mode, $step: 6) {
+
+  $jab: jabConverter($color);
+
+  @if ($variant == hover) {
+    @if($dark == true) {
+      @return check-lightness-dark($color, lighten($color, $hover), $hover);
+    } @else {
+      //TODO: check with design team about this:
+      //@return check-lightness($color, darken($color, $hover), $hover);
+      @return JABColorVariant($jab, 1);
+    }
+
+  } @else if ($variant == active) {
+    @if($dark == true) {
+      @return check-lightness-dark($color, lighten($color, $active), $hover);
+    } @else {
+      //@return check-lightness($color, darken($color, $active), $hover);
+      @return JABColorVariant($jab, 2);
+    }
+
+  } @else if ($variant == active-hover) {
+    //@return check-lightness($color, darken($color, $active-hover), $hover);
+    @return JABColorVariant($jab, 3);
+
+  } @else if ($variant == disabled) {
+    @return alpha-to-solid($color, $disabled);
+    //@return JABColorVariant($jab, -1);
+
+  } @else if ($variant == disabled-hover) {
+    @return alpha-to-solid(darken($color, $hover), $disabled);
+    //@return JABColorVariant($jab, -2);
+
+  } @else if ($variant == row or $variant == muted or $variant == mute) {
+    @if($dark == true) {
+      @return color-mute-dark($color);
+    } @else {
+      @return check-lightness($color, color-mute($color), math.div($hover, 3.5));
+    }
+
+  } @else if ($variant == row-hover or $variant == muted-hover or $variant == mute-hover) {
+    @return check-lightness($color, darken(color-mute($color), math.div($hover, 1.5)), math.div($hover, 3.5));
+
+  } @else if ($variant == row-active or $variant == muted-active or $variant == mute-active) {
+    @return check-lightness($color, darken(color-mute($color), math.div($active, 1.5)), math.div($active, 3.5));
+
+  } @else if ($variant == row-active-hover or $variant == muted-active-hover or $variant == mute-active-hover) {
+    @return check-lightness($color, darken(color-mute($color), math.div($active-hover, 1.5)), math.div($active-hover, 3.5));
+
+  } @else {
+    @return $color;
+  }
+}
+
+// Returns the color for animated part of progress bar
+
+@function blend($blend-color, $hue-adjust: 17, $shade-adjust: 5%, $desaturate-adjust: 3%) {
+  @return desaturate(mix(black, adjust-hue($blend-color, $hue-adjust), $shade-adjust), $desaturate-adjust);
+}
+
+// Used for blending in the primary color with the background
+@function create-gray($gray, $amount, $darken: 15%, $theme-color: $color-primary) {
+  @return mix(darken(complement($theme-color), $darken), $gray, $amount);
+}
+
+// for the dark mode create colors
+@function create-dark-color($color) {
+  @if saturation($color) <= 4% {
+    @return change-color($color, $lightness: 100 - lightness($color));
+  } @else {
+   @return lighten($color, 6%);
+  }
+}

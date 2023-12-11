@@ -1,0 +1,38 @@
+import { Injector, OnInit } from '@angular/core';
+import { ActiveModalRef, TreeWrap } from '@bmc-ux/adapt-angular';
+import { IFieldDefinition } from '@helix/platform/record/api';
+import { RxGuidService, RxStringService } from '@helix/platform/utils';
+import { IAssociationRecordFieldSelectorEditorDialogConfig, IFieldLabelsMap, IViewAssociationRecordFieldSelectorEditorDialogItem } from './association-record-field-selector-editor-dialog.interface';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { TreeNode } from 'primeng/api/treenode';
+import { CdkDragDrop } from '@angular/cdk/drag-drop/drag-events';
+import * as i0 from "@angular/core";
+export declare class AssociationRecordFieldSelectorEditorDialogComponent extends RxModalClass implements OnInit {
+    private rxStringService;
+    private rxGuidService;
+    activeModalRef: ActiveModalRef;
+    protected injector: Injector;
+    config: IAssociationRecordFieldSelectorEditorDialogConfig;
+    fieldLabelsMap: IFieldLabelsMap;
+    filteredFieldDescriptors: IFieldDefinition[];
+    searchValue: string;
+    availableFieldTreeNodes: TreeNode<IFieldDefinition>[];
+    canSave: boolean;
+    selectedFields: IViewAssociationRecordFieldSelectorEditorDialogItem[];
+    treeWrap: TreeWrap;
+    constructor(rxStringService: RxStringService, rxGuidService: RxGuidService, activeModalRef: ActiveModalRef, injector: Injector);
+    isDirty(): boolean;
+    ngOnInit(): void;
+    addField(field: IFieldDefinition): void;
+    onSelectedFieldsListDrop(event: CdkDragDrop<any>): void;
+    onSave(): void;
+    onRemove(field: IViewAssociationRecordFieldSelectorEditorDialogItem): void;
+    onMoveUp(field: IViewAssociationRecordFieldSelectorEditorDialogItem, index: number): void;
+    onMoveDown(field: IViewAssociationRecordFieldSelectorEditorDialogItem, index: number): void;
+    toggleOpen(expandAll: boolean): void;
+    private sortFields;
+    refreshFieldDescriptorsList(): void;
+    cancel(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AssociationRecordFieldSelectorEditorDialogComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AssociationRecordFieldSelectorEditorDialogComponent, "rx-association-record-field-selector-editor-dialog", never, {}, {}, never, never>;
+}

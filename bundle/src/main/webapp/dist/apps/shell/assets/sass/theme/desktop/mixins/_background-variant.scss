@@ -1,0 +1,73 @@
+// Contextual backgrounds
+
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    background-color: $color !important;
+
+    &.focus,
+    &.hover {
+      background-color: color-variant($color, hover) !important;
+    }
+
+    &.active {
+      background-color: color-variant($color, active) !important;
+    }
+  }
+
+  button#{$parent} {
+    background-color: $color !important;
+
+    &.focus,
+    &.hover,
+    &:hover,
+    &:focus {
+      background-color: color-variant($color, hover) !important;
+    }
+
+    &.active,
+    &:active {
+      background-color: color-variant($color, active) !important;
+    }
+  }
+
+  a#{$parent} {
+    @include hover-focus {
+      background-color: color-variant($color, hover) !important;
+    }
+
+    &:active {
+      background-color: color-variant($color, active) !important;
+    }
+  }
+}
+
+@mixin bg-variant-muted($parent, $color, $dark: false) {
+  #{$parent}-muted {
+    background-color: color-variant($color, row, $dark) !important;
+
+    &.focus,
+    &.hover {
+      background-color: color-variant($color, row-hover, $dark) !important;
+    }
+
+    &.active {
+      background-color: color-variant($color, row-active, $dark) !important;
+    }
+  }
+
+  a#{$parent}-muted {
+    @include hover-focus {
+      background-color: color-variant($color, row-hover, $dark) !important;
+    }
+
+    &:active {
+      background-color: color-variant($color, row-active, $dark) !important;
+    }
+  }
+}
+
+@mixin bg-variant-flat($parent, $color) {
+  #{$parent} {
+    background-color: $color !important;
+  }
+}

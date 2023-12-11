@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/config/api/index.ts"],"names":[],"mappings":"AAAA,cAAc,2BAA2B,CAAC;AAC1C,cAAc,6BAA6B,CAAC","sourcesContent":["export * from './config-definition.types';\nexport * from './config-definition.service';\n"]}

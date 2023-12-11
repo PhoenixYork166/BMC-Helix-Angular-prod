@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/localized-character-field/runtime/index.ts"],"names":[],"mappings":"AAAA,cAAc,uCAAuC,CAAC;AACtD,cAAc,oCAAoC,CAAC","sourcesContent":["export * from './localized-character-field.component';\nexport * from './localized-character-field.module';\n"]}

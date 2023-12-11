@@ -1,0 +1,36 @@
+import { Injector } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IValidationIssue } from '@helix/platform/ui-kit';
+import { IAssignmentExpression, IDataDictionaryBranch, IExpressionConfigurator, IFormBuilderConfig, IFormWidgetBuilderConfig, IPlainObject, IProcessActionElementModel, IServiceParameter, RxServerActionService } from '@helix/platform/shared/api';
+import { IServiceTaskDefinition } from '@helix/platform/process/api';
+import { IOutputDataDictionaryBranch, IProcessActionElementService } from './process-action.types';
+import * as i0 from "@angular/core";
+export declare class RxProcessActionService extends RxServerActionService implements IProcessActionElementService {
+    protected injector: Injector;
+    private rxActionTypeUtilsService;
+    private rxProcessDataDictionaryService;
+    private expressionConfigurator;
+    constructor(injector: Injector);
+    getDefinitionFromModel(model: IProcessActionElementModel): Partial<IServiceTaskDefinition>;
+    getExpressionConfigurator(): IExpressionConfigurator;
+    getInspectorConfig(model: IProcessActionElementModel, options: IPlainObject): IFormBuilderConfig;
+    getModelFromDefinition(definition: IServiceTaskDefinition): IProcessActionElementModel;
+    getShape(options: IPlainObject): any;
+    setCommonDataDictionaryBranch(guid: string, dataDictionaryBranch: Observable<IDataDictionaryBranch>): void;
+    validate(model: IProcessActionElementModel, availableCells: any): Observable<IValidationIssue[]>;
+    buildDataDictionaryBranch(model: IProcessActionElementModel): Observable<IDataDictionaryBranch>;
+    buildOutputDataDictionaryBranch(model: IProcessActionElementModel, outputParams?: IServiceParameter[]): Observable<IOutputDataDictionaryBranch[]>;
+    getClass(): any;
+    getDefinitionInputMapParam(inputParamName: string, inputParamValue: string): IAssignmentExpression;
+    getElementType(actionTypeName: string): string;
+    getExpressionConfiguratorClass(): any;
+    getInputMapInspectorWidgetConfig(model: IProcessActionElementModel): IFormWidgetBuilderConfig;
+    getInputMapFromDefinition(definition: IServiceTaskDefinition): IPlainObject;
+    private buildDefaultOutputDataDictionaryBranch;
+    private getInputMapFromModel;
+    private getOutputDataDictionaryExpression;
+    private getRunAsUserFromDefinition;
+    private updateOutputDataDictionaryBranch;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxProcessActionService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxProcessActionService>;
+}

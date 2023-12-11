@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/process/designer/index.ts"],"names":[],"mappings":"AAAA,cAAc,+BAA+B,CAAC;AAC9C,cAAc,0BAA0B,CAAC","sourcesContent":["export * from './process-designer-page/index';\nexport * from './process-designer/index';\n"]}

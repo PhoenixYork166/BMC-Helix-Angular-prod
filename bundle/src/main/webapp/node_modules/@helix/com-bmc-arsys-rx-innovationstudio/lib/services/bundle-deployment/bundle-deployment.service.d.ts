@@ -1,0 +1,30 @@
+import { NgZone } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { RxFileService } from '@helix/platform/utils';
+import { IBundleCreateDescriptor, IDeploymentParsedStatus, IDeploymentStatus } from './bundle-deployment.interfaces';
+import * as i0 from "@angular/core";
+export declare class AxBundleDeploymentService {
+    private httpClient;
+    private ngZone;
+    private translateService;
+    private rxFileService;
+    private createBundleUrl;
+    private deployBundleUrl;
+    private deploymentStatusUrl;
+    private cancelPolling$;
+    constructor(httpClient: HttpClient, ngZone: NgZone, translateService: TranslateService, rxFileService: RxFileService);
+    create(bundleDescriptor: IBundleCreateDescriptor): Observable<any>;
+    downloadContentPackage(bundleId: string, packageId: string): Observable<any>;
+    download(bundleId: string, packageId: string): Observable<any>;
+    install(file: File): Observable<any>;
+    reinstall(bundleId: string, file: File): Observable<any>;
+    update(file: File): Observable<any>;
+    import(bundleId: string, file: File): Observable<any>;
+    uninstall(bundleId: string): Observable<any>;
+    buildStatusMessage(deploymentParsedStatus: IDeploymentParsedStatus): string;
+    pollDeploymentStatus(guid: string, customDeploymentStatusUrl?: string): Observable<IDeploymentStatus>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AxBundleDeploymentService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<AxBundleDeploymentService>;
+}

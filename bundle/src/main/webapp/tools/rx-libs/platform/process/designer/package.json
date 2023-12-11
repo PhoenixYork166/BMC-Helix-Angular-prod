@@ -1,0 +1,14 @@
+{
+  "name": "@helix/platform/process/designer",
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-process-designer.umd.js",
+  "module": "../../fesm2015/helix-platform-process-designer.js",
+  "es2015": "../../fesm2015/helix-platform-process-designer.js",
+  "esm2015": "../../esm2015/process/designer/helix-platform-process-designer.js",
+  "fesm2015": "../../fesm2015/helix-platform-process-designer.js",
+  "typings": "helix-platform-process-designer.d.ts",
+  "sideEffects": false
+}

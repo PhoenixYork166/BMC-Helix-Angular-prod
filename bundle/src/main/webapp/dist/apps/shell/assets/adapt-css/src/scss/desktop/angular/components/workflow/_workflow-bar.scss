@@ -1,0 +1,101 @@
+
+.a-workflow-bar {
+  display: flex;
+  height: .5rem;
+  background-color: $gray-200;
+  border-radius: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.a-workflow-bar__step {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:last-child {
+    .a-workflow-bar__progress {
+      border-radius: 2px 100px 100px 2px;
+
+      &.is-rtl {
+        border-radius: 100px 2px 2px 100px;
+      }
+    }
+  }
+}
+
+.a-workflow-bar__step-small {
+  width: $w-workflow-bar-step-small;
+
+  &.is-first,
+  &.is-prev {
+    width: $w-workflow-bar-step-small + ($w-workflow-bar-step-small * .5);
+  }
+
+  &.is-prev {
+    width: $w-workflow-bar-step-small + ($w-workflow-bar-step-small * .5);
+  }
+
+  &.is-last {
+    width: auto;
+  }
+}
+
+.a-workflow-bar__step-large {
+  width: $w-workflow-bar-step-large;
+
+  &.is-first,
+  &.is-prev {
+    width: $w-workflow-bar-step-large + ($w-workflow-bar-step-large * .5);
+  }
+
+  &.is-last {
+    width: auto;
+  }
+}
+
+.a-workflow-bar__step-medium {
+  width: $w-workflow-bar-step-medium;
+
+  &.is-first,
+  &.is-prev {
+    width: $w-workflow-bar-step-medium + ($w-workflow-bar-step-medium * .5);
+  }
+
+  &.is-last {
+    width: auto;
+  }
+}
+
+.a-workflow-bar__step-wrapper {
+  &.is-last {
+    justify-content: flex-end;
+
+    .a-workflow__dot {
+      position: absolute;
+      top: 0;
+      left: if($rtl-mode, 10px !important, auto);
+      @if ($rtl-mode == false) {
+        right: 10px;
+      }
+    }
+  }
+}
+
+.a-workflow-bar__progress {
+  display: flex;
+  justify-content: center;
+  color: $white;
+  text-align: center;
+  border: none;
+  z-index: 12;
+}
+
+.a-workflow-bar__flex {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}

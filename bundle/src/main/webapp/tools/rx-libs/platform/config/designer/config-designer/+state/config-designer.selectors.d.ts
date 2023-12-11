@@ -1,0 +1,13 @@
+import { IConfigDesignerModel, IConfigDesignerState } from './config-designer.types';
+export declare const configDesignerStateSelector: import("@ngrx/store").MemoizedSelector<object, IConfigDesignerState, import("@ngrx/store").DefaultProjectorFn<IConfigDesignerState>>;
+export declare const configDesignerModelSelector: import("@ngrx/store").MemoizedSelector<object, IConfigDesignerModel, import("@ngrx/store").DefaultProjectorFn<IConfigDesignerModel>>;
+export declare const bundleIdSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const definitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const isDesignModeSelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const inspectorTabIndexSelector: import("@ngrx/store").MemoizedSelector<object, number, import("@ngrx/store").DefaultProjectorFn<number>>;
+export declare const parentComponentsSelector: import("@ngrx/store").MemoizedSelector<object, string[], import("@ngrx/store").DefaultProjectorFn<string[]>>;
+export declare const selectedFieldGuidSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const definitionModelFromDefinitionSelector: import("@ngrx/store").MemoizedSelector<object, import("../../config-designer.types").IConfigDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../config-designer.types").IConfigDefinitionModel>>;
+export declare const definitionModelSelector: import("@ngrx/store").MemoizedSelector<object, import("../../config-designer.types").IConfigDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../config-designer.types").IConfigDefinitionModel>>;
+export declare const isDirtySelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const savedDefinitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;

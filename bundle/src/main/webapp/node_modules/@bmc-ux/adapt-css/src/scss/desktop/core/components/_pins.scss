@@ -1,0 +1,112 @@
+.adapt-pin {
+  position: relative;
+  display: inline-flex;
+
+  .a-pin-icon {
+    position: relative;
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background: $white;
+
+    &::after { // tail
+      position: absolute;
+      bottom: -1rem;
+      left: .75rem;
+      width: 0;
+      height: 0;
+      border-width: 1rem .5625rem 0;
+      border-style: solid;
+      content: "";
+    }
+  }
+
+  &::before { // shadow
+    position: absolute;
+    bottom: 1rem;
+    left: .5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    box-shadow: 0 5px 4px 0 rgba($black, .14), 0 11px 10px 0 rgba($black, .06);
+    content: "";
+  }
+
+  &.pin-primary .a-pin-icon {
+    border: 3px solid $color-primary;
+
+    &::after {
+      border-color: $color-primary transparent transparent;
+    }
+  }
+
+  &.pin-secondary .a-pin-icon {
+    border: 3px solid $color-secondary;
+
+    &::after {
+      border-color: $color-secondary transparent transparent;
+    }
+  }
+
+  &.pin-active .a-pin-icon {
+    border: 3px solid $color-active;
+
+    &::after {
+      border-color: $color-active transparent transparent;
+    }
+  }
+
+  &.pin-light .a-pin-icon {
+    border: 3px solid $gray-100;
+
+    &::after {
+      border-color: $gray-100 transparent transparent;
+    }
+  }
+
+  &.pin-dark .a-pin-icon {
+    border: 3px solid $gray-1000;
+
+    &::after {
+      border-color: $gray-1000 transparent transparent;
+    }
+  }
+
+  &.pin-info .a-pin-icon {
+    border: 3px solid $color-info;
+
+    &::after {
+      border-color: $color-info transparent transparent;
+    }
+  }
+
+  &.pin-danger .a-pin-icon {
+    border: 3px solid $color-critical;
+
+    &::after {
+      border-color: $color-critical transparent transparent;
+    }
+  }
+
+  &.pin-success .a-pin-icon {
+    border: 3px solid $color-success;
+
+    &::after {
+      border-color: $color-success transparent transparent;
+    }
+  }
+
+  &.pin-warning .a-pin-icon {
+    border: 3px solid $color-warning;
+
+    &::after {
+      border-color: $color-warning transparent transparent;
+    }
+  }
+
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/data-dictionary/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,iCAAiC,CAAC","sourcesContent":["export * from './data-dictionary.types';\nexport * from './data-dictionary-utils.service';\n"]}

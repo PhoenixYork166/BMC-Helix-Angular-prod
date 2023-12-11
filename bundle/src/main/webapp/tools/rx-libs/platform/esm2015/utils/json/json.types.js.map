@@ -1,0 +1,1 @@
+{"version":3,"file":"json.types.js","sourceRoot":"","sources":["../../../../../../libs/platform/utils/json/json.types.ts"],"names":[],"mappings":"","sourcesContent":["export interface IJsonValidatorConfig {\n  errorMessage: string;\n}\n"]}

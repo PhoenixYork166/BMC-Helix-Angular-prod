@@ -1,0 +1,15 @@
+.empty-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 60%;
+  margin: 0 auto;
+
+  & > p {
+    text-align: center;
+  }
+
+  & > button {
+    margin-top: .5rem;
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"expression-validator.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/api/expressions/expression-validator.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IExpressionValidator {\n  isValid(expression: string): boolean;\n}\n"]}

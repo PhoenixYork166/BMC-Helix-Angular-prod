@@ -1,0 +1,59 @@
+.alert {
+  &,
+  .container {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  @include alert-variant($alert-bg, $alert-border, text-for-background($alert-bg));
+
+  .alert-link {
+    text-decoration: underline;
+    transition: $btn-transition;
+
+    &:hover,
+    &:focus {
+      color: $text-primary-inverse;
+    }
+  }
+
+  .close {
+    margin-right: auto;
+    margin-left: 0;
+    order: 3;
+  }
+}
+
+.alert-icon {
+  order: 1;
+  margin-left: $alert-padding-x * .75;
+  font-size: 1rem;
+  line-height: $font-size-base * $line-height-base;
+}
+
+.alert-content {
+  order: 2;
+  margin-left: $alert-padding-x * .75;
+  line-height: $alert-line-height;
+}
+
+.alert-success {
+  @include alert-variant($alert-success-bg, $alert-success-border, text-for-background($alert-success-bg));
+}
+
+.alert-info {
+  @include alert-variant($alert-info-bg, $alert-info-border, text-for-background($alert-info-bg));
+}
+
+.alert-warning {
+  @include alert-variant($alert-warning-bg, $alert-warning-border, text-for-background($alert-warning-bg));
+}
+
+.alert-danger {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, text-for-background($alert-danger-bg));
+}
+
+.page-alert {
+  border-color: transparent;
+  border-radius: 0;
+}

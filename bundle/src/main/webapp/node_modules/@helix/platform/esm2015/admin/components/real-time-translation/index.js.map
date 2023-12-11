@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/real-time-translation/index.ts"],"names":[],"mappings":"AAAA,cAAc,6CAA6C,CAAC;AAC5D,cAAc,mCAAmC,CAAC","sourcesContent":["export * from './real-time-translation-registration.module';\nexport * from './real-time-translation.component';\n"]}

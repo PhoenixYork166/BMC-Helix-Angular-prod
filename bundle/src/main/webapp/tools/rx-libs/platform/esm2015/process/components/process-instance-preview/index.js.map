@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/process/components/process-instance-preview/index.ts"],"names":[],"mappings":"AAAA,cAAc,sCAAsC,CAAC;AACrD,cAAc,mCAAmC,CAAC","sourcesContent":["export * from './process-instance-preview.component';\nexport * from './process-instance-preview.module';\n"]}

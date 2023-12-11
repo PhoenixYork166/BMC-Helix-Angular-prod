@@ -1,0 +1,93 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "extends": ["@nrwl/angular"],
+  "schematics": {
+    "workspace": {
+      "description": "Create or update Helix workspace.",
+      "factory": "./workspace"
+    },
+    "create-workspace": {
+      "description": "Create Helix workspace.",
+      "factory": "./create-workspace/index#createWorkspace"
+    },
+    "update-workspace": {
+      "description": "Update Helix workspace.",
+      "factory": "./update-workspace/index#updateWorkspace"
+    },
+    "add-style": {
+      "description": "Add styles to Angular library.",
+      "factory": "./add-style/index#addStyle"
+    },
+    "create-new": {
+      "description": "Create Angular library.",
+      "factory": "./create-new",
+      "schema": "./create-new/schema.json"
+    },
+    "create-view-component": {
+      "aliases": ["rx-view-component"],
+      "description": "Create view component.",
+      "factory": "./create-view-component",
+      "schema": "./create-view-component/schema.json"
+    },
+    "create-record-editor-field-view-component": {
+      "aliases": ["rx-field-view-component"],
+      "description": "Create record editor field view component.",
+      "factory": "./create-record-editor-field-view-component",
+      "schema": "./create-record-editor-field-view-component/schema.json"
+    },
+    "create-view-action": {
+      "aliases": ["rx-view-action"],
+      "description": "Create view action.",
+      "factory": "./create-view-action",
+      "schema": "./create-view-action/schema.json"
+    },
+    "update-package-json": {
+      "description": "Update package.json & tsconfig.json files.",
+      "factory": "./update-package-json/index#updatePackageJson"
+    },
+    "update-angular-json": {
+      "description": "Update angular.json file.",
+      "factory": "./update-angular-json/index#updateAngularJson"
+    },
+    "update-preinstall": {
+      "description": "Update preinstall.js file.",
+      "factory": "./update-preinstall/index#updatePreinstall"
+    },
+    "update-routing-module": {
+      "description": "Update routing module.",
+      "factory": "./update-routing-module/index#updateRoutingModule"
+    },
+    "update-webpack-config": {
+      "description": "Update webpack.config.js file.",
+      "factory": "./update-webpack-config/index#updateWebpackConfig"
+    },
+    "update-proxy-config": {
+      "description": "Update proxy.config.js file.",
+      "factory": "./update-proxy-config/index#updateProxyConfig"
+    },
+    "update-environment-config": {
+      "description": "Update environment.ts file.",
+      "factory": "./update-environment-config/index#updateEnvironmentConfig"
+    },
+    "update-bootstrap-config": {
+      "description": "Update main.ts file.",
+      "factory": "./update-bootstrap-config/index#updateBootstrapConfig"
+    },
+    "update-lib-config": {
+      "description": "Update lib files.",
+      "factory": "./update-lib-config/index#updateLibConfig"
+    },
+    "create-app-module-prod": {
+      "description": "Create app.module.prod.ts.",
+      "factory": "./create-app-module-prod/index#createAppModuleProd"
+    },
+    "copy": {
+      "description": "Copy file/directory.",
+      "factory": "./copy"
+    },
+    "generate-manifest": {
+      "description": "Generate manifest file.",
+      "factory": "./generate-manifest/index#generateManifest"
+    }
+  }
+}

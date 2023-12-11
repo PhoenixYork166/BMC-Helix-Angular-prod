@@ -1,0 +1,53 @@
+import { ComponentFactoryResolver, NgModule } from '@angular/core';
+import { RxViewComponentRegistryService, RxViewComponentType } from '@helix/platform/view/api';
+import { RX_BASE_FIELD_PROPERTIES } from '@helix/platform/view/components';
+import { <%= classify(viewComponentName) %>Component, <%= classify(viewComponentName) %>Module } from './runtime';
+import { <%= classify(viewComponentName) %>DesignComponent, <%= classify(viewComponentName) %>DesignModel, <%= classify(viewComponentName) %>DesignModule } from './design';
+
+@NgModule({
+  imports: [<%= classify(viewComponentName) %>DesignModule, <%= classify(viewComponentName) %>Module]
+})
+export class <%= classify(viewComponentName) %>RegistrationModule {
+  constructor(
+    private rxViewComponentRegistryService: RxViewComponentRegistryService,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {
+    rxViewComponentRegistryService.register({
+      type: '<%= dasherize(viewComponentSelector) %>',
+      name: '<%= classify(viewComponentName).replace((/([a-z\d])([A-Z])/g), '$1 $2')  %>',
+      icon: 'wall',
+      group: '<%= classify(bundleFriendlyName) %>',
+      // A field view component is considered as a record editor field.
+      // It can be embedded in a record editor using the property "canBeEmbeddedInRecordEditor".
+      options: {
+        canBeEmbeddedInRecordEditor: true
+      },
+      // It can be inserted in a record editor view component using "canBeInsertedInto".
+      canBeInsertedInto(componentTypes: string[]): boolean {
+        return componentTypes.includes(RxViewComponentType.RecordEditor);
+      },
+      componentFactory: this.componentFactoryResolver.resolveComponentFactory(<%= classify(viewComponentName) %>Component),
+      designComponentFactory: this.componentFactoryResolver.resolveComponentFactory(<%= classify(viewComponentName) %>DesignComponent),
+      designComponentModel: <%= classify(viewComponentName) %>DesignModel,
+      bundleId: '<%= bundleId %>',
+      // List of the view component specific input parameters (here "foo").
+      // They will be described with more details in the .model.ts file.
+      //
+      // Some properties are inherited from the base record editor field design defined in "IBaseRecordEditorFieldProperties":
+      //    fieldId: string;
+      //    label: string;
+      //    disabled: string;
+      //    hidden: string;
+      //    value?: string;
+      //    styles?: string;
+      //
+      // It is VERY IMPORTANT to add the view component custom properties to the common properties RX_BASE_FIELD_PROPERTIES.
+      properties: RX_BASE_FIELD_PROPERTIES.concat([
+        {
+          name: 'message',
+          enableExpressionEvaluation: true
+        }
+      ])
+    });
+  }
+}

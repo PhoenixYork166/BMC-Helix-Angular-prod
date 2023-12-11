@@ -1,0 +1,124 @@
+.adapt-rx-search_disabled .adapt-rx-search__form-control-block {
+  background: $input-disabled-bg;
+}
+
+.adapt-rx-search__form-control-block {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  width: 1%;
+  margin-bottom: 0;
+  border-radius: $input-border-radius;
+  border: $input-border-width solid $input-border-color;
+  background: $input-bg;
+  transition: $input-transition;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $search-border-hover;
+  }
+}
+
+@if ($rtl-mode) {
+  .adapt-rx-search__form-control-block:nth-last-child(2) {
+    border-radius: 0 $input-border-radius $input-border-radius 0;
+  }
+} @else {
+  .adapt-rx-search__form-control-block:nth-last-child(2) {
+    border-radius: $input-border-radius 0 0 $input-border-radius;
+  }
+}
+
+.adapt-rx-search__form-control-block_active {
+  border-color: $search-border-active !important;
+}
+
+.adapt-rx-search__expandable-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.adapt-rx-search__input-wrapper {
+  display: flex;
+  flex: 0 1 auto;
+  position: relative;
+  width: auto;
+  overflow: hidden;
+  border: 0;
+  transition: flex .2s ease-in;
+}
+
+.adapt-rx-search__input-wrapper_extended {
+  flex: 1 1 auto;
+  display: flex;
+  max-width: 100%;
+}
+
+.adapt-rx-search__fake-input {
+  border: 0;
+  height: auto;
+  visibility: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.adapt-rx-search__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  background: transparent !important;
+
+  @include rtl(padding-right, 0);
+}
+
+.adapt-rx-search__search-button-block {
+  z-index: 0;
+}
+
+.adapt-rx-search__icon {
+  color: $search-icon-color;
+  padding: 0 .625rem;
+}
+
+.input-group-sm {
+
+  .adapt-rx-search__icon {
+    font-size: $font-size-sm;
+  }
+}
+
+.input-group-lg {
+
+  .adapt-rx-search__icon {
+    font-size: $font-size-lg;
+  }
+}
+
+.adapt-rx-search__clear-button {
+  border: 0;
+  color: $search-clear-color;
+
+  &:hover {
+    color: $search-clear-hover-color;
+  }
+}
+
+.dropdown-menu__rx-search-container {
+  .adapt-rx-search__form-control-block {
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-radius: $input-border-radius $input-border-radius 0 0;
+  }
+
+  .adapt-rx-search__form-control-block_active {
+    border-radius: $input-border-radius;
+  }
+}

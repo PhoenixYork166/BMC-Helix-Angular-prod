@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/server-logs/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,mCAAmC,CAAC","sourcesContent":["export * from './server-logs.component';\nexport * from './server-logs-registration.module';\n"]}

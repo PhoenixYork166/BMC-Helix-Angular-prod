@@ -1,0 +1,48 @@
+import { OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { KeyValueObject } from '@bmc-ux/adapt-angular';
+import { IRecordDefinition } from '@helix/platform/record/api';
+import { IDataPageResult, RxAdminComponentDataPageService, RxAdminSettingsService, RxBundleCacheService, RxFeatureService } from '@helix/platform/shared/api';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { IRowDataItem } from '@helix/platform/view/api';
+import { IRecordGridColumn } from '@helix/platform/view/components';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { IDefinitionActionConfig } from '../bundle-details/bundle-details.types';
+import { DefinitionTabComponent } from '../definition-tab/definition-tab.component';
+import * as i0 from "@angular/core";
+export declare class ConfigurationDefinitionTabComponent implements OnInit {
+    private rxAdminComponentDataPageQuery;
+    private rxModalService;
+    private translateService;
+    private rxAdminSettingsService;
+    private router;
+    private rxBundleCache;
+    private rxFeatureService;
+    definitionTabComponent: DefinitionTabComponent;
+    componentCellTemplate: TemplateRef<any>;
+    gridColumns: IRecordGridColumn[];
+    definitions$: Observable<IDataPageResult>;
+    isActionInProgress: boolean;
+    recordDefinition: Partial<IRecordDefinition>;
+    private rowSelectionChanged$;
+    editRouterLink: string;
+    private definitionType;
+    definitionActions$: Observable<IDefinitionActionConfig[]>;
+    private settingTypeLabels;
+    constructor(rxAdminComponentDataPageQuery: RxAdminComponentDataPageService, rxModalService: RxModalService, translateService: TranslateService, rxAdminSettingsService: RxAdminSettingsService, router: Router, rxBundleCache: RxBundleCacheService, rxFeatureService: RxFeatureService);
+    ngOnInit(): void;
+    private getComponentType;
+    private getDefinitionActions;
+    onCustomAction(event: {
+        actionId: string;
+        selectedRows: IRowDataItem[];
+    }): void;
+    editAdminSetting(row: KeyValueObject): void;
+    private openInBundleSettingsEditor;
+    private getTitleKey;
+    onDeleteDefinition(selectedRows: IRowDataItem[]): void;
+    onRowSelectionChanged(selectedRows: IRowDataItem[]): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ConfigurationDefinitionTabComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ConfigurationDefinitionTabComponent, "ax-configuration-definition-tab", never, {}, {}, never, never>;
+}

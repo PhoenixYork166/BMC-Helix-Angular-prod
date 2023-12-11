@@ -1,0 +1,31 @@
+import { Injector, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { ActiveModalRef, RxSelectOption } from '@bmc-ux/adapt-angular';
+import { RxNotificationService } from '@helix/platform/shared/api';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { RxRuleDefinitionService } from '@helix/platform/rule/api';
+import { RxRulePoolManagementService } from '../rule-pool-management.service';
+import * as i0 from "@angular/core";
+export declare class RuleReassignmentComponent extends RxModalClass implements OnInit, OnDestroy {
+    private activeModalRef;
+    private rxNotificationService;
+    private rxRuleDefinitionService;
+    private rxRulePoolManagementService;
+    private translateService;
+    protected injector: Injector;
+    isSaveButtonDisabled: boolean;
+    poolFormControl: FormControl;
+    poolSelectOptions$: Observable<RxSelectOption[]>;
+    private destroyed$;
+    private selectedPoolId;
+    constructor(activeModalRef: ActiveModalRef, rxNotificationService: RxNotificationService, rxRuleDefinitionService: RxRuleDefinitionService, rxRulePoolManagementService: RxRulePoolManagementService, translateService: TranslateService, injector: Injector);
+    ngOnInit(): void;
+    optionFormatter(selectOption: RxSelectOption): string;
+    save(): void;
+    cancel(): void;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RuleReassignmentComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RuleReassignmentComponent, "rx-rule-reassignment", never, {}, {}, never, never>;
+}

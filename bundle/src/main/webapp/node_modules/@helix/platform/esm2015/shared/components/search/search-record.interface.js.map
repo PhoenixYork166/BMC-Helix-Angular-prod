@@ -1,0 +1,1 @@
+{"version":3,"file":"search-record.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/search/search-record.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IRxSearchRecord {\n  definitionName: string;\n  name: string;\n  view: string;\n  selected?: boolean;\n}\n"]}

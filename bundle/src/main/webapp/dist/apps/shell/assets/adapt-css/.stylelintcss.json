@@ -1,0 +1,22 @@
+{
+  "ignoreFiles": "src/scss/vendor/**/*.scss",
+  "rules": {
+    "string-quotes": "double",
+    "number-leading-zero": "never",
+    "no-extra-semicolons": true,
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "color-hex-case": "lower",
+    "color-hex-length": "short",
+    "no-missing-end-of-source-newline": true,
+    "declaration-block-semicolon-newline-after": "always",
+    "length-zero-no-unit": true,
+    "block-opening-brace-space-before": "always",
+    "function-comma-space-after": "always",
+    "function-parentheses-space-inside": "never",
+    "declaration-block-trailing-semicolon": "always",
+    "comment-no-empty": true,
+    "selector-list-comma-space-after": "never",
+    "no-invalid-double-slash-comments": true
+  }
+}

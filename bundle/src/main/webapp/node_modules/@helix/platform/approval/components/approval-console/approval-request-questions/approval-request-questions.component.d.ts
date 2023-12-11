@@ -1,0 +1,35 @@
+import { EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IRecordGridConfig, RecordGridComponent } from '@helix/platform/view/components';
+import { RxRecordInstanceService, RxRecordInstanceDataPageService } from '@helix/platform/record/api';
+import { TranslateService } from '@ngx-translate/core';
+import { ApprovalGridType, ApprovalRequestStatus, IApprovalRequest, INeedAttentionRequest } from '../approval-console.types';
+import { RxApprovalConsoleService } from '../approval-console.service';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { AdaptModalService } from '@bmc-ux/adapt-angular';
+import * as i0 from "@angular/core";
+export declare class ApprovalRequestQuestionsComponent implements OnInit, OnChanges {
+    private translateService;
+    private rxRecordInstanceService;
+    private rxModalService;
+    private adaptModalService;
+    private rxApprovalConsoleService;
+    private rxRecordInstanceDataPageService;
+    approvalRequest: IApprovalRequest | INeedAttentionRequest;
+    requestsTabStatus: ApprovalRequestStatus;
+    gridType: ApprovalGridType;
+    questionSubmitted: EventEmitter<void>;
+    requestQuestionsGrid: RecordGridComponent;
+    gridConfig$: Observable<IRecordGridConfig>;
+    constructor(translateService: TranslateService, rxRecordInstanceService: RxRecordInstanceService, rxModalService: RxModalService, adaptModalService: AdaptModalService, rxApprovalConsoleService: RxApprovalConsoleService, rxRecordInstanceDataPageService: RxRecordInstanceDataPageService);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    isNewQuestionButtonDisabled(): boolean;
+    askNewQuestion(): void;
+    private getQuestionData;
+    private getQuestionColumns;
+    private getQuestionRecordDefinition;
+    private showQuestionDetails;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ApprovalRequestQuestionsComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ApprovalRequestQuestionsComponent, "rx-approval-request-questions", never, { "approvalRequest": "approvalRequest"; "requestsTabStatus": "requestsTabStatus"; "gridType": "gridType"; }, { "questionSubmitted": "questionSubmitted"; }, never, never>;
+}

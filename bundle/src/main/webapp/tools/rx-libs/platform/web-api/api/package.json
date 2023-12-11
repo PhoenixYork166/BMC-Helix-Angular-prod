@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-web-api-api.umd.js",
+  "module": "../../fesm2015/helix-platform-web-api-api.js",
+  "es2015": "../../fesm2015/helix-platform-web-api-api.js",
+  "esm2015": "../../esm2015/web-api/api/helix-platform-web-api-api.js",
+  "fesm2015": "../../fesm2015/helix-platform-web-api-api.js",
+  "typings": "helix-platform-web-api-api.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/web-api/api"
+}

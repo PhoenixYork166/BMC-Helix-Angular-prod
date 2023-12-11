@@ -1,0 +1,35 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { RxAdminSettingsService } from '@helix/platform/shared/api';
+import { IRecordGridConfig, RecordGridComponent } from '@helix/platform/view/components';
+import { Observable, Subscription } from 'rxjs';
+import { AdminCommonSettingsEditorComponent } from '../admin-common-settings-editor/admin-common-settings-editor.component';
+import { RxAdminCommonSettingsService } from '../services/admin-common-settings.service';
+import { ICommonSettingsState } from './admin-common-settings.types';
+import { IGetRecordGridConfigParams, IOpenSettingsDetailsParams } from '../services/admin-common-settings.types';
+import { RxModalService } from '@helix/platform/ui-kit';
+import * as i0 from "@angular/core";
+export declare class AdminCommonSettingsComponent implements OnInit, OnDestroy {
+    private rxModalService;
+    private rxAdminSettingsService;
+    private rxAdminCommonSettingsService;
+    componentName$: Observable<string>;
+    recordGridComponent: RecordGridComponent;
+    adminCommonSettingsEditorComponent: AdminCommonSettingsEditorComponent;
+    private componentName;
+    private destroyed$;
+    busySubscription: Subscription;
+    state: ICommonSettingsState;
+    private dialogApi;
+    navigationMenuLabel: string;
+    constructor(rxModalService: RxModalService, rxAdminSettingsService: RxAdminSettingsService, rxAdminCommonSettingsService: RxAdminCommonSettingsService);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    addNewSetting(): void;
+    onBusy(isBusy: boolean): void;
+    getRecordGridConfig(options: IGetRecordGridConfigParams): Observable<IRecordGridConfig>;
+    openSettingsDetails(options: IOpenSettingsDetailsParams): Promise<any>;
+    private getCurrentGrid;
+    canClose(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AdminCommonSettingsComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AdminCommonSettingsComponent, "rx-admin-common-settings", never, { "componentName$": "componentName$"; }, {}, never, never>;
+}

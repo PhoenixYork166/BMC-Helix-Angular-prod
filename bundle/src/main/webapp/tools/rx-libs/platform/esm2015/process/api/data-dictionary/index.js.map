@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/process/api/data-dictionary/index.ts"],"names":[],"mappings":"AAAA,cAAc,8CAA8C,CAAC;AAC7D,cAAc,mCAAmC,CAAC","sourcesContent":["export * from './activities-data-dictionary-state.interface';\nexport * from './process-data-dictionary.service';\n"]}

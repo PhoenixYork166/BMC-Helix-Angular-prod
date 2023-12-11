@@ -1,0 +1,30 @@
+import { Injector, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DockedPanelContext, RxSelectOption, UploaderMode } from '@bmc-ux/adapt-angular';
+import { RxRecordInstanceService } from '@helix/platform/record/api';
+import { IPlainObject } from '@helix/platform/shared/api';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { ICognitiveTrainingDataSet } from '../../cognitive-training.types';
+import { RxCognitiveTrainingUtilsService } from '../../cognitive-training-utils.service';
+import * as i0 from "@angular/core";
+export declare class FileDataSetBladeComponent extends RxModalClass implements OnInit {
+    private dockedPanelContext;
+    private rxCognitiveTrainingUtilsService;
+    private rxRecordInstanceService;
+    protected injector: Injector;
+    fileDataSetForm: NgForm;
+    contextData: IPlainObject;
+    dataSet: ICognitiveTrainingDataSet;
+    localeOptions: RxSelectOption[];
+    csvFileUploadMode: UploaderMode;
+    constructor(dockedPanelContext: DockedPanelContext, rxCognitiveTrainingUtilsService: RxCognitiveTrainingUtilsService, rxRecordInstanceService: RxRecordInstanceService, injector: Injector);
+    ngOnInit(): void;
+    isDirty(): boolean;
+    optionFormatter: (opt: RxSelectOption) => any;
+    onTrainDataPercentCounterChange(trainDataPercent: number): void;
+    onTestDataPercentCounterChange(testDataPercent: number): void;
+    onSaveClick(): void;
+    onCloseClick(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<FileDataSetBladeComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<FileDataSetBladeComponent, "rx-file-data-set-blade", never, {}, {}, never, never>;
+}

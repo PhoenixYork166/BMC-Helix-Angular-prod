@@ -1,0 +1,1 @@
+{"version":3,"file":"iframe.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/iframe/iframe.interface.ts"],"names":[],"mappings":"","sourcesContent":["import { IWindowMessage } from '@helix/platform/utils';\n\nexport interface IIframeApi {\n  postMessageToFrame: (message: IWindowMessage) => void;\n}\n"]}

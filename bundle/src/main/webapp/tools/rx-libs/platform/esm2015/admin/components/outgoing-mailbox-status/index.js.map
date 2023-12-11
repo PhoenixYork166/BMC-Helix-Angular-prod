@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/outgoing-mailbox-status/index.ts"],"names":[],"mappings":"AAAA,cAAc,qCAAqC,CAAC;AACpD,cAAc,+CAA+C,CAAC","sourcesContent":["export * from './outgoing-mailbox-status.component';\nexport * from './outgoing-mailbox-status-registration.module';\n"]}

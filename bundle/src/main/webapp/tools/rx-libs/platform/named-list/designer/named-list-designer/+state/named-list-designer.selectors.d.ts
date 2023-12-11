@@ -1,0 +1,11 @@
+import { INamedListDesignerModel, INamedListDesignerState } from './named-list-designer.types';
+export declare const namedListDesignerStateSelector: import("@ngrx/store").MemoizedSelector<object, INamedListDesignerState, import("@ngrx/store").DefaultProjectorFn<INamedListDesignerState>>;
+export declare const namedListDesignerModelSelector: import("@ngrx/store").MemoizedSelector<object, INamedListDesignerModel, import("@ngrx/store").DefaultProjectorFn<INamedListDesignerModel>>;
+export declare const bundleIdSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const definitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const isDesignModeSelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const definitionModelFromDefinitionSelector: import("@ngrx/store").MemoizedSelector<object, import("../../named-list-designer.types").INamedListDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../named-list-designer.types").INamedListDefinitionModel>>;
+export declare const definitionModelSelector: import("@ngrx/store").MemoizedSelector<object, import("../../named-list-designer.types").INamedListDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../named-list-designer.types").INamedListDefinitionModel>>;
+export declare const isDirtySelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const savedDefinitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const originalDefinitionSelector: import("@ngrx/store").MemoizedSelector<object, import("@helix/platform/named-list/api").INamedListDefinition, import("@ngrx/store").DefaultProjectorFn<import("@helix/platform/named-list/api").INamedListDefinition>>;

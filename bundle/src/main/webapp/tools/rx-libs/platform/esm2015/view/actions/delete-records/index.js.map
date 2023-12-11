@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/actions/delete-records/index.ts"],"names":[],"mappings":"AAAA,cAAc,qCAAqC,CAAC;AACpD,cAAc,sCAAsC,CAAC","sourcesContent":["export * from './delete-records-view-action.module';\nexport * from './delete-records-view-action.service';\n"]}

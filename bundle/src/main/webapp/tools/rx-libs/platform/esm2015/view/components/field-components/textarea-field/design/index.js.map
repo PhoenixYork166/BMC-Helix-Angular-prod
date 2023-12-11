@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/textarea-field/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,mCAAmC,CAAC;AAClD,cAAc,gCAAgC,CAAC","sourcesContent":["export * from './textarea-field-design.component';\nexport * from './textarea-field-design.module';\n"]}

@@ -1,0 +1,139 @@
+import {
+  IViewComponentDesignSandbox,
+  IViewComponentDesignValidationIssue,
+  IViewDesignerInspectorConfig
+} from '@helix/platform/view/designer';
+import { ExpressionFormControlComponent, IExpressionFormControlOptions } from '@helix/platform/shared/components';
+import { map } from 'rxjs/operators';
+import { Injector} from '@angular/core';
+import { BaseRecordEditorFieldDesign } from '@helix/platform/view/components';
+import { RX_RECORD_DEFINITION } from '@helix/platform/record/api';
+import {combineLatest, Observable} from 'rxjs';
+import { IViewDesignerInspectorSectionConfig } from '@helix/platform/view/designer/public-interfaces/view-designer-inspector.types';
+import { Tooltip } from '@helix/platform/shared/api';
+import { I<%= classify(viewComponentName) %>DesignProperties } from './<%= dasherize(viewComponentName) %>.interfaces';
+
+// A Record Field view component extends BaseRecordEditorFieldDesign.
+export class <%= classify(viewComponentName) %>DesignModel extends BaseRecordEditorFieldDesign {
+  // List of record instance fields types that can be used for the Field view component.
+  // This means that the Field view component can be linked to a Record Definition field type "character".
+  fieldResourceTypes = [RX_RECORD_DEFINITION.resourceTypes.character];
+
+  // Those componentProperties will be subscribed in the design component to get the latest values
+  // or configuration.
+  componentProperties$: Observable<I<%= classify(viewComponentName) %>DesignProperties> = this.sandbox.componentProperties$;
+
+  constructor(public injector: Injector, public sandbox: IViewComponentDesignSandbox<I<%= classify(viewComponentName) %>DesignProperties>) {
+    super(injector, sandbox);
+
+    // Registering the view component validation based on the input parameter values.
+    combineLatest([this.sandbox.componentProperties$])
+      .pipe(
+        map(([componentProperties]: [I<%= classify(viewComponentName) %>DesignProperties]) =>
+          this.validateCustomProperties(this.sandbox, componentProperties)
+        )
+      )
+      .subscribe((validationIssues) => {
+        this.sandbox.setValidationIssues(validationIssues);
+      });
+  }
+
+  // Setting field properties default values or saved values.
+  // This method is called automatically.
+  static getInitialProperties(initialProperties?: I<%= classify(viewComponentName) %>DesignProperties): I<%= classify(viewComponentName) %>DesignProperties {
+    return {
+      // Custom field properties default values.
+      message: '',
+      // Common values shared across all fields view components.
+      ...BaseRecordEditorFieldDesign.getInitialProperties(),
+      // Values already saved in View Designer for this field (if any).
+      ...initialProperties
+    }
+  }
+
+  // This method is called automatically and will be used to set the view component
+  // field properties, groups and list of fields.
+  getInspectorConfig(): Observable<IViewDesignerInspectorConfig> {
+    return super.getInspectorConfig()
+      .pipe(
+        map(
+          (inspectorConfig: IViewDesignerInspectorConfig) => this.buildInspectorConfig(inspectorConfig)
+        )
+      );
+  };
+
+  // Preparing the inspector object (the Field options displayed in the Field Properties).
+  // Only the Field View Component specific parameters need to be listed here, here "foo".
+  private buildInspectorConfig(defaultInspectorConfig: IViewDesignerInspectorConfig) : IViewDesignerInspectorConfig {
+    // The custom configuration needs to be appended to the inherited field specific properties configuration.
+    // By default all parameters are under the "General" group.
+    // We can add more controls into the controls array or add to the existing "General" Control.
+    // Here is an example with the common property "fieldId":
+    // {
+    //   "inspectorSectionConfigs": [
+    //   {
+    //     "label": "General",
+    //     "controls": [
+    //       {
+    //         "name": "fieldId",
+    //         "options": {
+    //           "label": "Field name",
+    //           "required": true,
+    //           "options": [
+    //             {
+    //               "name": "Rating",
+    //               "id": "536870915"
+    //             }
+    //           ]
+    //         }
+    //       }
+    //     ]
+    //   }
+    // ]
+    // }
+
+    // Creating a new Control group 'Custom settings' in the inspectorSectionConfigs array.
+    const customSettingsInspectorSectionConfig: IViewDesignerInspectorSectionConfig = {
+      label: 'Custom settings',
+      controls: [
+        {
+          name: 'message',
+          component: ExpressionFormControlComponent,
+          options: {
+            label: 'Message',
+            tooltip: new Tooltip('This message will be displayed above the label.'),
+            dataDictionary$: this.expressionConfigurator.getDataDictionary(),
+            operators: this.expressionConfigurator.getOperators(),
+            isRequired: true
+          } as IExpressionFormControlOptions
+        }
+      ]
+    };
+
+    defaultInspectorConfig.inspectorSectionConfigs.push(customSettingsInspectorSectionConfig);
+
+    // To add the custom properties in the "General" control the parameter would need to be inserted in
+    // the first entry which should be the "General" control group, for example:
+    // defaultInspectorConfig.inspectorSectionConfigs[0].controls = defaultInspectorConfig.inspectorSectionConfigs[0].controls.concat(customSettingsInspectorSectionConfig.controls);
+
+    return defaultInspectorConfig;
+  }
+
+  // Note:
+  // The method "validate" already exists in the parent object and cannot be overridden.
+  // A different name is to be used.
+  // The validation is only for the Field View component specific properties
+  // here "message".
+  private validateCustomProperties(
+    sandbox: IViewComponentDesignSandbox,
+    model: I<%= classify(viewComponentName) %>DesignProperties
+  ): IViewComponentDesignValidationIssue[] {
+    const validationIssues = [];
+
+    if (!model.message) {
+      validationIssues.push(sandbox.createError('The message cannot be blank.', 'message'));
+    }
+
+    return validationIssues;
+  }
+}

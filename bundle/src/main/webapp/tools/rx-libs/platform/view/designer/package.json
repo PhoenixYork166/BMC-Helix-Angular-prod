@@ -1,0 +1,14 @@
+{
+  "name": "@helix/platform/view/designer",
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-view-designer.umd.js",
+  "module": "../../fesm2015/helix-platform-view-designer.js",
+  "es2015": "../../fesm2015/helix-platform-view-designer.js",
+  "esm2015": "../../esm2015/view/designer/helix-platform-view-designer.js",
+  "fesm2015": "../../fesm2015/helix-platform-view-designer.js",
+  "typings": "helix-platform-view-designer.d.ts",
+  "sideEffects": false
+}

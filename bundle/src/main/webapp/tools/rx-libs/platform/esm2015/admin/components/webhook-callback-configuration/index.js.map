@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/webhook-callback-configuration/index.ts"],"names":[],"mappings":"AAAA,cAAc,4CAA4C,CAAC;AAC3D,cAAc,sDAAsD,CAAC","sourcesContent":["export * from './webhook-callback-configuration.component';\nexport * from './webhook-callback-configuration-registration.module';\n"]}

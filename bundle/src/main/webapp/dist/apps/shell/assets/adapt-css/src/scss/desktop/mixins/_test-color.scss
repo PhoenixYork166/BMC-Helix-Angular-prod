@@ -1,0 +1,18 @@
+$JAB-primary: jabConverter($color-primary);
+$JAB-secondary: jabConverter($color-secondary);
+$JAB-active: jabConverter($color-active);
+
+$JAB-success: jabConverter($color-success);
+$JAB-info: jabConverter($color-info);
+$JAB-warning: jabConverter($color-warning);
+$JAB-critical: jabConverter($color-critical);
+
+@include bg-variantJAB(".bg-primaryJAB", $JAB-primary, $jab-step);
+@include bg-variantJAB(".bg-secondaryJAB", $JAB-secondary, $jab-step);
+@include bg-variantJAB(".bg-activeJAB", $JAB-active, $jab-step);
+
+@include bg-variantJAB(".bg-successJAB", $JAB-success, $jab-step);
+@include bg-variantJAB(".bg-infoJAB", $JAB-info, $jab-step);
+@include bg-variantJAB(".bg-dangerJAB", $JAB-critical, $jab-step);
+@include bg-variantJAB(".bg-warningJAB", $JAB-warning, $jab-step);
+

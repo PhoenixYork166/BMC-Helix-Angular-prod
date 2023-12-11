@@ -1,0 +1,1 @@
+{"version":3,"file":"prepared-file.interface.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/actions/edit-records/interfaces/prepared-file.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IPreparedFile {\n  key: number | string;\n  file: any;\n}\n"]}

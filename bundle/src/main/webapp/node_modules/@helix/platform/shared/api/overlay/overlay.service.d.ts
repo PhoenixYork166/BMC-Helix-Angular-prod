@@ -1,0 +1,35 @@
+import { RxTreeService } from '@helix/platform/utils';
+import { RxBundleService } from '../bundle/bundle.service';
+import { IBundleDescriptor } from '../bundle/bundle.interfaces';
+import { IDefinition } from '../definition/definition.types';
+import { RxLogService } from '../logging/log.service';
+import { RxCurrentUserService } from '../user/current-user.service';
+import { IUser, IUserOverlayGroupDescriptorChildren } from '../user/user.interface';
+import { DevelopmentMode } from './overlay.types';
+import { Observable } from 'rxjs';
+import { RxGlobalCacheService } from '../caching/global-cache.service';
+import * as i0 from "@angular/core";
+export declare class RxOverlayService {
+    private rxTreeService;
+    private rxLogService;
+    private rxBundleService;
+    private rxCurrentUserService;
+    private rxGlobalCacheService;
+    private overlay;
+    constructor(rxTreeService: RxTreeService, rxLogService: RxLogService, rxBundleService: RxBundleService, rxCurrentUserService: RxCurrentUserService, rxGlobalCacheService: RxGlobalCacheService);
+    areNewDefinitionsAllowed(bundleId: string): Observable<boolean>;
+    areNewDefinitionsAllowedSync(bundleDescriptor: IBundleDescriptor): boolean;
+    setCurrentOverlayContextOnSessionInit(user: IUser): void;
+    getOverlayOperation(overlayGroupId: string, parentOverlayGroupId: string): string;
+    isCustomizationEnabled(type: string, definition: IDefinition): boolean;
+    isBundleEditable(bundleId: string): boolean;
+    isCurrentOverlayGroupWritable(): boolean;
+    getCurrentOverlayContext(): IUserOverlayGroupDescriptorChildren;
+    setDevelopmentMode(developmentMode: DevelopmentMode): void;
+    getDevelopmentMode(): DevelopmentMode;
+    private userHasAccessToMultipleOverlays;
+    private getCurrentOverlayGroupId;
+    getUserDefaultOverlayGroupId(): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxOverlayService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxOverlayService>;
+}

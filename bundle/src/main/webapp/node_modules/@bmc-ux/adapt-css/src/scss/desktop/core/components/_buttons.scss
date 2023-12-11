@@ -1,0 +1,253 @@
+button,
+.btn {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:focus,
+  &.focus {
+    @include tab-focus();
+  }
+}
+
+.btn-secondary {
+  @include button-variant(
+                  $color-secondary,
+                  color-variant($color-secondary, hover),
+                  color-variant($color-secondary, hover),
+                  color-variant($color-secondary, active),
+                  $text-primary);
+}
+
+.btn-warning {
+  @include button-variant(
+                  $color-warning,
+                  color-variant($color-warning, hover),
+                  color-variant($color-warning, hover),
+                  color-variant($color-warning, active),
+                  $text-primary);
+}
+
+.btn-link {
+  border-radius: $btn-border-radius;
+  transition: color .25s;
+
+  @if($accessible-mode) {
+    text-decoration: underline;
+    color: get-contrast-color($color-active);
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+
+    @if($accessible-mode) {
+      text-decoration: underline;
+      color: color-variant(get-contrast-color($color-active), hover);
+    }
+  }
+
+  &:disabled,
+  &.disabled {
+    pointer-events: all;
+    opacity: 1;
+
+    &:hover,
+    &:focus {
+      cursor: $cursor-disabled;
+      color: color-variant($color-active, disabled);
+
+      @if($accessible-mode) {
+        color: color-variant(get-contrast-color($color-active), disabled);
+      }
+    }
+  }
+
+  &.adapt-build-in-loader {
+    &::before {
+      border-width: 1px;
+      border-style: solid;
+      border-color: $white $color-active $color-active $color-active;
+    }
+  }
+
+  &.btn-toolbar {
+    color: $text-primary;
+
+    &:hover {
+      color: $color-active;
+    }
+
+    &:active,
+    &.active {
+      color: color-variant($color-active, hover);
+    }
+  }
+}
+
+.btn-xs {
+  @include button-size($input-btn-padding-y-xs, $input-btn-padding-x-xs, $font-size-xs, $input-btn-line-height-xs, $btn-border-radius);
+}
+
+.btn-sm {
+  @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $input-btn-line-height-sm, $btn-border-radius);
+}
+
+.btn-lg {
+  @include button-size($input-btn-padding-y-lg, $input-btn-padding-x-lg, $font-size-lg, $input-btn-line-height-lg, $btn-border-radius);
+}
+
+.btn-xl {
+  @include button-size($input-btn-padding-y-xl, $input-btn-padding-x-xl, $font-size-lg, $input-btn-line-height-xl, $btn-border-radius);
+}
+
+.icon-change {
+  .icon-change-block {
+    position: relative;
+    margin-right: 25px;
+    font-size: $button-icon-change-font-size; //16px;
+    line-height: $button-icon-change-line-height; // 1
+
+    .icon {
+      &::before {
+        vertical-align: middle;
+      }
+
+      &:first-child,
+      &:last-child {
+        position: absolute;
+        transition: all .2s;
+        width: 0;
+      }
+
+      &:first-child {
+        left: 0;
+        opacity: 1;
+      }
+
+      &:last-child {
+        left: 5px;
+        opacity: 0;
+      }
+    }
+  }
+
+  &:hover {
+    .icon-change-block .icon {
+      &:first-child {
+        left: -5px;
+        opacity: 0;
+      }
+
+      &:last-child {
+        left: 0;
+        opacity: 1;
+      }
+    }
+
+    @media (hover:none) {
+      .icon-change-block .icon {
+        &:first-child {
+          left: 0;
+          opacity: 1;
+        }
+
+        &:last-child {
+          left: 5px;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+.btn-circle {
+  overflow: visible;
+  border-radius: 50%;
+}
+
+.btn-circle + .btn-circle,
+.btn-circle + .btn-circle:hover {
+  margin-top: .75rem;
+}
+
+.btn-group {
+  label {
+    margin: 0;
+  }
+}
+
+.btn-float-block {
+  position: fixed;
+  z-index: $zindex-fixed;
+  right: 40px;
+  bottom: 20px;
+
+  .btn {
+    @include shadow(2);
+    display: flex;
+    width: 2em;
+    height: 2em;
+    margin-left: .25em;
+    padding: 0;
+    font-size: 28px;
+    line-height: 1.5;
+    align-items: center;
+    border: 0;
+    justify-content: center;
+    transform: scale(1);
+    transition: all .15s $ease-float-in-out, transform .15s $ease-float-in-out, -webkit-transform .15s $ease-float-in-out;
+
+    &:focus {
+      box-shadow: inset 0 0 0 .2rem transparentize($color-active, .35), shadow-value(3);
+    }
+
+    &:hover {
+      @include shadow(3);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      @include shadow(1);
+      transform: scale(1);
+    }
+
+    @media (max-width: map-get($grid-breakpoints, md)) {
+      width: 2em;
+      height: 2em;
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    right: 20px;
+  }
+}
+
+.btn-reject,
+.btn-hold,
+.btn-approve {
+  &::after {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: {
+      position: center center;
+      repeat: no-repeat;
+      size: 100% 100%;
+    }
+    content: "";
+    vertical-align: -.1em;
+  }
+}
+
+.btn-reject::after {
+  background-image: icon($i-cross, $color-critical);
+}
+
+.btn-hold::after {
+  background-image: icon($i-pause-adapt, $text-primary);
+}
+
+.btn-approve::after {
+  background-image: icon($i-check, get-status-text-color($color-success));
+}

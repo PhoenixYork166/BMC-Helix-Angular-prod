@@ -1,0 +1,176 @@
+@use "sass:math";
+
+.adapt-search {
+  position: relative;
+  display: inline-flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: $search-height;
+  font-size: 0;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
+  background-color: $color-foreground;
+  justify-content: center;
+  transition: all 250ms $ease-transition-in-out;
+
+  &:hover {
+    border-color: $search-border-hover;
+    cursor: pointer;
+
+    &.adapt-search-active {
+      border-color: $search-border-active;
+    }
+  }
+
+  &.adapt-search-active {
+    border-color: $search-border-active;
+
+    .adapt-search-icon {
+      color: $search-icon-color;
+    }
+
+    .adapt-search-field-wrapper {
+      flex: 1 0 auto;
+    }
+  }
+
+  &.adapt-search-dirty {
+    .adapt-search-field-wrapper {
+      max-width: calc(100% - 70px);
+      @include rtl(margin-right, 35px);
+      flex: 1 0 auto;
+    }
+  }
+}
+
+.adapt-search-field {
+  position: absolute;
+  left: 0; // For RTL ana LTL
+  top: 1px;
+  bottom: 1px;
+  background: transparent;
+  color: $text-primary;
+  display: inline-block;
+  width: 100%;
+  height: calc(100% - 2px);
+  padding-left: 0;
+  padding-right: 0;
+  font-size: $search-font-size;
+  border: 0;
+
+  &:focus {
+    outline: none;
+    @include rtl(text-align, left);
+  }
+}
+
+
+// fix auto zoom in iPhones: https://github.bmc.com/bmc-ux/adapt-css/issues/863
+@if ($is-mobile and $font-size-base < $font-size-base-ios-not-scalable) {
+  @supports (-webkit-overflow-scrolling: touch) { // ios device
+    @media only screen and (max-device-width: 812px) {
+
+      $multiplier: math.div($font-size-base-ios-not-scalable, $font-size-base);
+
+      .adapt-search-field {
+        font-size: $font-size-base-ios-not-scalable;
+        width:  $multiplier * 100%;
+        height: $multiplier * 100%;
+        transform: scale(math.div(1, $multiplier));
+        transform-origin: left top;
+
+
+        &::placeholder {
+          font-size: $font-size-base-ios-not-scalable;
+        }
+      }
+    }
+  }
+}
+
+
+.adapt-search-icon,
+.adapt-search-clear {
+  display: inline-flex;
+  height: 100%;
+  font-size: $search-font-size;
+  align-items: center;
+  vertical-align: top;
+}
+
+.adapt-search-clear {
+  position: absolute;
+  top: 0;
+  @include rtl(right, 0);
+  display: none;
+  width: 35px;
+  opacity: 0;
+  color: $search-clear-color;
+  justify-content: center;
+  transition: opacity 250ms $ease-transition-linear;
+  border: 0;
+
+  &.adapt-search-clear-visible {
+    display: inline-flex;
+    opacity: 1;
+  }
+
+  &:hover {
+    color: $search-clear-hover-color;
+  }
+}
+
+.adapt-search-icon {
+  width: 35px;
+  color: $search-icon-color;
+  justify-content: center;
+}
+
+.adapt-search-field-wrapper {
+  position: relative;
+  max-width: calc(100% - 40px);
+  height: 100%;
+  @include rtl(margin-right, 5px);
+  flex: 0 0 auto;
+  will-change: flex;
+  transition: flex 250ms ease-in;
+  overflow: hidden;
+
+}
+
+.adapt-search-field-layout {
+  max-width: 100%;
+  @include rtl(padding-right, .25rem);
+}
+
+.adapt-search-field-ellipsis {
+  @include text-truncate();
+}
+
+.adapt-search-field-layout,
+.adapt-search-field::placeholder {
+  font-size: $search-font-size;
+}
+
+.adapt-search-triggerable {
+  width: 100%;
+
+  .input-group-append {
+    @include rtl(margin-left, 0);
+
+    button {
+      @include rtl(border-left, none);
+    }
+  }
+
+   input {
+     @include rtl(padding-right, 1.75rem);
+     @if($rtl-mode) {
+       border-bottom-left-radius: 0;
+       border-top-left-radius: 0;
+     } @else {
+       border-bottom-right-radius: 0;
+       border-top-right-radius: 0;
+     }
+  }
+}

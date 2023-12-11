@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-shared-api.umd.js",
+  "module": "../../fesm2015/helix-platform-shared-api.js",
+  "es2015": "../../fesm2015/helix-platform-shared-api.js",
+  "esm2015": "../../esm2015/shared/api/helix-platform-shared-api.js",
+  "fesm2015": "../../fesm2015/helix-platform-shared-api.js",
+  "typings": "helix-platform-shared-api.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/shared/api"
+}

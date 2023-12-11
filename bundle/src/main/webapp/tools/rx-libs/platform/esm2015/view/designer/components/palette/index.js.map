@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/designer/components/palette/index.ts"],"names":[],"mappings":"AAAA,cAAc,mCAAmC,CAAC;AAClD,cAAc,gCAAgC,CAAC","sourcesContent":["export * from './view-designer-palette.component';\nexport * from './view-designer-palette.module';\n"]}

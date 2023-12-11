@@ -1,0 +1,30 @@
+import { IFieldDefinition } from './field-definition.interfaces';
+import { IRecordDefinition } from './record-definition.types';
+import { RxOverlayService } from '@helix/platform/shared/api';
+import * as i0 from "@angular/core";
+export declare class RxFieldDefinitionService {
+    private rxOverlayService;
+    constructor(rxOverlayService: RxOverlayService);
+    isSystemField(fieldDefinition: IFieldDefinition): boolean;
+    isRequiredField(fieldDefinition: IFieldDefinition): boolean;
+    isPassword(fieldDefinition: IFieldDefinition): boolean;
+    isSecured(fieldDefinition: IFieldDefinition): boolean;
+    isReadOnly(fieldDefinition: IFieldDefinition): boolean;
+    isInheritedField(fieldDefinition: IFieldDefinition): boolean;
+    isPropertiesCustomizationEnabled(fieldDefinition: IFieldDefinition): boolean;
+    isTransient(fieldDefinition: any): boolean;
+    isOverlayMode(fieldDefinition: IFieldDefinition): boolean;
+    isReservedField(fieldDefinition: IFieldDefinition, skipValidate?: boolean): boolean;
+    isPermissionsCustomizationEnabled(fieldDefinition: any): boolean;
+    isSortable(fieldDefinition: IFieldDefinition): boolean;
+    isSearchable(fieldDefinition: IFieldDefinition, recordDefinition?: IRecordDefinition): boolean;
+    isJoinedField(fieldDefinition: IFieldDefinition): boolean;
+    isCoreField(fieldDefinition: IFieldDefinition): boolean;
+    isExternalRecordField(fieldDefinition: IFieldDefinition): boolean;
+    canBeAssociatedDisplayField(fieldDefinition: IFieldDefinition): boolean;
+    private isJoinRecordField;
+    isDataProviderIdField(fieldDefinition: IFieldDefinition, recordDefinition: IRecordDefinition): boolean;
+    isFieldInUserOverlay(fieldDefinition: IFieldDefinition): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxFieldDefinitionService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<RxFieldDefinitionService>;
+}

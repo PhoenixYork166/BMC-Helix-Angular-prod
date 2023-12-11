@@ -1,0 +1,32 @@
+import { Injector, OnInit } from '@angular/core';
+import { DockedPanelContext } from '@bmc-ux/adapt-angular';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { Observable, Subscription } from 'rxjs';
+import { ICommonSettingsGroup } from '../admin-common-settings/admin-common-settings.types';
+import { RxAdminCommonSettingsService } from '../services/admin-common-settings.service';
+import { IGetRecordGridConfigParams, IOpenSettingsDetailsParams } from '../services/admin-common-settings.types';
+import { IRecordGridConfig } from '@helix/platform/view/components';
+import * as i0 from "@angular/core";
+export declare class AdminCommonSettingsBladeComponent extends RxModalClass implements OnInit {
+    protected context: DockedPanelContext;
+    protected injector: Injector;
+    protected rxAdminCommonSettingsService: RxAdminCommonSettingsService;
+    adminCommonSettingsEditorComponent: any;
+    groups: ICommonSettingsGroup[];
+    isNew: boolean;
+    ownerKeyValue: string;
+    childOwnerKeyValue: string;
+    componentName: string;
+    isChildSetting: boolean;
+    busySubscription: Subscription;
+    constructor(context: DockedPanelContext, injector: Injector, rxAdminCommonSettingsService: RxAdminCommonSettingsService);
+    ngOnInit(): void;
+    isDirty(): boolean;
+    onCloseEditor(): void;
+    onBusy(isBusy: boolean): void;
+    getRecordGridConfig(options: IGetRecordGridConfigParams): Observable<IRecordGridConfig>;
+    openSettingsDetails(options: IOpenSettingsDetailsParams): Promise<any>;
+    onSave(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AdminCommonSettingsBladeComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AdminCommonSettingsBladeComponent, "rx-admin-common-settings-blade", never, {}, {}, never, never>;
+}

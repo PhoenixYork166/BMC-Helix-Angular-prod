@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/view/runtime-page/index.ts"],"names":[],"mappings":"AAAA,cAAc,4BAA4B,CAAC;AAC3C,cAAc,+BAA+B,CAAC","sourcesContent":["export * from './view-runtime-page.module';\nexport * from './view-runtime-page.component';\n"]}

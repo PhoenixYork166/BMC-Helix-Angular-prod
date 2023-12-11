@@ -1,0 +1,36 @@
+import { IAssociationDefinition, RxAssociationDefinitionDataPageService } from '@helix/platform/association/api';
+import { IFieldDefinition, IRecordDefinition, RxRecordDefinitionCacheService } from '@helix/platform/record/api';
+import { IExpressionConfigurator, IFormControlBuilderConfig, RxDefinitionNameService } from '@helix/platform/shared/api';
+import { RxGuidService } from '@helix/platform/utils';
+import { IViewComponentDesignSandbox, IViewComponentDesignValidationIssue, ViewComponentAddComponentPayload } from '@helix/platform/view/designer';
+import { Observable } from 'rxjs';
+import { IAssociationChildComponents, IAssociationDesignProperties } from './association-design.types';
+import { IAssociatedRecordField } from './association-record-field-selector-field';
+import { RxSelectOption } from '@bmc-ux/adapt-angular';
+import * as i0 from "@angular/core";
+export declare class AssociationDesignHelperService {
+    private rxRecordDefinitionCacheService;
+    private rxAssociationDefinitionDataPageService;
+    private rxGuidService;
+    private rxDefinitionNameService;
+    constructor(rxRecordDefinitionCacheService: RxRecordDefinitionCacheService, rxAssociationDefinitionDataPageService: RxAssociationDefinitionDataPageService, rxGuidService: RxGuidService, rxDefinitionNameService: RxDefinitionNameService);
+    getDropdownModeInspectorControls(recordDefinitionField: IFieldDefinition[], associationDefinitionFilters: IAssociationDefinition[]): IFormControlBuilderConfig[];
+    getDisplayedFieldsControl(recordDefinitionFields: IFieldDefinition[]): IFormControlBuilderConfig;
+    getRecordIdControl(): IFormControlBuilderConfig;
+    getUseDefaultRolesControl(): IFormControlBuilderConfig;
+    getNodeABRoleControls(): IFormControlBuilderConfig[];
+    getViewModeInspectorControls(): IFormControlBuilderConfig[];
+    getInitialInspectorControls(expressionConfigurator: IExpressionConfigurator): IFormControlBuilderConfig[];
+    getInitialProperties(): IAssociationDesignProperties;
+    getActionButtonDefinition(componentProperties: IAssociationDesignProperties, action: string, parentGuid: string): ViewComponentAddComponentPayload;
+    isCardinalityOne(componentProperties: IAssociationDesignProperties, associationDefinitions: IAssociationDefinition[]): boolean;
+    getAvailableAssociations(firstRecordDefinitionName: string, secondRecordDefinitionName: string): Observable<IAssociationDefinition[]>;
+    getRecordDefinition(recordDefinitionToAssociateName: string): Observable<IRecordDefinition>;
+    getFieldsInChildComponentsWithNames(components: IAssociatedRecordField[], availableFields: IFieldDefinition[]): IAssociatedRecordField[];
+    cleanEditingModeDependentData(componentProperties: IAssociationDesignProperties): void;
+    getNodeSideOptions(associationDefinition: IAssociationDefinition): RxSelectOption[];
+    resetRolesData(componentProperties: IAssociationDesignProperties): void;
+    validate(sandbox: IViewComponentDesignSandbox, properties: IAssociationDesignProperties, associationDefinition: IAssociationDefinition, childComponents: IAssociationChildComponents): IViewComponentDesignValidationIssue[];
+    static ɵfac: i0.ɵɵFactoryDeclaration<AssociationDesignHelperService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<AssociationDesignHelperService>;
+}

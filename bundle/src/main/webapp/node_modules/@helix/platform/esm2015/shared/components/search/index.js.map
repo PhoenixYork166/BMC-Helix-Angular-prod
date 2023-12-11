@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/search/index.ts"],"names":[],"mappings":"AAAA,cAAc,oBAAoB,CAAC;AACnC,cAAc,iBAAiB,CAAC;AAChC,cAAc,2BAA2B,CAAC","sourcesContent":["export * from './search.component';\nexport * from './search.module';\nexport * from './search-record.interface';\n"]}

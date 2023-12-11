@@ -1,0 +1,47 @@
+@mixin modal-variant($name, $color) {
+  .modal-#{$name} {
+    .modal-header {
+      background: $color;
+
+      @if $name=="default" {
+        color: $modal-header-color;
+
+        .close {
+          color: $modal-header-color;
+
+          &:hover {
+            color: transparentize($modal-header-color, .5);
+          }
+        }
+      } @else {
+        color: $modal-header-color-inverse;
+
+        .close {
+          color: $text-primary-inverse;
+
+          &:hover {
+            color: transparentize($text-primary-inverse, .5);
+          }
+        }
+      }
+
+      .modal-footer {
+        background-color: $modal-footer-background-color;
+      }
+    }
+  }
+}
+
+@mixin modal-size($sizes, $grid: $grid-breakpoints) {
+  @each $bp-key, $bp-value in $grid {
+    @if (not map-has-key($sizes, $bp-key)) {
+      @error ("The keys of both maps must be the same!");
+    }
+  }
+
+  @each $bp-key, $bp-value in $grid {
+    @include media-breakpoint-only($bp-key) {
+      max-width: map-get($sizes, $bp-key);
+    }
+  }
+}

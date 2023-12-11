@@ -1,0 +1,212 @@
+//
+//
+// Type utilities
+.font-weight-light {
+  font-weight: $font-weight-light !important;
+}
+
+.font-weight-default {
+  font-weight: $font-weight-base !important;
+}
+
+.font-weight-semibold {
+  font-weight: $font-weight-bold !important;
+}
+
+//
+//
+// Headings
+h1 {
+  line-height: $h1-line-height;
+  margin: $h1-margin;
+}
+
+h2 {
+  line-height: $h2-line-height;
+  margin: $h2-margin;
+}
+
+h3 {
+  line-height: $h3-line-height;
+  margin: $h3-margin;
+}
+
+h4 {
+  line-height: $h4-line-height;
+  margin: $h4-margin;
+}
+
+h5,
+h6 {
+  line-height: $h5-line-height;
+  margin: $h5-margin;
+}
+
+h1,
+h2,
+h4,
+h6 {
+  &.font-weight-light {
+    font-weight: $font-weight-light !important;
+  }
+}
+
+h3,
+h5 {
+  font-weight: $font-weight-bold;
+
+  &.font-weight-light {
+    font-weight: $font-weight-base !important;
+  }
+}
+
+h1,
+h2,
+h3 {
+  small,
+  .small {
+    font-size: $headings-small-font-size;
+    font-weight: $font-weight-base;
+    color: $headings-small-color;
+    line-height: 1;
+  }
+}
+
+h4,
+h5,
+h6 {
+  small,
+  .small {
+    font-size: $headings-small-font-size;
+    font-weight: $font-weight-base;
+    color: $headings-small-color;
+    line-height: 1;
+  }
+}
+
+.page-header {
+  padding-bottom: 11px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid $border-color;
+}
+
+//
+//
+// Colorized
+
+@include text-emphasis-variant(".text-primary", get-status-text-color($color-primary));
+@include text-emphasis-variant(".text-active", get-status-text-color($color-active));
+@include text-emphasis-variant(".text-success", get-status-text-color($color-success));
+@include text-emphasis-variant(".text-info", get-status-text-color($color-info));
+@include text-emphasis-variant(".text-warning", get-status-text-color($color-warning));
+@include text-emphasis-variant(".text-danger", get-status-text-color($color-critical));
+
+@include text-emphasis-variant(".text-default", $text-primary, get-status-text-color($color-active));
+@include text-emphasis-variant(".text-secondary", $text-secondary, get-status-text-color($color-active));
+@include text-emphasis-variant(".text-tertiary", $text-tertiary, get-status-text-color($color-active));
+@include text-emphasis-variant(".text-default-inverse", $text-primary-inverse, $color-active, black);
+@include text-emphasis-variant(".text-secondary-inverse", $text-secondary-inverse, $color-active);
+@include text-emphasis-variant(".text-tertiary-inverse", $text-tertiary-inverse, $color-active);
+
+@include text-emphasis-variant(".text-primary-icon", $color-primary);
+@include text-emphasis-variant(".text-active-icon", $color-active);
+@include text-emphasis-variant(".text-success-icon", $color-success);
+@include text-emphasis-variant(".text-info-icon", $color-info);
+@include text-emphasis-variant(".text-warning-icon", $color-warning);
+@include text-emphasis-variant(".text-danger-icon", $color-critical);
+@include text-emphasis-variant(".text-default-icon", $text-primary);
+@include text-emphasis-variant(".text-secondary-icon", $text-secondary);
+@include text-emphasis-variant(".text-tertiary-icon", $text-tertiary);
+
+//
+//
+// Abbreviations and acronyms
+
+abbr[title],
+  // Add data-* attribute to help out our tooltip plugin, per https://github.com/twbs/bootstrap/issues/5257
+abbr[data-original-title] {
+  cursor: help;
+  border-bottom: 1px solid $abbr-border-color;
+  text-decoration: none;
+}
+
+//
+//
+// Blockquotes
+
+blockquote,
+.blockquote {
+  font-family: $blockquote-text-font-family;
+  font-size: $blockquote-font-size;
+  font-style: italic;
+  padding: 10px 20px;
+  border-left: $blockquote-border-width solid $blockquote-border-color;
+
+  p {
+    &:before,
+    &:after {
+      padding-right: 1px;
+      color: $blockquote-p-color;
+    }
+
+    &:before {
+      content: "\201C";
+    }
+
+    &:after {
+      content: "\201D";
+    }
+  }
+
+  p,
+  ul,
+  ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  footer,
+  small,
+  .small {
+    font-family: $blockquote-sign-font-family;
+    font-style: normal;
+    color: $blockquote-small-color;
+  }
+}
+
+//
+//
+// Mark
+
+mark,
+.mark {
+  border-radius: $mark-border-radius;
+}
+
+//
+//
+// Bold text
+
+b,
+strong {
+  font-weight: $font-weight-bold;
+}
+
+//
+// Lists
+//
+
+ol,
+ul {
+  padding-left: $list-left-padding;
+  line-height: $list-line-height;
+}
+
+dt {
+  font-weight: $font-weight-bold;
+}
+
+dd {
+  margin-bottom: $dd-margin-bottom;
+}

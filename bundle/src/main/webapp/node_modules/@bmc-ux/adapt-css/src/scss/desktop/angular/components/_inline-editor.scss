@@ -1,0 +1,73 @@
+.a-editor-feedback {
+  overflow: hidden;
+}
+
+.a-editor.a-editor_controls-on-hover .a-editor-btn_start-edit {
+  opacity: 0;
+  transition: $transition-base;
+}
+
+.a-editor.a-editor_controls-on-hover:hover .a-editor-btn_start-edit {
+  opacity: 1;
+}
+
+.a-editor__edit-mode-block {
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+}
+
+.a-editor__edit-mode-block .form-group,
+.a-editor__edit-mode-block .form-control-feedback {
+  margin: 0;
+}
+
+.edit-on-click .a-editor-text {
+  background: transparent;
+  transition: background .2s;
+}
+
+.edit-on-click:hover .a-editor-text {
+  cursor: text;
+  background: $editor-bg-hover;
+}
+
+.a-editor-text:hover + .a-editor-btn_start-edit {
+  color: $editor-bg-selection;
+}
+
+.a-editor-edit-input {
+  margin: 0;
+}
+
+.a-editor-edit-controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.a-editor-btn {
+  padding: 0;
+  border: 0;
+  font-size: $font-size-base;
+  white-space: nowrap;
+}
+
+.a-editor-btn_cancel {
+  @include rtl(margin-right, .5rem);
+  @include rtl(margin-left, 0);
+}
+
+.a-editor-btn_start-edit {
+  vertical-align: baseline;
+}
+
+.a-editor-edit-controls__left {
+  @include rtl(margin-left, 0);
+  @include rtl(margin-right, auto);
+}
+
+.a-editor-edit-controls__right {
+  @include rtl(margin-left, auto);
+  @include rtl(margin-right, 0);
+}

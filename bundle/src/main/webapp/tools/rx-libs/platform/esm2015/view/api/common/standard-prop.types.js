@@ -1,0 +1,6 @@
+import { RX_AVAILABLE_ON_DEVICES_DEFAULT_VALUE, RX_AVAILABLE_ON_DEVICES_PROP_DESC } from './available-on-devices-prop.types';
+import { RX_HIDDEN_PROP_DEFAULT_VALUE, RX_HIDDEN_PROP_DESC } from './hidden-prop.types';
+import { RX_STYLES_PROP_DEFAULT_VALUE, RX_STYLES_PROP_DESC } from './styles-prop.types';
+export const RX_STANDARD_PROPS_DESC = [RX_HIDDEN_PROP_DESC, RX_STYLES_PROP_DESC, RX_AVAILABLE_ON_DEVICES_PROP_DESC];
+export const RX_STANDARD_PROPS_DEFAULT_VALUES = Object.assign(Object.assign(Object.assign({}, RX_HIDDEN_PROP_DEFAULT_VALUE), RX_STYLES_PROP_DEFAULT_VALUE), RX_AVAILABLE_ON_DEVICES_DEFAULT_VALUE);
+//# sourceMappingURL=standard-prop.types.js.map

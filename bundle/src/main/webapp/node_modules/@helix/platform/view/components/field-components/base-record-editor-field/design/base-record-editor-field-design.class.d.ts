@@ -1,0 +1,35 @@
+import { Injector } from '@angular/core';
+import { IFieldDefinition, IRecordDefinition, RxFieldDefinitionService, RxRecordDefinitionCacheService } from '@helix/platform/record/api';
+import { RxDefinitionNameService } from '@helix/platform/shared/api';
+import { IViewComponentDesignSandbox, IViewComponentDesignSettablePropertiesDataDictionary, IViewComponentDesignValidationIssue, IViewDesignerInspectorConfig, ViewDesignerComponentModel } from '@helix/platform/view/designer';
+import { Observable } from 'rxjs';
+import { RecordEditorMode } from '../../../record-editor/common/record-editor.types';
+import { IBaseRecordEditorFieldProperties } from './base-record-editor-field-design.types';
+export declare abstract class BaseRecordEditorFieldDesign extends ViewDesignerComponentModel {
+    protected injector: Injector;
+    protected sandbox: IViewComponentDesignSandbox<IBaseRecordEditorFieldProperties>;
+    protected rxRecordDefinitionCacheService: RxRecordDefinitionCacheService;
+    protected rxDefinitionNameService: RxDefinitionNameService;
+    protected rxFieldDefinitionService: RxFieldDefinitionService;
+    label$: Observable<string>;
+    recordEditorMode$: Observable<RecordEditorMode>;
+    parentGuid$: Observable<string>;
+    recordDefinitionName$: Observable<string>;
+    availableFieldDefinitions$: Observable<IFieldDefinition[]>;
+    recordDefinition$: Observable<IRecordDefinition>;
+    selectedFieldDefinition$: Observable<IFieldDefinition>;
+    isRequired$: Observable<boolean>;
+    private isSystemField$;
+    abstract fieldResourceTypes: string[];
+    static getInitialProperties(initialProperties?: IBaseRecordEditorFieldProperties): IBaseRecordEditorFieldProperties;
+    constructor(injector: Injector, sandbox: IViewComponentDesignSandbox<IBaseRecordEditorFieldProperties>);
+    rxInit(): void;
+    private pipeline;
+    getPropertiesByName(properties: IBaseRecordEditorFieldProperties): IBaseRecordEditorFieldProperties;
+    validate(componentProperties: IBaseRecordEditorFieldProperties): Observable<IViewComponentDesignValidationIssue[]>;
+    getBreadcrumb(): Observable<string>;
+    getInspectorConfig(): Observable<IViewDesignerInspectorConfig>;
+    getSettableProperties(): IViewComponentDesignSettablePropertiesDataDictionary;
+    private getBaseInspectorFields;
+    private getBaseInspectorConfig;
+}

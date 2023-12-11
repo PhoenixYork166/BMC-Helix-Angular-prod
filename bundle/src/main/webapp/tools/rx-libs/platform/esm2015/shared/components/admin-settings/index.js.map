@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/admin-settings/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,4BAA4B,CAAC","sourcesContent":["export * from './admin-settings.module';\nexport * from './admin-settings.component';\n"]}

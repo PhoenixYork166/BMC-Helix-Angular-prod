@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/shared/components/form-controls/tags-form-control/index.ts"],"names":[],"mappings":"AAAA,cAAc,+BAA+B,CAAC;AAC9C,cAAc,2BAA2B,CAAC","sourcesContent":["export * from './tags-form-control.component';\nexport * from './tags-form-control.types';\n"]}

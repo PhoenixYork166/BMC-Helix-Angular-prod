@@ -1,0 +1,1 @@
+{"version":3,"file":"email-profiles.interfaces.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/email-profiles/email-profiles.interfaces.ts"],"names":[],"mappings":"","sourcesContent":["export interface IEmailProfile {\n  profileName: string;\n  mailbox: string;\n  application: string;\n  mailboxType: number;\n}\n"]}

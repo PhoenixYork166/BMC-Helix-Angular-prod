@@ -1,0 +1,172 @@
+// #begin SCSS styles fot angular toast
+
+
+
+// #begin toast component
+.a-toast {
+  @if($rtl-mode) {
+    padding: 1.125rem 1.5rem 1.125rem 3.75rem;
+  } @else {
+    padding: $angular-toast-padding;
+  }
+  word-wrap: break-word;
+  margin-bottom: 1rem;
+  position: relative;
+  height: auto;
+  background: $angular-toast-white;
+  border-radius: $angular-toast-border-radius;
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 4);
+  cursor: default;
+  @media (min-width: 28.75rem) {
+    width: 26.25rem;
+  }
+}
+
+// $angular toast info
+.a-toast--info {
+  .a-toast__summary {
+    color: $angular-toast-info;
+  }
+
+  .a-toast__close {
+    background: $angular-toast-info;
+    border: 1px solid $angular-toast-info-border;
+  }
+}
+
+// $angular toast warn
+.a-toast--warning {
+  .a-toast__summary {
+    color: $angular-toast-warn;
+  }
+
+  .a-toast__close {
+    background: $angular-toast-warn-background;
+    border: 1px solid $angular-toast-warn-border;
+  }
+}
+
+// $angular toast success
+.a-toast--success {
+  .a-toast__summary {
+    color: $angular-toast-success;
+  }
+
+  .a-toast__close {
+    background: $angular-toast-success;
+    border: 1px solid $angular-toast-success-border;
+  }
+}
+
+// $angular toast danger
+.a-toast--danger {
+  .a-toast__summary {
+    color: $angular-toast-danger;
+  }
+
+  .a-toast__close {
+    background: $angular-toast-danger;
+    border: 1px solid $angular-toast-danger-border;
+  }
+}
+
+// $angular toast summary
+.a-toast__summary {
+  position: relative;
+  margin-top: 0;
+  line-height: 1.2rem;
+  @include text-truncate();
+}
+
+// $angular toast close icon
+.a-toast__close {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  @include rtl(right, -1px);
+  width: 2.125rem;
+  //z-index: $zindex-toast-close;
+  border-top-right-radius: $angular-toast-border-radius;
+  border-bottom-right-radius: $angular-toast-border-radius;
+
+  .a-toast__close-button {
+    color: $angular-toast-white;
+    width: 2rem;
+    padding: .625rem 0;
+    background: transparent;
+    border: none;
+    opacity: .7;
+    transition: opacity .25s $ease-transition-in-out;
+
+    &:hover {
+      opacity: .9;
+    }
+  }
+}
+
+// $angular toast details|content //
+.a-toast__details {
+  margin-bottom: 0;
+  font-size: $angular-toast-details-font-size;
+  line-height: $angular-toast-details-line-height;
+  color: $angular-toast-primary;
+  position: relative;
+  overflow: hidden;
+
+  a {
+    color: $angular-toast-teal;
+  }
+}
+
+
+// wrapper for toast component {positioning}
+
+//In progress - not ready for prod
+.a-toast-wrapper {
+  display: block;
+  position: fixed;
+  z-index: $zindex-toast;
+  top: 1.25rem;
+  right: 1.25rem;
+  left:  1.25rem;
+
+  &.is-top-center {
+    margin-left: 0; //For RTL and LTL
+  }
+  @media (min-width: 28.75rem) {
+    &.is-top-right {
+      left:  auto; //For RTL and LTL
+    }
+
+    &.is-top-left {
+      right: auto; //For RTL and LTL
+      left: 1.25rem; //For RTL and LTL
+    }
+
+    &.is-top-center {
+      right: 50%; //For RTL and LTL
+      left: 50%; //For RTL and LTL
+      @include rtl(margin-left, -13.125rem);
+    }
+
+    &.is-bottom-center {
+      bottom: 1.25rem;
+      top: auto;
+      right: 50%;
+      left: 50%;
+      margin-left: -13.125rem;
+    }
+
+    &.is-bottom-left {
+      bottom: 1.25rem;
+      top: auto;
+      right: auto;
+      left: 1.25rem;
+    }
+
+    &.is-bottom-right {
+      bottom: 1.25rem;
+      top: auto;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@helix/platform/event/designer",
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-event-designer.umd.js",
+  "module": "../../fesm2015/helix-platform-event-designer.js",
+  "es2015": "../../fesm2015/helix-platform-event-designer.js",
+  "esm2015": "../../esm2015/event/designer/helix-platform-event-designer.js",
+  "fesm2015": "../../fesm2015/helix-platform-event-designer.js",
+  "typings": "helix-platform-event-designer.d.ts",
+  "sideEffects": false
+}

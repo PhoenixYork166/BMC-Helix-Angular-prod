@@ -1,0 +1,34 @@
+import { ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AdaptTreeNode } from '@bmc-ux/adapt-angular';
+import { RxProcessElementsService } from '@helix/platform/process/api';
+import { RxDesignerStencilBuilder } from '@helix/platform/shared/api';
+import { ValueAccessor } from '@helix/platform/shared/components';
+import { RxJsonParserService } from '@helix/platform/utils';
+import { TranslateService } from '@ngx-translate/core';
+import { IProcessDesignerElementsPickerComponentOptions, IProcessElementTreeNode } from './process-designer-element-picker.interfaces';
+import * as i0 from "@angular/core";
+export declare class RxProcessDesignerElementPickerComponent extends ValueAccessor<string> implements OnInit, OnDestroy {
+    private rxDesignerStencilBuilder;
+    private rxJsonParserService;
+    private rxProcessElementsService;
+    private renderer;
+    private translateService;
+    options: IProcessDesignerElementsPickerComponentOptions;
+    dropdownButton: ElementRef;
+    dropdownWidth: number;
+    processElementsTree: AdaptTreeNode[];
+    selectedPaletteElementsByLabel: string;
+    selection: IProcessElementTreeNode[];
+    private selectedPaletteElements;
+    private stencilElements;
+    private destroyed$;
+    constructor(rxDesignerStencilBuilder: RxDesignerStencilBuilder, rxJsonParserService: RxJsonParserService, rxProcessElementsService: RxProcessElementsService, renderer: Renderer2, translateService: TranslateService);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    onSelectionChange(): void;
+    updatePickerFakeInputValue(): void;
+    clearDefinition(e: Event): void;
+    setDropdownWidth(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxProcessDesignerElementPickerComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxProcessDesignerElementPickerComponent, "rx-process-designer-element-picker", never, { "options": "options"; }, {}, never, never>;
+}

@@ -1,0 +1,83 @@
+/* woff2 format font declaration */  
+// Open sans
+@font-face {
+  font-family: "Open Sans";
+  src: url("#{$font-path}/OpenSans-VariableFontwdthwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("#{$font-path}/OpenSans-Italic-VariableFontwdthwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+  font-style: italic;
+}
+
+//Lora
+  @font-face {
+  font-family: "Lora";
+  src: url("#{$font-path}/Lora-VariableFontwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url("#{$font-path}/Lora-Italic-VariableFontwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+  font-style: italic;
+}
+
+//Raleway
+@font-face {
+  font-family: "Raleway";
+  src: url("#{$font-path}/Raleway-VariableFontwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("#{$font-path}/Raleway-Italic-VariableFontwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+  font-style: italic;
+}
+
+//Work sans
+@font-face {
+  font-family: "Work Sans";
+  src: url("#{$font-path}/WorkSans-VariableFontwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url("#{$font-path}/WorkSans-Italic-VariableFontwght.woff2") format("woff2-variations");
+  font-weight: 1 999;
+  font-style: italic;
+}
+
+//Roboto
+@font-face {
+  font-family: "Roboto";
+  src: url("#{$font-path}/Roboto-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("#{$font-path}/Roboto-Italic.woff2") format("woff2-variation");
+  font-weight: 1 999;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("#{$font-path}/Roboto-Light.woff2") format("woff2-variation");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("#{$font-path}/Roboto-Regular.woff2") format("woff2");
+  font-weight: 400;
+}

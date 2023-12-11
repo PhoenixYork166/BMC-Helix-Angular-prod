@@ -1,0 +1,16 @@
+button[aria-expanded="true"] .see-more {
+  display: none;
+}
+
+button[aria-expanded="false"] .see-less {
+  display: none;
+}
+
+.collapse-block {
+  .card {
+    &.card-header,
+    &.card-block {
+      border-radius: $card-border-radius;
+    }
+  }
+}

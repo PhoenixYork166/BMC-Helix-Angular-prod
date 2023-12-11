@@ -1,0 +1,97 @@
+.adapt-flow-chart {
+  background-color: $color-background;
+  display: block;
+  position: relative;
+}
+
+.adapt-flow-chart .ui-slider {
+  background-color: $color-primary;
+}
+
+.adapt-flow-chart__empty-state {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.adapt-flow-chart__empty-state adapt-empty-state {
+  width: 100%;
+}
+
+.adapt-flow-chart__zoom-slider-wrapper {
+  background-color: $white;
+  border-radius: 3px;
+  box-shadow: shadow-value(3);
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  padding: 20px 0 10px;
+
+  adapt-slider.is-vertical {
+    height: 200px;
+    position: relative;
+    @include rtl(left, 50%);
+    @include rtl(margin-left, -5px);
+  }
+}
+
+.adapt-flow-chart__zoom-slider {
+  min-height: 200px;
+}
+
+.adapt-flow-chart__zoom-fit-button {
+  color: $color-active;
+  border: 0;
+  background: none;
+  font-size: .75rem;
+  margin-top: 5px;
+}
+
+.adapt-flow-chart__label {
+  font-size: 15px;
+}
+
+.adapt-flow-chart__edge-label-bg {
+  fill: $alert-info-bg;
+  stroke: $alert-info-border;
+  stroke-width: 1;
+}
+
+.adapt-flow-chart__edge-label-text {
+  stroke: transparent;
+  fill: $white;
+  text-anchor: middle;
+  font-size: 11px;
+}
+
+.adapt-flow-chart__loader {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.node {
+  cursor: pointer;
+  transition: all .1s;
+  transition-timing-function: cubic-bezier(.87, 1, .6, .19);
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.node rect {
+  transition: all .1s;
+  stroke: transparent;
+  fill: $white;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .node:hover rect {
+    stroke: $color-active;
+  }
+}

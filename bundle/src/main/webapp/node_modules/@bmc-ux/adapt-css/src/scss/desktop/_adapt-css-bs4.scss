@@ -1,0 +1,60 @@
+//
+// Core CSS
+//
+@import "core/base/reboot";
+@import "core/base/type";
+@import "core/base/code";
+
+@import "core/utils/bidi";
+
+//
+//
+// Components
+//
+@import "core/components/alerts";
+@import "core/components/badges";
+@import "core/components/breadcrumbs";
+@import "core/components/buttons";
+@import "core/components/button-group";
+@import "core/components/card";
+@import "core/components/carousel";
+@import "core/components/close";
+@import "core/components/docked-panel";
+@import "core/components/dropdowns";
+@import "core/components/figure";
+@import "core/components/forms";
+@import "core/components/images";
+@import "core/components/list-group";
+@import "core/components/logo";
+@import "core/components/metatags";
+@import "core/components/modal";
+@import "core/components/navbar";
+@import "core/components/navs";
+@import "core/components/pagination";
+@import "core/components/pins";
+@import "core/components/play-button";
+@import "core/components/popover";
+@import "core/components/progress";
+@import "core/components/switcher";
+@import "core/components/tables";
+@import "core/components/tooltip";
+//
+//
+// Utility and helper classes
+//
+@import "core/utils/animation";
+@import "core/utils/background";
+@import "core/utils/border";
+@import "core/utils/prevent-focus";
+@import "core/utils/shadows";
+@import "core/utils/utilities";
+//
+//
+// Login screen
+//
+@import "core/templates/login";
+//
+//
+// Page loader
+//
+@import "core/components/page-loader-indeterminate";

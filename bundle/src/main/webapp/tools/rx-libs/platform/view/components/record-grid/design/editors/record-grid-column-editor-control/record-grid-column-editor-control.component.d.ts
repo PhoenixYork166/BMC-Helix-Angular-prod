@@ -1,0 +1,33 @@
+import { OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { RxFieldDefinitionService } from '@helix/platform/record/api';
+import { IFormControlComponent, IFormFocusable } from '@helix/platform/shared/api';
+import { ValueAccessor } from '@helix/platform/shared/components';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { RxRecordGridUtilsService } from '../../../common/services/record-grid-utils.service';
+import { RxRecordGridConfigUtilsService } from '../../../runtime/services/record-grid-config-utils.service';
+import { RecordGridDesignValidationIssue } from '../../record-grid-design.types';
+import { IRecordGridColumnEditorControlOptions, IRecordGridDesignColumnData, IRecordGridDesignInspectorColumnConfig } from './record-grid-column-editor.types';
+import * as i0 from "@angular/core";
+export declare class RecordGridColumnEditorControlComponent extends ValueAccessor<IRecordGridDesignInspectorColumnConfig[]> implements IFormControlComponent, IFormFocusable, OnChanges, OnDestroy {
+    private rxModalService;
+    private rxFieldDefinitionService;
+    private rxRecordGridConfigUtilsService;
+    private rxRecordGridUtilsService;
+    options: IRecordGridColumnEditorControlOptions;
+    private updateColumnsSubject;
+    columns$: import("rxjs").Observable<IRecordGridDesignColumnData[]>;
+    constructor(rxModalService: RxModalService, rxFieldDefinitionService: RxFieldDefinitionService, rxRecordGridConfigUtilsService: RxRecordGridConfigUtilsService, rxRecordGridUtilsService: RxRecordGridUtilsService);
+    ngOnChanges(changes: SimpleChanges): void;
+    onWriteValue(inspectorColumns: IRecordGridDesignInspectorColumnConfig[]): void;
+    removeColumn(columnData: IRecordGridDesignColumnData): void;
+    updateValue(columns: IRecordGridDesignInspectorColumnConfig[]): void;
+    openEditor(columnGuid?: string, activeActionIndex?: number): void;
+    focus(data: RecordGridDesignValidationIssue['data']): void;
+    getColumnResourceTypeName(column: IRecordGridDesignColumnData): string;
+    getSortedColumns(columns: IRecordGridDesignColumnData[]): IRecordGridDesignColumnData[];
+    trackByForColumns(index: number, column: IRecordGridDesignColumnData): string;
+    isActionsColumn(fieldId: string): boolean;
+    ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RecordGridColumnEditorControlComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RecordGridColumnEditorControlComponent, "rx-record-grid-column-editor", never, { "options": "options"; }, {}, never, never>;
+}

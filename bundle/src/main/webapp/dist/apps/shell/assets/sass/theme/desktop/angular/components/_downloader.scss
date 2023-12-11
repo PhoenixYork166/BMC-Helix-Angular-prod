@@ -1,0 +1,53 @@
+.adapt-downloader-link {
+  border: 1px solid color-variant($color-secondary, hover);
+  color: $gray-900;
+  padding: .9375rem;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  max-width: 100%;
+  background-color: $color-foreground;
+
+  .adapt-downloader-download-icon {
+    color: $gray-700;
+  }
+
+  &:hover {
+    border-color: $color-active;
+    color: $color-active;
+
+    .adapt-downloader-download-icon {
+      color: $color-active;
+    }
+
+    .adapt-downloader-file-image svg path {
+      fill: $color-active;
+    }
+  }
+
+  &:active {
+    border-color: color-variant($color-active, hover);
+    color: color-variant($color-active, hover);
+
+    .adapt-downloader-download-icon {
+      color: color-variant($color-active, hover);
+    }
+
+    .adapt-downloader-file-image svg path {
+      fill: color-variant($color-active, hover);
+    }
+  }
+}
+
+.adapt-downloader-file-image {
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.adapt-downloader-file-name {
+  display: inline-flex;
+  max-width: calc(100% - 30px - #{$icon-lockup-spacing} * 2) !important; // 100% - icons width - text left & rigth margin
+  @include icon-spacing(all);
+}

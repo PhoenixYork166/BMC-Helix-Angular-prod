@@ -1,0 +1,1 @@
+{"version":3,"file":"sort-button-class.interface.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/record-grid/runtime/card-layout-cell-header/sort-button-class.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface ISortButtonClass {\n  'btn-success': boolean;\n  'btn-secondary': boolean;\n}\n"]}

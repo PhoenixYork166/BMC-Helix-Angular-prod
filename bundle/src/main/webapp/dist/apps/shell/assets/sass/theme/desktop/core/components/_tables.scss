@@ -1,0 +1,70 @@
+.table {
+  th,
+  td {
+    padding: $table-cell-padding;
+    vertical-align: top;
+    border-top: $table-border-width solid $table-border-color-2;
+  }
+
+  &.table-sm th,
+  &.table-sm td {
+    padding: $table-cell-padding-sm;
+  }
+
+  th {
+    font-weight: 600;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-top: 0;
+    border-bottom: $table-border-width solid $table-border-color;
+  }
+
+  tbody + tbody {
+    border-top: $table-border-width solid $table-border-color;
+  }
+}
+
+caption {
+  caption-side: top;
+  color: $text-secondary;
+  padding: .5rem 0;
+}
+
+// Bordered version
+//
+// Add borders all around the table and between all the columns.
+
+.table-bordered {
+  border: $table-border-width solid $table-border-color-2;
+
+  th,
+  td {
+    border: $table-border-width solid $table-border-color-2;
+  }
+
+  thead {
+    th,
+    td {
+      border-bottom-width: $table-border-width;
+    }
+
+    th {
+      border-color: $table-border-color-2;
+    }
+  }
+}
+
+.key-value tr:last-child {
+  td,
+  th {
+    border-bottom: 1px solid $table-border-color-2;
+  }
+}
+
+@include table-row-var(active, $table-active-bg);
+@include table-row-var(success, $table-success-bg);
+@include table-row-var(info, $table-info-bg);
+@include table-row-var(warning, $table-warning-bg);
+@include table-row-var(danger, $table-danger-bg);

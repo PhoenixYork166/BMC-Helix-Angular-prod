@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/ui-kit/read-only-fields-modal/index.ts"],"names":[],"mappings":"AAAA,cAAc,iCAAiC,CAAC;AAChD,cAAc,oCAAoC,CAAC","sourcesContent":["export * from './read-only-fields-modal.module';\r\nexport * from './read-only-fields-modal.component';\r\n"]}

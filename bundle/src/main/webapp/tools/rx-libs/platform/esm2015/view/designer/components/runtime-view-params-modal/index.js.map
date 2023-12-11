@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/designer/components/runtime-view-params-modal/index.ts"],"names":[],"mappings":"AAAA,cAAc,uCAAuC,CAAC;AACtD,cAAc,oCAAoC,CAAC","sourcesContent":["export * from './runtime-view-params-modal.component';\nexport * from './runtime-view-params-modal.module';\n"]}

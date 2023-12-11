@@ -1,0 +1,1 @@
+{"version":3,"file":"view-component-event-manager.constant.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/runtime/event-manager/view-component-event-manager.constant.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,iCAAiC,GAAG,SAAS,CAAC","sourcesContent":["export const VIEW_COMPONENT_DEFAULT_EVENT_NAME = 'default';\n"]}

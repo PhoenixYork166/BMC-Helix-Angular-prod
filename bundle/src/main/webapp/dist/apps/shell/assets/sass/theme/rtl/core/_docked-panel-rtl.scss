@@ -1,0 +1,251 @@
+.dp-container {
+  display: flex;
+  flex-direction: row;
+  direction: ltr;
+  position: fixed;
+  z-index: $zindex-dockedpanel-window;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  @include media-breakpoint-up(sm) {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+.dp-wrapper {
+  direction: rtl;
+  flex: 0 0 auto;
+  height: 100%;
+}
+
+.dp {
+  position: relative;
+  height: 100%;
+  background-color: $color-foreground;
+  float: right;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-down(xs) {
+    min-width: 300px;
+  }
+  @include media-breakpoint-between(sm, sm) {
+    width: 80vw;
+  }
+  @include media-breakpoint-between(md, md) {
+    width: 55vw;
+  }
+  @include media-breakpoint-between(lg, lg) {
+    width: 45vw;
+  }
+  @include media-breakpoint-between(xl, xl) {
+    width: 35vw;
+  }
+  @include media-breakpoint-up(xxl) {
+    width: 25vw;
+  }
+
+  .adapt-alert-animated {
+    flex: 0 0 auto;
+  }
+}
+
+.dp-header {
+  height: $dp-header-height;
+  display: flex;
+  align-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  background-color: $dp-header-bg;
+  color: $dp-header-color;
+  font-size: $dp-header-font-size;
+  padding: $dp-padding;
+  transition: background-color .25s linear;
+  flex: 0 0 auto;
+}
+
+.dp-title {
+  @include text-truncate();
+}
+
+.dp-close {
+  border: 0;
+  cursor: pointer;
+  width: $dp-padding * 2 + $dp-close-size;
+  height: $dp-header-height;
+  margin-left: -$dp-padding;
+  margin-right: -$dp-padding * .5;
+  background: icon($i-angle-left) no-repeat center center;
+  background-size: $dp-close-size;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.dp-content {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  overflow-y: $dp-overflow-y;
+  -webkit-overflow-scrolling: touch;
+  transition: opacity .25s linear;
+  flex: 1 1 auto;
+}
+
+.dp-content > .dp-content-inner-wrapper {
+  display: flex;
+  overflow-y: auto;
+  overflow-x: auto;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.dp-body {
+  padding: $dp-padding;
+  height: auto !important;
+  overflow: auto;
+  flex-grow: 1;
+}
+
+.float-footer .dp-body {
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.dp-footer {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding: ($dp-padding * .5) ($dp-padding);
+  border-top: 1px solid $modal-footer-border-color;
+
+  & > .btn {
+    margin-bottom: 2px;
+  }
+}
+
+// Inactive style
+.inactive {
+  pointer-events: none !important;
+
+  .dp-header {
+    background-color: color-variant($dp-header-bg, disabled);
+  }
+
+  .dp-content {
+    opacity: .5;
+  }
+}
+
+// Specific direction settings
+.direction-left {
+  .dp-wrapper {
+    .dp-header {
+      border-right: 1px solid color-variant($dp-header-bg, hover);
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    .dp-content {
+      border-right: 1px solid $border-color;
+    }
+
+    &:last-child {
+      .dp-header {
+        border-right: none;
+      }
+
+      .dp-content {
+        border-right: none;
+      }
+    }
+  }
+}
+
+.direction-right {
+  direction: rtl;
+
+  .dp-wrapper {
+    .dp-header {
+      border-left: 1px solid color-variant($dp-header-bg, hover);
+    }
+
+    .dp-content {
+      border-left: 1px solid $border-color;
+    }
+
+    &:last-child {
+      .dp-header {
+        border-left: none;
+      }
+
+      .dp-content {
+        border-left: none;
+      }
+    }
+  }
+
+  .dp {
+    float: left;
+
+    .dp-header {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    .dp-close {
+      background-image: icon($i-angle-right);
+      margin-left: -$dp-padding * .5;
+      margin-right: -$dp-padding;
+    }
+  }
+}
+
+// Styles for Parent DockedPanel
+.dp-parent {
+  @include shadow(3);
+
+  .dp-header {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    .dp-close {
+      background-image: icon($i-cross, $text-primary-inverse);
+      margin-left: -$dp-padding;
+    }
+  }
+}
+
+// Footer align
+.dp-footer-align_reverse {
+  @at-root {
+    .direction-left & {
+      .dp-footer {
+        justify-content: flex-start;
+      }
+    }
+
+    .direction-right & {
+      .dp-footer {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+.dp-footer-align_left .dp-footer {
+  justify-content: flex-start;
+}
+
+.dp-footer-align_right .dp-footer {
+  justify-content: flex-end;
+}

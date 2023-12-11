@@ -1,0 +1,217 @@
+adapt-carousel-component {
+  display: block;
+}
+
+.a-carousel-overlay {
+  opacity: 1 !important;
+  background: $carousel-overlay-color; //$color-gray-mine-shaft;
+}
+
+.a-carousel-wrapper {
+  position: fixed;
+  z-index: $zindex-carousel;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.a-carousel-overlay__close {
+  position: fixed;
+  z-index: $zindex-carousel-overlay;
+  top: .65rem;
+  right: .65rem;
+
+  &::before {
+    width: 1.125rem;
+    height: 1.125rem;
+    font-size: 1.125rem;
+    color: $carousel-control-color;
+  }
+}
+
+.a-carousel {
+  position: relative;
+  max-width: 1000px;
+  overflow: hidden;
+  display: block;
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.a-carousel--mobile {
+  z-index: $zindex-carousel-mobile;
+
+  .a-carousel__indicators {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 1.875rem;
+  }
+
+  .a-carousel__controls {
+    display: none;
+  }
+
+  .a-carousel__indicators-item {
+    height: .125rem;
+  }
+}
+
+.a-carousel__inner {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}
+
+.a-carousel__indicators {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-right: 15%;
+  margin-left: 15%;
+  padding: 0;
+  list-style: none;
+  margin-top: .625rem;
+
+  &.is-mobile {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+
+    .a-carousel__indicators-item {
+      width: 100%;
+      max-width: 100%;
+      height: .125rem;
+
+      &:first-child {
+        @include rtl(margin-left, 0);
+        border-radius: 0;
+      }
+
+      &:last-child {
+        @include rtl(margin-right, 0);
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.a-carousel__indicators-item {
+  height: $carousel-indicator-height;
+  margin-right: $carousel-indicator-spacer;
+  margin-left: $carousel-indicator-spacer;
+  text-indent: -9999px;
+  max-width: $carousel-indicator-width;
+  width: $carousel-indicator-width;
+  background-color: $carousel-indicator-bg;
+  transition: background-color .25s $ease-transition-in-out;
+  cursor: pointer;
+  border-radius: 0;
+  @if $rtl-mode {
+    &:first-child {
+      border-radius: 0 .25rem .25rem 0;
+    }
+
+    &:last-child {
+      border-radius: .25rem 0 0 .25rem;
+    }
+  } @else {
+    &:first-child {
+      border-radius: .25rem 0 0 .25rem;
+    }
+
+    &:last-child {
+      border-radius: 0 .25rem .25rem 0;
+    }
+  }
+
+  &.is-active {
+    background-color: $carousel-indicator-active-bg;
+    box-shadow: none;
+  }
+}
+
+.adapt-carousel-wrapper {
+  background: $carousel-overlay-color;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.a-carousel__caption {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  position: absolute;
+  right: (100 - $carousel-caption-width) * .5; //15%;
+  left:  (100 - $carousel-caption-width) * .5;
+  bottom: 1.25rem;
+  color: $carousel-caption-color;
+  text-align: center;
+  z-index: 10;
+}
+
+.a-carousel__controls {
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 1.875rem;
+    height: 1.875rem;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .6));
+  }
+}
+
+.a-carousel__controls-prev,
+.a-carousel__controls-next {
+  position: absolute;
+  //top: 0;
+  //bottom: 0;
+  top: 40%;
+  bottom: 40%;
+  display: flex;
+  width: $carousel-control-width;
+  opacity: $carousel-control-opacity;
+  color: $white;
+  text-align: center;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .25s $ease-transition-in-out;
+
+  &:hover {
+    opacity: .9;
+    outline: 0;
+  }
+}
+
+.a-carousel__controls-prev {
+  @include rtl(left, 0);
+}
+
+.a-carousel__controls-next {
+  @include rtl(right, 0);
+}
+
+.video-wrapper {
+  height: 0;
+  padding-top: 25px;
+  padding-bottom: 56.25%; // 16:9
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"chatbot-user-mapping.interface.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/rx.settings/chatbot-user-mapping/chatbot-user-mapping.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IRxChatbotUserMappingParameters {\n  encryptedChatUserAndChatId: string;\n  chatbotProvider: string;\n}\n"]}

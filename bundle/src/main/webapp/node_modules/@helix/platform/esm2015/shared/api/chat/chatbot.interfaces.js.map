@@ -1,0 +1,1 @@
+{"version":3,"file":"chatbot.interfaces.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/chat/chatbot.interfaces.ts"],"names":[],"mappings":"","sourcesContent":["export interface IChatbotDefinition {\n  chatbotName: string;\n  enableTranslation: number;\n  id: string;\n  name: string;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"association-field-locator.interface.js","sourceRoot":"","sources":["../../../../../../libs/platform/association/api/association-field-locator.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IAssociationFieldLocator {\n  associationGuid: string;\n  associationNodeSide: string;\n  fieldId: string;\n}\n"]}

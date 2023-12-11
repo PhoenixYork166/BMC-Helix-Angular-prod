@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/web-api/designer/web-api-designer-page/index.ts"],"names":[],"mappings":"AAAA,cAAc,gCAAgC,CAAC;AAC/C,cAAc,mCAAmC,CAAC","sourcesContent":["export * from './web-api-designer-page.module';\nexport * from './web-api-designer-page.component';\n"]}

@@ -1,0 +1,36 @@
+import { Injector, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActiveModalRef } from '@bmc-ux/adapt-angular';
+import { RxCommandFactoryService, RxNotificationService } from '@helix/platform/shared/api';
+import { RxModalClass, RxModalService } from '@helix/platform/ui-kit';
+import { RxStringService } from '@helix/platform/utils';
+import { IRowDataItem } from '@helix/platform/view/api';
+import { TranslateService } from '@ngx-translate/core';
+import { RxApplicationIssuesService } from '../application-issues.service';
+import { IIssueSeverity } from '../application-issues.types';
+import * as i0 from "@angular/core";
+export declare class SubmitIssueToSupportComponent extends RxModalClass implements OnInit {
+    private activeModalRef;
+    private formBuilder;
+    private rxApplicationIssuesService;
+    private rxCommandFactoryService;
+    private rxModalService;
+    private rxNotificationService;
+    private rxStringService;
+    private translateService;
+    protected injector: Injector;
+    message: string;
+    issues: IRowDataItem[];
+    issueSeverityOptions: IIssueSeverity[];
+    submitIssueForm: FormGroup;
+    supportCentralUrl: string;
+    constructor(activeModalRef: ActiveModalRef, formBuilder: FormBuilder, rxApplicationIssuesService: RxApplicationIssuesService, rxCommandFactoryService: RxCommandFactoryService, rxModalService: RxModalService, rxNotificationService: RxNotificationService, rxStringService: RxStringService, translateService: TranslateService, injector: Injector);
+    ngOnInit(): void;
+    isDirty(): boolean;
+    initSearchQuery(): void;
+    submit(): void;
+    optionFormatter(severity: IIssueSeverity): string;
+    cancel(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SubmitIssueToSupportComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SubmitIssueToSupportComponent, "rx-submit-issue-to-support", never, {}, {}, never, never>;
+}

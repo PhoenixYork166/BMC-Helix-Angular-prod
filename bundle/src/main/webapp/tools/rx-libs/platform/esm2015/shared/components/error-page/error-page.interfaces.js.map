@@ -1,0 +1,1 @@
+{"version":3,"file":"error-page.interfaces.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/error-page/error-page.interfaces.ts"],"names":[],"mappings":"","sourcesContent":["export interface IErrorPageData {\n  errorTitle: string;\n  errorMessage: string;\n  showSignInLink?: boolean;\n  showApplications?: boolean;\n}\n"]}

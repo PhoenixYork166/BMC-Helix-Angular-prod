@@ -1,0 +1,31 @@
+import { OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { RxSelectOption } from '@bmc-ux/adapt-angular';
+import { RxCommandFactoryService } from '@helix/platform/shared/api';
+import { IDocumentTone } from '../tone-analysis-testing.interfaces';
+import { RxSystemConfigurationService } from '@helix/platform/shared/api';
+import * as i0 from "@angular/core";
+export declare class DocumentToneAnalysisComponent implements OnInit {
+    private rxCommandFactoryService;
+    private rxSystemConfigurationService;
+    languageOptions: RxSelectOption[];
+    language: RxSelectOption;
+    documentText: string[];
+    toneScoreThreshold: number;
+    defaultToneScoreThreshold: number;
+    containsHtml: boolean;
+    includeSentenceLevelAnalysis: boolean;
+    extractedToneData: IDocumentTone;
+    documentToneAnalysisForm: NgForm;
+    constructor(rxCommandFactoryService: RxCommandFactoryService, rxSystemConfigurationService: RxSystemConfigurationService);
+    ngOnInit(): void;
+    clearDocumentText(): void;
+    optionFormatter(option: RxSelectOption): string;
+    setDefaultThreshold(): void;
+    analyzeTone(): void;
+    reset(): void;
+    isAnalyzeToneButtonDisabled(): boolean;
+    isResetButtonDisabled(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DocumentToneAnalysisComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DocumentToneAnalysisComponent, "rx-document-tone-analysis", never, {}, {}, never, never>;
+}

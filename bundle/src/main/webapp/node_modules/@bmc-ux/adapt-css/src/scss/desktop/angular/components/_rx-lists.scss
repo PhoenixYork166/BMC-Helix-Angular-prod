@@ -1,0 +1,191 @@
+// rx list item
+.adapt-rx-list-item {
+  position: relative;
+  display: block;
+  cursor: move; // Fallback for IE11
+  cursor: grab;
+
+  &.readonly {
+    cursor: text;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    adapt-icon {
+      opacity: $disabled;
+    }
+
+    .adapt-rx-list-item__name {
+      color: color-variant($text-primary, disabled);
+    }
+
+    &:not(.hover-disabled):hover {
+      background-color: color-variant($table-row-hover, disabled);
+    }
+  }
+
+  &:not(.hover-disabled):hover,
+  &.readonly:not(.hover-disabled):hover {
+    background-color: $table-row-hover;
+
+    .adapt-rx-list-drag {
+      color: $gray-700;
+    }
+  }
+
+  .adapt-rx-list-item-view-block {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: calc(#{$input-padding-y} + #{$border-width}) 1rem;
+    background-color: inherit;
+    transition: background-color $animation-extra-fast $ease-transition-linear;
+  }
+
+  .adapt-rx-list-item-edit-block {
+    position: absolute;
+    width: 100%;
+    padding: 0 .875rem;
+    background-color: $white;
+    z-index: $zindex-offcanvas-1;
+
+    .edit-wrp {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      overflow-x: hidden;
+      padding: 0 1rem;
+      border: 1px solid $input-border-color;
+      border-radius: $input-border-radius;
+
+      @include transition($input-transition);
+
+      &.focused {
+        border-color: $color-active;
+      }
+
+      adapt-rx-textfield {
+        display: flex;
+        flex: 1 1;
+        align-items: center;
+
+        > div {
+          width: 100%;
+        }
+
+        .form-control {
+          border: none;
+          padding-right: 0;
+          padding-left: 0;
+        }
+      }
+    }
+
+    .edit-err {
+      padding-top: .25rem;
+      overflow: hidden;
+      color: $color-critical;
+    }
+  }
+
+  &.disabled,
+  &.readonly,
+  &.hover-disabled {
+    .adapt-rx-list-item__name:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.adapt-rx-list-item__name {
+  display: flex;
+  word-break: break-word;
+  color: $text-primary;
+  @include rtl(margin-left, .125rem);
+  @include rtl(padding-right, .5rem);
+
+  &:focus {
+    @include tab-focus();
+  }
+
+  .radio {
+    margin: 0;
+
+    .radio__label {
+      height: 1.25rem;
+    }
+  }
+
+  .checkbox {
+    margin: 0;
+  }
+}
+
+.adapt-list-builder__list-selection-actions {
+  display: block;
+  padding: 1rem .875rem 0;
+}
+
+.adapt-rx-list-item__controls {
+  display: flex;
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.adapt-rx-list-drag {
+  color: $text-tertiary;
+}
+
+.rx-list-remove,
+.rx-list-update {
+  opacity: 0;
+  border: 0;
+}
+
+.rx-list-remove:focus,
+.rx-list-remove:hover,
+.rx-list-update:focus,
+.rx-list-update:hover,
+.adapt-rx-list-item:not(.hover-disabled) .adapt-rx-list-name:focus + .rx-list-remove,
+.adapt-rx-list-item:not(.hover-disabled):focus .rx-list-remove,
+.adapt-rx-list-item:not(.hover-disabled):hover .rx-list-remove,
+.adapt-rx-list-item:not(.hover-disabled) .adapt-rx-list-name:focus + .rx-list-update,
+.adapt-rx-list-item:not(.hover-disabled):focus .rx-list-update,
+.adapt-rx-list-item:not(.hover-disabled):hover .rx-list-update {
+  opacity: 1;
+}
+
+// rx-list-selector
+.rx-list-selector {
+  display: block;
+
+  .adapt-list {
+    &.has-warning {
+      border-color: $color-warning;
+    }
+
+    &.has-danger {
+      border-color: $color-critical;
+    }
+
+    > .rx-select-dropdown {
+      margin-bottom: .375rem;
+      padding: .5rem .5rem 0;
+    }
+
+    &.has-danger .adapt-rx-search__input,
+    &.has-warning .adapt-rx-search__input {
+      color: $input-color;
+    }
+  }
+
+  .adapt-list__item-placeholder {
+    border: $border-width dashed $primary-color;
+    height: $input-height;
+    opacity: 1;
+    overflow: hidden;
+  }
+}

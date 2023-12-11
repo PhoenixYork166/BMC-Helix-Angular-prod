@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/web-api/api/index.ts"],"names":[],"mappings":"AAAA,cAAc,wCAAwC,CAAC;AACvD,cAAc,8BAA8B,CAAC;AAC7C,cAAc,4BAA4B,CAAC","sourcesContent":["export * from './web-api-definition-data-page.service';\nexport * from './web-api-definition.service';\nexport * from './web-api-definition.types';\n"]}

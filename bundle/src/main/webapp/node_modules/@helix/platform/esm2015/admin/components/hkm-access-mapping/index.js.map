@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/hkm-access-mapping/index.ts"],"names":[],"mappings":"AAAA,cAAc,gCAAgC,CAAC;AAC/C,cAAc,0CAA0C,CAAC","sourcesContent":["export * from './hkm-access-mapping.component';\nexport * from './hkm-access-mapping-registration.module';\n"]}

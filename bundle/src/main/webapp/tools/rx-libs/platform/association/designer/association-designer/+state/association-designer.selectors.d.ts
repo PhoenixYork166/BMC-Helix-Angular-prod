@@ -1,0 +1,13 @@
+import { IAssociationDesignerModel, IAssociationDesignerState } from './association-designer.types';
+export declare const associationDesignerStateSelector: import("@ngrx/store").MemoizedSelector<object, IAssociationDesignerState, import("@ngrx/store").DefaultProjectorFn<IAssociationDesignerState>>;
+export declare const associationDesignerModelSelector: import("@ngrx/store").MemoizedSelector<object, IAssociationDesignerModel, import("@ngrx/store").DefaultProjectorFn<IAssociationDesignerModel>>;
+export declare const isDesignModeSelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const bundleIdSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const definitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const definitionModelSelector: import("@ngrx/store").MemoizedSelector<object, import("../../association-designer.types").IAssociationDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../association-designer.types").IAssociationDefinitionModel>>;
+export declare const definitionModelFromDefinitionSelector: import("@ngrx/store").MemoizedSelector<object, import("../../association-designer.types").IAssociationDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../association-designer.types").IAssociationDefinitionModel>>;
+export declare const isDirtySelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const isForeignKeyCreatedSelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const isForeignKeyMissingSelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const savedDefinitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const originalDefinitionSelector: import("@ngrx/store").MemoizedSelector<object, import("@helix/platform/association/api").IAssociationDefinition, import("@ngrx/store").DefaultProjectorFn<import("@helix/platform/association/api").IAssociationDefinition>>;

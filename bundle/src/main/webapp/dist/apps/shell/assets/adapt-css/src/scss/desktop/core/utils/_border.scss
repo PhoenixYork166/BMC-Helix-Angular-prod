@@ -1,0 +1,39 @@
+@include border-variant(".border-default", $border-color);
+@include border-variant(".border-inverse", $border-color-inverse);
+@include border-variant(".border-primary", $color-primary);
+@include border-variant(".border-secondary", $color-secondary);
+@include border-variant(".border-active", $color-active);
+@include border-variant(".border-success", $color-success);
+@include border-variant(".border-info", $color-info);
+@include border-variant(".border-warning", $color-warning);
+@include border-variant(".border-danger", $color-critical);
+
+//Override for BS theme bordering
+@include border-variant(".border-light", $border-color);
+@include border-variant(".border-dark", $border-color-inverse);
+
+@include border-variant-muted(".border-primary", $color-primary);
+@include border-variant-muted(".border-secondary", $color-secondary);
+@include border-variant-muted(".border-active", $color-active);
+@include border-variant-muted(".border-success", $color-success);
+@include border-variant-muted(".border-info", $color-info);
+@include border-variant-muted(".border-warning", $color-warning);
+@include border-variant-muted(".border-danger", $color-critical);
+
+// Uses box shadows to create a gradient effect on non-bordered, shaded elements that can't recieve it through other means, .eg rounded or leveraging pseudo elements
+.border-gradient,
+.border-gradient.shadow-0 {
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 0);
+}
+
+@for $i from 1 through 5 {
+  .border-gradient.shadow-#{$i} {
+    @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, $i);
+  }
+}
+
+// Pipe divider
+span.pipe {
+  border-right: 1px solid $gray-300;
+  padding-right: $icon-lockup-spacing;
+}

@@ -1,0 +1,84 @@
+@import 'variables';
+
+.designer-modal-body {
+  height: $rx-designer-modal-height - $rx-modal-header-height - $rx-modal-footer-height;
+  min-height: calc(100% - #{$rx-modal-footer-height}) !important;
+}
+
+.designer-modal-accordion-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  padding-top: 10px;
+}
+
+.designer-modal-accordion-content {
+  position: relative;
+
+  &.cdk-drag-preview {
+    z-index: 1200 !important;
+  }
+}
+
+.designer-modal-drag-handle {
+  cursor: move;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 46px;
+  padding: 14px 10px 14px 14px;
+  z-index: 1;
+}
+
+.designer-modal-card-title-content {
+  width: 100%;
+  display: flex;
+
+  .left-header-block,
+  .right-header-block {
+    display: flex;
+    align-items: center;
+  }
+
+  .left-header-block {
+    flex-grow: 1;
+    min-width: 0;
+    font-size: 14px;
+    padding-left: 22px;
+  }
+}
+
+.designer-modal-card-sub-title {
+  color: $gray-600;
+  font-weight: normal;
+}
+
+.designer-modal-card-title-index-buttons {
+  display: flex;
+  font-size: 19px;
+}
+
+.rx-card {
+  overflow: auto;
+}
+
+.rx-tree-draggable-node {
+  cursor: pointer;
+
+  &.cdk-drag-preview {
+    z-index: 1200 !important;
+  }
+
+  &.cdk-drag {
+    opacity: 1; // show dragged action in origin list
+  }
+}
+
+.rx-tree-node-label {
+  word-break: break-all;
+}
+
+rx-form-builder {
+  max-width: $rx-input-max-width;
+}

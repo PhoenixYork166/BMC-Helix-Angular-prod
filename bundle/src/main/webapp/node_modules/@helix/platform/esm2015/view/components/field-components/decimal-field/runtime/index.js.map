@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/decimal-field/runtime/index.ts"],"names":[],"mappings":"AAAA,cAAc,2BAA2B,CAAC;AAC1C,cAAc,wBAAwB,CAAC","sourcesContent":["export * from './decimal-field.component';\nexport * from './decimal-field.module';\n"]}

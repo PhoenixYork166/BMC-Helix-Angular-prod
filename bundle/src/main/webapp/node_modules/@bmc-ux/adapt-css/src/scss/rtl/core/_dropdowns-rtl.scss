@@ -1,0 +1,118 @@
+.dropdown-menu {
+  border: none;
+  margin-bottom: 4px;
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+
+}
+
+.dropdown-header {
+  font-weight: 600;
+  padding: .375rem $dropdown-item-padding-x;
+}
+
+.dropdown-item {
+  border-radius: 0;
+}
+
+.dropdown-item.active,
+.dropdown-item.dropdown-item-active {
+  color: inherit;
+  background-color: $dropdown-item-active;
+  background-image: linear-gradient(270deg, $dropdown-item-selected, $dropdown-item-selected 3px, transparent 3px, transparent);
+}
+
+.dropdown-toggle,
+.dropdown-toggle:active {
+  position: relative;
+  padding-left: 26px;
+
+  &.dropdown-toggle-up {
+    @include caret(up);
+  }
+
+  &:after,
+  &.dropdown-toggle-up:after {
+    position: absolute;
+    top: calc(50% - #{$caret-width} / 2);
+    right: calc(100% - 18px);
+    margin-right: 0;
+  }
+
+  &.dropdown-kabob-btn {
+    background-repeat: no-repeat;
+
+    &:after {
+      display: none;
+    }
+  }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - -
+// Fixes for typeahead Window (NGB version)
+
+.typeahead {
+  .open ~ .dropdown-menu {
+    visibility: visible;
+  }
+
+  .dropdown-item.active,
+  .dropdown-item.dropdown-item-active {
+    color: inherit;
+    background-color: inherit;
+    background-image: none;
+  }
+
+  .ngb-highlight {
+    font-weight: 600 !important;
+  }
+}
+
+// - - - - - - - - - - - - - - - - - - - - - -
+
+.dropup .dropdown-menu {
+  transform-origin: 10% 100%;
+  bottom: 100%;
+}
+
+.dropup.show > .dropdown-menu {
+  top: auto !important;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - -
+// For actions menu (dropdown)
+
+.dropdown-kabob {
+  & .dropdown-menu {
+    left: 8px !important;
+  }
+
+  & .dropdown-toggle,
+  & .dropdown-toggle:hover,
+  & .dropdown-toggle:active,
+  & .dropdown-toggle:focus {
+    width: 30px;
+    height: 30px;
+    padding: 5px 10px;
+    background-position: center !important;
+    background-size: 24px !important;
+    background-color: inherit;
+    background-image: icon($i-ellipsis, $dropdown-kabob-icon) !important;
+    border: none;
+    transition: all .25s $ease-transition-in-out;
+  }
+
+  & .dropdown-toggle {
+    &:hover,
+    &:active,
+    &:focus {
+      background-image: icon($i-ellipsis, $dropdown-kabob-icon-active) !important;
+    }
+
+    &:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      background-image: icon($i-ellipsis, $dropdown-kabob-icon-disabled) !important;
+    }
+  }
+}
+

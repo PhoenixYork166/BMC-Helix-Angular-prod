@@ -1,0 +1,26 @@
+import { createAction, props } from '@ngrx/store';
+export const init = createAction('[Config Designer] Init', props());
+export const loadParentComponents = createAction('[Config Designer] Load Parent Components');
+export const loadParentComponentsSuccess = createAction('[Config Designer] Load Parent Components Success', props());
+export const loadDefinition = createAction('[Config Designer] Load Definition');
+export const loadDefinitionSuccess = createAction('[Config Designer] Load Definition Success', props());
+export const initDefinitionModel = createAction('[Config Designer] Init Definition Model', props());
+export const markDesignerPristine = createAction('[Config Designer] Mark Designer Pristine');
+export const markDesignerDirty = createAction('[Config Designer] Mark Designer Dirty');
+export const updateDefinitionModelFromDesigner = createAction('[Config Designer] Update Definition Model From Designer', props());
+export const updateSelectedFieldModel = createAction('[Config Designer] Update Selected Field Model', props());
+export const createNewFieldModel = createAction('[Config Designer] Create New Field Model', props());
+export const addFieldModel = createAction('[Config Designer] Add Field Model', props());
+export const clearSelectedFieldGuid = createAction('[Config Designer] Clear Selected Field GUID');
+export const setSelectedFieldGuid = createAction('[Config Designer] Set Selected Field GUID', props());
+export const deleteSelectedField = createAction('[Config Designer] Delete Selected Field');
+export const deleteSelectedFieldSuccess = createAction('[Config Designer] Delete Selected Field Success');
+export const toggleDesignMode = createAction('[Config Designer] Toggle Design Mode');
+export const editFieldGroups = createAction('[Config Designer] Edit Field Groups');
+export const setInspectorTabIndex = createAction('[Config Designer] Set Inspector Tab Index', props());
+export const saveDefinition = createAction('[Config Designer] Save Definition');
+export const updateDefinition = createAction('[Config Designer] Update Definition', props());
+export const saveDefinitionSuccess = createAction('[Config Designer] Save Definition Success', props());
+export const saveDefinitionError = createAction('[Config Designer] Save Definition Error');
+export const destroy = createAction('[Config Designer] Destroy');
+//# sourceMappingURL=config-designer.actions.js.map

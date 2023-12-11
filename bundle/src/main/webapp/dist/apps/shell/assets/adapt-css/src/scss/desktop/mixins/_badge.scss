@@ -1,0 +1,122 @@
+@mixin badge-variant($bg, $simple-badge: true) {
+  color: color-yiq($bg);
+  //color: if($accessible-mode, getTextColor($badge-color, $bg), $badge-color);
+  background-color: $bg;
+
+  &[href] {
+    @include hover-focus {
+      color: color-yiq($bg);
+      text-decoration: none;
+      background-color: darken($bg, 10%);
+    }
+  }
+  @if($simple-badge) {
+    &::after {
+      background-color: lighten($bg, 25%);
+    }
+  }
+}
+
+@mixin badge-hop-variant($bg, $color) {
+
+  &.hop .badge-#{$color} {
+    animation: hop-#{$color} 2s infinite;
+  }
+
+  @keyframes hop-#{$color} {
+    0% {
+      background-color: $bg;
+      @include shadow(0);
+    }
+
+    50% {
+      background-color: lighten($bg, 8%);
+      @include shadow(1);
+    }
+
+    100% {
+      background-color: $bg;
+      @include shadow(0);
+    }
+  }
+}
+
+@mixin animated-badge() {
+  .badge-pulse {
+    display: inline-block;
+
+    .badge {
+      &::after {
+        position: absolute;
+        content: "";
+        border-radius: $badge-border-radius;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: scale(0);
+        opacity: 0;
+        background-blend-mode: screen;
+        z-index: -1;
+      }
+
+      &-custom::after {
+        background-color: inherit;
+      }
+    }
+
+    &.badge-animation {
+      .badge::after {
+        animation: pulsing-badge 2s infinite;
+        transition-timing-function: $ease-transition-out;
+        animation-delay: .5s;
+      }
+
+      .hop {
+        animation: hop 2s infinite;
+
+        @each $color, $value in $theme-colors {
+          &.hop-#{$color} {
+            @include badge-hop-variant($value, $color);
+          }
+        }
+      }
+    }
+
+    @keyframes hop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+
+  @keyframes pulsing-badge {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    50% {
+      opacity: .3;
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+
+  .hop {
+    transform: scale(1);
+    transition-timing-function: $ease-transition-out;
+    border-radius: $badge-border-radius;
+  }
+}

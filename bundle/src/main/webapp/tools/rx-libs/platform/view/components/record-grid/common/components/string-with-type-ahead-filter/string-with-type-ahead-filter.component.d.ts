@@ -1,0 +1,30 @@
+import { OnInit } from '@angular/core';
+import { AdaptFilterControlsComponent, AdvancedFilterOption } from '@bmc-ux/adapt-angular';
+import { INamedListOption, RxNamedListDefinitionService, RxNamedListService, NamedListTypeAheadOption } from '@helix/platform/named-list/api';
+import { RxFeatureService } from '@helix/platform/shared/api';
+import { OperatorFunction } from 'rxjs';
+import { RxRecordGridAdvancedFilterValue } from '../../types/record-grid-advanced-filter-value.class';
+import { IRecordGridColumnNamedFilterOption } from '../../types/record-grid.types';
+import * as i0 from "@angular/core";
+export declare class RxStringWithTypeAheadFilterComponent implements OnInit {
+    private rxNamedListService;
+    private rxNamedListDefinitionService;
+    private rxFeatureService;
+    filterOption: AdvancedFilterOption;
+    filterControlsComponent: AdaptFilterControlsComponent;
+    set filterValue(values: RxRecordGridAdvancedFilterValue<INamedListOption[]>);
+    get filterValue(): RxRecordGridAdvancedFilterValue<INamedListOption[]>;
+    namedFilterOptions: IRecordGridColumnNamedFilterOption[];
+    selectedValues: INamedListOption[];
+    isSearchInProgress: boolean;
+    typeaheadKeystrokeCount: number;
+    private namedListDefinition$;
+    private _filterValue;
+    search: OperatorFunction<string, INamedListOption[]>;
+    constructor(rxNamedListService: RxNamedListService, rxNamedListDefinitionService: RxNamedListDefinitionService, rxFeatureService: RxFeatureService);
+    ngOnInit(): void;
+    onValueChange(selectedValues: NamedListTypeAheadOption[]): void;
+    private getSelectOptions;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxStringWithTypeAheadFilterComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxStringWithTypeAheadFilterComponent, "rx-string-with-type-ahead-filter", never, { "filterOption": "filterOption"; "filterControlsComponent": "filterControlsComponent"; "filterValue": "filterValue"; "namedFilterOptions": "namedFilterOptions"; }, {}, never, never>;
+}

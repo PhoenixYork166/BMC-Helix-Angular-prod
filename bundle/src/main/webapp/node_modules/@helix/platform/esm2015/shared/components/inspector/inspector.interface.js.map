@@ -1,0 +1,1 @@
+{"version":3,"file":"inspector.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/components/inspector/inspector.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IInspector<TDesignerItemModel = any> {\n  designerItemModel: TDesignerItemModel;\n}\n"]}

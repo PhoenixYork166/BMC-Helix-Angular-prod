@@ -1,0 +1,26 @@
+import { createAction, props } from '@ngrx/store';
+export const init = createAction('[Record Designer] Init', props());
+export const loadDefinition = createAction('[Record Designer] Load Definition');
+export const clearSearchFields = createAction('[Record Designer] Clear Search Fields');
+export const loadDefinitionSuccess = createAction('[Record Designer] Load Definition Success', props());
+export const initDefinitionModel = createAction('[Record Designer] Init Definition Model', props());
+export const markDesignerPristine = createAction('[Record Designer] Mark Designer Pristine');
+export const markDesignerDirty = createAction('[Record Designer] Mark Designer Dirty');
+export const toggleDesignMode = createAction('[Record Designer] Toggle Design Mode');
+export const updateDefinitionModelFromDesigner = createAction('[Record Designer] Update Definition Model From Designer', props());
+export const updateSelectedFieldModel = createAction('[Record Designer] Update Selected Field Model', props());
+export const setInspectorTabIndex = createAction('[Record Designer] Set Inspector Tab Index', props());
+export const createNewFieldModel = createAction('[Record Designer] Create New Field Model', props());
+export const addFieldModel = createAction('[Record Designer] Add Field Model', props());
+export const addNewFieldModels = createAction('[Record Designer] Add New Field Models', props());
+export const setSelectedFieldGuid = createAction('[Record Designer] Set Selected Field GUID', props());
+export const clearSelectedFieldGuid = createAction('[Record Designer] Clear Selected Field GUID');
+export const deleteSelectedField = createAction('[Record Designer] Delete Selected Field');
+export const copySelectedField = createAction('[Record Designer] Copy Selected Field');
+export const checkIfFieldUsedByIndexes = createAction('[Record Designer] Check If Field Used By Indexes');
+export const deleteSelectedFieldSuccess = createAction('[Record Designer] Delete Selected Field Success');
+export const deleteSelectedFieldError = createAction('[Record Designer] Delete Selected Field Error');
+export const saveDefinition = createAction('[Record Designer] Save Definition');
+export const saveDefinitionSuccess = createAction('[Record Designer] Save Definition Success', props());
+export const destroy = createAction('[Record Designer] Destroy');
+//# sourceMappingURL=record-designer.actions.js.map

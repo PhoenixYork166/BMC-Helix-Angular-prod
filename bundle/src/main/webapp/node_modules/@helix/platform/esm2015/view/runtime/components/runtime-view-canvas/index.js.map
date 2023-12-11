@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/runtime/components/runtime-view-canvas/index.ts"],"names":[],"mappings":"AAAA,cAAc,cAAc,CAAC","sourcesContent":["export * from './public-api';\n"]}

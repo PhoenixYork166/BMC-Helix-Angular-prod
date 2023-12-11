@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/admin/components/ipaas/jitterbit-configuration/index.ts"],"names":[],"mappings":"AAAA,cAAc,qCAAqC,CAAC;AACpD,cAAc,+CAA+C,CAAC","sourcesContent":["export * from './jitterbit-configuration.component';\nexport * from './jitterbit-configuration-registration.module';\n"]}

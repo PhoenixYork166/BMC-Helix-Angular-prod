@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/ui-kit/breadcrumb-bar/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,4BAA4B,CAAC;AAC3C,cAAc,4BAA4B,CAAC","sourcesContent":["export * from './breadcrumb-bar.module';\nexport * from './breadcrumb-bar.interface';\nexport * from './breadcrumb-bar.component';\n"]}

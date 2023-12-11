@@ -1,0 +1,250 @@
+$p-border: $gray-200; //Used for Caret in popover.
+
+.popover {
+  font-size: $popover-font-size;
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+
+  .arrow {
+    margin: 0 !important;
+  }
+
+  .close {
+    margin: 4px;
+    padding: 3px 6px;
+    font-size: 15px;
+  }
+
+  .popover-header {
+    position: relative;
+    margin: -1px -1px 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &.popover-mobile {
+    position: fixed;
+    top: .5rem;
+    right: 0;
+    bottom: .5rem;
+    left: 0;
+    max-width: none !important;
+    margin: 0;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
+    border: 0;
+
+    .a-popover-wrap {
+      overflow: scroll;
+      max-height: 100%;
+      background: $popover-bg;
+      width: 100%;
+      margin: 0 .5rem;
+      @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+    }
+
+    .popover-header {
+      margin: 0;
+    }
+
+  }
+
+  .a-popover-center {
+    display: flex;
+  }
+}
+
+.popover-body {
+  max-height: $dropable-element-max-height;
+  overflow: auto;
+}
+
+.bs-popover-top,
+.bs-popover-auto[x-placement^="top"] {
+  .arrow {
+    left: 50%;
+    transform: translate(-50%);
+
+    &::before {
+      border-top-color: $p-border;
+    }
+
+    &::before,
+    &::after {
+      border-bottom-width: 0 !important;
+    }
+  }
+}
+
+.bs-popover-bottom,
+.bs-popover-auto[x-placement^="bottom"] {
+  .arrow {
+    left: 50%;
+    transform: translate(-50%);
+
+    &::before {
+      border-bottom-color: $p-border;
+    }
+
+    &::before,
+    &::after {
+      border-top-width: 0 !important;
+    }
+  }
+}
+
+.bs-popover-left,
+.bs-popover-auto[x-placement^="left"] {
+  .arrow {
+    top: 50%;
+    transform: translate(0%, -50%);
+
+    &::before {
+      border-left-color: $p-border;
+    }
+
+    &::before,
+    &::after {
+      border-right-width: 0 !important;
+    }
+  }
+}
+
+.bs-popover-right,
+.bs-popover-auto[x-placement^="right"] {
+  .arrow {
+    top: 50%;
+    transform: translate(0%, -50%);
+
+    &::before {
+      border-right-color: $p-border;
+    }
+
+    &::before,
+    &::after {
+      border-left-width: 0 !important;
+    }
+  }
+}
+
+// top/bottom - left
+.bs-popover-top-left .arrow,
+.bs-popover-bottom-left .arrow {
+  left: 0;
+  transform: none;
+  width: 0;
+}
+
+.bs-popover-top-left .arrow {
+  &:before,
+  &:after {
+    border-width: 10px 10px 0 0;
+    left: -1px;
+  }
+}
+
+.bs-popover-bottom-left .arrow {
+  box-shadow: -1px -1px 1px 1px rgba(0, 0, 0, .05);
+
+  &:before,
+  &:after {
+    border-width: 0 10px 10px 0;
+    left: -1px;
+  }
+}
+
+// top/bottom - right
+.bs-popover-top-right .arrow,
+.bs-popover-bottom-right .arrow {
+  left: 100%;
+  transform: none;
+  width: 0;
+}
+
+.bs-popover-top-right .arrow {
+  &:before,
+  &:after {
+    border-width: 10px 0 0 10px;
+    right: -1px;
+  }
+}
+
+.bs-popover-bottom-right .arrow {
+  box-shadow: 1px -1px 1px 1px rgba(0, 0, 0, .05);
+
+  &:before,
+  &:after {
+    border-width: 0 0 10px 10px;
+    right: -1px;
+  }
+}
+
+// left/right - top
+.bs-popover-left-top .arrow,
+.bs-popover-right-top .arrow {
+  top: 0;
+  height: 0;
+  transform: none;
+}
+
+.bs-popover-left-top .arrow {
+  box-shadow: 1px -1px 1px 1px rgba(0, 0, 0, .05);
+
+  &:before,
+  &:after {
+    border-width: 0 0 10px 10px;
+    top: -1px;
+  }
+}
+
+.bs-popover-right-top .arrow {
+  box-shadow: -1px -1px 1px 1px rgba(0, 0, 0, .05);
+
+  &:before,
+  &:after {
+    border-width: 0 10px 10px 0;
+    top: -1px;
+  }
+}
+
+// left/right - bottom
+.bs-popover-left-bottom .arrow,
+.bs-popover-right-bottom .arrow {
+  top: 100%;
+  height: 0;
+  transform: none;
+}
+
+.bs-popover-left-bottom .arrow {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .05);
+
+  &:before,
+  &:after {
+    border-width: 10px 0 0 10px;
+    bottom: -1px;
+  }
+}
+
+.bs-popover-right-bottom .arrow {
+  box-shadow: -1px 1px 1px 1px rgba(0, 0, 0, .05);
+
+  &:before,
+  &:after {
+    border-width: 10px 10px 0 0;
+    bottom: -1px;
+  }
+}
+
+.popover-header {
+
+  .popover-title {
+    flex: 1 1;
+  }
+
+  .close {
+    margin: 0;
+    padding: 0;
+  }
+}

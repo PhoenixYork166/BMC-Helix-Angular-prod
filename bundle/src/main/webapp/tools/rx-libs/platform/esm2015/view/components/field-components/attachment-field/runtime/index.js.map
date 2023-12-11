@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/attachment-field/runtime/index.ts"],"names":[],"mappings":"AAAA,cAAc,8BAA8B,CAAC;AAC7C,cAAc,2BAA2B,CAAC","sourcesContent":["export * from './attachment-field.component';\nexport * from './attachment-field.module';\n"]}

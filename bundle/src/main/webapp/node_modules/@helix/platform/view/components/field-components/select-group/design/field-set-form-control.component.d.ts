@@ -1,0 +1,34 @@
+import { Injector, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder } from '@angular/forms';
+import { IFormWidgetComponent } from '@helix/platform/shared/api';
+import { InspectorWidgetBase } from '@helix/platform/shared/components';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { RxGuidService } from '@helix/platform/utils';
+import { Subscription } from 'rxjs';
+import { ISelectGroupFieldProperties, ISelectGroupFormControlOptions } from './select-group-design.types';
+import { SelectGroupDesignModel } from './select-group-design.model';
+import * as i0 from "@angular/core";
+export declare class FieldSetFormControlComponent extends InspectorWidgetBase<ISelectGroupFormControlOptions, SelectGroupDesignModel> implements OnDestroy, OnInit, IFormWidgetComponent {
+    private formBuilder;
+    private rxGuidService;
+    private rxModalService;
+    options: ISelectGroupFormControlOptions;
+    isDisabled: boolean;
+    formArray: import("@angular/forms").FormArray;
+    valueChangeSubscription: Subscription;
+    private maxSelectGroupFieldCount;
+    private destroyed$;
+    constructor(formBuilder: FormBuilder, rxGuidService: RxGuidService, rxModalService: RxModalService, injector: Injector);
+    ngOnInit(): void;
+    onWriteValue(fieldModels: ISelectGroupFieldProperties[]): void;
+    private onFormValueChange;
+    addField(): void;
+    removeField(index: number): void;
+    isAddFieldButtonDisabled(): boolean;
+    trackByFn(index: number, control: AbstractControl): string;
+    ngOnDestroy(): void;
+    private getFieldFormGroup;
+    setDisabledState(isDisabled: boolean): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<FieldSetFormControlComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<FieldSetFormControlComponent, "rx-field-set-form-control", never, { "options": "options"; "isDisabled": "isDisabled"; }, {}, never, never>;
+}

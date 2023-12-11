@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/document/designer/document-designer-page/index.ts"],"names":[],"mappings":"AAAA,cAAc,oCAAoC,CAAC;AACnD,cAAc,iCAAiC,CAAC","sourcesContent":["export * from './document-designer-page.component';\nexport * from './document-designer-page.module';\n"]}

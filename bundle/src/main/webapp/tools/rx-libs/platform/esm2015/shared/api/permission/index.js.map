@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/permission/index.ts"],"names":[],"mappings":"AAAA,cAAc,iCAAiC,CAAC;AAChD,cAAc,uBAAuB,CAAC","sourcesContent":["export * from './permission-owner-id.interface';\nexport * from './permission.constant';\n"]}

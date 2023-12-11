@@ -1,0 +1,31 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { RxUtilityModalsService } from '@helix/platform/ui-kit';
+import { IComponentCanDeactivate, IDesignerConfiguration, RxBundleCacheService, RxComponentCanDeactivateGuard, RxDefinitionNameService, RxPageTitleService } from '@helix/platform/shared/api';
+import * as i0 from "@angular/core";
+export declare class ProcessDesignerPageComponent implements OnInit, OnDestroy, IComponentCanDeactivate {
+    private activatedRoute;
+    private router;
+    private rxBundleCacheService;
+    private rxComponentCanDeactivateGuard;
+    private rxDefinitionNameService;
+    private rxPageTitleService;
+    private rxUtilityModalsService;
+    private translateService;
+    private processDesignerComponent;
+    configuration: IDesignerConfiguration;
+    isInitialized: boolean;
+    private isNewProcess;
+    private subscription;
+    constructor(activatedRoute: ActivatedRoute, router: Router, rxBundleCacheService: RxBundleCacheService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard, rxDefinitionNameService: RxDefinitionNameService, rxPageTitleService: RxPageTitleService, rxUtilityModalsService: RxUtilityModalsService, translateService: TranslateService);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    canDeactivate(): boolean;
+    confirmDeactivation(): Promise<boolean>;
+    onCloseDesigner(): void;
+    onDefinitionErrorLoading(): void;
+    onDefinitionSaved(processDefinitionName: string): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ProcessDesignerPageComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ProcessDesignerPageComponent, "rx-process-designer-page", never, {}, {}, never, never>;
+}

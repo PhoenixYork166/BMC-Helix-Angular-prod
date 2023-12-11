@@ -1,0 +1,32 @@
+import { AfterContentInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { ConnectionTestStatus } from '@helix/platform/ui-kit';
+import { RxAdminSettingsService, RxNotificationService } from '@helix/platform/shared/api';
+import { RxCognitiveServiceService } from '../../cognitive-service/cognitive-service.service';
+import { IIpaasBaseConfig } from './ipaas-base-configuration.types';
+import * as i0 from "@angular/core";
+export declare class IpaasBaseConfigurationComponent implements AfterContentInit {
+    private rxAdminSettingsService;
+    private rxCognitiveServiceService;
+    private rxNotificationService;
+    private translateService;
+    ipaasConfig: IIpaasBaseConfig;
+    childFormGroup: FormGroup;
+    busy: Subscription;
+    connectionTestStatus: ConnectionTestStatus;
+    private componentSettings;
+    private isNewIpaasConfiguration;
+    constructor(rxAdminSettingsService: RxAdminSettingsService, rxCognitiveServiceService: RxCognitiveServiceService, rxNotificationService: RxNotificationService, translateService: TranslateService);
+    ngAfterContentInit(): void;
+    updateConfigFormValues(): void;
+    onTestConnection(): void;
+    save(): void;
+    isSaveButtonDisabled(): boolean;
+    private getComponentSettings;
+    private setSettingValue;
+    private getValueFromSetting;
+    static ɵfac: i0.ɵɵFactoryDeclaration<IpaasBaseConfigurationComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<IpaasBaseConfigurationComponent, "rx-ipaas-base-configuration", never, { "ipaasConfig": "ipaasConfig"; "childFormGroup": "childFormGroup"; }, {}, never, ["*"]>;
+}

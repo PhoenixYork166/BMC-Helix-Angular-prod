@@ -1,0 +1,1 @@
+{"version":3,"file":"image.types.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/image/runtime/image.types.ts"],"names":[],"mappings":"","sourcesContent":["export interface IImageConfig {\n  recordDefinitionName: string;\n  recordInstanceId: string;\n  fieldId: string;\n  maxWidth: string;\n  alignment: string;\n}\n"]}

@@ -1,0 +1,83 @@
+.a-workflow-carousel {
+  .a-multi-carousel__list {
+    display: block;
+    transition: margin .3s ease-out;
+    padding: 0;
+  }
+
+  .a-workflow__step-content {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.fade-left::before,
+.fade-right::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: $workflow-carousel-padding;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 33;
+}
+
+.fade-left::before {
+  left: -1px;
+}
+
+.fade-right::after {
+  right: -1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.a-multi-carousel__viewport-workflow {
+  padding: 4px 0 6px;
+}
+
+.a-multi-carousel__counts {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24px;
+  overflow: hidden;
+}
+
+.a-multi-carousel__counts-next,
+.a-multi-carousel__counts-prev {
+  position: absolute;
+  bottom: 0;
+
+  &.is-floating {
+    bottom: 2px;
+  }
+}
+
+.a-multi-carousel__counts-next {
+  right: $workflow-carousel-padding;
+}
+
+.a-multi-carousel__counts-prev {
+  left: $workflow-carousel-padding;
+}
+
+.a-multi-carousel__item {
+  &:last-child:not(adapt-workflow-bar) {
+    .a-workflow__step {
+      &.is-medium {
+        width: $w-step-medium-width + ($w-step-medium-width * .5);
+      }
+
+      &.is-large {
+        width: $w-step-large-width + ($w-step-large-width * .5);
+      }
+
+      &.is-small {
+        width: $w-step-small-width + ($w-step-small-width * .5);
+      }
+    }
+  }
+}

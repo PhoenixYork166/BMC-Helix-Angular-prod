@@ -1,0 +1,3 @@
+export * from './<%= dasherize(actionName) %>-action.module';
+export * from './<%= dasherize(actionName) %>-action.service';
+export * from './<%= dasherize(actionName) %>-action.interface';

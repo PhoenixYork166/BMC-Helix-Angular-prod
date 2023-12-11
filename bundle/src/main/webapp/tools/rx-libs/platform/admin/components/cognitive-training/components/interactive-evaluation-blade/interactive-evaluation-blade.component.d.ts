@@ -1,0 +1,32 @@
+import { Injector, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { DockedPanelContext, RxSelectOption } from '@bmc-ux/adapt-angular';
+import { RxRecordInstanceDataPageService } from '@helix/platform/record/api';
+import { IPlainObject, RxCommandFactoryService } from '@helix/platform/shared/api';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { ICognitiveTrainingClassification } from '../../cognitive-training.types';
+import * as i0 from "@angular/core";
+export declare class InteractiveEvaluationBladeComponent extends RxModalClass implements OnInit {
+    private dockedPanelContext;
+    private rxCommandFactoryService;
+    private rxRecordInstanceDataPageService;
+    protected injector: Injector;
+    interactiveEvaluationForm: NgForm;
+    busy: Subscription;
+    contextData: IPlainObject;
+    trainedDataSet: RxSelectOption;
+    classifications: ICognitiveTrainingClassification[];
+    evaluationText: string;
+    trainedDataSetOptions: RxSelectOption[];
+    constructor(dockedPanelContext: DockedPanelContext, rxCommandFactoryService: RxCommandFactoryService, rxRecordInstanceDataPageService: RxRecordInstanceDataPageService, injector: Injector);
+    ngOnInit(): void;
+    isDirty(): boolean;
+    optionFormatter: (opt: RxSelectOption) => any;
+    getDataSetList(): void;
+    classify(): void;
+    displayClassification(classification: ICognitiveTrainingClassification): string;
+    onCloseClick(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<InteractiveEvaluationBladeComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<InteractiveEvaluationBladeComponent, "rx-interactive-evaluation-blade", never, {}, {}, never, never>;
+}

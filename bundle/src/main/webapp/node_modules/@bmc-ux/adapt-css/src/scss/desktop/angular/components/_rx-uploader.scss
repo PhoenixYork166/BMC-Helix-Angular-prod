@@ -1,0 +1,238 @@
+.adapt-rx-uploader {
+  display: block;
+  width: 100%;
+
+  .adapt-rx-uploader__wrp {
+    display: block;
+    width: 100%;
+
+    overflow-x: hidden;
+  }
+
+  .adapt-rx-uploader__content {
+    &.pointer-events {
+      pointer-events: none;
+
+      > * {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .adapt-rx-uploader__controls {
+    display: flex;
+    align-items: center;
+
+    adapt-uploader-item {
+      min-height: 50px;
+      padding: 13px 0;
+      width: 100%;
+    }
+
+    .animation__dnd,
+    .animation__drop {
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+      height: 100%;
+    }
+
+    .adapt-rx-uploader__drop-animation,
+    .adapt-rx-uploader__search-animation {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .drop-icon {
+      position: relative;
+      width: 45px;
+      height: 32px;
+
+      &__search {
+        width: 50px;
+      }
+
+      & > .icon {
+        position: absolute;
+      }
+    }
+
+    .adapt-rx-uploader__drop-animation {
+      .svg-cloud-icon {
+        animation: jumping 1.3s ease alternate infinite;
+      }
+    }
+
+    .adapt-rx-uploader__dnd-text {
+      color: $text-secondary;
+      @include ellipsis();
+
+      &-forbidden {
+        color: $color-critical;
+      }
+    }
+
+    .adapt-rx-uploader-attach-btn {
+      transition: $btn-transition, opacity .1s linear;
+
+      .btn-icon {
+        @include icon-spacing(right);
+      }
+    }
+
+    .adapt-rx-uploader-file-attach-btn__wrp:not(:last-of-type) {
+      > .adapt-rx-uploader-attach-btn {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    .adapt-rx-uploader-folder-attach-btn__wrp:not(:first-of-type) {
+      > .adapt-rx-uploader-attach-btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  .adapt-rx-uploader__restrict {
+    color: $text-tertiary;
+  }
+
+  .adapt-rx-uploader__files-list {
+
+    .files-list__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+
+      .adapt-rx-uploader__cancel-uploading {
+        padding: 0;
+        border: none;
+      }
+    }
+  }
+
+  .adapt-rx-uploader__feedback-info {
+    .adapt-rx-uploader__feedback-message {
+      .alert-icon-lockup-space {
+        padding-right: 0 !important;
+      }
+
+      > p {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &:not(.readonly) {
+    .adapt-rx-uploader__controls {
+      min-height: 50px;
+    }
+  }
+
+  &:not(.is-no-dnd):not(.readonly) {
+    .adapt-rx-uploader__controls {
+
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      background-color: $uploader-bg;
+
+      &.borderless {
+        border: none;
+        border-radius: unset;
+        background-color: transparent;
+      }
+
+      .animation__block-wrp {
+        position: relative;
+        width: 100%;
+        height: 50px;
+
+        display: flex;
+
+        margin: 0 .3125rem;
+
+        .animation__dnd,
+        .animation__drop {
+          position: absolute;
+          height: 100%;
+        }
+
+        .animation__drop {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
+
+    &.has-warning {
+      .adapt-rx-uploader__controls {
+        border-color: $color-warning;
+      }
+    }
+
+    &.has-danger {
+      .adapt-rx-uploader__controls {
+        border-color: $color-critical;
+      }
+    }
+
+    &.disabled {
+      .adapt-rx-uploader__controls {
+        background-color: color-variant($uploader-bg, disabled);
+        border-color: color-variant($border-color, disabled);
+
+        .adapt-rx-uploader__dnd-text {
+          color: color-variant($text-tertiary, disabled);
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .adapt-rx-uploader__restrict {
+      color: color-variant($text-tertiary, disabled);
+    }
+  }
+
+  adapt-empty-state {
+    width: 100%;
+  }
+}
+
+.feedback__remaining-files-list {
+  display: inline-block;
+  color: $link-color;
+  cursor: pointer;
+  text-decoration: $link-decoration;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+
+  &__wrp {
+    display: flex;
+    align-items: flex-start;
+
+    .file-index {
+      flex: 0 0 auto;
+    }
+
+    .file-name {
+      width: 100%;
+    }
+  }
+}
+
+.adapt-rx-drop-area {
+  outline: 1px dashed $color-active;
+
+  * {
+    pointer-events: none;
+  }
+}

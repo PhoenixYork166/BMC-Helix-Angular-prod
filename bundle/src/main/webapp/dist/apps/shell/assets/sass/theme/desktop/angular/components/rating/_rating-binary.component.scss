@@ -1,0 +1,40 @@
+.a-rating-binary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.a-rating-group {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a-rating-group__value {
+  padding: 10px 0;
+}
+
+.a-rating-center {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.a-rating_btn {
+  transition: $animation-fast $ease-transition-in;
+
+  &-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+.a-rating__undo-container {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"field-definition-option.interface.js","sourceRoot":"","sources":["../../../../../../libs/platform/record/api/field-definition-option.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IFieldDefinitionOption {\n  id: string;\n  label: string;\n}\n"]}

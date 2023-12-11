@@ -1,0 +1,1 @@
+{"version":3,"file":"association-designer.constant.js","sourceRoot":"","sources":["../../../../../../libs/platform/association/designer/association-designer.constant.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,uBAAuB,GAAG;IACrC,eAAe,EAAE,qBAAqB;CACvC,CAAC","sourcesContent":["export const RX_ASSOCIATION_DESIGNER = {\n  featureSelector: 'associationDesigner'\n};\n"]}

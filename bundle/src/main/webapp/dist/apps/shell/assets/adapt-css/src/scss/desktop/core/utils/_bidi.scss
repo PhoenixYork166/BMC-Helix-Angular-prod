@@ -1,0 +1,175 @@
+// TODO: create docs about bidi helper classes
+
+// Margin and Padding
+@each $prop, $abbrev in (margin: m, padding: p) {
+  @each $size, $length in $spacers {
+    .#{$abbrev}-start-#{$size} {
+      #{$prop}-#{$start}: $length !important;
+    }
+
+    .#{$abbrev}-end-#{$size} {
+      #{$prop}-#{$end}: $length !important;
+    }
+
+    //.#{$abbrev}-x-#{$size} {
+    //  #{$prop}-#{$start}: $length !important;
+    //  #{$prop}-#{$end}: $length !important;
+    //}
+    //
+    //.#{$abbrev}-top-#{$size} {
+    //  #{$prop}-top: $length !important;
+    //}
+    //
+    //.#{$abbrev}-btm-#{$size} {
+    //  #{$prop}-bottom: $length !important;
+    //}
+    //
+    //.#{$abbrev}-y-#{$size} {
+    //  #{$prop}-top: $length !important;
+    //  #{$prop}-bottom: $length !important;
+    //}
+  }
+}
+
+// custom margin/padding helper
+.m-start-1-5 {
+  margin-#{$start}: .375rem !important;
+}
+
+.m-end-1-5 {
+  margin-#{$end}: .375rem !important;
+}
+
+.m-start-auto {
+  margin-#{$start}: auto !important;
+}
+
+.m-end-auto {
+  margin-#{$end}: auto !important;
+}
+
+.m-auto {
+  margin-#{$start}: auto !important;
+  margin-#{$end}: auto !important;
+}
+
+// position
+
+.float-start {
+  float: #{$start};
+}
+
+.float-end {
+  float: #{$end};
+}
+
+.align-start {
+  text-align: #{$start};
+}
+
+.align-end {
+  text-align: #{$end};
+}
+
+// direction
+
+@mixin rtl($property, $value) {
+
+  @if $rtl-mode {
+
+    @if $property == margin-left {
+      margin-right: $value;
+    }
+
+    @if $property == margin-right {
+      margin-left: $value;
+    }
+
+    @if $property == padding-left {
+      padding-right: $value;
+    }
+
+    @if $property == padding-right {
+      padding-left: $value;
+    }
+
+    @if $property == left {
+      right: $value;
+    }
+
+    @if $property == right {
+      left: $value;
+    }
+
+
+    // for
+    // text-align, float, transition-property
+    // need to properties swap values
+
+    // TODO: move to text-align: start|end after IE support drops
+    @if $value == left {
+      #{$property}: right;
+    }
+
+    @if $value == right {
+      #{$property}: left;
+    }
+
+    @if $value == flex-start {
+      #{$property}: flex-end;
+    }
+
+    @if $value == flex-end {
+      #{$property}: flex-start;
+    }
+
+    @if $property == border-right {
+      border-left: $value;
+    }
+
+    @if $property == border-left {
+      border-right: $value;
+    }
+
+    @if $property == border-right-color {
+      border-left-color: $value;
+    }
+
+    @if $property == border-left-color {
+      border-right-color: $value;
+    }
+
+    // TODO: double check with @anton about .001deg
+    // TODO: set something more clever
+    @if $value == .001deg {
+      transform: rotate(180deg);
+    }
+
+  } @else {
+    @if $value == .001deg {
+      transform: rotate(.001deg);
+    } @else {
+      #{$property}: $value;
+    }
+
+  }
+
+}
+
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.bidi-rtl {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.bidi-lrt {
+  direction: ltr;
+  unicode-bidi: bidi-override;
+}

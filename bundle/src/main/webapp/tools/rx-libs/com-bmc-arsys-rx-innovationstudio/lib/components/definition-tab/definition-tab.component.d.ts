@@ -1,0 +1,58 @@
+import { EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import { IRecordDefinition } from '@helix/platform/record/api';
+import { DefinitionType, IBundleDescriptor, IDataPageResult, IDefinition, RxBundleCacheService, RxSessionExpirationService } from '@helix/platform/shared/api';
+import { IRowDataItem } from '@helix/platform/view/api';
+import { IRecordGridColumn, IRecordGridConfig, RecordGridComponent } from '@helix/platform/view/components';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subscription } from 'rxjs';
+import { IDefinitionActionConfig } from '../bundle-details/bundle-details.types';
+import { RxGainsightConfiguratorService } from '@helix/platform/shared/components';
+import * as i0 from "@angular/core";
+export declare class DefinitionTabComponent implements OnInit, OnDestroy, OnChanges {
+    private translateService;
+    private rxBundleCacheService;
+    private rxSessionExpirationService;
+    private rxGainsightConfiguratorService;
+    customizationStatusCellTemplate: TemplateRef<any>;
+    isEnabledCellTemplate: TemplateRef<any>;
+    nameCellTemplate: TemplateRef<any>;
+    scopeCellTemplate: TemplateRef<any>;
+    recordGrid: RecordGridComponent;
+    isActionInProgress: boolean;
+    definitionType: DefinitionType;
+    set definitionActions(definitionActions: IDefinitionActionConfig[]);
+    get definitionActions(): IDefinitionActionConfig[];
+    set gridColumns(columns: IRecordGridColumn[]);
+    get gridColumns(): IRecordGridColumn[];
+    definitions$: Observable<IDataPageResult<IDefinition>>;
+    recordDefinition: Partial<IRecordDefinition>;
+    editRouterLink: string;
+    customAction: EventEmitter<{
+        actionId: string;
+        selectedRows: IRowDataItem[];
+    }>;
+    deleteDefinition: EventEmitter<IRowDataItem[]>;
+    renameDefinition: EventEmitter<{
+        selectedRow: IRowDataItem;
+        definitionNames: string[];
+    }>;
+    revertCustomization: EventEmitter<IRowDataItem[]>;
+    copyDefinition: EventEmitter<IRowDataItem>;
+    addDefinition: EventEmitter<void>;
+    rowSelectionChanged: EventEmitter<IRowDataItem[]>;
+    recordGridConfig$: Observable<IRecordGridConfig>;
+    busySubscription: Subscription;
+    bundleDescriptor: IBundleDescriptor;
+    private _definitionActions;
+    private _gridColumns;
+    private destroyed$;
+    constructor(translateService: TranslateService, rxBundleCacheService: RxBundleCacheService, rxSessionExpirationService: RxSessionExpirationService, rxGainsightConfiguratorService: RxGainsightConfiguratorService);
+    ngOnInit(): void;
+    onClick(actionId: string): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    trackByFn(definitionAction: IDefinitionActionConfig): string;
+    ngOnDestroy(): void;
+    getDeleteSelectedDefinitionMessage(): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DefinitionTabComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DefinitionTabComponent, "ax-definition-tab", never, { "isActionInProgress": "isActionInProgress"; "definitionType": "definitionType"; "definitionActions": "definitionActions"; "gridColumns": "gridColumns"; "definitions$": "definitions$"; "recordDefinition": "recordDefinition"; "editRouterLink": "editRouterLink"; }, { "customAction": "customAction"; "deleteDefinition": "deleteDefinition"; "renameDefinition": "renameDefinition"; "revertCustomization": "revertCustomization"; "copyDefinition": "copyDefinition"; "addDefinition": "addDefinition"; "rowSelectionChanged": "rowSelectionChanged"; }, never, never>;
+}

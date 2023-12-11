@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/record/designer/record-designer-page/index.ts"],"names":[],"mappings":"AAAA,cAAc,+BAA+B,CAAC;AAC9C,cAAc,kCAAkC,CAAC","sourcesContent":["export * from './record-designer-page.module';\nexport * from './record-designer-page.component';\n"]}

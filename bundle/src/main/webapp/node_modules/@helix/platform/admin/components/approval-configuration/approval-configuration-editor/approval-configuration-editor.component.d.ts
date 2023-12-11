@@ -1,0 +1,30 @@
+import { Injector } from '@angular/core';
+import { ActiveModalRef, AdaptTabsComponent } from '@bmc-ux/adapt-angular';
+import { RxNotificationService } from '@helix/platform/shared/api';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { TranslateService } from '@ngx-translate/core';
+import { ApprovalFlowConfigurationComponent } from '../approval-flow-configuration/approval-flow-configuration.component';
+import { RecordRegistrationComponent } from '../record-registration/record-registration.component';
+import { SelfApprovalConfigurationComponent } from '../self-approval-configuration/self-approval-configuration.component';
+import * as i0 from "@angular/core";
+export declare class ApprovalConfigurationEditorComponent extends RxModalClass {
+    private translateService;
+    private rxNotificationService;
+    private activeModalRef;
+    protected injector: Injector;
+    activatedTabs: boolean[];
+    selectedRecordDefinition: any;
+    editMode: any;
+    approvalFlowConfigurationComponent: ApprovalFlowConfigurationComponent;
+    recordRegistrationComponent: RecordRegistrationComponent;
+    selfApprovalConfigurationComponent: SelfApprovalConfigurationComponent;
+    tabSetComponent: AdaptTabsComponent;
+    constructor(translateService: TranslateService, rxNotificationService: RxNotificationService, activeModalRef: ActiveModalRef, injector: Injector);
+    isDirty(): boolean;
+    onRecordRegistered(registeredRecordDefinitionName: string): void;
+    isSaveButtonDisabled(): boolean;
+    saveApprovalConfiguration(): void;
+    closeModal(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ApprovalConfigurationEditorComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ApprovalConfigurationEditorComponent, "rx-approval-configuration-editor", never, {}, {}, never, never>;
+}

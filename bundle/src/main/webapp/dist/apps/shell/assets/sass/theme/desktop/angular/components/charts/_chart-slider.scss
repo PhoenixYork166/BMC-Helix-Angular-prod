@@ -1,0 +1,109 @@
+$slider-padding-top: 10;
+$slider-spot-height: 10;
+$slider-line-height: 6;
+$slider-spot-height-2: $slider-spot-height * .5;
+$slider-spot-before: ($slider-spot-height - $slider-line-height) * .5;
+
+
+.adapt-chart-slider {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: content-box;
+  padding-top: $slider-padding-top + px;
+
+  &-main {
+    position: relative;
+    flex: 1 1 auto;
+  }
+
+  &-line-wrapper {
+    display: flex;
+    align-items: center;
+    height: $slider-spot-height + px;
+  }
+
+  &-line {
+    flex: 1 1 auto;
+    background-color: $color-background;
+    height: $slider-line-height + px;
+    border-radius: ($slider-line-height * .5) + px;
+  }
+
+  &-spot,
+  &-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: calc(100% + #{$slider-spot-height-2}px);
+  }
+
+
+  &-spot {
+    z-index: 1;
+    box-sizing: content-box;
+
+    &::before {
+      content: "";
+      position: absolute;
+      background-color: $gray-100;
+      border-style: solid;
+      border-color: $gray-100;
+      box-sizing: border-box;
+      width: calc(100% + #{$slider-spot-before}px);
+      height: $slider-spot-height + px;
+      left: -($slider-spot-height - $slider-line-height) * .25 + px;
+      bottom: -($slider-spot-height * .5) + px;
+      border-radius: ($slider-spot-height * .5) + px;
+      border-width: ($slider-spot-height - $slider-line-height) * .5 + 1 + px;
+      transition: background-color $animation-fast $ease-transition-in-out;
+      @include shadow(1);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-overlay {
+    z-index: -1;
+    background-color: $color-background;
+  }
+}
+
+.adapt-chart-slider-spot-active {
+  &::before {
+    background-color: $color-active;
+  }
+}
+
+.adapt-chart-slider-side-overlay {
+  position: absolute;
+  top: 0;
+  background-color: $color-foreground;
+  height: 100%;
+  opacity: .5;
+  z-index: 1;
+}
+
+.adapt-chart-slider-side-overlay-left {
+  right: 0;
+}
+
+.adapt-chart-slider-side-overlay-right {
+  left: 0;
+}
+
+.adapt-chart-slider-chart-zone {
+  height: 100%; // not sure we need to have this anymore !important;
+}
+
+.adapt-chart-slider-brush-svg {
+  position: absolute;
+  z-index: 2;
+}
+
+rect.overlay {
+  cursor: default !important;
+}

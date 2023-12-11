@@ -1,0 +1,32 @@
+import { OnInit } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { RxSelectOption } from '@bmc-ux/adapt-angular';
+import { RxNamedListDefinitionCacheService } from '@helix/platform/named-list/api';
+import { RxRecordDefinitionCacheService } from '@helix/platform/record/api';
+import { RxDefinitionNameService } from '@helix/platform/shared/api';
+import { IDefinitionPickerComponentOptions } from '@helix/platform/shared/components';
+import * as i0 from "@angular/core";
+export declare class SelectGroupFieldComponent implements OnInit {
+    private rxDefinitionNameService;
+    private rxNamedListDefinitionCacheService;
+    private rxRecordDefinitionCacheService;
+    fieldformGroup: AbstractControl;
+    index: number;
+    targetFieldOptions: RxSelectOption[];
+    definitionPickerOptions: IDefinitionPickerComponentOptions;
+    filterField: RxSelectOption[];
+    filterFieldIdOptions: RxSelectOption[];
+    sourceRecordDefinitionDisplayName: string;
+    fieldId: RxSelectOption[];
+    constructor(rxDefinitionNameService: RxDefinitionNameService, rxNamedListDefinitionCacheService: RxNamedListDefinitionCacheService, rxRecordDefinitionCacheService: RxRecordDefinitionCacheService);
+    ngOnInit(): void;
+    onNamedListDefinitionNameChange(emitEvent?: boolean): void;
+    setFilterId(): void;
+    setSourceRecordDefinitionDisplayName(): void;
+    setOptionFilterFieldIdOptions(): void;
+    optionFormatter(option: RxSelectOption): string;
+    onSelectFilterField(filterField: RxSelectOption[]): void;
+    onSelectField(field: RxSelectOption[]): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SelectGroupFieldComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SelectGroupFieldComponent, "rx-select-group-field", never, { "fieldformGroup": "fieldformGroup"; "index": "index"; "targetFieldOptions": "targetFieldOptions"; }, {}, never, never>;
+}

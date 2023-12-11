@@ -1,0 +1,274 @@
+.ui-treenode-selectable.ui-treenode-content {
+  cursor: pointer;
+}
+
+.a-tree__children {
+  padding-left: 1.4375rem;
+}
+
+.a-tree__container {
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  list-style: none;
+  white-space: nowrap;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.a-tree__container_trim {
+    .a-tree__content {
+      width: 100%;
+    }
+
+    .a-tree__focused {
+      overflow: hidden;
+    }
+
+    .a-tree__label {
+      @include ellipsis-wrap;
+    }
+  }
+
+  &.a-tree__container_wrap {
+    white-space: normal;
+  }
+
+  &.a-tree__container_wrap-all {
+    white-space: normal;
+
+    @include break-wrap;
+  }
+}
+
+.a-tree__no-matches {
+  padding: .5rem 0;
+  font-size: .75rem;
+}
+
+.a-tree__filter {
+  padding-bottom: .5rem;
+}
+
+.a-tree__filter-controls {
+  display: flex;
+}
+
+.a-tree__filter-status {
+  color: $text-tertiary;
+  align-self: center;
+  @include rtl(padding-right, .75rem);
+}
+
+// tree node
+
+.ui-treenode-children {
+  margin: 0;
+}
+
+.a-tree__node {
+  font-size: $font-size-base;
+  line-height: 1.25rem !important;
+  height: auto;
+  color: $tree-node-color;
+  position: relative;
+  list-style: none;
+
+  .checkbox {
+    display: inline-block;
+    margin: 0;
+    padding-right: .5rem;
+
+    .checkbox__item {
+      width: 1rem;
+      padding: 0;
+
+      &:before,
+      &:after,
+      .icon-indeterminate {
+        left: 0;
+      }
+    }
+  }
+
+  .a-tree__label {
+    transition: color .25s $ease-transition-in-out;
+
+    &:hover,
+    &:focus {
+      color: $tree-node-active-color;
+    }
+
+    &:active {
+      color: color-variant($tree-node-active-color, hover);
+    }
+  }
+
+  .checkbox + .a-tree__label {
+    &:hover,
+    &:focus,
+    &:active {
+      color: $tree-node-color;
+    }
+  }
+}
+
+.a-tree__content {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  padding: .5rem 0;
+  position: relative;
+  z-index: $zindex-tree-content;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.a-tree__toggle {
+  display: inline-block;
+  @include rtl(padding-right, .5rem);
+  position: relative;
+  z-index: $zindex-tree-toggle;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: .6875rem;
+    height: .6875rem;
+    background-image: icon($i-angle-right, $tree-node-color);
+    background-size: .6875rem .6875rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: transform .25s $ease-transition-in-out;
+    @if ($rtl-mode) {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    &::before {
+      background-image: icon($i-angle-right, $triangle-hover);
+    }
+  }
+
+  &:active:hover {
+    &:before {
+      background-image: icon($i-angle-right, $triangle-active);
+    }
+  }
+
+  &.is-flip {
+    &::before {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.a-tree__node_leaf {
+  .a-tree__toggle {
+    visibility: hidden;
+  }
+}
+
+.a-tree__content.is-selectable {
+  .a-tree__label {
+    &.is-flip {
+      font-weight: 600;
+
+      &:active:hover {
+        color: color-variant($tree-node-active-color, hover);
+      }
+    }
+
+    &.is-active {
+      font-weight: 600;
+      cursor: default;
+
+      &:hover {
+        color: $tree-node-color;
+      }
+    }
+  }
+}
+
+.a-tree__line {
+  flex: 0 0 auto;
+  width: .125rem;
+  position: relative;
+  background: $tree-node-selected-color;
+  vertical-align: text-bottom;
+  transition: all .25s $ease-transition-in-out;
+  margin-right: .625rem; //For RTL and LTL
+}
+
+.a-tree__node-icon {
+  display: inline-block;
+  @include rtl(padding-right, $tree-icon-spacing);
+  font-size: .8125rem;
+}
+
+.a-tree__focused {
+  display: flex;
+  flex-direction: row;
+
+  &:focus {
+    @include tab-focus();
+  }
+
+  &.is-mouse-focused {
+    box-shadow: none;
+  }
+}
+
+adapt-tree[draggablenodes="true"] {
+  .a-tree__content {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: .6875rem;
+      height: .6875rem;
+      background-image: icon($i-drag-drop, $gray-500);
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.a-tree {
+  .ui-treenode-droppoint {
+    height: 4px;
+    list-style-type: none;
+  }
+
+  .ui-treenode-droppoint-active {
+    border: 0 none;
+    background-color: $color-primary;
+  }
+}
+
+
+.a-tree__content.ui-treenode-dragover {
+  border: dashed 1px $color-primary;
+}
+
+
+.ui-treenode-dragover-disable {
+  border: dashed 1px $gray-300;
+  cursor: no-drop ;
+}
+
+.ui-treenode-dragStart {
+  opacity: .5;
+  border:none !important;
+  background-color: inherit;
+  
+  &:hover {
+    cursor: grabbing;
+    background-color: $gray-100;
+  }
+}

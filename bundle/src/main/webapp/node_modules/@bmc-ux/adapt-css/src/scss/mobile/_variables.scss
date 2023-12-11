@@ -1,0 +1,384 @@
+// NOTE:
+// if you redefine the variable for example:
+//
+// $input-param: 30% !default;  // the value in desktop/_variables.scss
+//
+// you need to put the same variable without !default in mobile/_variables.scss:
+//
+// $input-param: 800%;
+//
+// and make sure you copy all entries where this variable is used:
+//
+//
+// somewhere in desktop/_variables.scss:
+// $component-b-param: $input-param !default;
+//
+// should be also now in mobile/_variables.scss:
+// $component-b-param: $input-param;
+//
+
+// ===========================
+$is-mobile: true;
+
+//
+// ## Paragraphs
+//
+// Style p element.
+
+$paragraph-margin-bottom: .75rem;
+
+
+//
+// ## Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-gutter-width: 24px;
+
+//
+// ## Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+    sm: 546px + $grid-gutter-width,
+    md: 726px + $grid-gutter-width,
+    lg: 966px + $grid-gutter-width,
+    xl: 1146px + $grid-gutter-width,
+    xxl: 1566px + $grid-gutter-width
+) !default;
+
+
+//
+// ## Components
+//
+// Define common padding and border radius sizes and more.
+
+$line-height-sm: 1.6;
+
+
+//
+// ## Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$font-size-base: .9375rem; // 15px
+$font-size-base-ios-not-scalable: 1rem; // 16px
+$font-size-lg: 1.0625rem; // 17px
+$font-size-sm: .875rem; // 14px
+$font-size-xs: .8125rem; // 13px
+$font-size-xxs: .75rem; // 12px
+
+$line-height-base: 1.7751;
+
+$h1-font-size: 2rem; // 32px
+$h2-font-size: 1.5rem; // 24px
+$h3-font-size: 1.3125rem; // 21px
+$h4-font-size: 1.3125rem; // 21px
+$h5-font-size: 1.0625rem; // 17px
+$h6-font-size: 1.0625rem; // 17px
+
+
+$lead-font-size: 1.375rem; // 22px
+$blockquote-font-size: ($font-size-base * 1.25);
+
+$dd-margin-bottom: .75rem;
+
+//
+// ## Headings
+//
+
+$h1-line-height: 2.6875rem;
+$h1-margin: 26px 0 16px;
+
+$h2-line-height: 2.0625rem;
+$h2-margin: 26px 0 16px;
+
+$h3-line-height: 1.75rem;
+$h3-margin: 26px 0 16px;
+
+$h4-line-height: 1.75rem;
+$h4-margin: 22px 0 14px;
+
+$h5-line-height: 1.4375rem;
+$h5-margin: 22px 0 14px;
+
+//
+// ## Labels
+//
+
+$label-margin-bottom: .3125rem;
+
+//
+// ## Lists
+//
+
+$list-left-padding: 2.0625rem;
+$list-line-height: 2rem;
+
+//
+// ## Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-cell-padding: .75rem;
+$table-cell-padding-sm: .375rem; //updated from .5 so condensed tables display 50% of padding
+
+
+//
+// ## Buttons + Forms
+//
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+
+
+$input-btn-padding-x: 1.25rem;
+$input-btn-line-height: $line-height-base;
+
+$input-btn-padding-y-xs: .28125rem;
+$input-btn-padding-x-xs: .75rem;
+$input-btn-line-height-xs: $line-height-base;
+
+$input-btn-padding-x-sm: 1rem;
+$input-btn-line-height-sm: $line-height-base;
+
+$input-btn-padding-y-lg: .625rem;
+$input-btn-padding-x-lg: 1.5rem;
+$input-btn-line-height-lg: $line-height-base;
+
+$input-btn-padding-y-xl: .75rem;
+$input-btn-padding-x-xl: 1.75rem;
+$input-btn-line-height-xl: $line-height-base;
+
+//
+// ## Buttons
+//
+// For each of Bootstrap's buttons, define text, background, and border color.
+
+$btn-padding-x: $input-btn-padding-x;
+$btn-line-height: $input-btn-line-height;
+
+$btn-padding-y-xs: $input-btn-padding-y-xs;
+$btn-padding-x-xs: $input-btn-padding-x-xs;
+$btn-line-height-xs: $input-btn-line-height-xs;
+
+$btn-padding-x-sm: $input-btn-padding-x-sm;
+$btn-line-height-sm: $input-btn-line-height-sm;
+
+$btn-padding-y-lg: $input-btn-padding-y-lg;
+$btn-padding-x-lg: $input-btn-padding-x-lg;
+$btn-line-height-lg: $input-btn-line-height-lg;
+
+$btn-line-height-xl: $input-btn-line-height-xl;
+
+$btn-block-spacing-y: .75rem;
+
+$btn-toolbar-margin: .75rem;
+
+$button-icon-change-font-size: 18px;
+$button-icon-change-line-height: 1.4444;
+
+//
+// ## Forms
+//
+
+$input-padding-x: $input-btn-padding-x;
+$input-line-height: $input-btn-line-height;
+
+$input-padding-y-xs: $input-btn-padding-y-xs;
+$input-padding-x-xs: $input-btn-padding-x-xs;
+$input-line-height-xs: $input-btn-line-height-xs;
+
+$input-padding-x-sm: $input-btn-padding-x-sm;
+$input-line-height-sm: $input-btn-line-height-sm;
+
+$input-padding-y-lg: $input-btn-padding-y-lg;
+$input-padding-x-lg: $input-btn-padding-x-lg;
+$input-line-height-lg: $input-btn-line-height-lg;
+
+$input-height-inner: ($font-size-base * $input-btn-line-height) + ($input-btn-padding-y * 2);
+$input-height: calc(#{$input-height-inner} + #{$input-height-border});
+
+$input-height-inner-sm: ($font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2);
+$input-height-sm: calc(#{$input-height-inner-sm} + #{$input-height-border});
+
+$input-height-inner-lg: ($font-size-lg * $input-btn-line-height-lg) + ($input-btn-padding-y-lg * 2);
+$input-height-lg: calc(#{$input-height-inner-lg} + #{$input-height-border});
+
+$form-check-margin-bottom: .5rem;
+$form-check-input-gutter: 1.75rem;
+$form-check-input-margin-y: .5rem;
+$form-check-input-margin-x: .5rem;
+
+
+// Checkboxes and Radiobuttons
+$check-cell-size: 1.25rem ;
+
+$checkbox-siblings-margin: -2.5px;
+$checkbox-scale: .6;
+$checkbox-top: 4px;
+$checkbox-left: 4px;
+$checkbox-padding-left-x: 1.75;
+
+// Switch
+$switch-block-height: 2.75rem;
+$switch-slider-height: 1.5625rem;
+$switch-slider-width: 3.25rem;
+$switch-check-height: 2rem;
+
+$switch-scale: 1;
+$switch__slider-before: $switch-slider-width - $switch-check-height + .125rem;
+$switch__slider-after: $switch-slider-width - 1.375rem;
+$switch-slider-bg-size: 15px;
+$switch-check-marker-height: 1.25rem;
+
+$switch-sm-slider-height: 1.375rem;
+$switch-sm-slider-width: 2.8125rem;
+$switch-sm-check-height: 1.75rem;
+$switch-sm-check-marker-height: 1rem;
+$switch-sm-slider-bg-size: 14px;
+$switch-sm-slider-after: 1.65rem;
+
+
+$switch-lg-slider-height: 2rem;
+$switch-lg-slider-width: 3.75rem;
+$switch-lg-check-height: 2.5rem;
+$switch-lg-check-marker-height: 1.5rem;
+
+$switch-lg-slider-bg-size: 17px;
+$switch-lg-slider-after: 1.95rem;
+
+// Form validation icons
+
+$form-validation-icon-size: 1.125rem;
+
+//
+// ## Navs
+//
+$nav-link-font-size: .9375rem;
+$nav-pills-link-padding: .625rem 1rem .5rem;
+$nav-pills-stacked-link-padding: .125rem .8125rem;
+
+//
+// ## Navbar
+//
+
+$navbar-brand-padding-y: .625rem;
+$navbar-toggler-font-size: $font-size-lg;
+
+$nav-search-icon-y: 14px;
+$nav-font-adjustment: 1.5;
+
+$card-group-margin: ($grid-gutter-width * .5);
+
+//
+// ## Search
+//
+
+$search-font-size: $font-size-base;
+$search-font-size-sm: $font-size-sm;
+$search-font-size-lg: $font-size-lg;
+
+//
+// ## Tooltips
+//
+
+$tooltip-font-size: $font-size-sm;
+
+//
+// ## Popovers
+//
+$popover-font-size: $font-size-base;
+$popover-arrow-width: 10px;
+$popover-arrow-height: 5px;
+
+//
+// ## Metatags
+//
+
+$tag-border-radius: 20px;
+
+//
+// ## Badges
+//
+
+$badge-font-size: 80%;
+$badge-padding-y: .40625rem;
+$badge-padding-x: .75rem;
+
+$badge-hx-padding-y: .40625em;
+$badge-hx-padding-x: .75em;
+
+$badge-pill-padding-x: .8em;
+// Use a higher than normal value to ensure completely rounded edges when
+// customizing padding or font-size on labels.
+$badge-pill-border-radius: 10rem;
+
+// Badge inside the button
+$btn-badge-font-size: .8125rem; // 13*.923 = ~ 10.5px
+$btn-badge-padding-top: .375rem;
+$btn-badge-padding-bottom: .375rem;
+$btn-badge-margin: -6px -6px -6px 12px;
+
+//
+// ## Modals
+//
+
+$modal-inner-padding: 12px;
+
+$modal-overflow-y: scroll;
+
+$modal-header-padding: 5px 12px;
+
+$modal-title-line-height: $line-height-base;
+
+$dp-header-font-size: $h5-font-size;
+//
+// ## Alerts
+//
+
+$alert-line-height: 1.4375rem; // 23px
+
+// Progress SLA
+$progress-sla-icon-size: .75rem;
+
+
+// ## Breadcrumbs
+//
+
+$breadcrumb-padding-y: .625rem;
+$breadcrumb-item-padding: .5625rem;
+
+//
+// ## Close
+//
+
+$close-font-size: 1.3125rem;
+$close-vertical-align: -.25em;
+
+//
+// #TreeView
+//
+
+$tree-icon-spacing: $en-space + $en-space + $hair-space;
+
+//
+// ## Docked Panels
+//
+
+$dp-overflow-y: scroll;
+
+// IE11 input height
+$ie11-input-height: ($line-height-base * $font-size-base) + 2 * $input-btn-padding-y + .125rem; // line-height + font-size + padding(top, bottom) + border;
+$ie11-input-height-lg: ($input-btn-line-height-lg * $font-size-lg) + 2 * $input-btn-padding-y-lg + .125rem; // line-height + font-size + padding(top, bottom) + border;
+$ie11-input-height-sm: ($input-btn-line-height-sm * $font-size-sm) + 2 * $input-btn-padding-y-sm + .125rem; // line-height + font-size + padding(top, bottom) + border;
+
+$dropable-element-max-height: 55vh;
+
+$dropdown-menu-max-height: $dropable-element-max-height;
+$select-loader-height: calc(#{$dropdown-menu-max-height} - #{$m-select-header});
+
+//
+// #Metatag
+//
+
+$adapt-mt-input_focused: 1rem;

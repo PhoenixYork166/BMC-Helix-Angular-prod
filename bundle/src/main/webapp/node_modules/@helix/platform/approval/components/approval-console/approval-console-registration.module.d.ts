@@ -1,0 +1,30 @@
+import { ComponentFactoryResolver } from '@angular/core';
+import { RxViewComponentRegistryService } from '@helix/platform/view/api';
+import * as i0 from "@angular/core";
+import * as i1 from "./approval-console.component";
+import * as i2 from "./approval-request-general-details/approval-request-general-details.component";
+import * as i3 from "./approval-request-reassign/approval-request-reassign.component";
+import * as i4 from "./approval-request-approvers/approval-request-approvers.component";
+import * as i5 from "./approval-request-questions/approval-request-questions.component";
+import * as i6 from "./approval-request-comments/approval-request-comments.component";
+import * as i7 from "./approval-request-attachments/approval-request-attachments.component";
+import * as i8 from "./approval-request-question-response/approval-request-question-response.component";
+import * as i9 from "./approval-request-question/approval-request-question.component";
+import * as i10 from "./approval-request-comment/approval-request-comment.component";
+import * as i11 from "./approval-request-action-reason-input/approval-request-action-reason-input.component";
+import * as i12 from "@angular/common";
+import * as i13 from "@helix/platform/view/components";
+import * as i14 from "@bmc-ux/adapt-angular";
+import * as i15 from "@angular/forms";
+import * as i16 from "@ngx-translate/core";
+import * as i17 from "@helix/platform/ui-kit";
+import * as i18 from "@helix/platform/shared/api";
+import * as i19 from "@helix/platform/shared/components";
+export declare class ApprovalConsoleRegistrationModule {
+    private componentFactoryResolver;
+    private rxViewComponentRegistryService;
+    constructor(componentFactoryResolver: ComponentFactoryResolver, rxViewComponentRegistryService: RxViewComponentRegistryService);
+    static ɵfac: i0.ɵɵFactoryDeclaration<ApprovalConsoleRegistrationModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<ApprovalConsoleRegistrationModule, [typeof i1.ApprovalConsoleComponent, typeof i2.ApprovalRequestGeneralDetailsComponent, typeof i3.ApprovalRequestReassignComponent, typeof i4.ApprovalRequestApproversComponent, typeof i5.ApprovalRequestQuestionsComponent, typeof i6.ApprovalRequestCommentsComponent, typeof i7.ApprovalRequestAttachmentsComponent, typeof i8.ApprovalRequestQuestionResponseComponent, typeof i9.ApprovalRequestQuestionComponent, typeof i10.ApprovalRequestCommentComponent, typeof i11.ApprovalRequestActionReasonInputComponent], [typeof i12.CommonModule, typeof i13.RecordGridModule, typeof i14.AdaptButtonModule, typeof i14.AdaptDropdownModule, typeof i15.FormsModule, typeof i16.TranslateModule, typeof i14.AdaptTabsModule, typeof i17.ReadOnlyFieldModule, typeof i17.RxBusyIndicatorModule, typeof i18.RxDefinitionModule, typeof i19.RxSelectWithPaginationModule, typeof i14.AdaptEmptyStateModule, typeof i14.AdaptRxTextareaModule, typeof i14.AdaptRxUploaderModule, typeof i14.AdaptBusyModule, typeof i14.AdaptDownloadModule, typeof i14.AdaptRxLabelModule, typeof i14.AdaptRxSwitchModule, typeof i14.AdaptAlertModule, typeof i14.AdaptRxTextfieldModule], never>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<ApprovalConsoleRegistrationModule>;
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "rx-view-component",
+  "type": "object",
+  "properties": {
+    "viewComponentName": {
+      "type": "string",
+      "description": "View component name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for view component?"
+    }
+  },
+  "required": ["viewComponentName"]
+}

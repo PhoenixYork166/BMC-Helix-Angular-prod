@@ -1,0 +1,153 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@bmc-ux/dpl-iconfont/dist/css/dpl-iconfont.min.css'; // move this to scripts
+@import '../../../scripts/rappid-3.1.1/rappid.min.css';
+@import 'variables';
+@import 'adapt-overrides';
+@import 'rappid-overrides';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+html[rx-app='com.bmc.arsys.rx.innovationstudio'] {
+  min-width: 1200px;
+
+  rx-root {
+    min-width: 1200px;
+  }
+}
+
+rx-runtime-view {
+  .rx-default-border {
+    border: 1px solid $gray-300;
+  }
+
+  .rx-no-margin {
+    margin: 0;
+
+    rx-runtime-view-canvas-item {
+      margin: 0 !important;
+    }
+  }
+
+  .rx-white-background {
+    background-color: white;
+  }
+
+  .rx-auto-fill {
+    height: 100%;
+  }
+
+  .rx-auto-scroll {
+    overflow-y: auto;
+  }
+}
+
+.rx-button-unstyled {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+}
+
+.rx-flex-basis-100 {
+  flex-basis: 100% !important;
+}
+
+.rx-ellipsis {
+  @include ellipsis();
+}
+
+rx-rich-textarea-field-design,
+rx-rich-textarea-field {
+  .cke_toolbar {
+    margin: 0 !important;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .cke_toolgroup {
+    margin-bottom: 3px;
+  }
+
+  .cke_editable {
+    padding-top: 5px;
+  }
+
+  .cke_button {
+    padding: 4px 4px 1px 4px !important;
+  }
+}
+
+rx-rich-text,
+rx-rich-text-design,
+rx-rich-textarea-field,
+rx-rich-textarea-field-design {
+  // the styles below were copied from ckeditor/styles.js and tweaked as needed
+  .marker {
+    background-color: #ffff00;
+  }
+
+  .cke_editable {
+    font-size: 13px;
+    line-height: 1.6;
+    word-wrap: break-word;
+  }
+
+  .cke_contents_ltr blockquote {
+    padding-left: 20px;
+    padding-right: 8px;
+    border-left-width: 5px;
+  }
+
+  ol,
+  ul,
+  dl {
+    margin-right: 0;
+    padding: 0 40px;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    -moz-tab-size: 4;
+    tab-size: 4;
+  }
+
+  .subtitle {
+    color: $gray-700;
+    font-style: italic;
+  }
+
+  .special-containers {
+    padding: 5px 10px;
+    background: $gray-200;
+    border: 1px solid $gray-300;
+  }
+
+  .square-bulleted-list {
+    list-style-type: square;
+  }
+
+  .borderless-table {
+    border-style: hidden;
+    background-color: $gray-300;
+  }
+
+  .compact-table {
+    border-collapse: collapse;
+    border: 1px solid $gray-300;
+  }
+
+  .italic-title {
+    font-style: italic;
+  }
+}
+
+.rx-text-break {
+  word-wrap: break-word !important;
+}
+
+.rx-pointer-events-none {
+  pointer-events: none;
+}

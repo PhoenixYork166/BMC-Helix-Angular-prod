@@ -1,0 +1,43 @@
+.col-y-axis .tick line,
+.bar-x-axis .tick line {
+  stroke: $chart-axis-line;
+}
+
+.col-x-axis .tick line,
+.bar-y-axis .tick line {
+  display: none;
+}
+
+.bar-x-axis path,
+.col-x-axis path,
+.bar-y-axis path,
+.col-y-axis path {
+  stroke: $chart-axis-path;
+}
+
+.color-container {
+  position: relative;
+}
+
+.bar {
+  position: absolute;
+}
+
+.chart-tooltip-category {
+  margin-left: 8px;
+}
+
+.total-labels-group {
+  font-size: 13px;
+}
+
+.empty-column {
+  rect {
+    fill: $color-background;
+  }
+
+  text {
+    fill: $chart-empty-text;
+  }
+}
+

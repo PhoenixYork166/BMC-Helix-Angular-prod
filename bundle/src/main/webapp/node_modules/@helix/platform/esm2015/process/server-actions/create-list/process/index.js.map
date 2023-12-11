@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/process/server-actions/create-list/process/index.ts"],"names":[],"mappings":"AAAA,cAAc,sCAAsC,CAAC;AACrD,cAAc,oCAAoC,CAAC","sourcesContent":["export * from './create-list-process-action.service';\nexport * from './create-list-process-action.class';\n"]}

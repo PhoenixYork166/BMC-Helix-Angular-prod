@@ -1,0 +1,1 @@
+{"version":3,"file":"role.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/role/role.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IRole {\n  applicationName: string;\n  datatag?: string;\n  production?: string;\n  roleName: string;\n  roleID?: number;\n  test?: string;\n}\n"]}

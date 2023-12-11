@@ -1,0 +1,31 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IComponentCanDeactivate, IDesignerConfiguration, RxBundleCacheService, RxComponentCanDeactivateGuard, RxDefinitionNameService, RxPageTitleService } from '@helix/platform/shared/api';
+import { RxUtilityModalsService } from '@helix/platform/ui-kit';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class ConfigDesignerPageComponent implements OnInit, OnDestroy, IComponentCanDeactivate {
+    private activatedRoute;
+    private rxBundleCacheService;
+    private rxDefinitionNameService;
+    private rxUtilityModalsService;
+    private rxPageTitleService;
+    private router;
+    private translateService;
+    private rxComponentCanDeactivateGuard;
+    isInitialized: boolean;
+    private isNewConfig;
+    configuration: IDesignerConfiguration;
+    private destroyed$;
+    private configDesignerComponent;
+    constructor(activatedRoute: ActivatedRoute, rxBundleCacheService: RxBundleCacheService, rxDefinitionNameService: RxDefinitionNameService, rxUtilityModalsService: RxUtilityModalsService, rxPageTitleService: RxPageTitleService, router: Router, translateService: TranslateService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    onDefinitionSaved(definitionName: string): void;
+    onDefinitionErrorLoading(): void;
+    onCloseDesigner(): void;
+    canDeactivate(): boolean;
+    confirmDeactivation(): Promise<boolean>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ConfigDesignerPageComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ConfigDesignerPageComponent, "rx-config-designer-page", never, {}, {}, never, never>;
+}

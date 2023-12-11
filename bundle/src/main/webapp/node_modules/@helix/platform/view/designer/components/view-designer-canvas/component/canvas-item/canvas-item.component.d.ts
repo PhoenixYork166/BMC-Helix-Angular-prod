@@ -1,0 +1,30 @@
+import { ComponentFactory, ComponentRef, Injector, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, ViewContainerRef } from '@angular/core';
+import { IViewDesignerCanvasItemApi } from '../../interfaces/view-designer-canvas-item-api.interface';
+import { IViewComponentDropData, IViewDesignerCanvasLayout } from '../../interfaces/view-designer-canvas.interfaces';
+import { ViewDesignerCanvasService } from '../../view-designer-canvas.service';
+import * as i0 from "@angular/core";
+export declare class CanvasItemComponent implements OnChanges, OnDestroy, OnInit {
+    private injector;
+    private renderer;
+    private canvasItemApi;
+    private viewDesignerCanvasService;
+    layout: IViewDesignerCanvasLayout;
+    interactive: boolean;
+    isReadOnly: boolean;
+    container: ViewContainerRef;
+    private componentReference;
+    private childContainers;
+    constructor(injector: Injector, renderer: Renderer2, canvasItemApi: IViewDesignerCanvasItemApi, viewDesignerCanvasService: ViewDesignerCanvasService);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
+    cleanUp(): void;
+    registerOutlet(outletName: string, outletViewContainerRef: ViewContainerRef, containerFactory: ComponentFactory<any>): ComponentRef<any>;
+    onSelectComponent(event: Event): void;
+    dropComponent(transferData: IViewComponentDropData, insertIndex: number, outletName?: string): void;
+    private initializeItemApi;
+    private renderViewComponent;
+    private renderContainerComponent;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CanvasItemComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CanvasItemComponent, "rx-canvas-item", never, { "layout": "layout"; "interactive": "interactive"; "isReadOnly": "isReadOnly"; }, {}, never, never>;
+}

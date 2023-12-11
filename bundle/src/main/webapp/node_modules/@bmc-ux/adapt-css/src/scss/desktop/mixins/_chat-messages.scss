@@ -1,0 +1,26 @@
+@function svg-factory($fill-color) {
+  @return '<svg width="19px" height="16px" viewBox="0 0 19 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M0,0 L19,0 L12.282544,16 C11.9386192,12.1745291 10.7891663,8.94613246 8.83418539,6.31481003 C6.87920444,3.6834876 3.93447597,1.57855092 0,0 Z" id="Triangle" fill="' + $fill-color + '" transform="translate(9.500000, 8.000000) scale(1, -1) translate(-9.500000, -8.000000) "></path></svg>';
+}
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+$encoding-reference: (("<","%3C"), (">","%3E"), ('"',"'"), ("#","%23"), ("&","%26"), (" ","%20"));
+
+@function svg-encode($svg) {
+  @each $char, $encoded in $encoding-reference {
+    $svg: str-replace($svg, $char, $encoded);
+  }
+  @return "data:image/svg+xml," + $svg;
+}
+
+$svg-color-bot: #fff;
+$svg-color-live-agent: lighten(desaturate(color-mute(#f86e00), 11), 7);
+
+$svg-1: svg-factory($svg-color-bot);  // Chatbot
+$svg-2: svg-factory($svg-color-live-agent);  // Live agent

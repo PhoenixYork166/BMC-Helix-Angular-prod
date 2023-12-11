@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-approval-components.umd.js",
+  "module": "../../fesm2015/helix-platform-approval-components.js",
+  "es2015": "../../fesm2015/helix-platform-approval-components.js",
+  "esm2015": "../../esm2015/approval/components/helix-platform-approval-components.js",
+  "fesm2015": "../../fesm2015/helix-platform-approval-components.js",
+  "typings": "helix-platform-approval-components.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/approval/components"
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"name-value-pair.interface.js","sourceRoot":"","sources":["../../../../../../libs/platform/ui-kit/name-value-pairs-editor/name-value-pair.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface INameValuePair {\n  key: string;\n  value: string;\n}\n"]}

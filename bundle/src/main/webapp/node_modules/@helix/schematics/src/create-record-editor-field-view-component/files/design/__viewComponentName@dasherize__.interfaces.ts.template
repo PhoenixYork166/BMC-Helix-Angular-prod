@@ -1,0 +1,15 @@
+import { IBaseRecordEditorFieldComponentConfig, IBaseRecordEditorFieldProperties } from '@helix/platform/view/components';
+
+// The view component is a field view component.
+// The design time properties must extend "IBaseRecordEditorFieldProperties".
+// The custom view component properties are listed here, not the common properties
+// like label for example.
+// The parameters needs to be marked as optional (<name>?:<type>).
+export interface I<%= classify(viewComponentName) %>DesignProperties extends IBaseRecordEditorFieldProperties{
+  message?: string;
+}
+
+// Interface used for runtime needs to extend IBaseRecordEditorFieldComponentConfig.
+export interface I<%= classify(viewComponentName) %>RuntimeProperties extends IBaseRecordEditorFieldComponentConfig{
+  message?: string;
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/rx.settings/gainsight/index.ts"],"names":[],"mappings":"AAAA,cAAc,qEAAqE,CAAC","sourcesContent":["export * from './gainsight-admin-opt-in/gainsight-admin-opt-in-registration.module';\n"]}

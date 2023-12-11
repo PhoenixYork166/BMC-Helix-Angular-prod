@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/rich-textarea-field/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,qCAAqC,CAAC;AACpD,cAAc,wCAAwC,CAAC","sourcesContent":["export * from './rich-textarea-field-design.module';\nexport * from './rich-textarea-field-design.component';\n"]}

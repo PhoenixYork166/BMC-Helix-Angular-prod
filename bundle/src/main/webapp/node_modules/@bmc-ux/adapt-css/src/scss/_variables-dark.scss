@@ -1,0 +1,55 @@
+//
+// Gray variables for dark mode
+//
+$color-primary: $color-primary-custom;
+$color-secondary: $color-secondary-custom;
+$color-active: $color-active-custom;
+$color-info: $color-info-custom;
+$color-success: $color-success-custom;
+$color-warning: $color-warning-custom;
+$color-critical: $color-critical-custom;
+
+// Computed values after block distribution
+$w:     create-gray(#fff, 0%);
+$g-100:  darken($w, 2%); //#fafafa;   98
+$g-200:  darken($w, 5%); //#f2f2f2;   95
+$g-300:  darken($w, 15%); //#d9d9d9;  85
+$g-400:  darken($w, 28%); //#b8b8b8;  72
+$g-500:  darken($w, 40%); //#999999;  60
+$g-600:  darken($w, 50%); //#808080;  50
+$g-700:  darken($w, 63%); //#5e5e5e;  37
+$g-800:  darken($w, 75%); //#404040;  24.6
+$g-900:  darken($w, 85%); //#262626;  15
+$g-1000: darken($w, 88%); //#1f1f1f;  12
+$black:  create-gray(#000, 0%);
+
+
+$white:     create-gray($g-1000, 5%);
+$gray-1000: create-gray($w, 0%);
+
+$gray-100:  create-gray($g-900, 4.5%);
+$gray-900:  create-gray($g-100, .5%);
+
+$gray-200:  create-gray($g-800, 4%);
+$gray-800:  create-gray($g-200, 1%);
+
+$gray-300:  create-gray($g-700, 3.5%);
+$gray-700:  create-gray($g-300, 1.5%);
+
+$gray-400:  create-gray($g-600, 3%);
+$gray-600:  create-gray($g-400, 2%);
+
+$gray-500:  create-gray($g-500, 2.5%);
+
+// we need to add +6% of Lightness for the primary, tertiary and status colors in the Dark mode
+$color-primary:   create-dark-color($color-primary);   //BMC default is Orange
+$color-secondary: $gray-100; //BMC default is Gray
+$color-active:    create-dark-color($color-active);    //BMC default is Teal
+
+// Status-oriented colors
+$color-info:     create-dark-color($color-info);     //BMC default is Blue
+$color-success:  create-dark-color($color-success);  //BMC default is Green
+$color-warning:  create-dark-color($color-warning);  //BMC default is Yellow
+$color-critical: create-dark-color($color-critical); //BMC default is Red
+
+$shadow-opacity-amount: .15;

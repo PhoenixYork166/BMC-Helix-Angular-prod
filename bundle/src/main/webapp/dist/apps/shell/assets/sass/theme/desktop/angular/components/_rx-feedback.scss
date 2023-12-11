@@ -1,0 +1,39 @@
+.rx-feedback-alert {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .alert_truncated-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .alert_truncated {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .alert_truncated .alert-content {
+    max-height: 300px;
+    @include text-truncate();
+  }
+
+  .alert_truncated-wrapper:hover {
+
+    .alert_truncated {
+      @include shadow(2);
+    }
+
+    .alert-content {
+      white-space: normal;
+      overflow: auto;
+    }
+  }
+}
+
+.form-control-feedback .rx-feedback-alert:first-child {
+  padding-top: .25rem;
+}

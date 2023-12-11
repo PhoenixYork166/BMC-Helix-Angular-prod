@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/config/designer/config-designer/index.ts"],"names":[],"mappings":"AAAA,cAAc,0BAA0B,CAAC;AACzC,cAAc,6BAA6B,CAAC","sourcesContent":["export * from './config-designer.module';\nexport * from './config-designer.component';\n"]}

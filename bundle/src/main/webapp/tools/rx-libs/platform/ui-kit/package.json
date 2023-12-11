@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../bundles/helix-platform-ui-kit.umd.js",
+  "module": "../fesm2015/helix-platform-ui-kit.js",
+  "es2015": "../fesm2015/helix-platform-ui-kit.js",
+  "esm2015": "../esm2015/ui-kit/helix-platform-ui-kit.js",
+  "fesm2015": "../fesm2015/helix-platform-ui-kit.js",
+  "typings": "helix-platform-ui-kit.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/ui-kit"
+}

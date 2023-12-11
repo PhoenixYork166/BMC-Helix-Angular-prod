@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-view-components.umd.js",
+  "module": "../../fesm2015/helix-platform-view-components.js",
+  "es2015": "../../fesm2015/helix-platform-view-components.js",
+  "esm2015": "../../esm2015/view/components/helix-platform-view-components.js",
+  "fesm2015": "../../fesm2015/helix-platform-view-components.js",
+  "typings": "helix-platform-view-components.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/view/components"
+}

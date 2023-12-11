@@ -1,0 +1,14 @@
+{
+  "name": "@helix/platform/web-api/designer",
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-web-api-designer.umd.js",
+  "module": "../../fesm2015/helix-platform-web-api-designer.js",
+  "es2015": "../../fesm2015/helix-platform-web-api-designer.js",
+  "esm2015": "../../esm2015/web-api/designer/helix-platform-web-api-designer.js",
+  "fesm2015": "../../fesm2015/helix-platform-web-api-designer.js",
+  "typings": "helix-platform-web-api-designer.d.ts",
+  "sideEffects": false
+}

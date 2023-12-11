@@ -1,0 +1,22 @@
+button.is-mouse-focused,
+a.is-mouse-focused,
+li.is-mouse-focused,
+textarea.is-mouse-focused,
+input.is-mouse-focused,
+input[type="checkbox"].is-mouse-focused,
+input[type="radio"].is-mouse-focused + .radio__item,
+input[type="checkbox"].is-mouse-focused + .checkbox__item,
+input[type="radio"].is-mouse-focused:focus + .radio__item,
+input[type="checkbox"].is-mouse-focused:focus + .checkbox__item,
+.switch input:focus.is-mouse-focused ~ .switch__slider,
+.switch input.is-mouse-focused:focus ~ .switch__slider,
+.switch input.is-mouse-focused:focus + .switch__slider,
+.switch input.is-mouse-focused + .switch__slider {
+  box-shadow: none !important;
+}
+
+//Fix for shadow in float button
+.btn-float-block > a.is-mouse-focused,
+.btn-float-block > button.is-mouse-focused {
+  box-shadow: shadow-value(1) !important;
+}

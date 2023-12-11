@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/association/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,gCAAgC,CAAC;AAC/C,cAAc,6BAA6B,CAAC","sourcesContent":["export * from './association-design.component';\nexport * from './association-design.module';\n"]}

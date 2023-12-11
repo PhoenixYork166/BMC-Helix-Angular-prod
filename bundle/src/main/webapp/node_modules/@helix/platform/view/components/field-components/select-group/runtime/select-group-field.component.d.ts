@@ -1,0 +1,36 @@
+import { Injector } from '@angular/core';
+import { RxNamedListDefinitionService, RxNamedListService } from '@helix/platform/named-list/api';
+import { IRxSelectWithPaginationOption, RxSelectWithPaginationComponent } from '@helix/platform/shared/components';
+import { BaseRecordEditorFieldComponent } from '../../base-record-editor-field/runtime/base-record-editor-field-component.class';
+import { SelectGroupComponent } from './select-group.component';
+import * as i0 from "@angular/core";
+export declare class SelectGroupFieldComponent extends BaseRecordEditorFieldComponent {
+    private selectGroupComponent;
+    private rxNamedListDefinitionService;
+    private rxNamedListService;
+    optionLoaderFunc: any;
+    viewToModelValueAdapterFunc: any;
+    modelToViewValueAdapterFunc: any;
+    showDefaultTitle: boolean;
+    selectWithPaginationComponent: RxSelectWithPaginationComponent;
+    private readOnlyValue;
+    private namedListDefinitionName;
+    private fieldIdToFilterBy;
+    private namedListDefinition;
+    private fieldIndex;
+    private selectedOptions;
+    constructor(injector: Injector, selectGroupComponent: SelectGroupComponent, rxNamedListDefinitionService: RxNamedListDefinitionService, rxNamedListService: RxNamedListService);
+    onConfigInitialized(config: any): void;
+    resetFieldValue(): void;
+    getDisplayValue(): string;
+    private getNamedListOptionPage;
+    viewToModelValueAdapter(selectedOptions: IRxSelectWithPaginationOption[]): string;
+    modelToViewValueAdapter(modelValue: string): IRxSelectWithPaginationOption[];
+    private updateSelectedOption;
+    private resetLoadedOptions;
+    private getSelectionQueryCriteria;
+    private updateReadOnlyValue;
+    private triggerModelToViewValueUpdate;
+    static ɵfac: i0.ɵɵFactoryDeclaration<SelectGroupFieldComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<SelectGroupFieldComponent, "rx-select-group-field", never, {}, {}, never, never>;
+}

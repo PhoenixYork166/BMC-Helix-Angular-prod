@@ -1,0 +1,1 @@
+{"version":3,"file":"view-component-action-config.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/runtime/event-manager/view-component-action-config.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IViewComponentActionConfig {\n  guid: any;\n  name: string;\n  parameters: object;\n}\n"]}

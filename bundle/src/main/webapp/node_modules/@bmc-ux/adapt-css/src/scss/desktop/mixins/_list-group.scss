@@ -1,0 +1,38 @@
+@mixin list-group-item-variant($state, $background, $color, $border: $color) {
+
+  // accessibility issue https://github.bmc.com/bmc-ux/adapt-css/issues/638
+  $calculated-color: null;
+  @if ($accessible-mode == true) {
+    $calculated-color: get-contrast-color($color);
+  } @else {
+    $calculated-color: $color;
+  }
+
+  .list-group-item-#{$state} {
+    color: $calculated-color;
+    background-color: $background;
+    border-color: $border;
+  }
+
+  a.list-group-item-#{$state},
+  button.list-group-item-#{$state} {
+    color: $calculated-color;
+
+    .list-group-item-heading {
+      color: inherit;
+    }
+
+    @include hover-focus {
+      color: $calculated-color;
+      background-color: darken($background, 5%);
+    }
+
+    &.active {
+      @include plain-hover-focus {
+        color: $text-primary-inverse;
+        background-color: $calculated-color;
+        border-color: $calculated-color;
+      }
+    }
+  }
+}

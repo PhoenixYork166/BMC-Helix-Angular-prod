@@ -1,0 +1,130 @@
+// The building block of a card have been changed from .card-block to .card-body.
+// Added for backward compatibility
+// Inverse styles for cards
+.card {
+  &.inverse {
+    background-color: $card-bg-inverse;
+    border-color: $card-border-color-inverse;
+    color: $text-primary-inverse;
+  }
+}
+
+a >.card.inverse {
+  color: $color-active;
+}
+
+.card-block {
+  /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+  @extend .card-body;
+}
+
+.card-header {
+  margin-bottom: -1px;
+  color: $card-cap-color;
+
+  a {
+    color: $card-cap-color;
+    transition: $btn-transition;
+
+    &:hover,
+    &:focus {
+      color: if($accessible-mode, get-contrast-color($color-active, $card-cap-bg), $color-active);
+    }
+
+    &:active {
+      color: color-variant($color-active, active);
+    }
+  }
+
+  &.card-primary,
+  &.card-success,
+  &.card-info,
+  &.card-warning,
+  &.card-danger {
+    margin: -1px -1px 0;
+    border: 1px solid;
+    color: $text-primary-inverse;
+  }
+}
+
+.inverse >.card-header {
+  color: $card-cap-color-inverse;
+  background-color: $card-cap-bg-inverse;
+  border-bottom-color: $card-border-color-inverse;
+
+  a {
+    color: $card-cap-color-inverse;
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .card-header.card-#{$color} {
+    //@include getBackgroundColor($value);
+    background-color: $value;
+    border-color: color-variant($value, hover);
+    @if ($accessible-mode == true) {
+      color: getTextColor($value);
+    }
+  }
+}
+
+.card-img-top {
+  max-width: 100%;
+  width: auto;
+}
+
+.card-title {
+  font-weight: $card-cap-font-weight;
+  margin-bottom: 0;
+}
+
+.card-footer {
+  background-color: $card-footer-bg;
+}
+
+.inverse >.card-footer {
+  background-color: $card-footer-bg-inverse;
+  border-top-color: $card-border-color-inverse;
+}
+
+// Card-well (equal to wells in the BS43)
+.card.card-well {
+  padding: $card-well-spacer;
+  background-color: $card-well-bg;
+
+  &.inverse {
+    background-color: $card-well-bg-inverse;
+  }
+
+  &.card-well-lg {
+    padding: $card-well-spacer-lg;
+  }
+
+  &.card-well-sm {
+    padding: $card-well-spacer-sm;
+  }
+}
+
+//Card-step adds step by step style to card-success
+.card-step {
+  border: none;
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  -webkit-box-align: center;
+
+  &:before {
+    content: attr(data-list-counter);
+    color: $text-secondary;
+    font-weight: $card-step-number-weight;
+    font-size: $card-step-number-size;
+    min-width: $card-step-width;
+    background: $color-background;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}
+

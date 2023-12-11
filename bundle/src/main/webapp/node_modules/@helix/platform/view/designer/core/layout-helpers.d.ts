@@ -1,0 +1,11 @@
+import { IViewComponentDesignModel } from '../interfaces/view-component-design-model.interface';
+import { IViewComponentDesignModels } from '../interfaces/view-component-design-models.interface';
+import { IViewDesignModel } from '../interfaces/view-design-model.interface';
+export declare function findParentComponentModel(guid: string, components: IViewComponentDesignModels): IViewComponentDesignModel;
+export declare function findAllParentComponentGuids(guid: string, components: IViewComponentDesignModels): string[];
+export declare function findParentComponentByType(guid: string, componentType: string, components: IViewComponentDesignModels): IViewComponentDesignModel;
+export declare function isComponentContainsChild(guid: string, componentModel: IViewComponentDesignModel | IViewDesignModel): boolean;
+export declare function addChildComponent(componentModel: IViewComponentDesignModel | IViewDesignModel, guid: string, outletName: string, insertIndex?: number, columnIndex?: number, columnSpan?: number): IViewComponentDesignModel | IViewDesignModel;
+export declare function removeChildComponent(componentGuidToRemove: string, parentComponentModel: IViewComponentDesignModel | IViewDesignModel): IViewComponentDesignModel | IViewDesignModel;
+export declare function getChildGuidsFromModel(model: IViewComponentDesignModel | IViewDesignModel): string[];
+export declare function getAllChildGuids(parentComponent: IViewComponentDesignModel | IViewDesignModel, componentModelsState: IViewComponentDesignModels): string[];

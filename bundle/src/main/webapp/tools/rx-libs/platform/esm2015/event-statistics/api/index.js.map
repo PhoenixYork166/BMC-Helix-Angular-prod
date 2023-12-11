@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/event-statistics/api/index.ts"],"names":[],"mappings":"AAAA,cAAc,iDAAiD,CAAC;AAChE,cAAc,uCAAuC,CAAC","sourcesContent":["export * from './event-statistics-definition-data-page.service';\nexport * from './event-statistics-definition.service';\n"]}

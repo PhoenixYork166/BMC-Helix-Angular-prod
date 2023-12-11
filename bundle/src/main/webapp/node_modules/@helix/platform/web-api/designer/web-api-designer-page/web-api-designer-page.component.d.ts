@@ -1,0 +1,31 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { RxUtilityModalsService } from '@helix/platform/ui-kit';
+import { IComponentCanDeactivate, RxBundleCacheService, RxComponentCanDeactivateGuard, RxDefinitionNameService, RxPageTitleService } from '@helix/platform/shared/api';
+import * as i0 from "@angular/core";
+export declare class RxWebApiDesignerPageComponent implements OnInit, OnDestroy, IComponentCanDeactivate {
+    private rxUtilityModalService;
+    private rxBundleCacheService;
+    private rxDefinitionNameService;
+    private rxPageTitleService;
+    private rxComponentCanDeactivateGuard;
+    private translateService;
+    private activatedRoute;
+    private router;
+    isInitialized: boolean;
+    webApiDefinitionName: string;
+    private subscription;
+    private isNewWepApi;
+    private webApiDesignerComponent;
+    constructor(rxUtilityModalService: RxUtilityModalsService, rxBundleCacheService: RxBundleCacheService, rxDefinitionNameService: RxDefinitionNameService, rxPageTitleService: RxPageTitleService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard, translateService: TranslateService, activatedRoute: ActivatedRoute, router: Router);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    onCloseDesigner(): void;
+    confirmDeactivation(): Promise<boolean>;
+    canDeactivate(): boolean;
+    onWebApiDefinitionSaved(webApiDefinitionName: string): void;
+    onWebApiDefinitionErrorLoading(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxWebApiDesignerPageComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxWebApiDesignerPageComponent, "rx-web-api-designer-page", never, {}, {}, never, never>;
+}

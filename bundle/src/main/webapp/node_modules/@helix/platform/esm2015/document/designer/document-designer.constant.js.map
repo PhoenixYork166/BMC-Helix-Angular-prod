@@ -1,0 +1,1 @@
+{"version":3,"file":"document-designer.constant.js","sourceRoot":"","sources":["../../../../../../libs/platform/document/designer/document-designer.constant.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,oBAAoB,GAAG;IAClC,eAAe,EAAE,kBAAkB;CACpC,CAAC","sourcesContent":["export const RX_DOCUMENT_DESIGNER = {\n  featureSelector: 'documentDesigner'\n};\n"]}

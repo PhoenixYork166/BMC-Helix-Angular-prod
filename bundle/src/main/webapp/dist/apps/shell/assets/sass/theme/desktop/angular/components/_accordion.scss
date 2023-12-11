@@ -1,0 +1,240 @@
+// TODO: double check if we need to have accordion class
+.accordion {
+  .card {
+    margin-top: -1px;
+  }
+
+  .card-header {
+    padding: 0;
+    margin-bottom: -1px;
+  }
+
+  .card-title {
+    padding: $card-spacer-y $card-spacer-x;
+    display: flex;
+    text-decoration: none;
+    -webkit-appearance: none;
+    width: 100%;
+    background: none;
+    text-align: inherit;
+    border: none;
+
+    &:hover {
+      color: $color-active;
+    }
+
+    &:active {
+      color: color-variant($color-active, active-hover);
+    }
+
+    &:hover .tab-caret {
+      background-image: icon($i-angle-up, $accordion-tab-caret-hover);
+    }
+
+    &.collapsed .tab-caret {
+      transform: rotate(180deg);
+    }
+  }
+
+  .tab-caret {
+    @include rtl(margin-left, auto);
+    width: 10px;
+    height: 10px;
+    background-image: icon($i-angle-up, $accordion-tab-caret);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    align-self: center;
+    transform: rotate(0);
+    transition: transform .25s $ease-transition-in-out;
+  }
+
+  .tab-disabled {
+    cursor: $cursor-disabled;
+
+    .card-header {
+      /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+      @extend .text-muted;
+
+      .card-title {
+        text-decoration: none;
+        pointer-events: none;
+        color: $accordion-tab-card-disabled;
+      }
+    }
+
+    .tab-caret {
+      background-image: icon($i-angle-up, $accordion-tab-caret-disabled);
+    }
+  }
+
+  &.borderless {
+    & .card {
+      border: none;
+      border-bottom: 1px solid $card-border-color;
+      margin-top: 0;
+    }
+
+    & .card-header {
+      background-color: transparent;
+      border: none;
+    }
+
+    & .card-title {
+      padding-left: 4px;
+    }
+  }
+}
+
+.adapt-accordion {
+  &:not(.borderless) {
+    adapt-accordion-tab:first-child {
+      .card-header {
+        @include border-top-radius($card-border-radius);
+      }
+
+      .card {
+        @include border-top-radius($card-border-radius);
+      }
+    }
+
+    adapt-accordion-tab:last-child {
+      .card-header {
+        @include border-bottom-radius($card-border-radius);
+      }
+
+      .card[aria-selected="true"] {
+        .card-header {
+          @include border-bottom-radius(0);
+        }
+      }
+
+      .card {
+        @include border-bottom-radius($card-border-radius);
+      }
+    }
+
+    adapt-accordion-tab:not(last-child):not(first-child) {
+      .card-header {
+        @include border-radius(0);
+      }
+
+      .card {
+        @include border-radius(0);
+      }
+    }
+  }
+
+  .card {
+    margin-top: -2px; // to overlay border-radius
+  }
+
+  .card-header {
+    margin-bottom: -1px;
+    padding: 0;
+  }
+
+  .card-title {
+    padding: $card-spacer-y $card-spacer-x;
+    display: flex;
+    text-decoration: none;
+    -webkit-appearance: none;
+    width: 100%;
+    background: none;
+    text-align: inherit;
+    border: none;
+    color: $text-primary;
+
+    &:hover {
+      color: $color-active;
+    }
+
+    &:active {
+      color: color-variant($color-active, active-hover);
+    }
+
+    &:hover .tab-caret {
+      background-image: icon($i-angle-up, $accordion-tab-caret-hover);
+    }
+
+    &.collapsed .tab-caret {
+      transform: rotate(180deg);
+    }
+  }
+
+  .accordion-subtitle {
+    font-size: .75rem;
+    font-weight: $font-weight-normal;
+    color: $text-secondary;
+  }
+
+  .tab-caret {
+    width: 10px;
+    height: 10px;
+    @include rtl(margin-left, auto);
+    background-image: icon($i-angle-up, $accordion-tab-caret);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    align-self: center;
+    transform: rotate(0);
+    transition: transform .25s $ease-transition-in-out;
+  }
+
+  .tab-disabled {
+    cursor: $cursor-disabled;
+
+    .card-header {
+      /* stylelint-disable-next-line scss/at-extend-no-missing-placeholder */
+      @extend .text-muted;
+
+      .card-title {
+        text-decoration: none;
+        pointer-events: none;
+        color: $accordion-tab-card-disabled;
+      }
+
+      .accordion-subtitle {
+        color: $accordion-tab-card-disabled;
+      }
+    }
+
+    .tab-caret {
+      background-image: icon($i-angle-up, $accordion-tab-caret-disabled);
+    }
+  }
+
+  &.borderless {
+
+    .card {
+      margin-top: 0;
+      border: 0;
+      border-bottom: 1px solid $card-border-color;
+      border-radius: 0;
+    }
+
+    .card-header {
+      border: 0;
+      background-color: transparent;
+    }
+
+    .card-title {
+      padding-left: 4px;
+    }
+  }
+}
+
+.text-direction {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  @include rtl(margin-right, 10px);
+
+  &.column {
+    flex-wrap: wrap;
+
+    > * {
+      flex: 0 0 100%;
+    }
+  }
+}

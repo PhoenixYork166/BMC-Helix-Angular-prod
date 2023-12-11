@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-shared-components.umd.js",
+  "module": "../../fesm2015/helix-platform-shared-components.js",
+  "es2015": "../../fesm2015/helix-platform-shared-components.js",
+  "esm2015": "../../esm2015/shared/components/helix-platform-shared-components.js",
+  "fesm2015": "../../fesm2015/helix-platform-shared-components.js",
+  "typings": "helix-platform-shared-components.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/shared/components"
+}

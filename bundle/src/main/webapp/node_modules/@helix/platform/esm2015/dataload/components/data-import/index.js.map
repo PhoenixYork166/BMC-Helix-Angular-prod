@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/dataload/components/data-import/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,mCAAmC,CAAC","sourcesContent":["export * from './data-import.component';\r\nexport * from './data-import-registration.module';\r\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"form-widget-builder-config.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/form-builder/form-widget-builder-config.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IFormWidgetBuilderConfig {\n  component: any;\n  options?: any;\n  hidden?: boolean;\n  isDisabled?: boolean;\n}\n"]}

@@ -1,0 +1,51 @@
+button.is-mouse-focused,
+a.is-mouse-focused,
+input[type="checkbox"].is-mouse-focused,
+input[type="radio"].is-mouse-focused + .radio__item,
+input[type="checkbox"].is-mouse-focused + .checkbox__item,
+input[type="radio"].is-mouse-focused:focus + .radio__item,
+input[type="checkbox"].is-mouse-focused:focus + .checkbox__item,
+.carousel.is-mouse-focused,
+.a-multi-carousel__item.is-mouse-focused,
+.adapt-list-name.is-mouse-focused,
+.ui-table .ui-sortable-column.is-mouse-focused,
+.keyboard-focusable.is-mouse-focused {
+  box-shadow: none !important;
+
+  &::before {
+    box-shadow: none !important;
+  }
+}
+
+.switch input.is-mouse-focused:focus + .switch__slider,
+.switch input.is-mouse-focused + .switch__slider {
+  box-shadow: none !important;
+}
+
+.keyboard-focusable {
+  &:focus,
+  &.focus {
+    @include tab-focus();
+  }
+}
+
+.carousel.is-mouse-focused {
+  outline: none;
+}
+
+
+#arrow-keys-indicator {
+  position: fixed;
+  z-index: $zindex-popover;
+  bottom: .5rem;
+  left: .5rem;
+  padding: .8125rem .5rem .8125rem 3rem;
+  border-radius: $border-radius;
+  background-color: $color-foreground;
+  background-image: icon($i-keyboard, $text-primary);
+  background-repeat: no-repeat;
+  background-position: .5rem center;
+  background-size: 2rem;
+
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 4);
+}

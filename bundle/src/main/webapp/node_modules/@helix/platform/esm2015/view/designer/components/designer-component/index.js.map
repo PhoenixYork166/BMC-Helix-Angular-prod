@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/designer/components/designer-component/index.ts"],"names":[],"mappings":"AAAA,cAAc,sBAAsB,CAAC;AACrC,cAAc,mBAAmB,CAAC","sourcesContent":["export * from './designer.component';\nexport * from './designer.module';\n"]}

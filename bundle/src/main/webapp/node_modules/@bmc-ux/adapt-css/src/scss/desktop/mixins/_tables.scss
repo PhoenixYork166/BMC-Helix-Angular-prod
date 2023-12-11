@@ -1,0 +1,28 @@
+@mixin table-row-var($state, $bg) {
+  .table-#{$state} {
+    &,
+    > th,
+    > td {
+      background-color: color-variant($bg, row);
+      border-top-color: color-variant($bg, row-active);
+    }
+
+    + tr > th,
+    + tr > td {
+      border-top-color: color-variant($bg, row-active);
+    }
+  }
+
+  .table-hover {
+    .table-#{$state} {
+      @include hover {
+        background-color: color-variant($bg, row-hover);
+
+        > td,
+        > th {
+          background-color: color-variant($bg, row-hover);
+        }
+      }
+    }
+  }
+}

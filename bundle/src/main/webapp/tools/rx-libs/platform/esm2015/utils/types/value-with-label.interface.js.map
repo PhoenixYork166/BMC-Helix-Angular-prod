@@ -1,0 +1,1 @@
+{"version":3,"file":"value-with-label.interface.js","sourceRoot":"","sources":["../../../../../../libs/platform/utils/types/value-with-label.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IValueWithLabel {\r\n  label: string;\r\n  value: string;\r\n}\r\n"]}

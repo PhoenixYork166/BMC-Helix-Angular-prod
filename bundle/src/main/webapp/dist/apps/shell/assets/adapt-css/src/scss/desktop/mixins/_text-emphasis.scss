@@ -1,0 +1,47 @@
+//
+// Text-emphasis
+
+@use "sass:math";
+
+@mixin text-emphasis-variant($parent, $color, $hover-color: 0, $background: white) {
+
+  // accessibility issue https://github.bmc.com/bmc-ux/adapt-css/issues/638
+  $calculated-color: null;
+  @if ($accessible-mode == true) {
+    $calculated-color: get-contrast-color($color, $background);
+  } @else {
+    $calculated-color: $color;
+  }
+
+  #{$parent} {
+    color: $calculated-color !important;
+  }
+
+  @if ($hover-color == 0) {
+    $hover-color: $calculated-color;
+  }
+  a#{$parent},
+  #{$parent} a {
+    color: $calculated-color !important;
+    text-decoration: underline;
+
+    @include hover-focus {
+      color: color-variant($hover-color, hover) !important;
+    }
+  }
+
+  .disabled #{$parent} {
+    color: color-variant($calculated-color, disabled) !important;
+  }
+}
+
+// Generate appropriate text color based on base color input into it, adds some of the color to it in order to prevent wash out
+//
+// Note: need to verify result with buttons to see if the outcome is better.
+@mixin text-color-blend($color) {
+  @if math.div(.2126 * red($color) + .7152 * green($color) + .0722 * blue($color), 255) <= .5 {
+    color: mix($white, $c1, 95%);
+  } @else {
+    color: mix($black, $c1, 70%);
+  }
+}

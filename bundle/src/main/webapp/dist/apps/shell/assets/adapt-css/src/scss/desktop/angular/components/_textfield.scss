@@ -1,0 +1,41 @@
+.textfield,
+.textfield__wrapper {
+  position: relative;
+}
+
+.textfield .form-control--icons {
+  padding-right: 0;
+  position: absolute;
+  @include rtl(right, 0);
+  top: 0;
+  line-height: 38px;
+  width: 2rem;
+  height: 38px;
+  text-align: center;
+  transition: none;
+  z-index: 33;
+}
+
+.textfield.is-icons .form-control {
+  @include rtl(padding-right, 2rem);
+}
+
+
+.textfield-input-wrapper {
+  position: absolute;
+  visibility: hidden;
+  overflow: hidden;
+  height: 0;
+  width: 0;
+}
+
+.textfield-input-element-copy {
+  white-space: nowrap;
+  width: auto;
+  position: absolute;
+  visibility: hidden;
+}
+
+.textfield-padding-transition {
+  transition: padding $animation-fast ease-out;
+}

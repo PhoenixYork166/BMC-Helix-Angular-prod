@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "rx-new",
+  "type": "object",
+  "properties": {
+    "libraryName": {
+      "type": "string",
+      "description": "Library name"
+    }
+  }
+}

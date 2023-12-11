@@ -1,0 +1,76 @@
+// Linear-interpolation
+// Calculates the definition of a line between two points
+// $sizes - A SASS map of viewport widths and size value pairs
+// Returns A linear equation as a calc() function
+// Example: font-size: linear-interpolation((320px: 18px, 768px: 26px));
+// based on work by Jake Wilson & modified to work with bootstrap grid by ADAPT
+//
+@use "sass:math";
+
+@function linear-interpolation($sizes) {
+  $keys: map-keys($sizes);
+
+  // Custom: set prop to '100vw' if the given value in percentage
+  @if (unit(map-get($sizes, nth($keys, 1))) == "%") {
+    @return 100vw;
+  }
+
+  // Custom: set prop to key-value if the $sizes map has only one item
+  @if (length($keys) == 1) {
+    $temp: nth($sizes, 1);
+    @return math.div(nth($temp, 2), nth($temp, 1)) * 100 + vw;
+  }
+
+  @if (length($keys) != 2) {
+    @error "linear-interpolation() $sizes must be exactly 2 values";
+  }
+  // The slope
+  $m: math.div(map-get($sizes, nth($keys, 2)) - map-get($sizes, nth($keys, 1)), nth($keys, 2) - nth($keys, 1));
+
+  // The y-intercept
+  $b: map-get($sizes, nth($keys, 1)) - $m * nth($keys, 1);
+
+  // Determine if the sign should be positive or negative
+  $sign: "+";
+  @if ($b < 0) {
+    $sign: "-";
+    $b: abs($b);
+  }
+
+  @return calc(#{$m*100}vw#{" " + $sign + " "}#{$b});
+}
+
+// Fluid-resize
+// Generates linear interpolated size values through multiple break points
+// Requires function linear-interpolation
+// Example: @include fluid-resize('width', (xs: 100%, sm: 600px, md: 700px, lg: 800px, xl: 900px, xxl: 1000px));
+//
+/// $property - A string CSS property name
+/// $sizes - A SASS map of viewport unit and size value pairs
+/// $grid - Custom grid breakpoints map
+
+@mixin fluid-resize($property, $sizes, $grid: $grid-breakpoints) {
+  @each $bp-key, $bp-value in $grid {
+    @if (not map-has-key($sizes, $bp-key)) {
+      @error ("The keys of both maps must be the same!");
+    }
+  }
+
+  @each $bp-key, $bp-value in $grid {
+    $next-breakpoint: breakpoint-next($bp-key, $grid);
+    $map: ();
+
+    @if ($next-breakpoint) {
+      $map: (
+              $bp-value: map-get($sizes, $bp-key),
+              map-get($grid, $next-breakpoint): map-get($sizes, $next-breakpoint));
+    } @else {
+      $map: (
+              $bp-value: map-get($sizes, $bp-key));
+    }
+
+    @include media-breakpoint-only($bp-key) {
+      #{$property}: linear-interpolation($map);
+    }
+  }
+}

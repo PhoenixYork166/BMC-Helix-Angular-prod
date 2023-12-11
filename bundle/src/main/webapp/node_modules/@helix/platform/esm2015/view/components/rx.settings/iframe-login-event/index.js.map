@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/rx.settings/iframe-login-event/index.ts"],"names":[],"mappings":"AAAA,cAAc,gCAAgC,CAAC;AAC/C,cAAc,0CAA0C,CAAC","sourcesContent":["export * from './iframe-login-event.component';\nexport * from './iframe-login-event-registration.module';\n"]}

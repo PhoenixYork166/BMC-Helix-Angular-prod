@@ -1,0 +1,50 @@
+.a-workflow {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  position: relative;
+  transition: all .25s cubic-bezier(.4, 0, .2, 1);
+
+  .a-workflow__stepper-content {
+    margin-left: .75rem;
+
+    &.is-rtl {
+      margin-left: 0;
+      margin-right: .75rem;
+    }
+  }
+
+  .a-workflow-bar__progress {
+    flex-flow: column nowrap;
+    width: .5rem;
+    padding: 0;
+  }
+
+  .a-workflow-bar,
+  .a-workflow-bar__step,
+  .a-workflow-bar__flex {
+    flex-flow: column nowrap;
+    height: 100%;
+    transition: all .25s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  .a-workflow-bar__step {
+    transition: all 1s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  .a-workflow-bar__step-wrapper {
+    justify-content: flex-start;
+    height: auto;
+    transition: all 1s cubic-bezier(.4, 0, .2, 1);
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .a-workflow__dot {
+      left: 0;
+    }
+  }
+
+  .a-workflow-bar__step:last-child .a-workflow-bar__progress {
+    border-radius: 0 0 100px 100px;
+  }
+}

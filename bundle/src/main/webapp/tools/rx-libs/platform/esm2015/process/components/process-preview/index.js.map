@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/process/components/process-preview/index.ts"],"names":[],"mappings":"AAAA,cAAc,6BAA6B,CAAC;AAC5C,cAAc,0BAA0B,CAAC","sourcesContent":["export * from './process-preview.component';\nexport * from './process-preview.module';\n"]}

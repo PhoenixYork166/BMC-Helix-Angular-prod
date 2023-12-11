@@ -1,0 +1,64 @@
+{
+  "name": "@bmc-ux/adapt-css",
+  "version": "4.116.0-patch.2",
+  "description": "Contains all CSS and style-related utilities for the ADAPT component language",
+  "keywords": [
+    "Adapt",
+    "Bootstrap",
+    "CSS",
+    "HTML"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.bmc.com/bmc-ux/adapt-css"
+  },
+  "author": {
+    "name": "BMC",
+    "url": "https://github.bmc.com/pages/bmc-ux/adapt-css/docs"
+  },
+  "peerDependencies": {
+    "@bmc-ux/dpl-iconfont": ">=2.112.1"
+  },
+  "devDependencies": {
+    "@angular/cdk": "^10.2.7",
+    "@bmc-ux/dpl-iconfont": "2.115.0",
+    "autoprefixer": "10.4.8",
+    "bootstrap": "4.1.2",
+    "cowsay": "^1.5.0",
+    "cssnano": "^5.1.12",
+    "cssnano-cli": "^1.0.5",
+    "husky": "^5.2.0",
+    "onchange": "7.1.0",
+    "postcss": "8.4.16",
+    "postcss-cli": "10.0.0",
+    "sass": "^1.54.4",
+    "sass-color-helpers": "2.1.1",
+    "standard-version": "^9.5.0",
+    "stylelint": "^13.11.0",
+    "stylelint-scss": "^3.21.0"
+  },
+  "scripts": {
+    "lint": "stylelint src/scss/** --config .stylelintrc.json",
+    "ckeditor:compile": "sass src/ckeditor-skin:dist/ckeditor-skin --no-source-map",
+    "compile": "sass src/scss:dist/css --no-source-map",
+    "css:prefix": "postcss --no-map dist/css/*.css --replace --use autoprefixer",
+    "css:lint": "rm -rf dist/css/*.min.* && stylelint dist/css/*.css --config .stylelintcss.json --fix",
+    "sass:compile": "npm run lint && npm run compile && npm run ckeditor:compile && npm run css:prefix",
+    "sass:watch": "onchange 'src/scss/**/*.scss' -- npm run sass:compile",
+    "sass:build": "./css.sh",
+    "release": "standard-version",
+    "publish:cdn": "npm config set @bmc-ux:registry http://10.19.48.202:4873 && npm publish",
+    "publish:backup": "npm config set @bmc-ux:registry http://172.25.144.178:4873 && npm publish",
+    "publish:nexus": "npm config set @bmc-ux:registry http://10.19.48.11:4873/repository/bmc-ux/ && npm publish",
+    "publish:all": "npm run publish:backup && npm run publish:nexus",
+    "prepare": "husky install"
+  },
+  "browserslist": [
+    ">0.25%",
+    "not ie 10",
+    "not op_mini all"
+  ],
+  "publishConfig": {
+    "registry": "http://10.19.48.202:4873"
+  }
+}

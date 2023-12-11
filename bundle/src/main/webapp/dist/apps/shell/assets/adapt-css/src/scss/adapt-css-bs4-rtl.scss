@@ -1,0 +1,47 @@
+// Adapt CSS v4.13.0 for Angular 2+ based on
+// Bootstrap v4.1.1
+//
+//
+// ## ADAPT-CSS
+//
+// Mixins
+//
+// BS mixins first
+@import "rtl/bs-mixins-rtl";
+//
+// ADAPT mixins
+@import "desktop/adapt-mixins";
+
+//
+//
+// Variables
+//
+@import "desktop/variables/icons";
+@import "desktop/variables/var-default";
+@import "css-var-defaults";
+
+// Root variables for theme configuration
+@import "variables";
+
+@import "desktop/variables/variables";
+@import "rtl/variables/variables-rtl"; // TODO: check rtl variables
+@import "desktop/variables/fonts-declaration";
+//
+//
+// Styles
+//
+// BS Styles first
+@import "rtl/bs-styles-rtl";
+//
+// ADAPT styles
+@import "rtl/adapt-css-bs4";
+//@import "desktop/adapt-css-bs4";
+//
+// ADAPT-ANGULAR styles
+@import "desktop/adapt-angular";
+
+// Post process theming settings
+@import "theme/theme-post-processing";
+
+// CDK Overlay styles
+@import "vendor/overlay/cdk-overlay";

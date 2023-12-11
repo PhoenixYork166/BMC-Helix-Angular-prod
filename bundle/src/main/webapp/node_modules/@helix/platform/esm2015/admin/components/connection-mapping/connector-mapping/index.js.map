@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/admin/components/connection-mapping/connector-mapping/index.ts"],"names":[],"mappings":"AAAA,cAAc,yCAAyC,CAAC;AACxD,cAAc,+BAA+B,CAAC","sourcesContent":["export * from './connector-mapping-registration.module';\nexport * from './connector-mapping.component';\n"]}

@@ -1,0 +1,34 @@
+import { Injector, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { IDefinitionPickerComponentOptions, IPermissionEditorComponentOptions, RxPermissionEditorComponent } from '@helix/platform/shared/components';
+import { TranslateService } from '@ngx-translate/core';
+import { IAdminSetting, RxAdminSettingsService, RxNotificationService } from '@helix/platform/shared/api';
+import { DockedPanelContext } from '@bmc-ux/adapt-angular';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import * as i0 from "@angular/core";
+export declare class AdminSettingEditorComponent extends RxModalClass implements OnInit {
+    protected injector: Injector;
+    private dockedPanelContext;
+    private formBuilder;
+    private translateService;
+    private rxAdminSettingsService;
+    private rxNotificationService;
+    isEditMode: any;
+    settingForm: FormGroup;
+    adminSetting: IAdminSetting;
+    viewDefinitionPickerOptions: IDefinitionPickerComponentOptions;
+    permissionEditorOptions: IPermissionEditorComponentOptions;
+    rxPermissionEditorComponent: RxPermissionEditorComponent;
+    constructor(injector: Injector, dockedPanelContext: DockedPanelContext, formBuilder: FormBuilder, translateService: TranslateService, rxAdminSettingsService: RxAdminSettingsService, rxNotificationService: RxNotificationService);
+    ngOnInit(): void;
+    createSettingForm(): FormGroup;
+    initializeSettingForm(): void;
+    saveAdminSetting(): void;
+    private transformFormControlData;
+    isSettingActive(): boolean;
+    isInBundleSetting(): boolean;
+    cancel(): void;
+    isDirty(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AdminSettingEditorComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AdminSettingEditorComponent, "ax-admin-setting-editor", never, {}, {}, never, never>;
+}

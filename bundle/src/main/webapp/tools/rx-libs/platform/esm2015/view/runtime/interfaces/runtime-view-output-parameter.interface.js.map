@@ -1,0 +1,1 @@
+{"version":3,"file":"runtime-view-output-parameter.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/view/runtime/interfaces/runtime-view-output-parameter.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IRuntimeViewOutputParameter {\n  [name: string]: any;\n}\n"]}

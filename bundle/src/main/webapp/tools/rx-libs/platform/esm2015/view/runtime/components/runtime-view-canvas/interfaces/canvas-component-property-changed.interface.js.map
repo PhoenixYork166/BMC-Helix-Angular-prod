@@ -1,0 +1,1 @@
+{"version":3,"file":"canvas-component-property-changed.interface.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/runtime/components/runtime-view-canvas/interfaces/canvas-component-property-changed.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface ICanvasComponentPropertyChanged {\n  guid: string;\n}\n"]}

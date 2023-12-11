@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/command/index.ts"],"names":[],"mappings":"AAAA,cAAc,qBAAqB,CAAC;AACpC,cAAc,2BAA2B,CAAC","sourcesContent":["export * from './command.interface';\nexport * from './command-factory.service';\n"]}

@@ -1,0 +1,45 @@
+@mixin form-control-validation($color) {
+  // Color the label and help text
+  $computed-text-color: if($accessible-mode, get-contrast-color($color), get-status-text-color($color));
+
+  .form-control-feedback,
+  .form-control-label,
+  .col-form-label,
+  .form-check-label,
+  .custom-control,
+  .checkbox__item {
+    color: $computed-text-color;
+  }
+
+  // Set the border and box shadow on specific inputs to match
+  // class .input-group-custom-tag - special case for textfield custom tag
+  .form-control,
+  .form-control + .input-group-custom-tag {
+    color: $computed-text-color;
+    border-color: $color;
+  }
+
+  .form-control:hover,
+  .form-control:hover + .input-group-custom-tag {
+    border-color: color-variant($color, hover);
+  }
+
+  .form-control:focus,
+  .form-control:focus + .input-group-custom-tag {
+    @include box-shadow($input-box-shadow, 0 0 6px lighten($color, 20%));
+  }
+
+  // Set validation states also for addons
+  .input-group-append,
+  .input-group-prepend {
+    .input-group-text {
+      color: $computed-text-color;
+      border-color: $color;
+    }
+  }
+
+  input:checked ~ .checkbox__item::before {
+    background-color: $color !important;
+    border-color: color-variant($color, hover) !important;
+  }
+}

@@ -1,0 +1,105 @@
+$tooltip-arrow-size: 6px !default;
+
+.adapt-tooltip {
+  position: fixed;
+  pointer-events: none;
+  font-size: .75rem;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.5385;
+  text-align: start;
+  white-space: normal;
+  text-decoration: none;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  word-wrap: break-word;
+  word-break: normal;
+  line-break: auto;
+  z-index: $zindex-tooltip;
+}
+
+.adapt-tooltip-inner {
+  position: relative;
+  padding: 3px 8px;
+  color: $text-primary-inverse;
+  border-radius: $border-radius;
+  background-color: $tooltip-bg;
+  box-shadow: shadow-value(3);
+  max-width: none;
+  text-align: center;
+  border: solid 1px $tooltip-bg;
+
+  &::after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+}
+
+.adapt-tooltip-top,
+.adapt-tooltip-right,
+.adapt-tooltip-bottom,
+.adapt-tooltip-left {
+  & .adapt-tooltip-inner::after {
+    content: "";
+    display: inline-block;
+  }
+}
+
+.adapt-tooltip-top {
+  transform: translate(-50%, -100%);
+
+  & .adapt-tooltip-inner::after {
+    transform: translate(-50%, 100%);
+    bottom: 0;
+    left: 50%;
+    border-width: $tooltip-arrow-size $tooltip-arrow-size 0 $tooltip-arrow-size;
+    border-color: $tooltip-bg transparent transparent transparent;
+  }
+}
+
+.adapt-tooltip-right {
+  transform: translateY(-50%);
+
+  & .adapt-tooltip-inner::after {
+    transform: translate(-100%, -50%);
+    left: 0;
+    top: 50%;
+    border-width: $tooltip-arrow-size $tooltip-arrow-size $tooltip-arrow-size 0;
+    border-color: transparent $tooltip-bg transparent transparent;
+  }
+}
+
+.adapt-tooltip-bottom {
+  transform: translateX(-50%);
+
+  & .adapt-tooltip-inner::after {
+    transform: translate(-50%, -100%);
+    top: 0;
+    left: 50%;
+    border-width: 0 $tooltip-arrow-size $tooltip-arrow-size $tooltip-arrow-size;
+    border-color: transparent transparent $tooltip-bg transparent;
+  }
+}
+
+.adapt-tooltip-left {
+  transform: translate(-100%, -50%);
+  min-width: 150px;
+
+  & .adapt-tooltip-inner::after {
+    transform: translate(100%, -50%);
+    top: 50%;
+    right: 0;
+    border-width: $tooltip-arrow-size 0 $tooltip-arrow-size $tooltip-arrow-size;
+    border-color: transparent transparent transparent $tooltip-bg;
+  }
+}
+
+.adapt-toltip-pre-wrap {
+  .adapt-tooltip-inner {
+    @include pre-wrap();
+    text-align: left;
+  }
+}

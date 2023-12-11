@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-security-login.umd.js",
+  "module": "../../fesm2015/helix-platform-security-login.js",
+  "es2015": "../../fesm2015/helix-platform-security-login.js",
+  "esm2015": "../../esm2015/security/login/helix-platform-security-login.js",
+  "fesm2015": "../../fesm2015/helix-platform-security-login.js",
+  "typings": "helix-platform-security-login.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/security/login"
+}

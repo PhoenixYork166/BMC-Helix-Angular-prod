@@ -1,0 +1,1 @@
+{"version":3,"file":"unique-validator.types.js","sourceRoot":"","sources":["../../../../../../libs/platform/utils/unique-validator/unique-validator.types.ts"],"names":[],"mappings":"","sourcesContent":["export interface IUniqueValidatorConfig {\n  errorMessage: string;\n  items: string[];\n  prefix?: string;\n}\n"]}

@@ -1,0 +1,47 @@
+import { IRecordDefinition } from './record-definition.types';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { IFieldInstance } from './field-instance.interface';
+import { IFieldValueChanged, IRecordInstance, IRxFieldValidationResult, IRxRecordInstanceAssociationInstances, IRxValidationResult } from './record-instance.types';
+import { Injector } from '@angular/core';
+export declare class RecordInstance implements IRecordInstance {
+    recordDefinition: IRecordDefinition;
+    private injector;
+    readonly resourceType: string;
+    private fieldValueChangedSubject;
+    validation$: BehaviorSubject<IRxValidationResult>;
+    id: string;
+    fieldValueChanged$: Observable<IFieldValueChanged>;
+    displayId: string;
+    recordDefinitionName: string;
+    permittedGroupsBySecurityLabels: any;
+    permittedUsersBySecurityLabels: any;
+    permittedRolesBySecurityLabels: any;
+    fieldInstances: {
+        [fieldId: number]: IFieldInstance;
+    };
+    originalData: IRecordInstance;
+    associationInstances: IRxRecordInstanceAssociationInstances;
+    private rxLogService;
+    private rxLocalizationService;
+    private rxStringService;
+    private rxNumberUtilsService;
+    private validationService;
+    constructor(recordDefinition: IRecordDefinition, recordInstance: IRecordInstance, injector: Injector);
+    private prepareRecordInstance;
+    getFieldValue(fieldId: number, associatedRecordPath?: string[]): any;
+    setFieldValue(fieldId: number, value: any, associatedRecordPath?: string[]): void;
+    getFieldProp(fieldId: number, prop: string, associatedRecordPath?: string[]): any;
+    setFieldProp(fieldId: number, prop: string, value: any, associatedRecordPath?: string[]): void;
+    getFieldInstance(fieldId: number, associatedRecordPath?: string[]): IFieldInstance;
+    getRecordInstance(associatedRecordPath?: string[]): RecordInstance;
+    isFieldValueChanged(fieldId: number, newValue: any, associatedRecordPath?: string[]): boolean;
+    revertFieldInstances(): void;
+    reset(): void;
+    getOriginalRecordInstance(): RecordInstance;
+    validate(): void;
+    validateSingleField(fieldId: number, value: any, associatedRecordPath?: string[]): IRxFieldValidationResult;
+    private getExtensionRecords;
+    private isDeletedOrPendingAssociations;
+    private logIncorrectFieldValueWarning;
+    prepareForBulkEdit(): void;
+}

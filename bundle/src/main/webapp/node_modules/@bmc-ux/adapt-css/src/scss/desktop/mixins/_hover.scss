@@ -1,0 +1,18 @@
+
+// hover effects
+@mixin hover-supported {
+  @media not all and (pointer: coarse) { // coarse pointer would be a finger-based touch screen, like an iPad, iPhone, or other tablet
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// focus effects
+@mixin focus-supported {
+  @media not all and (pointer: coarse) { // coarse pointer would be a finger-based touch screen, like an iPad, iPhone, or other tablet
+    &:focus {
+      @content;
+    }
+  }
+}

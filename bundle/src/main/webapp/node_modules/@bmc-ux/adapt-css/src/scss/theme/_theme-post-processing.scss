@@ -1,0 +1,19 @@
+@if ($useLightTextWithPrimaryColor == false) {
+  .btn-primary {
+    @include button-variant($color-primary,
+            color-variant($color-primary, hover),
+            color-variant($color-primary, hover),
+            color-variant($color-primary, active),
+            $text-primary);
+  }
+}
+
+@if ($useLightTextWithSecondaryColor == true) {
+  .btn-secondary {
+    @include button-variant($color-secondary,
+            color-variant($color-secondary, hover),
+            color-variant($color-secondary, hover),
+            color-variant($color-secondary, active),
+            $color-white);
+  }
+}

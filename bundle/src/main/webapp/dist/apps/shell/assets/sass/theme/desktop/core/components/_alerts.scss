@@ -1,0 +1,98 @@
+.alert {
+  &,
+  .container {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  @include alert-variant($alert-bg, $alert-border, text-for-background($alert-bg));
+
+  .alert-link {
+    text-decoration: underline;
+    transition: $btn-transition;
+
+    &:hover,
+    &:focus {
+      color: $text-primary-inverse;
+    }
+  }
+
+  .close {
+    @include rtl(margin-right, 0);
+    @include rtl(margin-left, auto);
+    order: 3;
+  }
+}
+
+.alert-icon {
+  order: 1;
+  @include rtl(margin-right, $alert-padding-x * .75);
+  @include rtl(padding-left, 1px);
+  font-size: 16px;
+  line-height: $font-size-base * $line-height-base;
+
+  &-inline {
+    @include rtl(padding-left, 1px);
+  }
+}
+
+.alert-content {
+  order: 2;
+  @include rtl(margin-right, $alert-padding-x * .75);
+  line-height: $alert-line-height;
+}
+
+.adapt-alert-close {
+  @include rtl(margin-left, auto);
+  @include rtl(margin-right, 0);
+  order: 3;
+  opacity: .6;
+  cursor: pointer;
+  border: 0;
+
+  &:hover,
+    &:focus {
+      opacity: 1;
+    }
+}
+
+.alert-success {
+  @include alert-variant($alert-success-bg, $alert-success-border, text-for-background($alert-success-bg));
+  
+  .adapt-alert-close {
+    background-color: $alert-success-bg;
+    color: text-for-background($alert-success-bg);
+  }
+}
+
+.alert-info {
+  @include alert-variant($alert-info-bg, $alert-info-border, text-for-background($alert-info-bg));
+  
+  .adapt-alert-close {
+    background-color: $alert-info-bg;
+    color: text-for-background($alert-info-bg);
+  }
+}
+
+.alert-warning {
+  @include alert-variant($alert-warning-bg, $alert-warning-border, text-for-background($alert-warning-bg));
+  
+  .adapt-alert-close {
+    background-color: $alert-warning-bg;
+    color: text-for-background($alert-warning-bg);
+  }
+}
+
+.alert-danger {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, text-for-background($alert-danger-bg));
+  
+  .adapt-alert-close {
+    background-color: $alert-danger-bg;
+    color: text-for-background($alert-danger-bg);
+  }
+}
+
+.page-alert {
+  border-color: transparent;
+  border-radius: 0;
+}

@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-view-shell-designer-page.umd.js",
+  "module": "../../fesm2015/helix-platform-view-shell-designer-page.js",
+  "es2015": "../../fesm2015/helix-platform-view-shell-designer-page.js",
+  "esm2015": "../../esm2015/view/shell-designer-page/helix-platform-view-shell-designer-page.js",
+  "fesm2015": "../../fesm2015/helix-platform-view-shell-designer-page.js",
+  "typings": "helix-platform-view-shell-designer-page.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/view/shell-designer-page"
+}

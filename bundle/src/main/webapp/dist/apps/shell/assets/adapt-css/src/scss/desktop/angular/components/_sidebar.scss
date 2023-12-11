@@ -1,0 +1,203 @@
+@import "../../variables/variables";
+
+.adapt-sidebar-wrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+
+  .adapt-sidebar-column {
+    height: 100%;
+  }
+
+  .adapt-sidebar-panels.opened {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &.light {
+    border: 1px solid $sidebar-light-border-color;
+
+    & .adapt-sidebar-nav {
+      background-color: $sidebar-light-nav-bg-color;
+      color: $sidebar-light-color;
+      border-color: $sidebar-light-border-color;
+
+      & .adapt-sidebar-nav-btn {
+        border-color: $sidebar-light-border-color;
+      }
+    }
+
+    & .adapt-sidebar-panels {
+      background-color: $sidebar-light-panel-bg-color;
+      border-color: $sidebar-light-border-color;
+    }
+
+    & .adapt-sidebar-panel-header {
+      border-color: $sidebar-light-border-color;
+    }
+  }
+
+  &.dark {
+    border: 1px solid $sidebar-dark-border-color;
+
+    & .adapt-sidebar-nav {
+      background-color: $sidebar-dark-nav-bg-color;
+      color: $sidebar-dark-color;
+      border-color: $sidebar-dark-border-color;
+
+      & .adapt-sidebar-nav-btn {
+        border-color: $sidebar-dark-border-color;
+      }
+    }
+
+    & .adapt-sidebar-panels__right {
+      border-color: $sidebar-dark-border-color;
+    }
+
+    & .adapt-sidebar-panels {
+      color: $sidebar-dark-color;
+      background-color: $sidebar-dark-panel-bg-color;
+      border-color: $sidebar-dark-border-color;
+    }
+
+    & .adapt-sidebar-panel-header {
+      border-color: $sidebar-dark-border-color;
+
+      & .adapt-sidebar-panel-header-text {
+        color: $sidebar-dark-color;
+      }
+    }
+  }
+
+  &.right {
+    flex-direction: row-reverse;
+  }
+}
+
+.adapt-sidebar-nav {
+  width: $sidebar-nav-width;
+  flex: 0 0 auto;
+  z-index: $zindex-sidebar;
+
+  &.adapt-sidebar-nav__left {
+    border-right: 1px solid;
+  }
+
+  &.adapt-sidebar-nav__right {
+    border-left: 1px solid;
+  }
+
+  & .adapt-sidebar-nav-btn {
+    display: block;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: $sidebar-nav-width;
+    border-bottom: 1px solid;
+    font-size: $sidebar-nav-font-size;
+    color: inherit;
+    transition: color .25s ease-in-out;
+    border-radius: 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.active {
+      color: $color-primary;
+
+      &:hover {
+        color: color-variant($color-primary, hover);
+      }
+
+      &:active {
+        color: color-variant($color-primary, active);
+      }
+    }
+
+    &:hover {
+      color: $color-active;
+    }
+
+    &:active {
+      color: color-variant($color-active, hover);
+    }
+  }
+}
+
+.adapt-sidebar-panels {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 0;
+  height: 100%;
+  opacity: 0;
+  transition: left 1s $ease-transition-in-out, transform 1s $ease-transition-in-out, opacity 1s $ease-transition-in-out;
+  z-index: $zindex-sidebar - 1;
+
+  &.adapt-sidebar-panels__left {
+    transform: translateX(-100%);
+    border-right: 1px solid;
+  }
+
+  &.adapt-sidebar-panels__right {
+    transform: translateX(100%);
+    border-left: 1px solid;
+  }
+}
+
+.adapt-sidebar-panel-header {
+  display: flex;
+  align-items: center;
+  padding: $sidebar-panel-header-padding;
+  box-sizing: border-box;
+  height: $sidebar-nav-width;
+  min-height: $sidebar-nav-width;
+  border-bottom: 1px solid;
+
+  & .adapt-sidebar-panel-title-wrapper {
+    display: inline-block;
+    width: calc(100% - 13px);
+
+    & .adapt-sidebar-panel-header-text {
+      line-height: unset;
+      margin: 0;
+      @include rtl(padding-right, 5px);
+      @include text-truncate();
+    }
+  }
+
+  & .close {
+    position: relative;
+    display: flex;
+    font-size: inherit;
+  }
+}
+
+.adapt-sidebar-items {
+  height: 100%;
+}
+
+.adapt-sidebar-item {
+  height: 100%;
+  flex-direction: column;
+
+  & .adapt-sidebar-panel-content {
+    height: calc(100% - #{$sidebar-nav-width});
+    padding: $sidebar-padding;
+    overflow: auto;
+  }
+}
+
+.adapt-sidebar-main {
+  width: 100%;
+  height: 100%;
+  padding: $sidebar-padding;
+
+  &--transition {
+    transition: margin 1s $ease-transition-in-out;
+    transition-property: margin, width;
+  }
+}

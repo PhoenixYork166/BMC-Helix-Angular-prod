@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/date-field/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,+BAA+B,CAAC;AAC9C,cAAc,4BAA4B,CAAC","sourcesContent":["export * from './date-field-design.component';\nexport * from './date-field-design.module';\n"]}

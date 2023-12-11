@@ -1,0 +1,309 @@
+// Switcher
+//
+.switcher {
+  display: inline-flex;
+  flex-direction: column;
+
+  &.switcher__before {
+    .switcher-before,
+    .switcher-after {
+      padding-left: 0;
+      padding-right: 55px;
+      text-align: right;
+    }
+
+    .switch label {
+      display: inline-flex;
+      align-items: center;
+
+      .switch__slider {
+        order: 2;
+      }
+    }
+  }
+}
+
+.switch {
+  background: inherit;
+  cursor: pointer;
+  display: inline-block;
+  margin: ($switch-block-height - $switch-slider-height) * .5 0;
+  user-select: none;
+  vertical-align: middle;
+
+  label {
+    cursor: pointer;
+    font-weight: normal;
+    margin: 0;
+    position: relative;
+  }
+
+  &:hover {
+    .switch__slider {
+      &::before {
+        background-color: $switch-switcher-hover-color;
+        transform: scale($switch-scale);
+      }
+
+      &::after {
+        background-color: $switch-pot-color;
+        transform: scale($switch-scale);
+      }
+    }
+
+    input:disabled ~ .switch__slider {
+      opacity: $disabled;
+
+      &::before {
+        background-color: $switch-switcher-color;
+        transform: none;
+        transition: none;
+      }
+
+      &::after {
+        background-color: $switch-switcher-color;
+        transform: none;
+        transition: none;
+      }
+    }
+  }
+
+  &:active {
+    .switch__slider {
+      &::after {
+        background-color: $switch-pot-active-color;
+      }
+    }
+  }
+
+  input {
+    border: 0;
+    opacity: 0;
+    outline: none;
+    padding: 0;
+    width: $switch-slider-width;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+
+    &:checked ~ .switch__slider {
+      background-color: $switch-well-color-active;
+      background-image: $switch-check-marker;
+      background-position: 6px center;
+      background-repeat: no-repeat;
+      background-size: $switch-slider-bg-size $switch-slider-bg-size; // IE11 wants both
+
+      &::before {
+        left: $switch-slider-before;
+      }
+
+      &::after {
+        left: $switch-slider-after;
+      }
+    }
+
+    &:disabled,
+    &:disabled:checked {
+
+      ~ .switch__slider {
+        box-shadow: none;
+        cursor: $cursor-disabled;
+        opacity: $disabled;
+      }
+
+      ~ .switch__item {
+        color: $switch-label-disable-color;
+        cursor: $cursor-disabled;
+      }
+    }
+
+    &:focus ~ .switch__slider {
+      @include tab-focus;
+
+      &:after {
+        background-color: $switch-pot-focus-color;
+      }
+    }
+
+    &:focus:hover ~ .switch__slider:after {
+      background-color: $switch-pot-color;
+    }
+  }
+
+  &__slider {
+    background-clip: padding-box;
+    background-color: $switch-well-color;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    height: $switch-slider-height;
+    position: relative;
+    text-align: left;
+    transition: background-color .25s ease-in;
+    vertical-align: middle;
+    width: $switch-slider-width;
+
+    &:before {
+      @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 1);
+      background: $switch-switcher-color;
+      @if ($accessible-mode) {
+        border: 1px solid $border-color;
+      } @else {
+        border: 1px solid transparent;
+      }
+      border-radius: 50%;
+      content: "";
+      display: block;
+      height: $switch-check-height;
+      left: -($switch-check-height - $switch-slider-height) * .5;
+      position: absolute;
+      top: -($switch-check-height - $switch-slider-height) * .5;
+      transition: all .25s $ease-transition-in-out;
+      width: $switch-check-height;
+    }
+
+    &:after {
+      background: $switch-switcher-color;
+      border-radius: 50%;
+      content: "";
+      display: block;
+      height: $switch-check-marker-height;
+      left: ($switch-slider-height - $switch-check-marker-height) * .5;
+      margin-top: -$switch-check-marker-height * .5;
+      position: absolute;
+      top: 50%;
+      transition: all .25s $ease-transition-in-out;
+      width: $switch-check-marker-height;
+    }
+  }
+
+  &__item {
+    vertical-align: middle;
+
+    &.label-before {
+      @include rtl(margin-right, $icon-lockup-spacing);
+    }
+
+    &.label-after {
+      @include rtl(margin-left, $icon-lockup-spacing);
+    }
+  }
+}
+
+.switch.readonly {
+  cursor: default;
+
+  input,
+  label {
+    cursor: default;
+  }
+
+  .switch__slider {
+    box-shadow: none;
+    cursor: default;
+    opacity: $disabled;
+  }
+
+  .switch__item {
+    color: $switch-label-disable-color;
+    cursor: default;
+  }
+}
+
+.switch-sm {
+  .switch__slider {
+    height: $switch-sm-slider-height;
+    width: $switch-sm-slider-width;
+
+    &::before {
+      height: $switch-sm-check-height;
+      width: $switch-sm-check-height;
+      left: -($switch-sm-check-height - $switch-sm-slider-height) * .5;
+      top: -($switch-sm-check-height - $switch-sm-slider-height) * .5;
+
+    }
+
+    &:after {
+      height: $switch-sm-check-marker-height;
+      left: ($switch-sm-slider-height - $switch-sm-check-marker-height) * .5;
+      margin-top: -($switch-sm-check-marker-height - .05rem) * .5;
+      width: $switch-sm-check-marker-height;
+    }
+  }
+
+  .switch__item {
+    font-size: $font-size-sm;
+  }
+
+  input:checked ~ .switch__slider {
+    background-size: $switch-sm-slider-bg-size $switch-sm-slider-bg-size; // IE11 wants both
+    &::before {
+      left: $switch-sm-slider-width - $switch-sm-check-height + .2rem;
+
+    }
+
+    &::after {
+      left: $switch-sm-slider-after;
+    }
+  }
+}
+
+.switch-lg {
+  .switch__slider {
+    height: $switch-lg-slider-height;
+    width: $switch-lg-slider-width;
+
+    &::before {
+      height: $switch-lg-check-height;
+      width: $switch-lg-check-height;
+      left: -($switch-lg-check-height - $switch-lg-slider-height) * .5;
+      top: -($switch-lg-check-height - $switch-lg-slider-height) * .5;
+    }
+
+    &:after {
+      height: $switch-lg-check-marker-height;
+      left: ($switch-lg-slider-height - $switch-lg-check-marker-height) * .5 + .015rem;
+      margin-top: -$switch-lg-check-marker-height * .5;
+      width: $switch-lg-check-marker-height;
+    }
+  }
+
+  .switch__item {
+    font-size: $font-size-lg;
+  }
+
+  input:checked ~ .switch__slider {
+    background-size: $switch-lg-slider-bg-size $switch-lg-slider-bg-size; // IE11 wants both
+    &::before {
+      left: $switch-lg-slider-width - $switch-lg-check-height + .2rem;
+    }
+
+    &::after {
+      left: $switch-lg-slider-after;
+    }
+  }
+}
+
+.switcher-before,
+.switcher-after {
+  padding-left: 55px;
+}
+
+.switcher + .switcher {
+  margin-left: 10px; // space out consecutive inline controls
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  // IE10+ specific styles go here
+  // fix for https://github.bmc.com/bmc-ux/adapt-css/issues/612
+  .switch__slider::before {
+    height: 28px;
+    top: -3px;
+    width: 28px;
+  }
+
+  .switch input:checked ~ .switch__slider::after {
+    left: 27px;
+  }
+}

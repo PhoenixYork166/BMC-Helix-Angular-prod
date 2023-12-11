@@ -1,0 +1,1 @@
+{"version":3,"file":"comaround-knowledge.interfaces.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/comaround-knowledge/comaround-knowledge.interfaces.ts"],"names":[],"mappings":"","sourcesContent":["export interface ComaroundPortal {\n  id: string;\n  name: string;\n  isDefault: boolean;\n}\n"]}

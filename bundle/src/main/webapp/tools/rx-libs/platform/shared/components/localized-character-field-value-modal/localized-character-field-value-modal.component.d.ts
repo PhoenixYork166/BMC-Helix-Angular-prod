@@ -1,0 +1,36 @@
+import { Injector, OnInit } from '@angular/core';
+import { RxLocaleService } from '@helix/platform/record/api';
+import { ActiveModalRef } from '@bmc-ux/adapt-angular';
+import { IPlainObject, RxLocalizationService } from '@helix/platform/shared/api';
+import { ILocalizedCharacterFieldLocale } from './localized-character-field-value-modal.interface';
+import { Subscription } from 'rxjs';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import { NgForm } from '@angular/forms';
+import * as i0 from "@angular/core";
+export declare class LocalizedCharacterFieldValueModalComponent extends RxModalClass implements OnInit {
+    private activeModalRef;
+    private rxLocaleService;
+    private rxLocalizationService;
+    protected injector: Injector;
+    localeForm: NgForm;
+    defaultLocale: ILocalizedCharacterFieldLocale;
+    currentLocale: ILocalizedCharacterFieldLocale;
+    gridLocales: ILocalizedCharacterFieldLocale[];
+    maxLength: number;
+    isCurrentLocaleSupported: boolean;
+    getLocalesSubscription: Subscription;
+    valueByLocale: IPlainObject;
+    data: IPlainObject;
+    locales: ILocalizedCharacterFieldLocale[];
+    isReadOnly: any;
+    private fieldDefinition;
+    private currentLocaleCode;
+    constructor(activeModalRef: ActiveModalRef, rxLocaleService: RxLocaleService, rxLocalizationService: RxLocalizationService, injector: Injector);
+    isDirty(): boolean;
+    ngOnInit(): void;
+    init(): void;
+    ok(): void;
+    close(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<LocalizedCharacterFieldValueModalComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<LocalizedCharacterFieldValueModalComponent, "rx-localized-character-field-value-modal", never, {}, {}, never, never>;
+}

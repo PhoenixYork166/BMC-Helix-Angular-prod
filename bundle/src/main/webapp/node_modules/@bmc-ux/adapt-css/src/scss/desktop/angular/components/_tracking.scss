@@ -1,0 +1,50 @@
+.adapt-agreement {
+  border: $input-border-width solid $input-border-color;
+  border-radius: $border-radius;
+
+  &.adapt-agreement_has-shadow {
+    @include shadow(2);
+  }
+}
+
+.adapt-agreement__header {
+  border-bottom: $input-border-width solid $input-border-color;
+}
+
+.agreement__main-title {
+  margin: 0 0 1rem 0;
+}
+
+.agreement__separator {
+  margin: 1rem 0;
+}
+
+.agreement__switcher {
+  font-size: $font-size-lg;
+}
+
+.agreement__content {
+  @include rtl("margin-left", 4.125em);
+}
+
+.adapt-agreement__content_epmty-state {
+  font-size: .9375rem;
+  text-align: center;
+  width: 100%;
+}
+
+.agreement__content-text {
+  margin: 1rem 0;
+}
+
+.agreement__badge .badge {
+  min-width: 70px;
+}
+
+.agreement__collapse-btn {
+  color: $text-primary;
+}
+
+adapt-alert .text-info {
+  display: flex;
+}

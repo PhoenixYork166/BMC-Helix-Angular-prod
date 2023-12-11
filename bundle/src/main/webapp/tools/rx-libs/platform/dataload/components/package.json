@@ -1,0 +1,14 @@
+{
+  "name": "@helix/platform/dataload/components",
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-dataload-components.umd.js",
+  "module": "../../fesm2015/helix-platform-dataload-components.js",
+  "es2015": "../../fesm2015/helix-platform-dataload-components.js",
+  "esm2015": "../../esm2015/dataload/components/helix-platform-dataload-components.js",
+  "fesm2015": "../../fesm2015/helix-platform-dataload-components.js",
+  "typings": "helix-platform-dataload-components.d.ts",
+  "sideEffects": false
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"field-locator.interface.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/record-grid/common/types/field-locator.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IFieldLocator {\n  associationGuid: string;\n  associationNodeSide: string;\n  fieldId: string;\n}\n"]}

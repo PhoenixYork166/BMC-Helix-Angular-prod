@@ -1,0 +1,70 @@
+import { DatePipe } from '@angular/common';
+import { Injector, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActiveModalRef, AdaptRxControlLabelTooltip, BusyConfig } from '@bmc-ux/adapt-angular';
+import { ColumnConfig, RowData } from '@bmc-ux/adapt-table';
+import { RxRecordInstanceDataPageService, RxRecordInstanceService } from '@helix/platform/record/api';
+import { RxBundleCacheService, RxDefinitionNameService, RxGlobalCacheService } from '@helix/platform/shared/api';
+import { RxModalClass, RxModalService } from '@helix/platform/ui-kit';
+import { RxJsonParserService, RxStringService } from '@helix/platform/utils';
+import { IRecordGridConfig } from '@helix/platform/view/components';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subscription } from 'rxjs';
+import { AxBundleDeploymentService } from '../../services/bundle-deployment';
+import { IBundleDeployPackageRegistryEntry } from './manage-content-packages.types';
+import * as i0 from "@angular/core";
+export declare class ManageContentPackagesComponent extends RxModalClass implements OnInit, OnDestroy {
+    private activeModalRef;
+    private axBundleDeploymentService;
+    private datePipe;
+    protected injector: Injector;
+    private rxBundleCacheService;
+    private rxDefinitionNameService;
+    private rxGlobalCacheService;
+    private rxJsonParserService;
+    private rxModalService;
+    private rxRecordInstanceDataPageService;
+    private rxRecordInstanceService;
+    private rxStringService;
+    private translateService;
+    busySubscription: Subscription;
+    busyConfig: BusyConfig;
+    private viewType;
+    packageCreationDateControl: FormControl;
+    packageNameControl: FormControl;
+    createdByControl: FormControl;
+    viewTypeControl: FormControl;
+    buttonGroupConfig: {
+        name: string;
+        value: any;
+    }[];
+    private selectedPackageContent;
+    gridColumns: ColumnConfig[];
+    gridData: RowData<IBundleDeployPackageRegistryEntry>[];
+    expandedRowColumns: {
+        definitions: {
+            field: string;
+            header: any;
+        }[];
+        data: {
+            field: string;
+            header: any;
+        }[];
+    };
+    expandedRowKeys: {};
+    packagesList$: Observable<IBundleDeployPackageRegistryEntry[]>;
+    packageCreationDateTooltip: AdaptRxControlLabelTooltip;
+    packagesList: IBundleDeployPackageRegistryEntry[];
+    recordGridConfig$: Observable<IRecordGridConfig>;
+    private destroyed$;
+    constructor(activeModalRef: ActiveModalRef, axBundleDeploymentService: AxBundleDeploymentService, datePipe: DatePipe, injector: Injector, rxBundleCacheService: RxBundleCacheService, rxDefinitionNameService: RxDefinitionNameService, rxGlobalCacheService: RxGlobalCacheService, rxJsonParserService: RxJsonParserService, rxModalService: RxModalService, rxRecordInstanceDataPageService: RxRecordInstanceDataPageService, rxRecordInstanceService: RxRecordInstanceService, rxStringService: RxStringService, translateService: TranslateService);
+    ngOnInit(): void;
+    private updateGridData;
+    ngOnDestroy(): void;
+    optionFormatter(entry: IBundleDeployPackageRegistryEntry): string;
+    downloadPackage(): void;
+    deletePackage(): void;
+    close(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ManageContentPackagesComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ManageContentPackagesComponent, "ax-manage-content-packages", never, {}, {}, never, never>;
+}

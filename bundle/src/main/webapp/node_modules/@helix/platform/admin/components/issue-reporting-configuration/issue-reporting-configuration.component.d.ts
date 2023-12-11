@@ -1,0 +1,32 @@
+import { OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { RxCurrentUserService, RxNotificationService } from '@helix/platform/shared/api';
+import { RxIssueReportingConfigurationService } from './issue-reporting-configuration.service';
+import { Subscription } from 'rxjs';
+import { RxRecordInstanceService, RxRecordInstanceUpdateService } from '@helix/platform/record/api';
+import { BaseViewComponent } from '@helix/platform/view/runtime';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class IssueReportingConfigurationAdminComponent extends BaseViewComponent implements OnInit {
+    private formBuilder;
+    private rxCurrentUserService;
+    private rxIssueReportingConfigurationService;
+    private rxNotificationService;
+    private rxRecordInstanceService;
+    private rxRecordInstanceUpdateService;
+    private translateService;
+    issueReportingConfigurationForm: FormGroup;
+    isAdministrator: boolean;
+    isAccountLinked: boolean;
+    oauthUrl: string;
+    busy: Subscription;
+    private configId;
+    constructor(formBuilder: FormBuilder, rxCurrentUserService: RxCurrentUserService, rxIssueReportingConfigurationService: RxIssueReportingConfigurationService, rxNotificationService: RxNotificationService, rxRecordInstanceService: RxRecordInstanceService, rxRecordInstanceUpdateService: RxRecordInstanceUpdateService, translateService: TranslateService);
+    saveConfig(): void;
+    private getOauthData;
+    openWindow(): void;
+    private assertWindowClosed;
+    ngOnInit(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<IssueReportingConfigurationAdminComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<IssueReportingConfigurationAdminComponent, "rx-admin-issue-reporting-configuration", never, {}, {}, never, never>;
+}

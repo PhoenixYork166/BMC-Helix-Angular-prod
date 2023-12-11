@@ -1,0 +1,30 @@
+import { AfterViewInit, ElementRef, OnDestroy, QueryList } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ActiveModalRef } from '@bmc-ux/adapt-angular';
+import { IIconBrowserDialogConfig, IIconGlyph } from '../icon-picker.types';
+import * as i0 from "@angular/core";
+export declare class IconBrowserDialogComponent implements AfterViewInit, OnDestroy {
+    private activeModalRef;
+    private document;
+    config: IIconBrowserDialogConfig;
+    searchFormControl: FormControl;
+    selectedIcon$: BehaviorSubject<IIconGlyph>;
+    filteredIcons$: Observable<IIconGlyph[]>;
+    isSelectButtonDisabled$: Observable<boolean>;
+    iconButtons: QueryList<ElementRef<HTMLButtonElement>>;
+    iconsList: ElementRef<HTMLUListElement>;
+    private selectedIndex$;
+    private destroyed$;
+    constructor(activeModalRef: ActiveModalRef, document: any);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    selectIcon(icon: IIconGlyph): void;
+    onSelect(): void;
+    onCancel(): void;
+    isIconSelected(icon: IIconGlyph): boolean;
+    private scrollToSelectedIcon;
+    trackByFn(index: number, item: IIconGlyph): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<IconBrowserDialogComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<IconBrowserDialogComponent, "rx-icon-browser-dialog", never, {}, {}, never, never>;
+}

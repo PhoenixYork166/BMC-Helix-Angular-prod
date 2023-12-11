@@ -1,0 +1,1 @@
+{"version":3,"file":"localized-character-field-editor.interface.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/record/designer/record-designer/localized-character-field-editor/localized-character-field-editor.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface ILocalizedCharacterFieldEditorOptions {\n  isReadOnly: boolean;\n}\n"]}

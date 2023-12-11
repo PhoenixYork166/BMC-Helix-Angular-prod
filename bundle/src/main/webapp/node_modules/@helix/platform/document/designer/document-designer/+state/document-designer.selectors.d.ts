@@ -1,0 +1,11 @@
+import { IDocumentDesignerModel, IDocumentDesignerState } from './document-designer.types';
+export declare const documentDesignerStateSelector: import("@ngrx/store").MemoizedSelector<object, IDocumentDesignerState, import("@ngrx/store").DefaultProjectorFn<IDocumentDesignerState>>;
+export declare const documentDesignerModelSelector: import("@ngrx/store").MemoizedSelector<object, IDocumentDesignerModel, import("@ngrx/store").DefaultProjectorFn<IDocumentDesignerModel>>;
+export declare const bundleIdSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const definitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const isDesignModeSelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const definitionModelFromDefinitionSelector: import("@ngrx/store").MemoizedSelector<object, import("../../document-designer.types").IDocumentDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../document-designer.types").IDocumentDefinitionModel>>;
+export declare const definitionModelSelector: import("@ngrx/store").MemoizedSelector<object, import("../../document-designer.types").IDocumentDefinitionModel, import("@ngrx/store").DefaultProjectorFn<import("../../document-designer.types").IDocumentDefinitionModel>>;
+export declare const isDirtySelector: import("@ngrx/store").MemoizedSelector<object, boolean, import("@ngrx/store").DefaultProjectorFn<boolean>>;
+export declare const savedDefinitionNameSelector: import("@ngrx/store").MemoizedSelector<object, string, import("@ngrx/store").DefaultProjectorFn<string>>;
+export declare const originalDefinitionSelector: import("@ngrx/store").MemoizedSelector<object, import("@helix/platform/document/api").IDocumentDefinition, import("@ngrx/store").DefaultProjectorFn<import("@helix/platform/document/api").IDocumentDefinition>>;

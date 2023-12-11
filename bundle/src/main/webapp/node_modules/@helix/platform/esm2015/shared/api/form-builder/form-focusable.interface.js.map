@@ -1,0 +1,1 @@
+{"version":3,"file":"form-focusable.interface.js","sourceRoot":"","sources":["../../../../../../../libs/platform/shared/api/form-builder/form-focusable.interface.ts"],"names":[],"mappings":"","sourcesContent":["import { IPlainObject } from '../common-types';\n\nexport interface IFormFocusable {\n  focus(data?: IPlainObject);\n}\n"]}

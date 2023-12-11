@@ -1,0 +1,36 @@
+import { TemplateRef, EventEmitter } from '@angular/core';
+import { AdaptModalService } from '@bmc-ux/adapt-angular';
+import { ColumnConfig, AdaptTableComponent, SortOrder } from '@bmc-ux/adapt-table';
+import { SortMeta } from 'primeng/api';
+import { IPlainObject } from '@helix/platform/shared/api';
+import { ISortButtonClass } from './sort-button-class.interface';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class CardLayoutCellHeaderComponent {
+    private modalService;
+    private translateService;
+    title: string;
+    columns: ColumnConfig[];
+    adaptTable: AdaptTableComponent;
+    openDialog: (config: any) => Promise<any>;
+    sort: EventEmitter<SortMeta[]>;
+    cardLayoutSortModalTemplate: TemplateRef<any>;
+    multiSortMeta: SortMeta[];
+    constructor(modalService: AdaptModalService, translateService: TranslateService);
+    onSortMenuItemClick(): void;
+    getSortableColumns(): ColumnConfig[];
+    onSortAscClick(column: ColumnConfig): void;
+    onSortDescClick(column: ColumnConfig): void;
+    changeSort(column: ColumnConfig, order: SortOrder): void;
+    getColumnSort(column: ColumnConfig): SortMeta;
+    getColumnSortIndex(column: ColumnConfig): number;
+    hasColumnSortOrder(column: ColumnConfig, order: SortOrder): boolean;
+    getSortAscBtnClass(column: ColumnConfig): IPlainObject;
+    getSortDescBtnClass(column: ColumnConfig): IPlainObject;
+    getSortBtnClass(column: ColumnConfig, order: SortOrder): ISortButtonClass;
+    clearAllSorting(): void;
+    applySorting(): void;
+    getCurrentSortingSummary(): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CardLayoutCellHeaderComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CardLayoutCellHeaderComponent, "rx-card-layout-cell-header", never, { "title": "title"; "columns": "columns"; "adaptTable": "adaptTable"; "openDialog": "openDialog"; }, { "sort": "sort"; }, never, never>;
+}

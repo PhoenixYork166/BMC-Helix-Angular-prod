@@ -1,0 +1,36 @@
+import { OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { IFormBuilderEvent, IFormControlComponent, IFormFocusable, IPlainObject } from '@helix/platform/shared/api';
+import { ValueAccessor } from '../../form-builder/value-accessor';
+import { RxExpressionEditorService } from '../../expression-editor/expression-editor.service';
+import { IAssignmentExpressionListFormControlOptions } from './assignment-expression-list-form-control.types';
+import * as i0 from "@angular/core";
+export declare class AssignmentExpressionListFormControlComponent extends ValueAccessor<any[]> implements IFormControlComponent, IFormFocusable, OnInit, OnChanges, OnDestroy {
+    private formBuilder;
+    private renderer;
+    private rxExpressionEditorService;
+    private rxModalService;
+    private translateService;
+    options: IAssignmentExpressionListFormControlOptions;
+    propertyPath: string;
+    private fieldGroups;
+    currentOptions: IAssignmentExpressionListFormControlOptions;
+    formArray: FormArray;
+    private defaultOptions;
+    private destroyed$;
+    constructor(formBuilder: FormBuilder, renderer: Renderer2, rxExpressionEditorService: RxExpressionEditorService, rxModalService: RxModalService, translateService: TranslateService);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
+    focus(data: IPlainObject): void;
+    onWriteValue(value: IPlainObject[]): void;
+    setDisabledState(isDisabled: boolean): void;
+    addItem(item?: IPlainObject): void;
+    openExpressionEditor(event: IFormBuilderEvent, formControl: FormControl): void;
+    removeItem(index: number): void;
+    private patchOptions;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AssignmentExpressionListFormControlComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AssignmentExpressionListFormControlComponent, "rx-assignment-expression-list-form-control", never, { "options": "options"; "propertyPath": "propertyPath"; }, {}, never, never>;
+}

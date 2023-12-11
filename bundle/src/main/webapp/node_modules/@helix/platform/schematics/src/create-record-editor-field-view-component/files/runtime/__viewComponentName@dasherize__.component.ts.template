@@ -1,0 +1,32 @@
+import { Component, Injector } from '@angular/core';
+import { IViewComponent } from '@helix/platform/view/runtime';
+import { BaseRecordEditorFieldComponent } from '@helix/platform/view/components';
+import { RxFieldDefinitionService } from '@helix/platform/record/api';
+import { RxViewComponent } from '@helix/platform/view/api';
+import { I<%= classify(viewComponentName) %>RuntimeProperties } from '../design/<%= dasherize(viewComponentName) %>.interfaces';
+
+// A Record Field View component extends BaseRecordEditorFieldComponent.
+@Component({
+  selector: '<%= dasherize(viewComponentSelector) %>',
+  styleUrls: ['./<%= dasherize(viewComponentName) %>.scss'],
+  templateUrl: './<%= dasherize(viewComponentName) %>.component.html'
+})
+@RxViewComponent({
+  name: '<%= dasherize(viewComponentSelector) %>',
+})
+export class <%= classify(viewComponentName) %>Component extends BaseRecordEditorFieldComponent implements IViewComponent {
+  maxLength: number;
+
+  constructor(injector: Injector,
+              private rxFieldDefinitionService: RxFieldDefinitionService) {
+    super(injector);
+  }
+
+  onConfigInitialized(config: I<%= classify(viewComponentName) %>RuntimeProperties): void {
+    super.onConfigInitialized(config);
+
+    if (this.fieldDefinition.maxLength && !this.rxFieldDefinitionService.isSystemField(this.fieldDefinition)) {
+      this.maxLength = this.fieldDefinition.maxLength;
+    }
+  }
+}

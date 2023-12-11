@@ -1,0 +1,36 @@
+.rx-form-control {
+  &:disabled {
+    background-color: $input-disabled-bg;
+    opacity: 1;
+    resize: none;
+  }
+
+  &[readonly]:not(.form-control-disabled-look),
+  &[readonly]:not(.form-control-disabled-look) + .input-group-custom-tag {
+    background: none;
+    background-clip: padding-box;
+    border-color: $white;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &[readonly]:focus,
+  &[readonly]:focus + .input-group-custom-tag {
+    border-color: $input-focus-border-color;
+  }
+}
+
+.form-control-disabled-look {
+  @include rtl(padding-left, 1rem);
+}
+
+.rx-form-control.form-control-disabled-look + .input-group-custom-tag {
+  background-color: $input-disabled-bg;
+  border-color: $input-disabled-border-color;
+  @include rtl(padding-right, 1rem);
+
+  &:focus,
+  &:focus + .input-group-custom-tag {
+    border-color: $input-focus-border-color;
+  }
+}

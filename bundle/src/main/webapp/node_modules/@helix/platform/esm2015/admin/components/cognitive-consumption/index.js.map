@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/cognitive-consumption/index.ts"],"names":[],"mappings":"AAAA,cAAc,mCAAmC,CAAC;AAClD,cAAc,6CAA6C,CAAC","sourcesContent":["export * from './cognitive-consumption.component';\nexport * from './cognitive-consumption-registration.module';\n"]}

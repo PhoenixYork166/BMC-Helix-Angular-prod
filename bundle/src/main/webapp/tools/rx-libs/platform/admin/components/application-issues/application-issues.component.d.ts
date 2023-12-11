@@ -1,0 +1,33 @@
+import { OnInit } from '@angular/core';
+import { AdaptDockedPanelService } from '@bmc-ux/adapt-angular';
+import { RxCommandFactoryService, RxCurrentUserService, RxNotificationService } from '@helix/platform/shared/api';
+import { RxModalService } from '@helix/platform/ui-kit';
+import { RxDeleteRecordsViewActionService } from '@helix/platform/view/actions';
+import { IRecordGridConfig, RecordGridComponent } from '@helix/platform/view/components';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { RxApplicationIssuesService } from './application-issues.service';
+import { IIssueReportingInfo } from './application-issues.types';
+import * as i0 from "@angular/core";
+export declare class ApplicationIssuesAdminComponent implements OnInit {
+    private adaptDockedPanelService;
+    private rxApplicationIssuesService;
+    private rxCommandFactoryService;
+    private rxCurrentUserService;
+    private rxDeleteRecordsViewActionService;
+    private translateService;
+    private rxNotificationService;
+    private rxModalService;
+    issuesRecordGrid: RecordGridComponent;
+    issueReportingInfo: IIssueReportingInfo;
+    issuesRecordGridConfiguration$: Observable<IRecordGridConfig>;
+    isAdministrator: boolean;
+    supportCentralUrl: string;
+    constructor(adaptDockedPanelService: AdaptDockedPanelService, rxApplicationIssuesService: RxApplicationIssuesService, rxCommandFactoryService: RxCommandFactoryService, rxCurrentUserService: RxCurrentUserService, rxDeleteRecordsViewActionService: RxDeleteRecordsViewActionService, translateService: TranslateService, rxNotificationService: RxNotificationService, rxModalService: RxModalService);
+    ngOnInit(): void;
+    private getIssueColumns;
+    private getActionButtons;
+    private showIssueDetails;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ApplicationIssuesAdminComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ApplicationIssuesAdminComponent, "rx-admin-application-issues", never, {}, {}, never, never>;
+}

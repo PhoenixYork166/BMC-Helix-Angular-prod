@@ -1,0 +1,1 @@
+{"version":3,"file":"csv.types.js","sourceRoot":"","sources":["../../../../../../libs/platform/utils/file-utils/csv.types.ts"],"names":[],"mappings":"","sourcesContent":["export type CsvData = (string | number)[][];\n"]}

@@ -1,0 +1,198 @@
+@import "../../variables/variables";
+
+//
+// Utility classes
+// --------------------------------------------------
+
+// Border color
+.border-white {
+  border-color: $white !important;
+}
+
+// Hidden border
+.border-hide {
+  border-color: transparent !important;
+}
+
+.border-left-hide {
+  border-left-color: transparent !important;
+}
+
+.border-top-hide {
+  border-top-color: transparent !important;
+}
+
+.border-right-hide {
+  border-right-color: transparent !important;
+}
+
+.border-bottom-hide {
+  border-bottom-color: transparent !important;
+}
+
+// Toggling content
+// -------------------------
+
+// Note: Deprecated .hide in favor of .hidden or .sr-only (as appropriate) in v3.0.1
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.text-hide {
+  //@include text-hide; The `text-hide()` mixin has been deprecated as of v4.1.0. It will be removed entirely in v5
+}
+
+.text-break {
+  @include break-wrap;
+}
+
+// Hide from screenreaders and browsers
+//
+// Credit: HTML5 Boilerplate
+
+.hidden {
+  display: none !important;
+}
+
+// For Affix plugin
+// -------------------------
+
+.affix {
+  position: fixed;
+}
+// Typography helpers
+//--------------------------
+
+span {
+  &.icon-space {
+    display: inline-block;
+    visibility: hidden;
+    width: $icon-lockup-spacing;
+  }
+
+  &.letter-space {
+    display: inline-block;
+    visibility: hidden;
+    width: $en-space;
+
+    &.en {
+      width: $en-space;
+    }
+
+    &.lg,
+    &.em {
+      width: $em-space;
+    }
+
+    &.sm,
+    &.thin {
+      width: $thin-space;
+    }
+
+    &.xs,
+    &.hair {
+      width: $hair-space;
+    }
+
+    &.icon-space {
+      width: $icon-lockup-spacing;
+    }
+
+  }
+}
+
+//
+//
+// Emphasis
+.extra-large {
+  font-size: $extra-large-font-size !important;
+}
+
+.large {
+  font-size: $large-font-size !important;
+}
+
+.small {
+  font-size: $small-font-size !important;
+}
+
+.extra-small {
+  font-size: $extra-small-font-size !important;
+}
+
+.line-height-remove {
+  line-height: 0 !important;
+}
+
+//
+//
+// Text-transformation
+.uppercase {
+  text-transform: uppercase !important;
+}
+
+.lowercase {
+  text-transform: lowercase !important;
+}
+
+.capitalize {
+  text-transform: capitalize !important;
+}
+
+.text-tracking-wide {
+  letter-spacing: .05em !important;
+}
+
+.text-tracking-default {
+  letter-spacing: 0 !important;
+}
+
+.text-tracking-tight {
+  letter-spacing: -.05em !important;
+}
+
+.text-truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.text-no-wrap {
+  white-space: nowrap !important;
+}
+
+.text-indent-hang {
+  padding-left: $grid-gutter-width*.5 !important;
+  text-indent: $grid-gutter-width*.5 !important;
+}
+
+.font-sans {
+  font-family: $font-family-sans-serif !important;
+}
+
+.font-serif {
+  font-family: $font-family-serif !important;
+}
+
+.font-mono {
+  font-family: $font-family-monospace !important;
+}
+
+.focusable:focus {
+  @include tab-focus();
+}
+
+.text-url-break-out {
+  @include break-wrap;
+}
+
+.not-allowed {
+  cursor: $cursor-disabled;
+}

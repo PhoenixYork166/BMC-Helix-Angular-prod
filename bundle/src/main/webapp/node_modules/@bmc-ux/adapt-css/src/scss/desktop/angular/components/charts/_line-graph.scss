@@ -1,0 +1,68 @@
+.axis {
+  path {
+    fill: none;
+    stroke: $chart-axis-path;
+  }
+
+  line {
+    stroke: $chart-axis-line;
+  }
+}
+
+.tick text {
+  font-size: .8125rem;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  fill: $chart-tick-color;
+}
+
+.axis--y .tick text {
+  transform: translateX(-5px);
+}
+
+.chart-tooltip-color-spot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+}
+
+.line-graph-svg {
+  overflow: visible !important;
+}
+
+.line-graph-circle,
+.line-chart-lines {
+  transition: all .25s $ease-transition-in-out;
+}
+
+.line-graph-transition {
+  transition: all .35s $ease-transition-in-out;
+}
+
+.line-graph-tooltip {
+  margin-top: -5px;
+
+  div {
+    text-align: left;
+  }
+
+  .chart-tooltip-content-wrapper {
+    position: relative;
+    text-align: left;
+  }
+
+  .chart-tooltip-category {
+    margin: 0;
+  }
+
+  .chart-tooltip-color-spot {
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    left: -16px;
+  }
+
+  .adapt-tooltip-inner {
+    padding-left: 32px !important;
+  }
+}
+

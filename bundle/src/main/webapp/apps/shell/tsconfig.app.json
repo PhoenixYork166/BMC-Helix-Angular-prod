@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": ["ckeditor", "lodash"]
+  },
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
+  "include": ["src/main.ts", "src/polyfills.ts"]
+}

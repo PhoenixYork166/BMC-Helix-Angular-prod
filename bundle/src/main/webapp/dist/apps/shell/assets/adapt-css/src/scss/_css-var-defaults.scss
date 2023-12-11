@@ -1,0 +1,34 @@
+//
+// These current values are ADAPT default constants
+// they are NOT customizable with customization tool
+
+:root {
+  // animation variables
+  --animation-extra-fast:  .1s;
+  --animation-fast:        .25s;
+  --animation-medium:      .5s;
+  --animation-slow:        1s;
+  --animation-extra-slow:  1.5s;
+  --animation-infinite:    infinite;
+
+  --ease-float-in-out: cubic-bezier(.25, .8, .25, 1);
+  --ease-transition-in: cubic-bezier(0, 0, .2, 1);
+  --ease-transition-out: cubic-bezier(.4, 0, 1, 1);
+  --ease-transition-in-out: cubic-bezier(.4, 0, .2, 1);
+
+  // font
+  --font-weight-light: 200;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+
+  --font-size-base: .8125rem;
+  --font-size-lg: .9375rem;
+  --font-size-sm: .75rem;
+  --font-size-xs: .6875rem;
+  --font-size-xxs: .625rem;
+
+  --h1-font-size: 1.75rem;
+  --h2-font-size: 1.3125rem;
+
+  --hover: 6.5%;
+}

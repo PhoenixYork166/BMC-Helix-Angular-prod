@@ -1,0 +1,12 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SampleComponent } from './sample.component';
+
+@NgModule({
+  imports: [CommonModule],
+  exports: [SampleComponent],
+  declarations: [SampleComponent],
+  entryComponents: [SampleComponent]
+})
+export class SampleModule {
+}

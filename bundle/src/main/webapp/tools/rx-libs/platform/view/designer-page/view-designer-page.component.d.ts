@@ -1,0 +1,31 @@
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IComponentCanDeactivate, RxBundleCacheService, RxComponentCanDeactivateGuard, RxDefinitionNameService, RxPageTitleService } from '@helix/platform/shared/api';
+import { IViewDesignerConfiguration } from '@helix/platform/view/designer';
+import { RxUtilityModalsService } from '@helix/platform/ui-kit';
+import { TranslateService } from '@ngx-translate/core';
+import * as i0 from "@angular/core";
+export declare class ViewDesignerPageComponent implements OnInit, OnDestroy, IComponentCanDeactivate {
+    private activatedRoute;
+    private bundleCacheService;
+    private definitionNameService;
+    private rxUtilityModalsService;
+    private rxPageTitleService;
+    private router;
+    private translateService;
+    private rxComponentCanDeactivateGuard;
+    configuration: IViewDesignerConfiguration;
+    private subscription;
+    private isNewView;
+    private viewDesignerComponent;
+    constructor(activatedRoute: ActivatedRoute, bundleCacheService: RxBundleCacheService, definitionNameService: RxDefinitionNameService, rxUtilityModalsService: RxUtilityModalsService, rxPageTitleService: RxPageTitleService, router: Router, translateService: TranslateService, rxComponentCanDeactivateGuard: RxComponentCanDeactivateGuard);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    onViewDefinitionSaved(viewDefinitionName: string): void;
+    onViewDefinitionErrorLoading(): void;
+    onCloseDesigner(): void;
+    canDeactivate(): boolean;
+    confirmDeactivation(): Promise<boolean>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ViewDesignerPageComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ViewDesignerPageComponent, "rx-view-designer-page", never, {}, {}, never, never>;
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/action-button/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,kCAAkC,CAAC;AACjD,cAAc,+BAA+B,CAAC","sourcesContent":["export * from './action-button-design.component';\nexport * from './action-button-design.module';\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/rich-text/runtime/index.ts"],"names":[],"mappings":"AAAA,cAAc,uBAAuB,CAAC;AACtC,cAAc,oBAAoB,CAAC","sourcesContent":["export * from './rich-text.component';\nexport * from './rich-text.module';\n"]}

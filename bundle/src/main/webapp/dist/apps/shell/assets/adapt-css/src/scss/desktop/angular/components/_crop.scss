@@ -1,0 +1,90 @@
+.adapt-crop {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: $white;
+  user-select: none;
+  cursor: move;
+}
+
+.adapt-crop--cut-area-result,
+.adapt-crop--cut-area-offcut {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.adapt-crop--cut-area-result {
+  z-index: 2;
+}
+
+.adapt-crop--cut-area-fade {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.adapt-crop--img-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  @include border-gradient($border-gradient-from, $border-gradient-to, $border-gradient-weight, 2);
+}
+
+.adapt-crop--img {
+  position: absolute;
+}
+
+.adapt-crop--dim-label {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  padding: 0 8px;
+  margin-top: 5px;
+  border-radius: 2px;
+  background: $color-info;
+  color: $white;
+  font-size: 85%;
+  font-weight: 600;
+  @include shadow(1);
+}
+
+.adapt-crop--dim-label i {
+  margin-right: 1px;
+}
+
+.adapt-crop--overlay-loader,
+.adapt-crop--overlay-placeholder {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $white;
+}
+
+.adapt-crop--overlay-loader {
+  z-index: 3;
+  cursor: progress;
+}
+
+.adapt-crop--overlay-placeholder {
+  z-index: 4;
+  cursor: default;
+  text-align: center;
+  color: $gray-500;
+}

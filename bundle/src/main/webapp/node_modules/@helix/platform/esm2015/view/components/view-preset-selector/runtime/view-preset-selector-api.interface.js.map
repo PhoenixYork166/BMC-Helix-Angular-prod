@@ -1,0 +1,1 @@
+{"version":3,"file":"view-preset-selector-api.interface.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/view-preset-selector/runtime/view-preset-selector-api.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IViewPresetSelectorApi {\n  getGuid: () => string;\n  markAppliedViewPresetAsEdited: () => void;\n}\n"]}

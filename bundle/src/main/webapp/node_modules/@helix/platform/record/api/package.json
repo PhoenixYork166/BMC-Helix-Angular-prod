@@ -1,0 +1,14 @@
+{
+  "version": "22.1.7-20230731111104",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "../../bundles/helix-platform-record-api.umd.js",
+  "module": "../../fesm2015/helix-platform-record-api.js",
+  "es2015": "../../fesm2015/helix-platform-record-api.js",
+  "esm2015": "../../esm2015/record/api/helix-platform-record-api.js",
+  "fesm2015": "../../fesm2015/helix-platform-record-api.js",
+  "typings": "helix-platform-record-api.d.ts",
+  "sideEffects": false,
+  "name": "@helix/platform/record/api"
+}

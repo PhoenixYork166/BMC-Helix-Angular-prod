@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/view/components/page/runtime/index.ts"],"names":[],"mappings":"AAAA,cAAc,6CAA6C,CAAC;AAC5D,cAAc,kBAAkB,CAAC;AACjC,cAAc,eAAe,CAAC","sourcesContent":["export * from './page-component-definition-adapter.service';\nexport * from './page.component';\nexport * from './page.module';\n"]}

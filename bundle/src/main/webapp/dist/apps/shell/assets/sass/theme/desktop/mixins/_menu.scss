@@ -1,0 +1,20 @@
+@mixin dark() {
+  background-color: $nav-background;
+  color: $nav-links-color;
+}
+
+@mixin white() {
+  background-color: $nav-background-white;
+  color: $nav-links-color-white;
+}
+
+@mixin grey() {
+  background-color: $nav-background-grey;
+  color: $nav-links-color-grey;
+}
+
+@mixin custom() {
+  background-color: var(--nav-background);
+  color: var(--nav-links-color);
+}
+

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/ui-kit/busy-indicator/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,4BAA4B,CAAC","sourcesContent":["export * from './busy-indicator.module';\nexport * from './busy-indicator.component';\n"]}

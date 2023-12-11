@@ -1,0 +1,11 @@
+// Took from @angular/cdk@10.2.5
+// Included to sources to allow building CSS on non-node env
+@import "overlay"; // local source
+
+// @import "./node_modules/@angular/cdk/overlay"; // dev import from node_modules
+
+$cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.4);
+$backdrop-animation-duration: .25s;
+$backdrop-animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+
+@include cdk-overlay();

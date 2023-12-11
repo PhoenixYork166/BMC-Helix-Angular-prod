@@ -1,0 +1,31 @@
+import * as i0 from "@angular/core";
+import * as i1 from "./record-designer.component";
+import * as i2 from "./localized-character-field-editor/localized-character-field-editor.component";
+import * as i3 from "./inheritance-issue-info/inheritance-issue-info.component";
+import * as i4 from "./archive-associations-control/archive-associations-control.component";
+import * as i5 from "./archive-associations-control/archive-association-selector.component";
+import * as i6 from "./archive-associations-control/missing-archive-definitions-modal.component";
+import * as i7 from "./field-option-editor/field-option-editor.component";
+import * as i8 from "./add-join-fields-editor/add-join-fields-editor.component";
+import * as i9 from "./record-indexes-control/record-indexes-control.component";
+import * as i10 from "./record-indexes-control/record-indexes-editor.component";
+import * as i11 from "@bmc-ux/adapt-angular";
+import * as i12 from "@angular/common";
+import * as i13 from "@angular/forms";
+import * as i14 from "@helix/platform/shared/components";
+import * as i15 from "@helix/platform/ui-kit";
+import * as i16 from "@ngx-translate/core";
+import * as i17 from "@helix/platform/view/components";
+import * as i18 from "@helix/platform/shared/api";
+import * as i19 from "@helix/platform/record/api";
+import * as i20 from "./record-customization-options/record-customization-options.module";
+import * as i21 from "./record-inheritance-editor/record-inheritance-editor.module";
+import * as i22 from "./search-field-editor/search-field-editor.module";
+import * as i23 from "@bmc-ux/adapt-table";
+import * as i24 from "@ngrx/store";
+import * as i25 from "@ngrx/effects";
+export declare class RecordDesignerModule {
+    static ɵfac: i0.ɵɵFactoryDeclaration<RecordDesignerModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<RecordDesignerModule, [typeof i1.RecordDesignerComponent, typeof i2.LocalizedCharacterFieldEditorComponent, typeof i3.InheritanceIssueInfoComponent, typeof i4.ArchiveAssociationsControlComponent, typeof i5.ArchiveAssociationSelectorComponent, typeof i6.MissingArchiveDefinitionsModalComponent, typeof i7.FieldOptionEditorComponent, typeof i8.AddJoinFieldsEditorComponent, typeof i9.RecordIndexesControlComponent, typeof i10.RecordIndexesEditorComponent], [typeof i11.AdaptCodeViewerModule, typeof i11.AdaptRxLabelModule, typeof i11.AdaptTabsModule, typeof i11.AdaptBusyModule, typeof i11.AdaptButtonModule, typeof i11.AdaptDropdownModule, typeof i11.AdaptRxCheckboxModule, typeof i11.AdaptRxSelectModule, typeof i11.AdaptRxTextfieldModule, typeof i11.AdaptPopoverModule, typeof i11.AdaptIconModule, typeof i12.CommonModule, typeof i13.FormsModule, typeof i14.RxDesignerHeaderModule, typeof i15.RxModalModule, typeof i15.RxValidationIssuesModule, typeof i16.TranslateModule, typeof i13.ReactiveFormsModule, typeof i17.RecordGridModule, typeof i14.RxFormBuilderModule, typeof i18.RxDefinitionModule, typeof i19.RxRecordDefinitionFieldOptionPipeModule, typeof i20.RecordCustomizationOptionsModule, typeof i21.RecordInheritanceEditorModule, typeof i22.SearchFieldEditorModule, typeof i23.AdaptTableModule, typeof i11.AdaptSidebarModule, typeof i24.StoreFeatureModule, typeof i25.EffectsFeatureModule, typeof i11.AdaptAlertModule, typeof i11.AdaptRxRadiobuttonModule, typeof i11.AdaptRxSwitchModule, typeof i11.AdaptPopoverModule, typeof i11.AdaptAccordionModule, typeof i11.AdaptRxListBuilderModule], [typeof i1.RecordDesignerComponent]>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<RecordDesignerModule>;
+}

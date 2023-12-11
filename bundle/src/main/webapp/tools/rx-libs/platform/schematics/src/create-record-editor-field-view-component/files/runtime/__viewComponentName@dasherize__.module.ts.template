@@ -1,0 +1,16 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReadOnlyFieldModule } from '@helix/platform/ui-kit';
+import { AdaptRxTextfieldModule } from '@bmc-ux/adapt-angular';
+import { ReactiveFormsModule } from '@angular/forms';
+import { <%= classify(viewComponentName) %>Component } from './<%= dasherize(viewComponentName) %>.component';
+
+@NgModule({
+  imports: [CommonModule, ReadOnlyFieldModule, AdaptRxTextfieldModule, ReactiveFormsModule, TranslateModule],
+  exports: [<%= classify(viewComponentName) %>Component],
+  declarations: [<%= classify(viewComponentName) %>Component],
+  entryComponents: [<%= classify(viewComponentName) %>Component]
+})
+export class <%= classify(viewComponentName) %>Module {
+}

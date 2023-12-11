@@ -1,0 +1,1 @@
+{"version":3,"file":"helix-platform-web-api-api.js","sourceRoot":"","sources":["../../../../../../libs/platform/web-api/api/helix-platform-web-api-api.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,cAAc,SAAS,CAAC","sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './index';\n"]}

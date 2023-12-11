@@ -1,0 +1,23 @@
+.rx-typeahead-popup-content {
+  overflow: auto;
+}
+
+.rx-typeahead__dropdown-item {
+  white-space: normal;
+}
+
+.rx-typeahead__input-wrapper {
+  position: relative;
+}
+
+.rx-typeahead__clear-btn {
+  position: absolute;
+  @include rtl(right, 0);
+  top: 1px;
+  border: 0;
+  color: $search-clear-color;
+
+  &:hover {
+    color: $search-clear-hover-color;
+  }
+}

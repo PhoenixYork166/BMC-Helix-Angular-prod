@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../libs/platform/shared/components/form-controls/input-list-form-control/index.ts"],"names":[],"mappings":"AAAA,cAAc,qCAAqC,CAAC;AACpD,cAAc,kCAAkC,CAAC","sourcesContent":["export * from './input-list-form-control.component';\nexport * from './input-list-form-control.module';\n"]}

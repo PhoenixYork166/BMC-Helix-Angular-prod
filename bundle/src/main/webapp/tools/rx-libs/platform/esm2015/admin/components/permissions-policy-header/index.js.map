@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/permissions-policy-header/index.ts"],"names":[],"mappings":"AAAA,cAAc,uCAAuC,CAAC;AACtD,cAAc,iDAAiD,CAAC","sourcesContent":["export * from './permissions-policy-header.component';\nexport * from './permissions-policy-header-registration.module';\n"]}

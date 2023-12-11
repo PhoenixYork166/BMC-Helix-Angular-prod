@@ -1,0 +1,1 @@
+{"version":3,"file":"resource-urls.constant.js","sourceRoot":"","sources":["../../../../../../libs/platform/shared/api/resource-urls.constant.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,gBAAgB,GAAG;IAC9B,OAAO,EAAE,6BAA6B;CACvC,CAAC","sourcesContent":["export const RX_RESOURCE_URLS = {\n  command: '/api/rx/application/command'\n};\n"]}

@@ -1,0 +1,157 @@
+@mixin button-variant($background, $border, $active-background: color-variant($background, hover), $active-border: color-variant($background, active), $color: $white) {
+  //@include color-yiq($background);
+  $text-color: $color;
+  color: $text-color;
+  background-color: $background;
+  border-color: $active-background;
+  @include box-shadow($btn-box-shadow);
+
+  &.adapt-build-in-loader {
+    @include hover-supported() {
+      &::before {
+        border-width: 1px;
+        border-style: solid;
+        border-color: $color $active-border $active-border $active-border;
+      }
+    }
+
+    @include focus-supported() {
+      &::before {
+        border-width: 1px;
+        border-style: solid;
+        border-color: $color $active-border $active-border $active-border;
+      }
+    }
+
+    &:active,
+    &.active {
+      &::before {
+        border-width: 1px;
+        border-style: solid;
+        border-color: $color color-variant($background, active-hover) color-variant($background, active-hover) color-variant($background, active-hover);
+      }
+    }
+
+    &::before {
+      border-width: 1px;
+      border-style: solid;
+      border-color: $color $active-background $active-background $active-background;
+    }
+
+    &:disabled {
+      &::before {
+        border-width: 1px;
+        border-style: solid;
+        border-color: $color $active-background $active-background $active-background;
+      }
+
+      @include focus-supported() {
+        &::before {
+          border-width: 1px;
+          border-style: solid;
+          border-color: $color $active-background $active-background $active-background;
+        }
+      }
+
+      @include hover-supported() {
+        &::before {
+          border-width: 1px;
+          border-style: solid;
+          border-color: transparentize($color, .4) $active-background $active-background $active-background;
+        }
+      }
+    }
+  }
+
+  @include hover-supported() {
+    //@include color-yiq($background);
+    color: $text-color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  @include focus-supported() {
+    // Avoid using mixin so we can pass custom focus shadow properly
+    //@if $enable-shadows {
+    //  box-shadow: $btn-box-shadow, 0 0 0 3px rgba($border, .5);
+    //} @else {
+    //  box-shadow: 0 0 0 3px rgba($border, .5);
+    //}
+    color: $text-color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  // Disabled comes first so active can properly restyle
+  &:disabled {
+    color: color-variant($text-color, disabled);
+    background-color: color-variant($background, disabled);
+    border-color: color-variant($active-background, disabled);
+    opacity: 1;
+
+    @include focus-supported() {
+      background-color: color-variant($background, disabled);
+      border-color: color-variant($active-background, disabled);
+    }
+
+    @include hover-supported() {
+      cursor: $cursor-disabled;
+      background-color: color-variant($background, disabled);
+      border-color: color-variant($active-background, disabled);
+      color: transparentize(color-variant($text-color, disabled), .4);
+    }
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/pointer#Browser_compatibility
+      // fix for https://github.bmc.com/bmc-ux/adapt-angular/issues/2000
+      &:hover {
+        cursor: $cursor-disabled;
+        background-color: color-variant($background, disabled);
+        border-color: color-variant($active-background, disabled);
+        color: transparentize(color-variant($text-color, disabled), .4);
+      }
+    }
+  }
+
+  &:active,
+  .show > &.dropdown-toggle,
+  .open > &.dropdown-toggle {
+    color: $text-color;
+    border-color: $active-border;
+    background-color: $active-background;
+    background-image: none; // Remove the gradient for the pressed/active state
+    @include box-shadow($btn-active-box-shadow);
+
+    @include hover-supported() {
+      color: $text-color;
+      border-color: color-variant($background, active-hover);
+      background-color: color-variant($background, active);
+    }
+
+    @include focus-supported() {
+      color: $text-color;
+      border-color: color-variant($background, active-hover);
+      background-color: color-variant($background, active);
+    }
+  }
+
+  &.active {
+    color: $text-color;
+    border-color: $active-border;
+    background-color: $active-background;
+    background-image: none; // Remove the gradient for the pressed/active state
+    @include box-shadow($btn-active-box-shadow);
+
+    @include hover-supported() {
+      color: $text-color;
+      border-color: color-variant($background, active-hover);
+      background-color: color-variant($background, active);
+    }
+
+    @include focus-supported() {
+      color: $text-color;
+      border-color: color-variant($background, active-hover);
+      background-color: color-variant($background, active);
+    }
+  }
+}

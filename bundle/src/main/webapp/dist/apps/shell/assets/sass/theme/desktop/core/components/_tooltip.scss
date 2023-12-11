@@ -1,0 +1,36 @@
+.tooltip {
+  margin: 0;
+}
+
+.tooltip-inner {
+  box-shadow: $tooltip-box-shadow;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* IE10+ specific styles go here */
+
+  .tooltip {
+    // IE11 bug with calculating the height of the element.
+    // Another possible fix - is to push arrow 1px inside tooltip
+    // https://github.bmc.com/bmc-ux/adapt-css/issues/618
+    .tooltip-inner {
+      border: 1px solid $tooltip-border;
+    }
+  }
+}
+
+.bs-tooltip-top .arrow,
+.bs-tooltip-auto[x-placement^="top"] .arrow,
+.bs-tooltip-bottom .arrow,
+.bs-tooltip-auto[x-placement^="bottom"] .arrow {
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.bs-tooltip-left .arrow,
+.bs-tooltip-auto[x-placement^="left"] .arrow,
+.bs-tooltip-right .arrow,
+.bs-tooltip-auto[x-placement^="right"] .arrow {
+  top: 50%;
+  transform: translate(0%, -50%);
+}

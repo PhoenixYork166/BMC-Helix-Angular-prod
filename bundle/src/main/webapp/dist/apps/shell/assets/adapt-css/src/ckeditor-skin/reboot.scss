@@ -1,0 +1,12 @@
+// The CSS file to be used to apply style to editor content.
+// Styles will be used only in iframe.
+@import "../scss/desktop/bs-mixins";
+@import "../scss/desktop/adapt-mixins";
+@import "../scss/desktop/variables/icons";
+@import "../scss/desktop/variables/var-default";
+@import "../scss/variables";
+@import "../scss/desktop/variables/variables";
+@import "../scss/desktop/variables/fonts-declaration";
+
+@import "../scss/vendor/bootstrap/reboot";
+@import "../scss/desktop/core/base/reboot";

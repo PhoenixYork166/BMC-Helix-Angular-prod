@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/rule-pool-management/index.ts"],"names":[],"mappings":"AAAA,cAAc,4CAA4C,CAAC;AAC3D,cAAc,kCAAkC,CAAC","sourcesContent":["export * from './rule-pool-management-registration.module';\nexport * from './rule-pool-management.component';\n"]}

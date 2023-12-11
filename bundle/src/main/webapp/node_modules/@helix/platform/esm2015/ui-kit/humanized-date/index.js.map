@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../libs/platform/ui-kit/humanized-date/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AACxC,cAAc,uBAAuB,CAAC","sourcesContent":["export * from './humanized-date.module';\nexport * from './humanized-date.pipe';\n"]}

@@ -1,0 +1,57 @@
+//ADAPT's main background and foreground colors
+//Flat use to provide background but not hover states.
+@include bg-variant-flat(".bg-foreground", $color-foreground);
+@include bg-variant-flat(".bg-background", $color-background);
+//Used to support dark background themes while waiting on full support for dashboards
+@include bg-variant-flat(".bg-foreground-inverse", $color-foreground-inverse);
+@include bg-variant-flat(".bg-background-inverse", $color-background-inverse);
+//Used for gray-scale colors, use only if background color doesn't suffice
+@include bg-variant-flat(".bg-white", $white);
+@include bg-variant-flat(".bg-gray-100", $gray-100);
+@include bg-variant-flat(".bg-gray-200", $gray-200);
+@include bg-variant-flat(".bg-gray-300", $gray-300);
+@include bg-variant-flat(".bg-gray-400", $gray-400);
+@include bg-variant-flat(".bg-gray-500", $gray-500);
+@include bg-variant-flat(".bg-gray-600", $gray-600);
+@include bg-variant-flat(".bg-gray-700", $gray-700);
+@include bg-variant-flat(".bg-gray-800", $gray-800);
+@include bg-variant-flat(".bg-gray-900", $gray-900);
+@include bg-variant-flat(".bg-gray-1000", $gray-1000);
+@include bg-variant-flat(".bg-black", $black);
+
+//Overrides for theme helpers in BS4
+@include bg-variant-flat(".bg-light", $color-foreground);
+@include bg-variant-flat(".bg-dark", $color-foreground-inverse);
+
+//@if ($accessible-mode == true) {
+//  @include bg-variant('.bg-primary', get-contrast-color($color-primary));
+//  @include bg-variant('.bg-secondary', get-contrast-color($color-secondary));
+//  @include bg-variant('.bg-active', get-contrast-color($color-active));
+//  @include bg-variant('.bg-success', get-contrast-color($color-success));
+//  @include bg-variant('.bg-info', get-contrast-color($color-info));
+//  @include bg-variant('.bg-warning', get-contrast-color($color-warning));
+//  @include bg-variant('.bg-danger', get-contrast-color($color-critical));
+//  @include bg-variant('.bg-inactive', $color-gray-dusty);
+//  @include bg-variant('.bg-inverse', $color-navigate);
+
+//} @else {
+@include bg-variant(".bg-primary", $color-primary);
+@include bg-variant(".bg-secondary", $color-secondary);
+@include bg-variant(".bg-active", $color-active);
+@include bg-variant(".bg-success", $color-success);
+@include bg-variant(".bg-info", $color-info);
+@include bg-variant(".bg-warning", $color-warning);
+@include bg-variant(".bg-danger", $color-critical);
+@include bg-variant(".bg-inactive", $gray-500); //TODO there's probably a more appropriate color. This is more of a design questions. Is Gray-500 the most appropriate color for inactive theme-wise.
+@include bg-variant(".bg-not-completed", $progress-bg);
+@include bg-variant(".bg-inverse", $color-foreground-inverse);
+//}
+
+
+@include bg-variant-muted(".bg-primary", $color-primary, $dark-mode);
+@include bg-variant-muted(".bg-secondary", $color-secondary, $dark-mode);
+@include bg-variant-muted(".bg-active", $color-active, $dark-mode);
+@include bg-variant-muted(".bg-success", $color-success, $dark-mode);
+@include bg-variant-muted(".bg-info", $color-info, $dark-mode);
+@include bg-variant-muted(".bg-warning", $color-warning, $dark-mode);
+@include bg-variant-muted(".bg-danger", $color-critical, $dark-mode);

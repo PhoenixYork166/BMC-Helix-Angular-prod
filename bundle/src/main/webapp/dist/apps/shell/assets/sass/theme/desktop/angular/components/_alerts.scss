@@ -1,0 +1,539 @@
+/* stylelint-disable max-nesting-depth */
+.adapt-alert-animated {
+  position: relative;
+  display: block;
+}
+
+.alert-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.alert-wrapper {
+  overflow: hidden;
+}
+
+.alert-btn:focus,
+.alert-close:focus {
+  outline: none;
+}
+
+.alert-animated-content {
+  animation-name: alertAnimatedContent;
+  animation-duration: .7s;
+  animation-direction: alternate;
+}
+
+.alert-link {
+  cursor: pointer;
+}
+
+.alert-stacked {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  @include rtl(padding-right, 3.75rem);
+  @include rtl(padding-left, 2.875rem);
+  border-radius: 0;
+  flex: 1;
+  transition: height .45s $ease-transition-in-out;
+
+  &.container {
+    border: 0;
+  }
+
+  .alert-count {
+    font-weight: $font-weight-bold;
+  }
+
+  .alert-stacked__icon {
+    position: absolute;
+    top: 0;
+    @include rtl(left, .875rem);
+
+    &::before {
+      width: 1rem;
+      font-size: 1rem;
+      vertical-align: middle;
+      line-height: 2.5rem;
+    }
+  }
+
+  &.is-controls {
+    @include rtl(padding-right, 9.625rem);
+
+    @media (max-width: 577px) {
+      @include rtl(padding-right, 3rem);
+
+      .alert-close {
+        bottom: auto;
+
+        &::before {
+          line-height: 2.5rem;
+        }
+      }
+    }
+
+    .alert-stacked__icon {
+      animation-name: alertAnimatedContent;
+      animation-duration: .7s;
+      animation-direction: alternate;
+    }
+
+    @media (max-width: 577px) {
+      .alert-animated-content {
+        animation-name: alertAnimatedMobileRight;
+      }
+
+      &.is-animated-left {
+        .alert-animated-content {
+          animation-name: alertAnimatedMobileLeft;
+        }
+      }
+
+      &.is-controls {
+        &.is-animated-left {
+          .alert-stacked__icon {
+            animation-name: alertAnimatedMobileLeft;
+          }
+        }
+
+        .alert-stacked__icon {
+          animation-name: alertAnimatedMobileRight;
+        }
+      }
+    }
+  }
+
+  .alert-close {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    @include rtl(right, 0);
+    width: 3rem;
+    border: 0;
+    border-radius: 0;
+    text-align: center;
+    background: transparent;
+
+    &::before {
+      font-size: .8125rem;
+      line-height: 1;
+      color: $alert-btn-color;
+    }
+
+    @media (max-width: 577px) {
+      @include rtl(right, -1px);
+      opacity: .7;
+      border: 1px solid transparent;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    @media (min-width: 578px) {
+      &.is-border {
+        @include rtl(border-left, 1px solid transparent);
+      }
+    }
+  }
+}
+
+.alert-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:not(.is-mobile) {
+    position: absolute;
+    top: -1px;
+    @include rtl(right, 3rem);
+    bottom: -1px;
+    animation-name: alertAnimatedContent;
+    animation-duration: .7s;
+    animation-direction: alternate;
+  }
+
+  &.is-mobile {
+    position: relative;
+    top: -1px;
+    overflow: hidden;
+    padding-bottom: 1px;
+  }
+
+  &.is-invisible {
+    animation: none;
+  }
+
+  .alert-btn {
+    width: 3rem;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+
+    &::before {
+      @include rtl(rotate, .001deg);
+      font-size: 1.75rem;
+      color: $alert-btn-color;
+      vertical-align: text-top;
+    }
+
+    @media (max-width: 577px) {
+      width: auto;
+      height: 2.75rem;
+      margin-bottom: -1px;
+      padding: 0;
+      flex: 1 1 50%;
+
+      &::before {
+        font-size: 2.125rem;
+      }
+    }
+
+    &[disabled] {
+      opacity: .6;
+    }
+  }
+}
+// TODO: move to a function
+.is-success {
+  .alert-controls {
+    .alert-btn {
+      background: $adapt-alert-success-bg;
+
+      @media (max-width: 577px) {
+        border: 1px solid color-variant($adapt-alert-success-bg, hover);
+      }
+
+      &:first-child {
+        @media (max-width: 577px) {
+          @include rtl(border-right, none);
+        }
+      }
+
+      &:hover:not([disabled]) {
+        background-color: color-variant($adapt-alert-success-bg, hover);
+      }
+
+      &:active:hover {
+        background-color: color-variant($adapt-alert-success-bg, active);
+      }
+    }
+  }
+
+  .alert-close {
+    @media (min-width: 578px) {
+      &.is-border {
+        &:hover:not([disabled]) {
+          @include rtl(border-left-color, color-variant($adapt-alert-success-bg, active));
+        }
+
+        &:active:hover {
+          @include rtl(border-left-color, color-variant($adapt-alert-success-bg, active-hover));
+        }
+      }
+
+      &:hover:not([disabled]) {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-success-bg, active));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-success-bg, hover);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-success-bg, active);
+        }
+      }
+
+      &:active:hover {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-success-bg, active-hover));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-success-bg, active);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-success-bg, active-hover);
+        }
+      }
+    }
+  }
+}
+
+.is-info {
+  .alert-controls {
+    .alert-btn {
+      background: $adapt-alert-info-bg;
+      @media (max-width: 577px) {
+        border: 1px solid color-variant($adapt-alert-info-bg, hover);
+      }
+
+      &:first-child {
+        @media (max-width: 577px) {
+          @include rtl(border-right, none);
+        }
+      }
+
+      &:hover:not([disabled]) {
+        background-color: color-variant($adapt-alert-info-bg, hover);
+      }
+
+      &:active:hover {
+        background-color: color-variant($adapt-alert-info-bg, active);
+      }
+    }
+  }
+
+  .alert-close {
+    @media (min-width: 578px) {
+      &.is-border {
+        &:hover:not([disabled]) {
+          @include rtl(border-left-color, color-variant($adapt-alert-info-bg, active));
+        }
+
+        &:active:hover {
+          @include rtl(border-left-color, color-variant($adapt-alert-info-bg, active-hover));
+        }
+      }
+
+      &:hover:not([disabled]) {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-info-bg, active));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-info-bg, hover);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-info-bg, active);
+        }
+      }
+
+      &:active:hover {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-info-bg, active-hover));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-info-bg, active);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-info-bg, active-hover);
+        }
+      }
+    }
+  }
+}
+
+.is-warning {
+  .alert-controls {
+    .alert-btn {
+      background: $adapt-alert-warning-bg;
+      @media (max-width: 577px) {
+        border: 1px solid color-variant($adapt-alert-warning-bg, hover);
+      }
+
+      &:first-child {
+        @media (max-width: 577px) {
+          @include rtl(border-right, none);
+        }
+      }
+
+      &:hover:not([disabled]) {
+        background-color: color-variant($adapt-alert-warning-bg, hover);
+      }
+
+      &:active:hover {
+        background-color: color-variant($adapt-alert-warning-bg, active);
+      }
+    }
+  }
+
+  .alert-close {
+    @media (min-width: 578px) {
+      &.is-border {
+        &:hover:not([disabled]) {
+          @include rtl(border-left-color, color-variant($adapt-alert-warning-bg, active));
+        }
+
+        &:active:hover {
+          @include rtl(border-left-color, color-variant($adapt-alert-warning-bg, active-hover));
+        }
+      }
+
+      &:hover:not([disabled]) {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-warning-bg, active));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-warning-bg, hover);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-warning-bg, active);
+        }
+      }
+
+      &:active:hover {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-warning-bg, active-hover));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-warning-bg, active);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-warning-bg, active-hover);
+        }
+      }
+    }
+  }
+}
+
+.is-danger {
+  .alert-controls {
+    .alert-btn {
+      background: $adapt-alert-danger-bg;
+      @media (max-width: 577px) {
+        border: 1px solid color-variant($adapt-alert-danger-bg, hover);
+      }
+
+      &:first-child {
+        @media (max-width: 577px) {
+          @include rtl(border-right, none);
+        }
+      }
+
+      &:hover:not([disabled]) {
+        background-color: color-variant($adapt-alert-danger-bg, hover);
+      }
+
+      &:active:hover {
+        background-color: color-variant($adapt-alert-danger-bg, active);
+      }
+    }
+  }
+
+  .alert-close {
+    @media (min-width: 578px) {
+      &.is-border {
+        &:hover:not([disabled]) {
+          @include rtl(border-left-color, color-variant($adapt-alert-danger-bg, active));
+        }
+
+        &:active:hover {
+          @include rtl(border-left-color, color-variant($adapt-alert-danger-bg, active-hover));
+        }
+      }
+
+      &:hover:not([disabled]) {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-danger-bg, active));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-danger-bg, hover);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-danger-bg, active);
+        }
+      }
+
+      &:active:hover {
+        & + .alert-controls {
+          .alert-btn:last-child {
+            @media (min-width: 578px) {
+              @include rtl(border-right-color, color-variant($adapt-alert-danger-bg, active-hover));
+            }
+          }
+        }
+        background-color: color-variant($adapt-alert-danger-bg, active);
+        @media (max-width: 577px) {
+          border: 1px solid color-variant($adapt-alert-danger-bg, active-hover);
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes alertAnimatedContent {
+  0% {
+    opacity: .2;
+    -webkit-transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+
+@keyframes alertAnimatedContent {
+  0% {
+    opacity: .2;
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes alertAnimatedContent2 {
+  0% {
+    opacity: .2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes alertAnimatedMobileLeft {
+  0% {
+    opacity: .2;
+    transform: translateY(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes alertAnimatedMobileRight {
+  0% {
+    opacity: .2;
+    transform: translateY(-5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes alertControlsAnimated {
+  0% {
+    opacity: .2;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* stylelint-enable max-nesting-depth */

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/platform/admin/components/functional-roles/index.ts"],"names":[],"mappings":"AAAA,cAAc,8BAA8B,CAAC;AAC7C,cAAc,wCAAwC,CAAC","sourcesContent":["export * from './functional-roles.component';\nexport * from './functional-roles-registration.module';\n"]}

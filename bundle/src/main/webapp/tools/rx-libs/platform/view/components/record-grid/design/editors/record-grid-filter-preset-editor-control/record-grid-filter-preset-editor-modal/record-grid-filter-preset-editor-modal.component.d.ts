@@ -1,0 +1,34 @@
+import { AfterViewInit, Injector } from '@angular/core';
+import { AbstractControl, NgForm, ValidationErrors } from '@angular/forms';
+import { ActiveModalRef } from '@bmc-ux/adapt-angular';
+import { IRecordDefinition } from '@helix/platform/record/api';
+import { RxModalClass, RxModalService } from '@helix/platform/ui-kit';
+import { RxGuidService } from '@helix/platform/utils';
+import { IRecordGridPredefinedFilterPreset } from '../../../../runtime/types/record-grid-predefined-filter-preset.interface';
+import { IPredefinedFilterPresetEditorPresetData, IRecordGridFilterPresetEditorModalParams } from '../record-grid-filter-preset-editor.types';
+import * as i0 from "@angular/core";
+export declare class RecordGridFilterPresetEditorModalComponent extends RxModalClass implements AfterViewInit {
+    private activeModalRef;
+    private rxModalService;
+    private rxGuidService;
+    protected injector: Injector;
+    private accordionTabEls;
+    filterPresetsForm: NgForm;
+    isReadOnly: boolean;
+    recordDefinition: IRecordDefinition;
+    selectedFieldIds: string[];
+    filterPresets: IPredefinedFilterPresetEditorPresetData[];
+    params: IRecordGridFilterPresetEditorModalParams;
+    constructor(activeModalRef: ActiveModalRef, rxModalService: RxModalService, rxGuidService: RxGuidService, injector: Injector);
+    ngAfterViewInit(): void;
+    addFilterPreset(): void;
+    removeFilterPreset(index: number): void;
+    createFilterPresetEditorData(filterPreset: IRecordGridPredefinedFilterPreset, isOpen: boolean): IPredefinedFilterPresetEditorPresetData;
+    getCheckPresetTitleDuplicateValidator(currentFilterPreset: IPredefinedFilterPresetEditorPresetData): (control: AbstractControl) => ValidationErrors | null;
+    trackByForFilterPresets(index: number, filterPreset: IPredefinedFilterPresetEditorPresetData): string;
+    toggleOpen(expandAll: boolean): void;
+    onSaveChangesClick(): void;
+    cancel(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RecordGridFilterPresetEditorModalComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RecordGridFilterPresetEditorModalComponent, "rx-record-grid-filter-preset-editor-modal", never, {}, {}, never, never>;
+}

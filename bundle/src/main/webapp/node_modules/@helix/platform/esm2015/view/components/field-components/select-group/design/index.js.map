@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../../../libs/platform/view/components/field-components/select-group/design/index.ts"],"names":[],"mappings":"AAAA,cAAc,iCAAiC,CAAC;AAChD,cAAc,6BAA6B,CAAC","sourcesContent":["export * from './select-group-design.component';\nexport * from './select-group-design.model';\n"]}

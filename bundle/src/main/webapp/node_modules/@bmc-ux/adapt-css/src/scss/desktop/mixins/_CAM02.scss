@@ -1,0 +1,486 @@
+@use "sass:math";
+
+$jab-step: 6;
+
+// math
+@function exp($n) {
+  @return math.pow(math.$e, $n);
+}
+
+$deg2rad: math.div(math.$pi, 180);
+
+// help function for rgb2xyz
+@function assumeColor($color) {
+  @if ($color > .04045) {
+    $color: math.pow(math.div($color + .055, 1.055), 2.4);
+  } @else {
+    $color: math.div($color, 12.92);
+  }
+  @return $color;
+}
+
+@function rgb2xyz($r, $g, $b) {
+  $r: math.div($r, 255.0);
+  $g: math.div($g, 255.0);
+  $b: math.div($b, 255.0);
+
+  $r: assumeColor($r);
+  $g: assumeColor($g);
+  $b: assumeColor($b);
+
+  $x: ( ($r * .4124) + ($g * .3576) + ($b * .1805) ) * 100.0;
+  $y: ( ($r * .2126) + ($g * .7152) + ($b * .0722) ) * 100.0;
+  $z: ( ($r * .0193) + ($g * .1192) + ($b * .9505) ) * 100.0;
+
+  $xyz: (
+          "x": $x,
+          "y": $y,
+          "z": $z
+  );
+
+  @return $xyz;
+}
+
+@function xyz2cat02($x, $y, $z) {
+  $l: ( .7328 * $x) + (.4296 * $y) - (.1624 * $z);
+  $m: (-.7036 * $x) + (1.6975 * $y) + (.0061 * $z);
+  $s: ( .0030 * $x) + (.0136 * $y) + (.9834 * $z);
+
+  $lms: ($l, $m, $s);
+
+  @return $lms;
+}
+
+@function cat022hpe($l, $m, $s) {
+  $lh: ( .7409792 * $l) + (.2180250 * $m) + (.0410058 * $s);
+  $mh: ( .2853532 * $l) + (.6242014 * $m) + (.0904454 * $s);
+  $sh: (-.0096280 * $l) - (.0056980 * $m) + (1.0153260 * $s);
+
+  @return ($lh, $mh, $sh);
+}
+
+@function cat022xyz($l, $m, $s) {
+  $x: ( 1.096124 * $l) - (.278869 * $m) + (.182745 * $s);
+  $y: ( .454369 * $l) + (.473533 * $m) + (.072098 * $s);
+  $z: (-.009628 * $l) - (.005698 * $m) + (1.015326 * $s);
+
+  @return ($x, $y, $z);
+}
+
+@function hpe2xyz($l, $m, $s) {
+  $x: (1.910197 * $l) - (1.112124 * $m) + (.201908 * $s);
+  $y: (.370950 * $l) + (.629054 * $m) - (.000008 * $s);
+  $z: $s;
+
+  @return ($x, $y, $z);
+}
+
+@function nonlinearAdaptation($coneResponse, $fl) {
+  $p: math.pow(($fl * $coneResponse) * .01, .42);
+
+  @return math.div((400.0 * $p), (27.13 + $p)) + .1;
+}
+
+// CIECAM02_VC viewing conditions; assumes average viewing conditions
+// for shortcut will use VC instead of CIECAM02_VC
+
+$VC_D65_X: 95.047; // D65 standard referent
+$VC_D65_Y: 100.0;
+$VC_D65_Z: 108.883;
+
+// Viewing conditions
+// Note about L_A:
+// Billy Bigg's implementation just uses a value of 4 cd/m^2, but
+// the colorspacious implementation uses greater precision by calculating
+// it with (64 / numpy.pi) / 5
+// This is based on Moroney (2000), "Usage guidelines for CIECAM97s" where
+// sRGB illuminance is 64 lux. Because of its greater precision we use
+// Moroney's alternative definition.
+
+$VC_la: math.div(math.div(64.0, math.$pi), 5.0);
+$VC_yb: 20.0; // 20% gray
+
+// Surrounding
+$VC_f: 1.0;   // average;  dim: 0.9;  dark: 0.8
+$VC_c: .69;  // average;  dim: 0.59; dark: 0.525
+$VC_nc: 1.0;  // average;  dim: 0.95; dark: 0.8
+
+$D65_LMS: xyz2cat02($VC_D65_X, $VC_D65_Y, $VC_D65_Z);
+
+$VC_n: math.div($VC_yb, $VC_D65_Y);
+$VC_z: 1.48 + math.sqrt($VC_n);
+
+$k: math.div(1.0, ((5.0 * $VC_la) + 1.0));
+$VC_fl: (.2 * math.pow($k, 4.0) * (5.0 * $VC_la)) + .1 * math.pow(1.0 - math.pow($k, 4.0), 2.0) * math.pow(5.0 * $VC_la, math.div(1.0, 3.0));
+
+$VC_nbb: .725 * math.pow(math.div(1.0, $VC_n), .2);
+$VC_ncb: $VC_nbb;
+$VC_d: $VC_f * ( 1.0 - (math.div(1.0, 3.6)) * exp(math.div(( - $VC_la - 42.0), 92.0)) );
+
+@function vc_achromaticResponseToWhite() {
+
+  $l: nth($D65_LMS, 1);
+  $m: nth($D65_LMS, 2);
+  $s: nth($D65_LMS, 3);
+
+  $lc: $l * ((math.div(($VC_D65_Y * $VC_d), $l)) + (1.0 - $VC_d));
+  $mc: $m * ((math.div(($VC_D65_Y * $VC_d), $m)) + (1.0 - $VC_d));
+  $sc: $s * ((math.div(($VC_D65_Y * $VC_d), $s)) + (1.0 - $VC_d));
+
+  $hpeTransforms: cat022hpe($lc, $mc, $sc);
+  $lp: nth($hpeTransforms, 1);
+  $mp: nth($hpeTransforms, 2);
+  $sp: nth($hpeTransforms, 3);
+
+  $lpa: nonlinearAdaptation($lp, $VC_fl);
+  $mpa: nonlinearAdaptation($mp, $VC_fl);
+  $spa: nonlinearAdaptation($sp, $VC_fl);
+
+  @return (2.0 * $lpa + $mpa + .05 * $spa - .305) * $VC_nbb;
+}
+// CIECAM02_VC viewing conditions end;
+
+@function cTransform($cone, $D65_cone) {
+  @return $cone * (math.div($VC_D65_Y * $VC_d, $D65_cone) + (1.0 - $VC_d));
+}
+
+@function cat022cam02($l, $m, $s) {
+  $resultColor: 0;
+
+  $D65_CAT02: xyz2cat02($VC_D65_X, $VC_D65_Y, $VC_D65_Z);
+
+  $lc: cTransform($l, nth($D65_CAT02, 1));
+  $mc: cTransform($m, nth($D65_CAT02, 2));
+  $sc: cTransform($s, nth($D65_CAT02, 3));
+
+  $hpeTransforms: cat022hpe($lc, $mc, $sc);
+  $lp: nth($hpeTransforms, 1);
+  $mp: nth($hpeTransforms, 2);
+  $sp: nth($hpeTransforms, 3);
+
+  $lpa: nonlinearAdaptation($lp, $VC_fl);
+  $mpa: nonlinearAdaptation($mp, $VC_fl);
+  $spa: nonlinearAdaptation($sp, $VC_fl);
+
+  $ca: $lpa - math.div((12.0 * $mpa), 11.0) + math.div($spa, 11.0);
+  $cb: math.div(1.0, 9.0) * ($lpa + $mpa - 2.0 * $spa);
+
+  // sass atan2 by some reason is different from JS, it returns degrees
+  $theColor_h: math.atan2($cb, $ca);
+  $unitless: math.div($theColor_h, ($theColor_h * 0 + 1));
+  $theColor_h: $unitless;
+
+  // normalize
+  @if($theColor_h < 0) {
+    $theColor_h: $theColor_h + 360.0;
+  }
+
+  $temp: 0;
+  $theColor_H: 0;
+  @if ($theColor_h < 20.14) {
+    $temp: math.div($theColor_h + 122.47, 1.2) + math.div(20.14 - $theColor_h, .8);
+    $theColor_H: 300 + math.div(100*math.div($theColor_h + 122.47, 1.2), $temp);
+  } @else if ($theColor_h < 90.0) {
+    $temp: math.div($theColor_h - 20.14, .8) + math.div(90.00 - $theColor_h, .7);
+    $theColor_H: math.div(100*math.div($theColor_h - 20.14, .8), $temp);
+  } @else if($theColor_h < 164.25) {
+    $temp: math.div($theColor_h - 90.00, .7) + math.div(164.25 - $theColor_h, 1.0);
+    $theColor_H: 100 + math.div(100*math.div($theColor_h - 90.00, .7), $temp);
+  } @else if ($theColor_h < 237.53) {
+    $temp: math.div($theColor_h - 164.25, 1.0) + math.div(237.53 - $theColor_h, 1.2);
+    $theColor_H: 200 + math.div(100*math.div($theColor_h - 164.25, 1.0), $temp);
+  } @else {
+    $temp: math.div($theColor_h - 237.53, 1.2) + math.div(360 - $theColor_h + 20.14, .8);
+    $theColor_H: 300 + math.div(100*math.div($theColor_h - 237.53, 1.2), $temp);
+  }
+
+  $a: ( 2.0 * $lpa + $mpa + .05 * $spa - .305 ) * $VC_nbb;
+
+  $theColor_J: 100.0 * math.pow(math.div($a, vc_achromaticResponseToWhite()), $VC_c * $VC_z);
+
+  $et: .25 * (math.cos(math.div(($theColor_h * math.$pi), 180.0) + 2.0) + 3.8);
+  $t: math.div((math.div(50000.0, 13.0)) * $VC_nc * $VC_ncb * $et * math.sqrt($ca * $ca + $cb * $cb), $lpa + $mpa + (21.0 * .05) * $spa);
+
+  $theColor_C: math.pow($t, .9) * math.sqrt($theColor_J * .01) * math.pow(1.64 - math.pow(.29, $VC_n), .73);
+
+  // $theColor_ATAN:  $theColor_h;
+  $theColor_Q: math.div(4.0, $VC_c) * math.sqrt($theColor_J * .01) * (vc_achromaticResponseToWhite() + 4.0) * math.pow($VC_fl, .25);
+
+  $theColor_M: $theColor_C * math.pow($VC_fl, .25);
+
+  $theColor_s: 100.0 * math.sqrt(math.div($theColor_M, $theColor_Q));
+
+  $resultColor: (
+    $theColor_h,
+    $theColor_H,
+    $theColor_J,
+    $theColor_C,
+    $theColor_Q,
+    $theColor_M,
+    $theColor_s
+  );
+
+  @return $resultColor;
+
+}
+
+@function jabConverter($HEX_color) {
+
+  $r: red($HEX_color);
+  $g: green($HEX_color);
+  $b: blue($HEX_color);
+
+  $computedXYZ: rgb2xyz($r, $g, $b);
+  $lmsConeResponses: xyz2cat02($computedXYZ...); // checked, correct
+  $cam02: cat022cam02($lmsConeResponses...);
+  $cam02_h: nth($cam02, 1);
+  $cam02_J: nth($cam02, 3);
+  $cam02_M: nth($cam02, 6);
+
+  // altCam02Coef.ucs coeff
+  $k_l: 1.00;
+  $c1: .007;
+  $c2: .0228;
+
+  $JPrime: math.div(((1.0 + 100.0 * $c1) * $cam02_J), (1.0 + $c1 * $cam02_J));
+  $JPrime: math.div($JPrime, $k_l);
+
+  $MPrime: (math.div(1.0, $c2)) * math.log(1.0 + $c2 * $cam02_M); // log=ln
+
+  $a: $MPrime * math.cos($deg2rad * $cam02_h);
+  $b: $MPrime * math.sin($deg2rad * $cam02_h);
+
+  $jab: (
+          $JPrime,
+          $a,
+          $b
+  );
+
+  @return $jab;
+}
+
+@function Aab2Cat02LMS($A, $aa, $bb, $nbb) {
+  $x: math.div($A, $nbb) + .305;
+
+  $l: (.32787 * $x) + (.32145 * $aa) + (.20527 * $bb);
+  $m: (.32787 * $x) - (.63507 * $aa) - (.18603 * $bb);
+  $s: (.32787 * $x) - (.15681 * $aa) - (4.49038 * $bb);
+
+  @return ($l, $m, $s);
+}
+
+@function inverseNonlinearAdaptation($coneResponse, $fl) {
+
+  $div: math.div(27.13 * math.abs($coneResponse - .1), 400.0 - math.abs($coneResponse - .1));
+
+  @return math.div(100.0, $fl) * math.pow($div, math.div(1.0, .42));
+}
+
+@function toRGB($c) {
+
+  $result: 0;
+  @if ($c <= .0031308) {
+    $result: 12.92 * $c;
+  } @else {
+    $result: 1.055 * math.pow($c, math.div(1, 2.4)) - .055;
+  }
+
+  $result: 255.0 * $result;
+
+  @return $result;
+}
+
+@function xyz2rgb($x, $y, $z) {
+  $x: $x * .01;
+  $y: $y * .01;
+  $z: $z * .01;
+
+  $preR: $x *  3.2404542 + $y * -1.5371385 - $z *  .4985314;
+  $preG: $x *  -.9692660 + $y *  1.8760108 + $z *  .0415560;
+  $preB: $x *   .0556434 + $y *  -.2040259 + $z * 1.0572252;
+
+  @return (
+          toRGB($preR), // r
+          toRGB($preG), // g
+          toRGB($preB)  // b
+  );
+}
+
+@function cam022rgb($J, $C, $h) {
+
+  $t: math.pow(math.div($C, math.sqrt($J * .01) *  math.pow(1.64 - math.pow(.29, $VC_n), .73)), math.div(1.0, .9));
+
+  $et: 1.0 * .25 * (math.cos(math.div($h * math.$pi, 180.0) + 2.0) + 3.8);
+
+  $a: math.pow($J * .01, math.div(1.0, $VC_c * $VC_z)) * vc_achromaticResponseToWhite();
+
+  $p1: math.div((math.div(50000.0, 13.0) * $VC_nc * $VC_ncb) * $et, $t);
+  $p2: math.div($a, $VC_nbb) + .305;
+  $p3: math.div(21.0, 20.0);
+  // p4, p5, ca, cb;
+
+  // ?? Need to check if in SASS we need to do it
+  $hr: math.div(($h * math.$pi), 180.0);
+  $ca: 0;
+  $cb: 0;
+
+  @if (math.abs(math.sin($hr)) >= math.abs(math.cos($hr))) {
+    $p4: math.div($p1, math.sin($hr));
+    $cb: math.div($p2 * (2.0 + $p3) * math.div(460.0, 1403.0), $p4 + (2.0 + $p3) * math.div(220.0, 1403.0) * math.div(math.cos($hr), math.sin($hr)) - math.div(27.0, 1403.0) + $p3 * math.div(6300.0, 1403.0));
+    $ca: $cb * math.div(math.cos($hr), math.sin($hr));
+  }
+  @else {
+    $p5: math.div($p1, math.cos($hr));
+    $ca: math.div($p2 * (2.0 + $p3) * math.div(460.0, 1403.0), $p5 + (2.0 + $p3) * math.div(220.0, 1403.0) - (math.div(27.0, 1403.0) - $p3 * math.div(6300.0, 1403.0)) * math.div(math.sin($hr), math.cos($hr)));
+    $cb: $ca * math.div(math.sin($hr), math.cos($hr));
+  }
+
+  $qq: $ca;
+
+  $lms_a: Aab2Cat02LMS($a, $ca, $cb, $VC_nbb);
+  $lpa: nth($lms_a, 1);
+  $mpa: nth($lms_a, 2);
+  $spa: nth($lms_a, 3);
+
+  $lp: inverseNonlinearAdaptation($lpa, $VC_fl);
+  $mp: inverseNonlinearAdaptation($mpa, $VC_fl);
+  $sp: inverseNonlinearAdaptation($spa, $VC_fl);
+
+  $txyz: hpe2xyz($lp, $mp, $sp);
+  $lms_c: xyz2cat02(nth($txyz, 1), nth($txyz, 2), nth($txyz, 3));
+  $lms_c_l: nth($lms_c, 1);
+  $lms_c_m: nth($lms_c, 2);
+  $lms_c_s: nth($lms_c, 3);
+
+  $D65_CAT02: xyz2cat02($VC_D65_X, $VC_D65_Y, $VC_D65_Z);
+
+  $l: math.div($lms_c_l, math.div($VC_D65_Y * $VC_d, nth($D65_CAT02, 1)) + (1.0 - $VC_d));
+  $m: math.div($lms_c_m, math.div($VC_D65_Y * $VC_d, nth($D65_CAT02, 2)) + (1.0 - $VC_d));
+  $s: math.div($lms_c_s, math.div($VC_D65_Y * $VC_d, nth($D65_CAT02, 3)) + (1.0 - $VC_d));
+
+  $xyz: cat022xyz($l, $m, $s);
+  $rgb: xyz2rgb($xyz...);
+
+  @return (
+    nth($rgb, 1), // r
+    nth($rgb, 2), // g
+    nth($rgb, 3), // b
+  );
+}
+
+@function jab2rgb($J, $a, $b) {
+  // altCam02Coef.ucs coeff
+  $k_l: 1.00;
+  $c1: .007;
+  $c2: .0228;
+
+  $newMPrime: math.sqrt($a * $a + $b * $b);
+
+  $newM: math.div((exp($newMPrime * $c2) - 1.0), $c2);
+
+  $newh: math.atan2($b, $a);
+  $unitless: math.div($newh, ($newh * 0 + 1));
+  $newh: $unitless;
+
+  @if ($newh < 0) {
+    $newh: 360.0 + $newh;
+  }
+
+  $newC: math.div($newM, math.pow($VC_fl, .25));
+
+  $newCam02J: math.div($J, (1.0 + $c1*(100.0 - $J)));
+
+  $converted: cam022rgb($newCam02J, $newC, $newh);
+
+  @return $converted;
+}
+
+// not used right now. JABColorVariant is used instead
+@function brighter($color, $k: 1) {
+  // Kn is completely arbitrary and was picked originally by Mike Bostock to make
+  // the Lab brighter and darker functions behave similarly to the RGB equivalents
+  // in d3-color. We copy and paste the value directly and encourage others to
+  // add a more systematically chosen value.
+  $Kn: 1;
+
+  $JPrime: nth($color, 1) + $Kn * $k;
+
+  $jab: (
+          $JPrime,
+          nth($color, 2),
+          nth($color, 3)
+  );
+
+  @return $jab;
+}
+
+// not used right now. JABColorVariant is used instead
+@function darker($color, $k: 1) {
+  // Kn is completely arbitrary and was picked originally by Mike Bostock to make
+  // the Lab brighter and darker functions behave similarly to the RGB equivalents
+  // in d3-color. We copy and paste the value directly and encourage others to
+  // add a more systematically chosen value.
+  $Kn: 1;
+
+  $JPrime: nth($color, 1) - $Kn * $k;
+
+  $jab: (
+          $JPrime,
+          nth($color, 2),
+          nth($color, 3)
+  );
+
+  @return $jab;
+}
+
+// this function is a combination of 'darker' and 'brighter' functions above
+//
+// JABColorVariant($Jab-color, 1, $step) -  makes color darker
+// JABColorVariant($Jab-color, -1, $step) -  makes color brighter
+//
+@function JABColorVariant($color, $k, $s: $jab-step) {
+  $Kn: 1;
+
+  $JPrime: nth($color, 1) - $Kn * $k * $s;
+
+  $jab: (
+          $JPrime,
+          nth($color, 2),
+          nth($color, 3)
+  );
+
+  $rgb: rgb(jab2rgb(nth($jab, 1), nth($jab, 2), nth($jab, 3))...);
+
+  @return $rgb;
+}
+
+// This mixin should be used instead of bg-variant
+@mixin bg-variantJAB($parent, $Jab-color, $step: $jab-step) {
+
+  $hex: rgb(jab2rgb(nth($Jab-color, 1), nth($Jab-color, 2), nth($Jab-color, 3))...);
+
+  #{$parent} {
+    background-color: $hex !important;
+
+    &.focus,
+    &.hover {
+      background-color: JABColorVariant($Jab-color, 1, $step) !important;
+    }
+
+    &.active-state {
+      background-color: JABColorVariant($Jab-color, 2, $step) !important;
+    }
+
+    &.active-hover {
+      background-color: JABColorVariant($Jab-color, 3, $step) !important;
+    }
+
+    &.disabled-state {
+      background-color: JABColorVariant($Jab-color, -1, $step) !important;
+    }
+
+    &.disabled-hover {
+      background-color: JABColorVariant($Jab-color, -2, $step) !important;
+    }
+  }
+}

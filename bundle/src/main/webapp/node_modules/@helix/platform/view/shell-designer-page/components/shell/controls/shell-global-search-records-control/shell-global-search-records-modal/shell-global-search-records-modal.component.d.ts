@@ -1,0 +1,38 @@
+import { AfterViewInit, Injector, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActiveModalRef, DismissReasons, TreeWrap } from '@bmc-ux/adapt-angular';
+import { IShellGlobalSearchRecordItem, IShellGlobalSearchRecordsModalConfig, IShellGlobalSearchSelectedItem } from './shell-global-search-records-modal.types';
+import { RxRecordDefinitionDataPageService } from '@helix/platform/record/api';
+import { RxDefinitionNameService } from '@helix/platform/shared/api';
+import { CdkDragDrop } from '@angular/cdk/drag-drop/drag-events';
+import { IDefinitionPickerComponentOptions } from '@helix/platform/shared/components';
+import { TreeNode } from 'primeng/api/treenode';
+import { RxModalClass } from '@helix/platform/ui-kit';
+import * as i0 from "@angular/core";
+export declare class RxShellGlobalSearchRecordsModalComponent extends RxModalClass implements OnInit, AfterViewInit {
+    activeModalRef: ActiveModalRef;
+    private recordDefinitionDataPageService;
+    private definitionNameService;
+    protected injector: Injector;
+    private accordionTabEls;
+    selectedRecordsForm: NgForm;
+    config: IShellGlobalSearchRecordsModalConfig;
+    availableRecordDefinitionItems: IShellGlobalSearchRecordItem[];
+    filteredRecordDefinitionItems: TreeNode<IShellGlobalSearchRecordItem>[];
+    selectedRecords: IShellGlobalSearchSelectedItem[];
+    treeWrap: TreeWrap;
+    DismissReasons: typeof DismissReasons;
+    definitionPickerOptions: IDefinitionPickerComponentOptions;
+    constructor(activeModalRef: ActiveModalRef, recordDefinitionDataPageService: RxRecordDefinitionDataPageService, definitionNameService: RxDefinitionNameService, injector: Injector);
+    ngOnInit(): void;
+    updateFilteredItems(): void;
+    addRecord(recordItem: IShellGlobalSearchRecordItem): void;
+    toggleOpen(expandAll: boolean): void;
+    onSelectedRecordsListDrop(event: CdkDragDrop<IShellGlobalSearchRecordItem>): void;
+    removeRecord(record: IShellGlobalSearchSelectedItem): void;
+    onSave(): void;
+    private getRecordDefinitions;
+    ngAfterViewInit(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<RxShellGlobalSearchRecordsModalComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<RxShellGlobalSearchRecordsModalComponent, "rx-shell-global-search-records-modal", never, {}, {}, never, never>;
+}

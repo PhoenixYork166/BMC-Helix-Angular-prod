@@ -1,0 +1,598 @@
+$rotation-radius: 7px;
+$read-folder-animation-duration: 500ms;
+$read-folder-animation-delay: 200ms;
+
+.adapt-uploader,
+.adapt-single-uploader {
+  display: block;
+  width: 100%;
+}
+
+.adapt-uploader-messages {
+  .alert-icon-lockup-space {
+    padding-right: 0 !important; //For RTL and LTL
+  }
+
+  > p {
+    margin-bottom: 0;
+  }
+}
+
+.adapt-uploader {
+
+  &__wrp {
+    display: block;
+    width: 100%;
+
+    overflow-x: hidden;
+  }
+
+  &__content {
+    &.pointer-events {
+      pointer-events: none;
+
+      > * {
+        pointer-events: none;
+      }
+    }
+  }
+
+  &:not(.is-no-dnd):not(.readonly) {
+    .adapt-uploader-dnd-animation__wrp {
+      height: 50px;
+    }
+
+    .adapt-uploader-dnd,
+    .adapt-uploader-drop {
+      position: absolute;
+      max-width: 100%;
+      padding: 5px;
+    }
+
+    .adapt-uploader-drop {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .adapt-uploader-content {
+      & .is-mouse-focused {
+        background-color: transparent;
+      }
+    }
+
+    &.has-warning {
+      .adapt-uploader-dnd-animation {
+        border-color: $color-warning;
+      }
+    }
+
+    &.has-danger {
+      .adapt-uploader-dnd-animation {
+        border-color: $color-critical;
+      }
+    }
+
+    &.disabled {
+      .adapt-uploader-dnd-animation {
+        background-color: color-variant($uploader-bg, disabled);
+        border-color: color-variant($border-color, disabled);
+
+        .adapt-uploader-dnd-text {
+          color: color-variant($text-tertiary, disabled);
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .adapt-uploader-restrict {
+      color: color-variant($text-tertiary, disabled);
+    }
+  }
+
+  .adapt-uploader-drop__icon > .clound-icon {
+    animation: jumping 1.3s ease alternate infinite;
+  }
+}
+
+.adapt-uploader-dnd-animation__wrp {
+  width: 100%;
+}
+
+.adapt-uploader-dnd-animation {
+  position: relative;
+  height: 100%;
+
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  background-color: $uploader-bg;
+}
+
+.adapt-uploader-dnd,
+.adapt-uploader-drop {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.adapt-uploader-drop-animation,
+.adapt-uploader-search-animation {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.adapt-uploader-drop__icon {
+  position: relative;
+  width: 45px;
+  height: 100%;
+
+  &-forbidden {
+    display: flex;
+    align-items: center;
+  }
+
+  & > svg {
+    position: absolute;
+  }
+}
+
+.adapt-uploader-dnd-text {
+  color: $text-secondary;
+  margin: 0;
+  @include ellipsis();
+
+  &-forbidden {
+    color: $color-critical;
+  }
+}
+
+.adapt-uploader-block-level-text {
+  margin: .25rem 0!important;
+  color: $text-secondary;
+}
+
+.adapt-uploader-attach-btn {
+  transition: $btn-transition, opacity .1s linear;
+
+  .btn-icon {
+    @include icon-spacing(right);
+  }
+}
+
+.adapt-uploader-attach-file-btn-wrap:not(:last-of-type) {
+  .adapt-uploader-attach-btn {
+    @include rtl(border-right, none);
+    @if($rtl-mode) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    } @else {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.adapt-uploader-attach-folder-btn-wrap:not(:first-of-type) {
+  .adapt-uploader-attach-btn {
+    @if($rtl-mode) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    } @else {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
+.adapt-uploader-restrict {
+  color: $text-tertiary;
+  margin-top: .25rem;
+}
+
+.adapt-uploader-list-title {
+  margin-bottom: 0;
+  font-weight: $font-weight-bold;
+}
+
+.adapt-uploader-list-files-zone {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 10px 0 5px;
+
+    .adapt-uploader-cancel {
+      padding: 0;
+      border: none;
+    }
+  }
+
+  & .btn-uploader-collapse-btn {
+    padding-right: 5px; // For RTL and LTL
+  }
+}
+
+.btn.btn-uploader-collapse-btn {
+  padding-left: 5px; // For RTL and LTL
+}
+
+.adapt-uploader-submask-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 160px;
+  text-align: center;
+}
+
+.adapt-uploader-submask-center-inner-read {
+  position: relative;
+  width: 50px;
+  height: 100%;
+
+  & > svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.adapt-uploader-search-folder-ellipsis {
+  position: absolute;
+  top: 16px;
+  left: 0; // For RTL and LTL
+  height: 40px;
+  width: 100%;
+}
+
+.floating {
+  position: absolute;
+  top: 35%;
+  animation: updown 2s infinite ease-in-out alternate;
+}
+
+.adapt-uploader-img-search {
+  position: absolute;
+  left: 18px;
+  animation: circle 4s infinite linear;
+}
+
+.remaining-files-list {
+  display: inline-block;
+  color: $link-color;
+  cursor: pointer;
+  text-decoration: $link-decoration;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+
+  &__wrp {
+    display: flex;
+    align-items: flex-start;
+
+    .file-index {
+      flex: 0 0 auto;
+    }
+
+    .file-name {
+      width: 100%;
+    }
+  }
+}
+
+// Single uploader
+.adapt-single-uploader {
+
+  &__wrp {
+    display: block;
+    width: 100%;
+
+    overflow-x: hidden;
+  }
+
+  &__content {
+    &.pointer-events {
+      pointer-events: none;
+
+      > * {
+        pointer-events: none;
+      }
+    }
+  }
+
+  &:not(.is-no-dnd) {
+    .adapt-uploader-dnd,
+    .adapt-uploader-drop {
+      position: absolute;
+      padding: 5px;
+      max-width: 100%;
+    }
+
+    .adapt-uploader-drop {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .adapt-single-uploader-dnd-animation {
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      background-color: $uploader-bg;
+    }
+
+    &.has-warning {
+      .adapt-single-uploader-dnd-animation {
+        border-color: $color-warning;
+      }
+    }
+
+    &.has-danger {
+      .adapt-single-uploader-dnd-animation {
+        border-color: $color-critical;
+      }
+    }
+
+    &.disabled {
+      .adapt-single-uploader-dnd-animation {
+        background-color: color-variant($uploader-bg, disabled);
+        border-color: color-variant($border-color, disabled);
+
+        .adapt-uploader-dnd-text {
+          color: color-variant($text-tertiary, disabled);
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .adapt-uploader-restrict {
+      color: color-variant($text-tertiary, disabled);
+    }
+  }
+
+  .adapt-uploader-drop__icon > .clound-icon {
+    animation: jumping 1.3s ease alternate infinite;
+  }
+}
+
+.adapt-single-uploader-inner {
+  width: 100%;
+  min-height: 50px;
+}
+
+.adapt-single-uploader-dnd-animation {
+  position: relative;
+  height: 50px;
+}
+// Single uploader END
+
+// Uploader-item
+.adapt-uploader-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 10px 0;
+  position: relative;
+
+  border-top: 1px solid #c2c2c2;        // TODO(nick): check WTF?
+  border-bottom: 1px solid #efefef;     // same
+  background-color: $color-foreground;
+
+  overflow: hidden;
+
+  &.disabled {
+    cursor: $cursor-disabled;
+
+    .adapt-uploader-file {
+      cursor: pointer;
+
+      .adapt-uploader-file-image {
+        opacity: $disabled;
+        cursor: $cursor-disabled;
+      }
+    }
+
+    .adapt-uploading-progress > span {
+      color: color-variant($text-secondary, disabled);
+    }
+  }
+
+  &.readonly {
+    .adapt-uploader-file {
+      width: 100%;
+    }
+  }
+}
+
+.adapt-uploader-item + .adapt-uploader-item {
+  border-top: none;
+}
+
+.collapse-block {
+  .adapt-uploader-item:first-of-type {
+    border-top: none;
+  }
+}
+
+.adapt-uploader-item__wrp {
+  width: 100%;
+  display: flex;
+
+  &.canceled {
+    .upload-status,
+    .adapt-uploader-file {
+      opacity: $disabled;
+    }
+  }
+}
+
+.adapt-uploader-item__controls {
+  flex: 0 0 auto;
+}
+
+.adapt-uploader-file {
+  width: 60%;
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.adapt-uploader-file-image {
+  width: 20px;
+  height: 20px;
+  line-height: 1.5;
+  @include icon-spacing(right);
+}
+
+.adapt-uploader-file-name {
+  display: flex;
+  width: calc(100% - 50px);
+  border: 0;
+
+  &__truncate {
+    display: inline-flex;
+    max-width: 100%;
+  }
+
+  &.ltr {
+    @if($rtl-mode) {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.adapt-uploader-status__wrp {
+  position: relative;
+  width: 100%;
+}
+
+.adapt-uploader-status {
+  width: 40%;
+  flex: 0 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.adapt-uploader-file-error {
+  flex: 1;
+}
+
+.adapt-uploader-file-uploading,
+.adapt-uploader-file-uploaded {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: flex-end;
+
+  align-items: center;
+}
+
+.adapt-uploading-progress {
+  display: flex;
+  width: 100%;
+
+  & > span {
+    color: $text-primary;
+  }
+}
+
+.upload-status {
+  display: flex;
+  flex: 1;
+}
+
+.success-icon,
+.error-icon {
+  @include icon-spacing(right);
+}
+
+.adapt-uploader-item-remove,
+.adapt-uploader-item-delete,
+.adapt-uploader-item-cancel {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0;
+  color: $text-primary;
+  background-color: transparent;
+  border: none;
+
+
+  &:active {
+    color: color-variant($color-active, hover);
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-active;
+  }
+
+  &:disabled {
+    color: color-variant($text-primary, disabled);
+    opacity: 1;
+    cursor: $cursor-disabled;
+
+    &:hover {
+      color: color-variant($text-primary, disabled-hover);
+      opacity: $disabled;
+    }
+  }
+}
+
+.adapt-uploader-item-status-bar-wrapper {
+  position: relative;
+  background-color: $uploader-bg;
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  margin: 8px 10px;
+}
+
+.adapt-uploader-item-indeterminate-loader-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  @include rtl(padding-left, .625rem);
+
+  .adapt-alert-bar {
+    border-radius: 3px;
+  }
+}
+
+.adapt-uploader-item-status-bar {
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  background-color: $color-primary;
+  border-radius: 3px 0 0 3px;
+  transition: width 250ms ease-in;
+}
+
+.adapt-uploader-item-status-bar_uploaded {
+  border-radius: 3px;
+}
+
+.ellipsis {
+  @include ellipsis();
+}
+// Uploader-item END
+
+.adapt-drop-wrp {
+  outline: 1px dashed $color-active;
+
+  * {
+    pointer-events: none;
+  }
+}
