@@ -1,0 +1,6 @@
+#
+#Mon Dec 11 09:42:36 UTC 2023
+IgnoreRuleExecution=false
+DuplicateDataActionType=MERGE
+Name=com.example.test210500\:fruits
+ImportOrder=8
