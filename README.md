@@ -1,4 +1,3 @@
-# BMC-Helix-Angular
 ## BMC Helix code base
 
 ## Hello user
