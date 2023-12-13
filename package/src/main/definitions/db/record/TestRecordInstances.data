@@ -20,9 +20,9 @@ begin schema data
    data-mapping   :             </element>                <element dataType="string" name="f536870_14_test_text">                    <fieldMapping arFieldId="536870914"/>
    data-mapping   :                 </element>            </element>        </formMapping>    </element></arDocMapping>
    data           : <?xml version="1.0" encoding="utf-8"?><entryList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">    
-   data           : <entryItem>        <f1_Display_ID>000000000000001</f1_Display_ID>        <f2_Created_By>Demo</f2_Created_By>        <f3_Created_Date>2023-02-27T18:38:
-   data           : 13+00:00</f3_Created_Date>        <f4_Assignee xsi:nil="true"/>        <f5_Modified_By>Demo</f5_Modified_By>        <f6_Modified_Date>2023-02-27T20:38
-   data           : :48+00:00</f6_Modified_Date>        <f7_Status>New</f7_Status>        <f8_Description>Udpated 2023.02.27.20.38.48</f8_Description>        <f15_Status_
+   data           : <entryItem>        <f1_Display_ID>000000000000001</f1_Display_ID>        <f2_Created_By>Demo</f2_Created_By>        <f3_Created_Date>2023-02-27T10:38:
+   data           : 13-08:00</f3_Created_Date>        <f4_Assignee xsi:nil="true"/>        <f5_Modified_By>Demo</f5_Modified_By>        <f6_Modified_Date>2023-02-27T12:38
+   data           : :48-08:00</f6_Modified_Date>        <f7_Status>New</f7_Status>        <f8_Description>Udpated 2023.02.27.20.38.48</f8_Description>        <f15_Status_
    data           : History xsi:nil="true"/>        <f16_Notifier_Listening>Not Listening</f16_Notifier_Listening>        <f37__ID>AGGADG1AAP0IDARQRFDPRQRFDP1I78</f37__ID>
    data           :         <f536870_13_test_attachment>            <attachmentName>lain.jpg</attachmentName>            <attachmentOrigSize>131148</attachmentOrigSize> 
    data           :            <attachmentData>/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQ

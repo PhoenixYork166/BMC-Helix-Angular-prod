@@ -1,0 +1,27 @@
+@import "../../../sass/abstracts/variables";
+@import "../../../sass/abstracts/mixins";
+@import "../../../sass/components/button";
+@import "../../../sass/components/frosted";
+@import "../../../sass/layouts/grid";
+@import "../../../sass/base/animations";
+@import "../../../sass/base/utilities";
+@import "../../../sass/base/base";
+
+signature-pad ::ng-deep {
+  canvas {
+    border: 1px solid $gray-300;
+  }
+}
+
+.btn {
+  margin-right: 1rem;
+  transition: 0.25s ease-in-out;
+
+  &:hover {
+      transform: translateY(-0.2rem);
+  }
+  &:active {
+      transform: translateY(0rem);
+  }
+}
+

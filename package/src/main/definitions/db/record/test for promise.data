@@ -15,9 +15,9 @@ begin schema data
    data-mapping   : taType="string" name="f37__ID">                    <fieldMapping arFieldId="379"/>                </element>            </element>        </formMappi
    data-mapping   : ng>    </element></arDocMapping>
    data           : <?xml version="1.0" encoding="utf-8"?><entryList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">    
-   data           : <entryItem>        <f1_Display_ID>000000000000001</f1_Display_ID>        <f2_Created_By>Demo</f2_Created_By>        <f3_Created_Date>2023-02-27T23:07:
-   data           : 25+00:00</f3_Created_Date>        <f4_Assignee xsi:nil="true"/>        <f5_Modified_By>Demo</f5_Modified_By>        <f6_Modified_Date>2023-02-27T23:07
-   data           : :25+00:00</f6_Modified_Date>        <f7_Status>New</f7_Status>        <f8_Description>Hello world ^_^</f8_Description>        <f15_Status_History xsi:
+   data           : <entryItem>        <f1_Display_ID>000000000000001</f1_Display_ID>        <f2_Created_By>Demo</f2_Created_By>        <f3_Created_Date>2023-02-27T15:07:
+   data           : 25-08:00</f3_Created_Date>        <f4_Assignee xsi:nil="true"/>        <f5_Modified_By>Demo</f5_Modified_By>        <f6_Modified_Date>2023-02-27T15:07
+   data           : :25-08:00</f6_Modified_Date>        <f7_Status>New</f7_Status>        <f8_Description>Hello world ^_^</f8_Description>        <f15_Status_History xsi:
    data           : nil="true"/>        <f16_Notifier_Listening>Not Listening</f16_Notifier_Listening>        <f37__ID>AGGADG1AAP0IDARQR7K3RQR7K33G7B</f37__ID>    </entry
    data           : Item></entryList>
 end

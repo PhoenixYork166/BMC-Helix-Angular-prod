@@ -13,7 +13,8 @@ public class MyApplication extends RxBundle {
     @Override
     protected void register() {
         //
-        // TODO: Register static web resources and framework extensions.
+        // Todo
+        // Register static web resources and framework extensions.
         //
         // registerService(new MyService());
         //

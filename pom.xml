@@ -9,10 +9,10 @@
 
     <properties>
       <!-- START: Bundle specific configuration. Verify and Change as per environment -->
-		<developerUserName>developerUserName</developerUserName>
-		<developerPassword>developerPassword</developerPassword>
+		<developerUserName>activationuser</developerUserName>
+		<developerPassword>X9hJFSbt9LiW8W3m</developerPassword>
 		<!-- Server name with Jetty port. -->
-		<webUrl>https://dev-endpoint.onbmc.com</webUrl>
+		<webUrl>https://hkairport-dev-is.onbmc.com</webUrl>
 		<!--  Decides which overlay mode the SDK calls to server work in. -->
 		<overlayMode>1</overlayMode>
 	  <!-- END: Bundle specific configuration.-->
